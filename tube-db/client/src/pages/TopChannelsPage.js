@@ -83,7 +83,7 @@ class TopChannelsPage extends React.Component {
                                 </Col>
 
                                 <Col flex={2} style={{ textAlign: 'center' }}>
-                                    {this.state.selectedChannelDetails.country}
+                                <CardTitle>{this.state.selectedChannelDetails.country}</CardTitle>
                                 </Col>
 
                                 <Col flex={2} style={{ textAlign: 'right' }}>
