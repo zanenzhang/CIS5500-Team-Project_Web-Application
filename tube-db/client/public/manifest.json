@@ -1,0 +1,15 @@
+{
+  "short_name": "tubeDB Client",
+  "name": "CIS 5500 - tubeDB Client",
+  "icons": [
+    {
+      "src": "3trimed.png",
+      "type": "image/png",
+      "sizes": "355x260"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
