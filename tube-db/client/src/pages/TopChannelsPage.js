@@ -11,7 +11,6 @@ import {
 
 import { getChannel } from '../fetcher'
 
-
 class TopChannelsPage extends React.Component {
     constructor(props) {
         super(props)
@@ -29,13 +28,11 @@ class TopChannelsPage extends React.Component {
     }
 
     executeChannelSearch() {
-
         getChannel(this.state.channelQuery).then(res => {    // 
             this.setState({ queryResults: res.results })
             this.setState({ selectedChannelDetails: res.results[0] })
 
         })
-        
     }
 
     componentDidMount() {

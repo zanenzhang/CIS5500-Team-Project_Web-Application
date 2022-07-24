@@ -1,1 +1,5 @@
-To-Do: Create build instructions for local build of this project.
+After cloaning repository
+1. Run Terminal
+2. cd to server and 'run npm'
+3. open seperat terminal cd to client and 'run npm'
+4. currently only functioning page is TopChannels can be accessed at http://localhost:3000/topchannels
