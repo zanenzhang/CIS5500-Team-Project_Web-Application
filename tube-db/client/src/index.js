@@ -21,7 +21,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route exact
-							path="/"
+							path="/homepage"
 							render={() => (
 								<HomePage />
 							)}/>

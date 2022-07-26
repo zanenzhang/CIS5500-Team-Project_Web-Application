@@ -7,6 +7,23 @@ const getChannel = async (name) => {
     return res.json()
 }
 
+const getAllChannels = async (id) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/channels?id=${id}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
+const getAllVideos = async (id) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/videos?name=${id}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
+
 export {
-    getChannel
+    getChannel,
+    getAllChannels,
+    getAllVideos
 }
