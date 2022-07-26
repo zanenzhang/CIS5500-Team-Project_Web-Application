@@ -1,7 +1,10 @@
 import TubeDBLogo from '../images/logo4.png';
 import React, {useState} from 'react';
 
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Nav, NavItem, NavLink } from "shards-react";
+import {Menu} from 'antd';
+import './HeaderMenu.css';
 
 
 class HeaderMenu extends React.Component {
@@ -18,11 +21,15 @@ class HeaderMenu extends React.Component {
 
   render () {
     return (
-      <Nav>
+      <Nav justified>
+        <div className='header-logo'>
         <NavItem>
-          <NavItem>
           <img src={TubeDBLogo} width={120} />
-          </NavItem>
+        </NavItem>
+        </div>
+          <div className='header-labels'>
+          <NavItem>
+          <NavLink href="#">Home</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#">Trending Videos</NavLink>
@@ -33,9 +40,11 @@ class HeaderMenu extends React.Component {
         <NavItem>
         <NavLink href="#">Profile</NavLink>
         </NavItem>
+        </div>
       </Nav>
     );
   }
 }
+
 
 export default HeaderMenu;
