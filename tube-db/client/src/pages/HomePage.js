@@ -77,20 +77,22 @@ class HomePage extends React.Component {
       <div>
 
       <div id="headerBar">
-      <div id="headerContent">
-      <img src={TubeDBLogo} width={100} />
-      </div>
+        <div id="headerLogo">
+        <img src={TubeDBLogo} width={150} />
+        </div>
+        <div id="headerContent">
         Content here
+        </div>
       </div>
 
-      <div className="page">
-        <div className="sideBar">
+      <div id="page">
+        <div id="sideBar">
             <div>
             <HeaderMenu />
             </div>
         </div>
       
-        <div className="content">
+        <div id="pageContent">
         content
         </div>
       </div>
