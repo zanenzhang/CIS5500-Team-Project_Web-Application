@@ -1,4 +1,4 @@
-import TubeDBLogo from '../images/logo4.png';
+
 import React, {useState} from 'react';
 
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
@@ -22,14 +22,9 @@ class HeaderMenu extends React.Component {
   render () {
     return (
       <Nav justified>
-        <div className='header-logo'>
-        <NavItem>
-          <img src={TubeDBLogo} width={120} />
-        </NavItem>
-        </div>
           <div className='header-labels'>
           <NavItem>
-          <NavLink href="#">Home</NavLink>
+          <NavLink href="#">Saved Videos</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#">Trending Videos</NavLink>

@@ -1,5 +1,7 @@
 import React from 'react';
 import HeaderMenu from '../components/HeaderMenu';
+import './HomePage.css'
+import TubeDBLogo from '../images/Group_1.svg';
 
 import {
   Table,
@@ -66,18 +68,37 @@ class HomePage extends React.Component {
       this.setState({ channelResults: res.results })
     })
 
-  }
+  };
 
   render() {
 
     return (
-        
+      
       <div>
-        <HeaderMenu />
+
+      <div id="headerBar">
+      <div id="headerContent">
+      <img src={TubeDBLogo} width={100} />
       </div>
+        Content here
+      </div>
+
+      <div className="page">
+        <div className="sideBar">
+            <div>
+            <HeaderMenu />
+            </div>
+        </div>
+      
+        <div className="content">
+        content
+        </div>
+      </div>
+    </div>
     )
-  }
+  };
 
 }
 
 export default HomePage
+

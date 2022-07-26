@@ -1,0 +1,37 @@
+html {
+    height: 100%;
+  }
+  
+  body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+  }
+  
+  #headerBar {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    background: #c8d5b9;
+    color: #8fc0a9;
+  }
+  
+  #headerContent {
+    margin-left: 10px;
+  }
+  
+  .page {
+    display: flex;
+    height: calc( 100vh - 30px);
+  }
+  
+  .sideBar {
+    width: 200px;
+    background: #8fc0a9;
+  }
+  
+  .content {
+    background: #70c1b3;
+    flex: 1 0 auto;
+    /* enable grow, disable shrink */
+  }

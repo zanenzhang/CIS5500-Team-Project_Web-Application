@@ -25,6 +25,11 @@ ReactDOM.render(
 							render={() => (
 								<HomePage />
 							)}/>
+		 <Route exact
+							path="/hello"
+							render={() => (
+								<HomePage />
+							)}/>
         <Route exact
 							path="/topchannels"
 							render={() => (
