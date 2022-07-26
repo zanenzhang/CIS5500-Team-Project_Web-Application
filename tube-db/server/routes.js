@@ -4,7 +4,7 @@
 const config = require('./config.json')
 const mysql = require('mysql');
 const e = require('express');
-const { connect } = require('./server');
+//const { connect } = require('./server');
 
 // TODO: fill in your connection details here
 const connection = mysql.createConnection({

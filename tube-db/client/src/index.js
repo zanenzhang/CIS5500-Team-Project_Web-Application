@@ -6,33 +6,35 @@ import {
 	Switch
 } from 'react-router-dom';
 
-// import HomePage from './pages/HomePage';
+// import pages';
 import TopChannelsPage from './pages/TopChannelsPage';
-import 'antd/dist/antd.css';
+import HomePage from './pages/HomePage';
+import TrendingVideosPage from './pages/TrendingVideosPage';
 
+import 'antd/dist/antd.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
-// import TrendingVideosPage from './pages/TrendingVideosPage';
+
 
 ReactDOM.render(
   <div>
     <Router>
       <Switch>
-        {/* <Route exact
+        <Route exact
 							path="/"
 							render={() => (
 								<HomePage />
-							)}/> */}
+							)}/>
         <Route exact
 							path="/topchannels"
 							render={() => (
 								<TopChannelsPage />
 							)}/>
-        {/* <Route exact
+        <Route exact
 							path="/trendingvideos"
 							render={() => (
 								<TrendingVideosPage />
-							)}/> */}
+							)}/>
       </Switch>
     </Router>
   </div>,
