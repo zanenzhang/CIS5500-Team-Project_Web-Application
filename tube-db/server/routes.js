@@ -35,7 +35,7 @@ async function hello(req, res) {
 //             CHANNEL-SPECIFIC ROUTES
 // ********************************************
 
-// Route 1 (handler)
+// CS Route 1 (handler)
 async function channel(req, res) {
 
     if (req.query.name){
@@ -54,6 +54,31 @@ async function channel(req, res) {
             });
     }
 };
+
+// CS Route 2 (handler) - get the top 100 channels by rank no filters
+async function find_channels(req, res) {
+
+    connection.query(
+        `
+        SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
+        FROM TOP_YOUTUBE_CHANNELS
+        ORDER BY Ranking
+        LIMIT 0, 100;
+        `, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    
+};
+
+// ********************************************
+//             VIDEO-SPECIFIC ROUTES
+// ********************************************
+
 
 async function home_videos(req, res) {
 
@@ -79,5 +104,6 @@ async function home_videos(req, res) {
 module.exports = {
     hello,
     channel,
+    find_channels,
     home_videos
 }

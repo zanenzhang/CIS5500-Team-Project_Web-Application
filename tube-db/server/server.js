@@ -11,10 +11,14 @@ const app = express();
 // whitelist localhost 3000
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 
-app.get('/home', routes.home_videos);
+// Routes //
 
+app.get('/home', routes.home_videos);
+app.get('/hello', routes.hello);
+// Channel Specific Routes //
 // Route 1 - register as GET 
 app.get('/channel', routes.channel);
+app.get('/find_channels', routes.find_channels);
 
 
 app.listen(config.server_port, () => {
