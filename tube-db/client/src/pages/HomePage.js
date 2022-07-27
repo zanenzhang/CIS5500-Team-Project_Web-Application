@@ -104,12 +104,12 @@ class HomePage extends React.Component {
             //return {
              // onClick: event => {this.goToMatch(record.MatchId)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
             //};
-          }} dataSource={this.state.videoResults} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
+          }} dataSource={this.state.videoResults} rowKey={'key'} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
             <ColumnGroup title="Random Videos">
-              <Column title="Video Title" dataIndex="title" key="1" sorter= {(a, b) => a.title.localeCompare(b.title)}/>
-              <Column title="Trending Date" dataIndex="trending_date" key="2" sorter= {(a, b) => a.trending_date.localeCompare(b.trending_date)}/>
-              <Column title="Likes" dataIndex="likes" key="3" sorter= {(a, b) => a.likes.localeCompare(b.likes)}/>
-              <Column title="Picture Thumbnail" dataIndex="thumbnail_link" key="4"/>
+              <Column title="Video Title" dataIndex="title" sorter= {(a, b) => a.title.localeCompare(b.title)}/>
+              <Column title="Trending Date" dataIndex="trending_date" sorter= {(a, b) => a.trending_date.localeCompare(b.trending_date)}/>
+              <Column title="Likes" dataIndex="likes" sorter= {(a, b) => a.likes.localeCompare(b.likes)}/>
+              <Column title="Picture Thumbnail" dataIndex="thumbnail_link"/>
             </ColumnGroup>
           </Table>  
         </div>
