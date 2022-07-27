@@ -1,7 +1,14 @@
 import config from './config.json'
 
-const getChannel = async (name) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/channel?name=${name}`, {
+const getChannel = async (ranking) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/channel?ranking=${ranking}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
+const getFindChannels = async () => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/find_channels`, {
         method: 'GET',
     })
     return res.json()
@@ -30,5 +37,6 @@ const getHomeVideos = async (country, pageCount) => {
 
 export {
     getChannel,
+    getFindChannels,
     getHomeVideos
 }

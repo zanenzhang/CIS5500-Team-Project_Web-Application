@@ -38,12 +38,12 @@ async function hello(req, res) {
 // CS Route 1 (handler)
 async function channel(req, res) {
 
-    if (req.query.name){
+    if (req.query.ranking){
         connection.query(
             `
             SELECT channel_title, country, subscribers
             FROM TOP_YOUTUBE_CHANNELS
-            Where channel_name = "${req.query.name}" 
+            Where channel_rank = "${req.query.ranking}" 
             `, function (error, results, fields) {
                 if (error) {
                     console.log(error)

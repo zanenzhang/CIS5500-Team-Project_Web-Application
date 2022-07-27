@@ -9,34 +9,49 @@ import {
     Divider,
 } from 'antd'
 
-import { getChannel } from '../fetcher'
+import { getChannel, getFindChannels } from '../fetcher'
+
+const { Column, ColumnGroup } = Table;
 
 class TopChannelsPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            channelQuery: "",
-            queryResults: [],
+            selectedQuery: "",
+            channelsQuery: "",
+            selectedQueryResults: [],
+            channelsQueryResults: [],
             selectedChannelDetails: null
         }
         this.updateChannelSearchBar = this.updateChannelSearchBar.bind(this)
         this.executeChannelSearch = this.executeChannelSearch.bind(this)
+        this.executeSelectedSearch = this.executeSelectedSearch.bind(this)
     }
 
     updateChannelSearchBar(event) {
-        this.setState({ channelQuery: event.target.value })
+        this.setState({ selectedQuery: event.target.value })
     }
 
     executeChannelSearch() {
-        getChannel(this.state.channelQuery).then(res => {    // 
-            this.setState({ queryResults: res.results })
-            this.setState({ selectedChannelDetails: res.results[0] })
+        getFindChannels().then(res => {    // 
+            this.setState({ channelsQueryResults: res.results })
+        })
+    }
 
+    executeSelectedSearch(Ranking) {
+        getChannel(Ranking).then(res => {    // 
+            this.setState({ selectedQueryResults: res.results })
+            this.setState({ selectedChannelDetails: res.results[0] })
         })
     }
 
     componentDidMount() {
-        getChannel("neebsgaming").then(res => {
+
+        getFindChannels().then(res => {    // 
+            this.setState({ channelsQueryResults: res.results })
+        })
+
+        getChannel(1).then(res => {
             this.setState({ selectedChannelDetails: res.results[0] })
         })
     }
@@ -44,20 +59,30 @@ class TopChannelsPage extends React.Component {
     render() {
         return (
             <div>
-                <Form style={{ width: '80vw', margin: '0 auto', marginTop: '5vh' }}>
-                    <Row>
-                        <Col flex={2}><FormGroup style={{ width: '20vw', margin: '0 auto' }}>
-                            <label>Channel Name</label>
-                            <FormInput placeholder="Channel Name" value={this.state.channelQuery} onChange={this.updateChannelSearchBar} />
-                        </FormGroup></Col>
-                        
-                        <Col flex={2}><FormGroup style={{ width: '10vw' }}>
-                            <Button style={{ marginTop: '4vh' }} onClick={this.executeChannelSearch}>Execute Search</Button>
-                        </FormGroup></Col>
-                    </Row>
-                </Form>
+
+                <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
+                    <h3>Channels</h3>
+                    <Table onRow={(record, rowIndex) => {
+                        return {
+                        onClick: event => {this.executeSelectedSearch(record.Ranking)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
+                        };
+                        }} dataSource={this.state.channelsQueryResults} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
+                                
+                                <Column title="Ranking" dataIndex="Ranking" key="Ranking" sorter= {(a, b) => a.Ranking-b.Ranking}/>
+                                <Column title="Title" dataIndex="Title" key="Title" sorter= {(a, b) => a.Title.localeCompare(b.Title)}/>
+                                <Column title="Country" dataIndex="country" key="country" sorter= {(a, b) => a.country.localeCompare(b.country)}/>
+                                <Column title="Language" dataIndex="language" key="language" sorter= {(a, b) => a.language.localeCompare(b.language)}/>
+                                
+                                <ColumnGroup title="Viewership">
+                                    <Column title="Subscribers" dataIndex="subscribers" key="subscribers" sorter= {(a, b) => a.subscribers-b.subscribers}/>
+                                    <Column title="Total Views" dataIndex="views" key="views" sorter= {(a, b) => a.views-b.views}/>
+                                </ColumnGroup>
+                    </Table>
+                </div>
 
 
+
+                {/* Selected Channel will display via below structure */}
                 <Divider />
                 {this.state.selectedChannelDetails ? <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
                     <Card>
