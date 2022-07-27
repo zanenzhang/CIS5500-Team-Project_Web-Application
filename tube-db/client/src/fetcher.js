@@ -7,15 +7,8 @@ const getChannel = async (name) => {
     return res.json()
 }
 
-const getAllChannels = async (id) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/channels?id=${id}`, {
-        method: 'GET',
-    })
-    return res.json()
-}
-
-const getAllVideos = async (id) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/videos?name=${id}`, {
+const getHomeVideos = async (country, pageCount) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/home?country=${country}&page=${pageCount}`, {
         method: 'GET',
     })
     return res.json()
@@ -24,6 +17,5 @@ const getAllVideos = async (id) => {
 
 export {
     getChannel,
-    getAllChannels,
-    getAllVideos
+    getHomeVideos
 }

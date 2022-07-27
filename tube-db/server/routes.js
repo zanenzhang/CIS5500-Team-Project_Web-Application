@@ -55,6 +55,27 @@ async function channel(req, res) {
     }
 }
 
+async function home_videos(req, res) {
+
+    country = req.query.country
+    pageCount = req.query.pageCount
+    limit = pageCount * 20
+
+    finalQuery = `SELECT video_id, title, trending_date, likes, thumbnail_link   
+    FROM TOP_TRENDING_VIDEOS WHERE country='${country}' LIMIT ${limit}'
+    `
+    
+    connection.query(finalQuery, function (error, results, fields) {
+
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+}
+
 module.exports = {
     hello,
     channel

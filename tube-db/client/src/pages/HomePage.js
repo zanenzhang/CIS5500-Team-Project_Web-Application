@@ -12,28 +12,35 @@ import { getAllVideos, getAllChannels } from '../fetcher'
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 
-
+/*
 const videoDetails = [
+  //title, trending_date, likes, thumbnail_link
   {
-    title: 'VideoTitle',
-    dataIndex: 'Name',
-    key: 'Name',
-    sorter: (a, b) => a.Name.localeCompare(b.Name),
+    title: 'Video Title',
+    dataIndex: 'title',
+    key: '1',
+    sorter: (a, b) => a.title.localeCompare(b.title),
   },
   {
-    title: 'TrendingDate',
-    dataIndex: 'TrendingDate',
-    key: 'Date',
-    sorter: (a, b) => a.Date.localeCompare(b.TrendingDate)
+    title: 'Trending Date',
+    dataIndex: 'trending_date',
+    key: '2',
+    sorter: (a, b) => a.trending_date.localeCompare(b.trending_date)
   },
   {
-    title: 'PublishedAt',
-    dataIndex: 'PublicationTime',
-    key: 'Time',
-    sorter: (a, b) => a.PublicationTime.localeCompare(b.PublicationTime)
-    
+    title: 'Likes',
+    dataIndex: 'likes',
+    key: '3',
+    sorter: (a, b) => a.likes.localeCompare(b.likes)
+  },
+  {
+    title: 'Picture Thumbnail',
+    dataIndex: 'thumbnail_link',
+    key: '4'
   }
 ];
+*/
+
 
 class HomePage extends React.Component {
 
@@ -42,32 +49,28 @@ class HomePage extends React.Component {
 
     this.state = {
       videoResults: [],
-      channelResults: []
+      pageCount: 1,
+      country: "United States"
     }
 
-    this.goToVideo = this.goToVideo.bind(this)
-    this.goToChannel = this.goToChannel.bind(this)
+    this.handleMoreVideos = this.handleMoreVideos.bind(this)
+    this.updateMoreVideos = this.updateMoreVideos.bind(this)
   }
 
-
-  goToVideo(videoId) {
-    window.location = `/videos?id=${videoId}`
+  updateMoreVideos() {
+    getHomeVideos(this.state.country, this.state.pageCount).then(res => {
+      this.setState({ videoResults: res.results })
+    })
   }
 
-  goToChannel(channelId) {
-    window.location = `/channels?id=${channelId}`
+  handleMoreVideos(){
+    this.setState({pageCount: pageCount += 1})
   }
 
   componentDidMount() {
-    getAllVideos(null, null, null).then(res => {
+    getHomeVideos(this.state.country, this.state.pageCount).then(res => {
       this.setState({ videoResults: res.results })
     })
-
-    getAllChannels().then(res => {
-      console.log(res.results)
-      this.setState({ channelResults: res.results })
-    })
-
   };
 
   render() {
@@ -94,6 +97,21 @@ class HomePage extends React.Component {
       
         <div id="pageContent">
         content
+        <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh' }}>
+        <h3>Thumbnail Testing</h3>
+        <Table onRow={(record, rowIndex) => {
+            //return {
+             // onClick: event => {this.goToMatch(record.MatchId)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
+            //};
+          }} dataSource={this.state.videoResults} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
+            <ColumnGroup title="Random Videos">
+              <Column title="Video Title" dataIndex="title" key="1" sorter= {(a, b) => a.title.localeCompare(b.title)}/>
+              <Column title="Trending Date" dataIndex="trending_date" key="2" sorter= {(a, b) => a.trending_date.localeCompare(b.trending_date)}/>
+              <Column title="Likes" dataIndex="likes" key="3" sorter= {(a, b) => a.likes.localeCompare(b.likes)}/>
+              <Column title="Picture Thumbnail" dataIndex="thumbnail_link" key="4"/>
+            </ColumnGroup>
+          </Table>  
+        </div>
         </div>
       </div>
     </div>
