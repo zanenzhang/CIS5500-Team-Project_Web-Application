@@ -25,10 +25,12 @@
   #sideBar {
     width: 200px;
     background: #8fc0a9;
+    height: 700px;
   }
   
   #pageContent {
     background: #70c1b3;
     flex: 1 0 auto;
+    height: 700px;
     /* enable grow, disable shrink */
   }
