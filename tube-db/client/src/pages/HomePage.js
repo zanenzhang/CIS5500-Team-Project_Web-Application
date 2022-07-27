@@ -2,13 +2,13 @@ import React from 'react';
 import HeaderMenu from '../components/HeaderMenu';
 import './HomePage.css'
 import TubeDBLogo from '../images/Group_1.svg';
+import { getHomeVideos } from '../fetcher'
 
 import {
   Table,
   Select
 } from 'antd'
 
-import { getAllVideos, getAllChannels } from '../fetcher'
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 
@@ -64,12 +64,13 @@ class HomePage extends React.Component {
   }
 
   handleMoreVideos(){
-    this.setState({pageCount: pageCount += 1})
+    this.setState({pageCount: (this.state.pageCount + 1)})
   }
 
   componentDidMount() {
     getHomeVideos(this.state.country, this.state.pageCount).then(res => {
       this.setState({ videoResults: res.results })
+      console.log(this.state.videoResults);
     })
   };
 
