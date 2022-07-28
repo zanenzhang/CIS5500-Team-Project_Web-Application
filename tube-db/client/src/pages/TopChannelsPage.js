@@ -13,6 +13,18 @@ import { getChannel, getFindChannels } from '../fetcher'
 
 const { Column, ColumnGroup } = Table;
 
+function numFormatter(num) {
+    if(num >= 1000 && num < 1000000){
+        return (num/1000).toFixed(1) + 'K'; // convert to K where num >= 1,000 but num < 1 mil
+    }else if(num >= 1000000 && num < 1000000000){
+        return (num/1000000).toFixed(1) + 'M'; // convert to M where num >= 1 mil but num < 1 bil
+    }else if(num >= 1000000000){
+        return (num/1000000000).toFixed(1) + 'B'; // convert to B where num >= 1 bil
+    }else if(num < 900){
+        return num; // if value < 1000, nothing to do
+    }
+}
+
 class TopChannelsPage extends React.Component {
     constructor(props) {
         super(props)
@@ -74,8 +86,8 @@ class TopChannelsPage extends React.Component {
                                 <Column title="Language" dataIndex="language" key="language" sorter= {(a, b) => a.language.localeCompare(b.language)}/>
                                 
                                 <ColumnGroup title="Viewership">
-                                    <Column title="Subscribers" dataIndex="subscribers" key="subscribers" sorter= {(a, b) => a.subscribers-b.subscribers}/>
-                                    <Column title="Total Views" dataIndex="views" key="views" sorter= {(a, b) => a.views-b.views}/>
+                                    <Column title="Subscribers" dataIndex="subscribers" key="subscribers" render={(a)=>numFormatter(a)} sorter= {(a, b) => a.subscribers-b.subscribers}/>
+                                    <Column title="Total Views" dataIndex="views" key="views" render={(a)=>numFormatter(a)} sorter= {(a, b) => a.views-b.views}/>
                                 </ColumnGroup>
                     </Table>
                 </div>
@@ -112,7 +124,7 @@ class TopChannelsPage extends React.Component {
                                 </Col>
 
                                 <Col flex={2} style={{ textAlign: 'right' }}>
-                                    <CardTitle>{this.state.selectedChannelDetails.subscribers}</CardTitle>
+                                    <CardTitle>{numFormatter(this.state.selectedChannelDetails.subscribers)}</CardTitle>
                                 </Col>
                             </Row>
                         </CardBody>

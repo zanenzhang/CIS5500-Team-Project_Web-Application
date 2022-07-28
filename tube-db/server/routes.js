@@ -41,7 +41,7 @@ async function channel(req, res) {
     if (req.query.ranking){
         connection.query(
             `
-            SELECT channel_title, country, subscribers
+            SELECT *
             FROM TOP_YOUTUBE_CHANNELS
             Where channel_rank = "${req.query.ranking}" 
             `, function (error, results, fields) {
