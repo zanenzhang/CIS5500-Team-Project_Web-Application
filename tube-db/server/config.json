@@ -1,8 +1,8 @@
 {
     "rds_host": "tubedb.ci1gtpuf7iew.us-east-1.rds.amazonaws.com",
     "rds_port": "3306",
-    "rds_user": "admin",
-    "rds_password" : "bugbusters~2022",
+    "rds_user": "guest",
+    "rds_password" : "Bugbusters~2022",
     "rds_db": "tubedb",
     "server_host": "127.0.0.1",
     "server_port":"8080"
