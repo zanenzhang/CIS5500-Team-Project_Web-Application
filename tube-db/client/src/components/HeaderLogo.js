@@ -6,12 +6,11 @@ import NavbarItem from './NavbarItem';
 import { Nav, NavItem, NavLink } from "shards-react";
 import {Menu} from 'antd';
 import TubeDBLogo from '../images/Group_1.svg';
-import SearchBar from './SearchBar';
 
-import './SideMenu.css';
+import './HeaderLogo.css';
 
 
-class SideMenu extends React.Component {
+class Header extends React.Component {
   state = {
     current: 'home',
   };
@@ -30,9 +29,6 @@ class SideMenu extends React.Component {
         <div id="headerLogo">
         <img src={TubeDBLogo} width={150} />
         </div>
-         <div id="searchBar">
-
-         </div>
         </div>
       </Nav>
     );
@@ -40,4 +36,4 @@ class SideMenu extends React.Component {
 }
 
 
-export default SideMenu;
+export default Header;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import searchBarIcon from '../../images/searchbar.png';
+import searchBarIcon from '../images/searchicon.svg';
+import './SearchBar.css';
 
 const SearchBar = ({ setSearchTerm }) => {
   const [state, setState] = useState('');
@@ -10,23 +11,19 @@ const SearchBar = ({ setSearchTerm }) => {
       initial.current = false;
       return;
     }
-
-    const timer = setTimeout(() => {
-      setSearchTerm(state);
-    }, 800);
-
-    return () => clearTimeout(timer);
   }, [setSearchTerm, state]);
 
   return (
-      <div id="searchbar">
-        <img src={searchBarIcon} alt='search-icon' />
-        <input
+    <div class="Wrapper">
+      <div class="SearchBar">
+        <img src={searchBarIcon} alt='search-icon' class="SearchBarImg"/>
+        <input class="SearchTerm"
           type='text'
-          placeholder='Search Movie'
+          placeholder='Search Videos'
           onChange={event => setState(event.currentTarget.value)}
           value={state}
         />
+      </div>
       </div>
   );
 };
