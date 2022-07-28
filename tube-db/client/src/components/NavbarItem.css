@@ -9,7 +9,8 @@
     margin-top: 12px;
     overflow: hidden;
     padding: 10.67px 21.33px;
-    width: 301px;
+    width: 201px;
+    border-style: solid;
   }
   
   .view-grid {
@@ -20,8 +21,7 @@
   .text {
     flex: 1;
     letter-spacing: 0;
-    line-height: 26.7px;
-    white-space: nowrap;
+    line-height: 26.7px
   }
   
   .nav-item.nav-item-1 {

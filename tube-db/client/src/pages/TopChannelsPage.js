@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress, Container, CardSubtitle } from "shards-react";
-import HeaderMenu from '../components/HeaderMenu';
+import SideMenu from '../components/SideMenu';
 import './TopChannels.css';
 
 //import { FixedSizeList as List } from "react-window";

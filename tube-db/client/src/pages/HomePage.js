@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderMenu from '../components/HeaderMenu';
+import SideMenu from '../components/SideMenu';
 import './HomePage.css'
 import TubeDBLogo from '../images/Group_1.svg';
 import { getHomeVideos } from '../fetcher'
@@ -81,9 +81,7 @@ class HomePage extends React.Component {
       <div>
 
       <div id="headerBar">
-        <div id="headerLogo">
-        <img src={TubeDBLogo} width={150} />
-        </div>
+        
         <div id="headerContent">
         Content here
         </div>
@@ -92,7 +90,7 @@ class HomePage extends React.Component {
       <div id="page">
         <div id="sideBar">
             <div>
-            <HeaderMenu />
+            <SideMenu />
             </div>
         </div>
       

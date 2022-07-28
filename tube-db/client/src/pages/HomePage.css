@@ -4,7 +4,7 @@
   
   #headerLogo {
     height: 120px;
-    width: 200px;
+    width: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +23,7 @@
   }
   
   #sideBar {
-    width: 200px;
+    width: 250px;
     background: #8fc0a9;
     height: 700px;
   }
