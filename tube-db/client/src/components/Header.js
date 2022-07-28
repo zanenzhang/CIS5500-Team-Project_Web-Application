@@ -6,6 +6,7 @@ import NavbarItem from './NavbarItem';
 import { Nav, NavItem, NavLink } from "shards-react";
 import {Menu} from 'antd';
 import TubeDBLogo from '../images/Group_1.svg';
+import SearchBar from './SearchBar';
 
 import './SideMenu.css';
 
