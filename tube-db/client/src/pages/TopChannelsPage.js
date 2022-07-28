@@ -3,7 +3,7 @@ import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress
 import HeaderMenu from '../components/HeaderMenu';
 import './TopChannels.css';
 
-import { FixedSizeList as List } from "react-window";
+//import { FixedSizeList as List } from "react-window";
 
 import {
     Table,
