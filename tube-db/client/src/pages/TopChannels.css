@@ -1,0 +1,27 @@
+.cardText {
+    color: whitesmoke;
+    margin-top: .2rem;
+    margin-bottom: 0;
+}
+
+.cardDivider {
+    padding: 0rem;
+    margin: 1rem 0rem;
+    border: 1px solid whitesmoke;
+}
+
+.cardTitle{
+    padding: 0rem;
+    margin: -0.5rem;
+    /* border: 1px solid red; */
+}
+
+.negGrowth{
+    color: #E34613;
+    margin-bottom: -.5rem;
+}
+
+.posGrowth{
+    color: #B0E313;
+    margin-bottom: -.5rem;
+}
