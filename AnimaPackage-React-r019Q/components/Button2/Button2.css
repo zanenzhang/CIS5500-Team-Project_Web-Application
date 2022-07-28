@@ -1,0 +1,14 @@
+.button-1 {
+  height: 42.67px;
+  min-width: 42.67px;
+  position: relative;
+}
+
+.icon-volume {
+  height: 21px;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  width: 21px;
+}
+

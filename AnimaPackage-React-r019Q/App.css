@@ -1,0 +1,418 @@
+.master {
+  align-items: flex-start;
+  background-color: var(--summer-green);
+  display: flex;
+  overflow: hidden;
+  width: 1920px;
+}
+
+.overlap-group3 {
+  height: 1080px;
+  margin-left: -9px;
+  position: relative;
+  width: 1929px;
+}
+
+.overlap-group2 {
+  height: 1079px;
+  left: 9px;
+  position: absolute;
+  top: 1px;
+  width: 1920px;
+}
+
+.albums {
+  height: 867px;
+  left: 376px;
+  position: absolute;
+  top: 212px;
+  width: 1474px;
+}
+
+.player {
+  align-items: flex-end;
+  background-color: var(--summer-green);
+  display: flex;
+  flex-direction: column;
+  height: 117px;
+  left: 0;
+  padding: 0.0px 0;
+  position: absolute;
+  top: 962px;
+  width: 1920px;
+}
+
+.border-top {
+  background-color: var(--black);
+  height: 1px;
+  width: 1920px;
+}
+
+.right-controls {
+  align-items: center;
+  display: flex;
+  height: min-content;
+  margin-right: 21.33px;
+  margin-top: 36px;
+  position: relative;
+  width: min-content;
+}
+
+.volume {
+  background-color: #f3f4f6;
+  border-radius: 13332px;
+  height: 5.33px;
+  min-width: 117.33px;
+  overflow: hidden;
+}
+
+.filled {
+  background-color: #8c8c8c;
+  border-radius: 13332px;
+  height: 5px;
+  width: 89px;
+}
+
+.border-left {
+  background-color: #e5e7eb;
+  height: 963px;
+  left: 322px;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.border-up {
+  height: 2px;
+  left: 324px;
+  position: absolute;
+  top: 161px;
+  width: 1596px;
+}
+
+.border-up-1 {
+  height: 963px;
+  left: 324px;
+  position: absolute;
+  top: 0;
+  width: 2px;
+}
+
+.over-it {
+  left: 378px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 479px;
+  white-space: nowrap;
+}
+
+.name {
+  left: 378px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 824px;
+  white-space: nowrap;
+}
+
+.meet-the-woo {
+  left: 678px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 824px;
+  white-space: nowrap;
+}
+
+.queen {
+  left: 977px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 824px;
+  white-space: nowrap;
+}
+
+.issa {
+  left: 1275px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 824px;
+  white-space: nowrap;
+}
+
+.plain-jane-remix-fe {
+  left: 1574px;
+  letter-spacing: 0;
+  line-height: 20.2px;
+  position: absolute;
+  top: 834px;
+}
+
+.name-1 {
+  left: 678px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 479px;
+  white-space: nowrap;
+}
+
+.amalia-deuxe-version {
+  left: 976px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 479px;
+  white-space: nowrap;
+}
+
+.fever {
+  left: 1275px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 479px;
+  white-space: nowrap;
+}
+
+.certified-lover-boy {
+  left: 1574px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 479px;
+  white-space: nowrap;
+}
+
+.name-2 {
+  left: 377px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 498px;
+  white-space: nowrap;
+}
+
+.the-weeknd {
+  left: 377px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 843px;
+  white-space: nowrap;
+}
+
+.pop-smoke {
+  left: 678px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 843px;
+  white-space: nowrap;
+}
+
+.nicki-minaj {
+  left: 976px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 843px;
+  white-space: nowrap;
+}
+
+.address {
+  left: 1276px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 843px;
+  white-space: nowrap;
+}
+
+.aap-ferg {
+  left: 1574px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 862px;
+  white-space: nowrap;
+}
+
+.medea-music {
+  left: 678px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 500px;
+  white-space: nowrap;
+}
+
+.doja-cat {
+  left: 976px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 500px;
+  white-space: nowrap;
+}
+
+.name-3 {
+  left: 1275px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 498px;
+  white-space: nowrap;
+}
+
+.name-4 {
+  left: 1574px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 498px;
+  white-space: nowrap;
+}
+
+.left-nav {
+  align-items: flex-start;
+  background-color: var(--summer-green);
+  display: flex;
+  height: 963px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 331px;
+}
+
+.left-nav-1 {
+  align-items: center;
+  background-color: var(--summer-green);
+  display: flex;
+  flex-direction: column;
+  height: 963px;
+  overflow: hidden;
+  padding: 25px 0;
+  position: relative;
+  width: 330px;
+}
+
+.group-1-1 {
+  height: 144px;
+  margin-left: 4.0px;
+  object-fit: cover;
+  width: 198px;
+}
+
+.medea-full-logo {
+  align-items: flex-end;
+  align-self: flex-start;
+  display: flex;
+  margin-left: -166.62px;
+  margin-top: 9px;
+  min-width: 76px;
+  padding: 0 0.0px;
+}
+
+.m {
+  height: 7px;
+  margin-bottom: 0.88px;
+  width: 11px;
+}
+
+.overlap-group {
+  height: 12px;
+  margin-left: 7px;
+  position: relative;
+  width: 53px;
+}
+
+.text-1 {
+  color: #adff00;
+  font-family: var(--font-family-helveticaneuecyr-bold);
+  font-size: var(--font-size-l);
+  font-weight: 700;
+  left: 40px;
+  letter-spacing: -0.66px;
+  line-height: 47.7px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  width: 3px;
+}
+
+.tube-db {
+  color: #b4fe17;
+  font-family: var(--font-family-sf_pro_display-bold);
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  left: 0;
+  letter-spacing: -1.14px;
+  line-height: 47.7px;
+  position: absolute;
+  top: 2px;
+  white-space: nowrap;
+  width: 53px;
+}
+
+.top-nav {
+  align-items: flex-start;
+  display: flex;
+  height: 43px;
+  left: 375px;
+  min-width: 1515px;
+  padding: 0 0.0px;
+  position: absolute;
+  top: 22px;
+}
+
+.overlap-group1 {
+  height: 43px;
+  margin-top: 0;
+  position: relative;
+  width: 107px;
+}
+
+.browsing-buttons {
+  align-items: flex-start;
+  display: flex;
+  gap: 21.33px;
+  height: min-content;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: min-content;
+}
+
+.chevron-left {
+  height: 29px;
+  left: 7px;
+  position: absolute;
+  top: 8px;
+  width: 29px;
+}
+
+.nav-item-3 {
+  align-self: flex-end;
+  height: 58px;
+  margin-bottom: -11.67px;
+  margin-left: 205px;
+  width: 1165px;
+}
+
+.title {
+  color: var(--black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxl);
+  font-weight: 400;
+  left: 373px;
+  letter-spacing: 0;
+  line-height: 42.7px;
+  position: absolute;
+  top: 105px;
+  white-space: nowrap;
+}
+
