@@ -6,4 +6,6 @@
 .header-labels {
     font-size: 18pt;
     font: Arial;
+    align-items: center;
+    justify-content: center;
 }

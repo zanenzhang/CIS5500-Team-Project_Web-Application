@@ -1,5 +1,6 @@
   #headerBar {
     display: flex;
+    height: 100px;
   }
   
   #headerLogo {

@@ -1,5 +1,6 @@
 .nav-item {
     align-items: center;
+    justify-content: center;
     background-color: var(--summer-green);
     border-radius: 10.67px;
     display: flex;
@@ -16,6 +17,8 @@
   .view-grid {
     height: 32px;
     min-width: 32px;
+    align-items: center;
+    justify-content: center;
   }
   
   .text {
