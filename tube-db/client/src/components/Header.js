@@ -5,6 +5,7 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import NavbarItem from './NavbarItem';
 import { Nav, NavItem, NavLink } from "shards-react";
 import {Menu} from 'antd';
+import TubeDBLogo from '../images/Group_1.svg';
 
 import './SideMenu.css';
 
@@ -24,13 +25,13 @@ class SideMenu extends React.Component {
   render () {
     return (
       <Nav justified>
-        <div id="sideMenu">
-          <div className='header-labels'>
-          <NavbarItem text="Saved Videos" href="#"/>
-          <NavbarItem text="Trending Videos" href="#"/>
-          <NavbarItem text="Channels" href="#"/>
-          <NavbarItem text="Profile" href="#"/>
+        <div id="header">
+        <div id="headerLogo">
+        <img src={TubeDBLogo} width={150} />
         </div>
+         <div id="searchBar">
+
+         </div>
         </div>
       </Nav>
     );

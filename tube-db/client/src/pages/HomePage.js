@@ -1,8 +1,8 @@
 import React from 'react';
 import SideMenu from '../components/SideMenu';
 import './HomePage.css'
-import TubeDBLogo from '../images/Group_1.svg';
 import { getHomeVideos } from '../fetcher'
+import Header from '../components/Header';
 
 import {
   Table,
@@ -82,12 +82,16 @@ class HomePage extends React.Component {
 
       <div id="headerBar">
         
+        <div id="headerLogo">
+          <Header />
+        </div>
         <div id="headerContent">
-        Content here
+          Search bar here
         </div>
       </div>
 
       <div id="page">
+
         <div id="sideBar">
             <div>
             <SideMenu />
