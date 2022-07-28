@@ -88,7 +88,7 @@ class TopChannelsPage extends React.Component {
         return (
             <div>
 
-                {/* <HeaderMenu /> */}
+                /* <SideMenu /> */
 
                 <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
                     <h3>Channels</h3>
