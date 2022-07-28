@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress } from "shards-react";
+import HeaderMenu from '../components/HeaderMenu';
 
 
 import {
@@ -26,6 +27,9 @@ function numFormatter(num) {
 }
 
 class TopChannelsPage extends React.Component {
+
+    
+
     constructor(props) {
         super(props)
         this.state = {
@@ -72,6 +76,8 @@ class TopChannelsPage extends React.Component {
         return (
             <div>
 
+                {/* <HeaderMenu /> */}
+
                 <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
                     <h3>Channels</h3>
                     <Table onRow={(record, rowIndex) => {
@@ -101,12 +107,48 @@ class TopChannelsPage extends React.Component {
                         <CardBody>
 
                             <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'center' }}>
+                                    <h3>{this.state.selectedChannelDetails.channel_title}</h3>
+                                </Col>
+                            </Row>
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'center' }}>
+                                    <CardTitle>{"All Time Statistics"}</CardTitle>
+                                </Col>
+                            </Row>
+
+                            <Row gutter='30' align='middle' justify='center'>
                                 <Col flex={2} style={{ textAlign: 'left' }}>
-                                <h5>Channel Title</h5>
+                                <h5>Views</h5>
                                 </Col>
 
+
+                                <Col flex={2} style={{ textAlign: 'right' }}>
+                                <h5>Subcribers</h5>
+                                </Col>
+                            </Row>
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'left' }}>
+                                    <CardTitle>{numFormatter(this.state.selectedChannelDetails.views)}</CardTitle>
+                                </Col>
+
+                                <Col flex={2} style={{ textAlign: 'right' }}>
+                                    <CardTitle>{numFormatter(this.state.selectedChannelDetails.subscribers)}</CardTitle>
+                                </Col>
+                            </Row>
+
+
+
+                            <Row gutter='30' align='middle' justify='center'>
                                 <Col flex={2} style={{ textAlign: 'center' }}>
-                                    <h5>Country</h5>
+                                    <CardTitle>{"Last 3 Months"}</CardTitle>
+                                </Col>
+                            </Row>
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'left' }}>
+                                <h5>Views</h5>
                                 </Col>
 
                                 <Col flex={2} style={{ textAlign: 'right' }}>
@@ -116,17 +158,17 @@ class TopChannelsPage extends React.Component {
 
                             <Row gutter='30' align='middle' justify='center'>
                                 <Col flex={2} style={{ textAlign: 'left' }}>
-                                    <CardTitle>{this.state.selectedChannelDetails.channel_title}</CardTitle>
-                                </Col>
-
-                                <Col flex={2} style={{ textAlign: 'center' }}>
-                                <CardTitle>{this.state.selectedChannelDetails.country}</CardTitle>
+                                    <CardTitle>{numFormatter(this.state.selectedChannelDetails.views_l3m)}</CardTitle>
                                 </Col>
 
                                 <Col flex={2} style={{ textAlign: 'right' }}>
-                                    <CardTitle>{numFormatter(this.state.selectedChannelDetails.subscribers)}</CardTitle>
+                                    <CardTitle>{numFormatter(this.state.selectedChannelDetails.subscribers_l3m)}</CardTitle>
                                 </Col>
                             </Row>
+
+                            {/* Location for trendingVideos from this channel....... */}
+
+
                         </CardBody>
                     </Card>
                     
