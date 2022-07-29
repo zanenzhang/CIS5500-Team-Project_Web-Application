@@ -10,9 +10,21 @@
     border: 1px solid whitesmoke;
 }
 
+.cardTopTitle{
+    padding: 0rem;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: -0.5rem 0.2rem;
+    color: whitesmoke;
+}
+
 .cardTitle{
     padding: 0rem;
-    margin: -0.5rem;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: -0.5rem 0.2rem;
+    color: whitesmoke;
     /* border: 1px solid red; */
 }
 

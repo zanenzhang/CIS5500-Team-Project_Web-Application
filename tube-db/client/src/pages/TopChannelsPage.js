@@ -16,6 +16,7 @@ import { getChannel, getFindChannels } from '../fetcher'
 
 const { Column, ColumnGroup } = Table;
 
+//add the case that values are negative (test abs. val and append - when negative)
 function numFormatter(num) {
     if(num >= 1000 && num < 1000000){
         return (num/1000).toFixed(1) + 'K'; // convert to K where num >= 1,000 but num < 1 mil
@@ -91,7 +92,7 @@ class TopChannelsPage extends React.Component {
                 {/* <HeaderMenu /> */}
 
                 <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
-                    <h3>Channels</h3>
+                    <h3>Top Channels</h3>
                     <Table onRow={(record, rowIndex) => {
                         return {
                         onClick: event => {this.executeSelectedSearch(record.Ranking)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
@@ -123,7 +124,7 @@ class TopChannelsPage extends React.Component {
                                     <CardBody >
                                         <Row gutter='30' align='middle' justify='center'>
                                             <Col flex={2} style={{ textAlign: 'center', margin: '0rem', padding: '0rem'}}>
-                                                <h3 className={'cardText cardTitle'}>Statistics</h3>
+                                                <h3 className={'cardText cardTopTitle'}>Statistics</h3>
                                             </Col>
 
                                             <Divider className='cardDivider'/>
@@ -136,13 +137,11 @@ class TopChannelsPage extends React.Component {
                                         </Row>
 
                                         <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign:'left'}}>
-                                                <CardSubtitle className='cardText'>Views</CardSubtitle>
+                                            <Col flex={2}  style={{ textAlign: 'left' }}>
+                                                    <p className='cardTitle'>Views</p>
                                             </Col>
-
-
-                                            <Col flex={2} style={{ textAlign: 'right' }}>
-                                                <CardSubtitle className='cardText'>Subs</CardSubtitle>
+                                            <Col flex={2}  style={{ textAlign: 'right' }}>
+                                                    <p className='cardTitle'>Subs</p>
                                             </Col>
                                         </Row>
 
@@ -165,13 +164,11 @@ class TopChannelsPage extends React.Component {
                                         </Row>
 
                                         <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign:'left'}}>
-                                                <CardSubtitle className='cardText'>Views</CardSubtitle>
+                                            <Col flex={2}  style={{ textAlign: 'left' }}>
+                                                    <p className='cardTitle'>Views</p>
                                             </Col>
-
-
-                                            <Col flex={2} style={{ textAlign: 'right' }}>
-                                                <CardSubtitle className='cardText'>Subs</CardSubtitle>
+                                            <Col flex={2}  style={{ textAlign: 'right' }}>
+                                                    <p className='cardTitle'>Subs</p>
                                             </Col>
                                         </Row>
 
@@ -185,15 +182,7 @@ class TopChannelsPage extends React.Component {
                                             </Col>
                                         </Row>
 
-                                        {/* <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign: 'left' }}>
-                                            <h5 className='cardText'>Growth</h5>
-                                            </Col>
 
-                                            <Col flex={2} style={{ textAlign: 'right' }}>
-                                            <h5 className='cardText'>Growth</h5>
-                                            </Col>
-                                        </Row> */}
 
                                         <Row gutter='30' align='middle' justify='center'>
                                             <Col flex={2} style={{ textAlign: 'left' }}>
@@ -208,13 +197,13 @@ class TopChannelsPage extends React.Component {
                                                 </p>
                                             </Col>
                                         </Row>
-
                                     </CardBody>
                                 </Card>
                             </Col>
 
                             <Col flex={2} style={{ textAlign: 'right' , 'border-radius': '0 1rem 1rem 0', 'background-color':'#2f4550'}}>
-                                <h3 flex={2} style={{ textAlign: 'center', color: 'whitesmoke', margin: '1rem 0 1rem 0'}}>Trending Videos</h3>
+
+                                <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Trending Videos</h3>
                             </Col>
                         </Row>
                         
