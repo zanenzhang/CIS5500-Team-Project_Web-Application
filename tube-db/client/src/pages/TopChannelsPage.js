@@ -206,19 +206,19 @@ class TopChannelsPage extends React.Component {
                                 <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Trending Videos</h3>
                                 <Carousel className='carousel' autoplay='true' dotPosition='right'>
                                     <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/hqdefault.jpg"/>
+                                        <img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/mqdefault.jpg"/>
                                     </div>
                                     <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/n_8hxS_7Vis/hqdefault.jpg"/>
+                                        <img className='center' src="https://i.ytimg.com/vi/n_8hxS_7Vis/mqdefault.jpg"/>
                                     </div>
                                     <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/9nidKH8cM38/hqdefault.jpg"/>
+                                        <img className='center' src="https://i.ytimg.com/vi/9nidKH8cM38/mqdefault.jpg"/>
                                     </div>
                                     <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/w-aidBdvZo8/hqdefault.jpg"/>
+                                        <img className='center' src="https://i.ytimg.com/vi/w-aidBdvZo8/mqdefault.jpg"/>
                                     </div>
                                     <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/vePc5V4h_kg/hqdefault.jpg"/>
+                                        <img className='center' src="https://i.ytimg.com/vi/vePc5V4h_kg/mqdefault.jpg"/>
                                     </div>
                                 </Carousel>
                             </Col>
