@@ -4,6 +4,17 @@
     margin-bottom: 0;
 }
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+.carousel{
+    width:800px;
+}
+
 .cardDivider {
     padding: 0rem;
     margin: 1rem 0rem;

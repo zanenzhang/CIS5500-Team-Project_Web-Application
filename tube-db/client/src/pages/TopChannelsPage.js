@@ -10,6 +10,7 @@ import {
     Row,
     Col,
     Divider,
+    Carousel
 } from 'antd'
 
 import { getChannel, getFindChannels } from '../fetcher'
@@ -202,8 +203,24 @@ class TopChannelsPage extends React.Component {
                             </Col>
 
                             <Col flex={2} style={{ textAlign: 'right' , 'border-radius': '0 1rem 1rem 0', 'background-color':'#2f4550'}}>
-
                                 <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Trending Videos</h3>
+                                <Carousel className='carousel' autoplay='true' dotPosition='right'>
+                                    <div>
+                                        <img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/hqdefault.jpg"/>
+                                    </div>
+                                    <div>
+                                        <img className='center' src="https://i.ytimg.com/vi/n_8hxS_7Vis/hqdefault.jpg"/>
+                                    </div>
+                                    <div>
+                                        <img className='center' src="https://i.ytimg.com/vi/9nidKH8cM38/hqdefault.jpg"/>
+                                    </div>
+                                    <div>
+                                        <img className='center' src="https://i.ytimg.com/vi/w-aidBdvZo8/hqdefault.jpg"/>
+                                    </div>
+                                    <div>
+                                        <img className='center' src="https://i.ytimg.com/vi/vePc5V4h_kg/hqdefault.jpg"/>
+                                    </div>
+                                </Carousel>
                             </Col>
                         </Row>
                         
