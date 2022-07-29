@@ -1,9 +1,9 @@
 import React from 'react';
 import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress, Container, CardSubtitle } from "shards-react";
-import HeaderMenu from '../components/HeaderMenu';
+import SideMenu from '../components/SideMenu';
 import './TopChannels.css';
 
-import { FixedSizeList as List } from "react-window";
+//import { FixedSizeList as List } from "react-window";
 
 import {
     Table,
@@ -89,7 +89,7 @@ class TopChannelsPage extends React.Component {
         return (
             <div>
 
-                {/* <HeaderMenu /> */}
+                /* <SideMenu /> */
 
                 <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
                     <h3>Top Channels</h3>

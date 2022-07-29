@@ -1,10 +1,11 @@
   #headerBar {
     display: flex;
+    height: 130px;
   }
   
   #headerLogo {
-    height: 120px;
-    width: 200px;
+    height: 130px;
+    width: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +15,7 @@
   
   #headerContent {
     flex-grow: 1;
-    background: #c8d5b9;
+    background: #8fc0a9;
   }
   
   #page {
@@ -23,7 +24,7 @@
   }
   
   #sideBar {
-    width: 200px;
+    width: 250px;
     background: #8fc0a9;
     height: 700px;
   }

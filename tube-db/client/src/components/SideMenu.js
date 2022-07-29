@@ -2,12 +2,14 @@
 import React, {useState} from 'react';
 
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import NavbarItem from './NavbarItem';
 import { Nav, NavItem, NavLink } from "shards-react";
 import {Menu} from 'antd';
-import './HeaderMenu.css';
+
+import './SideMenu.css';
 
 
-class HeaderMenu extends React.Component {
+class SideMenu extends React.Component {
   state = {
     current: 'home',
   };
@@ -22,19 +24,13 @@ class HeaderMenu extends React.Component {
   render () {
     return (
       <Nav justified>
+        <div id="sideMenu">
           <div className='header-labels'>
-          <NavItem>
-          <NavLink href="#">Saved Videos</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href="#">Trending Videos</NavLink>
-        </NavItem>
-        <NavItem>
-        <NavLink href="#">Channels</NavLink>
-        </NavItem>
-        <NavItem>
-        <NavLink href="#">Profile</NavLink>
-        </NavItem>
+          <NavbarItem text="Saved Videos" href="#"/>
+          <NavbarItem text="Trending Videos" href="#"/>
+          <NavbarItem text="Channels" href="#"/>
+          <NavbarItem text="Profile" href="#"/>
+        </div>
         </div>
       </Nav>
     );
@@ -42,4 +38,4 @@ class HeaderMenu extends React.Component {
 }
 
 
-export default HeaderMenu;
+export default SideMenu;

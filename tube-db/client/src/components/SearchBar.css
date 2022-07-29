@@ -1,0 +1,48 @@
+.Wrapper {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  padding: 0 20px;
+}
+
+.SearchBar {
+  position: relative;
+  max-width: 1280px;
+  width: 98%;
+  height: 55px;
+  background: #8fc0a9;
+  margin: 0 auto;
+  border-radius: 40px;
+  color: #fff;
+  border: solid;
+  border-color: black;
+  box-shadow: none;
+}
+
+.SearchBarImg {
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    width: 30px;
+  }
+
+.SearchBar > input {
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    margin: 8px 0;
+    padding: 0 0 0 60px;
+    border: 0;
+    width: 95%;
+    background: transparent;
+    height: 40px;
+    color: #fff;
+    border-color: transparent;
+}
+
+.SearchBar > input:focus{
+    outline: none;
+    outline-style: none;
+    box-shadow: none;
+}
+
