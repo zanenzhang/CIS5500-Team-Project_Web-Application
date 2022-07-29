@@ -203,13 +203,15 @@ class TopChannelsPage extends React.Component {
                             </Col>
 
                             <Col flex={2} style={{ textAlign: 'right' , 'border-radius': '0 1rem 1rem 0', 'background-color':'#2f4550'}}>
-                                <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Trending Videos</h3>
+                                <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Recent Trending Videos</h3>
                                 <Carousel className='carousel' autoplay='true' dotPosition='right'>
                                     <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/mqdefault.jpg"/>
+                                        <a href='https://www.youtube.com/embed/5WjcDji3xYc'><img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/mqdefault.jpg"/></a>
                                     </div>
                                     <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/n_8hxS_7Vis/mqdefault.jpg"/>
+                                        {/* <iframe calssName='center' width="400" height="225" src="https://www.youtube.com/embed/DTvS9lvRxZ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe> */}
+                                        <img className='center' src="https://i.ytimg.com/vi/DTvS9lvRxZ8/mqdefault.jpg"/>
                                     </div>
                                     <div>
                                         <img className='center' src="https://i.ytimg.com/vi/9nidKH8cM38/mqdefault.jpg"/>

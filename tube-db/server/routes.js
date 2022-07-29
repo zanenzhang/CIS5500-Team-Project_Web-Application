@@ -55,6 +55,36 @@ async function channel(req, res) {
     }
 };
 
+//  Selected Channel 5 most recent trending videos (with aggregation) (handler)
+// this runs in DG in about 100 seconds without optimization.
+async function selected_channel_recent_trending(req, res) {
+
+    if (req.query.ranking){
+        connection.query(
+            `
+            WITH Selected_Channel AS (
+                SELECT channel_title
+                FROM TOP_YOUTUBE_CHANNELS
+                WHERE channel_rank = ${req.query.ranking}
+            )SELECT V.title AS title, V.published_at AS published, V.video_id AS video_id,
+                    MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
+                    MIN(V.trending_date) AS trend_start, GROUP_CONCAT(DISTINCT V.country) AS countries
+            FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Channel AS C
+            WHERE V.channel_title = C.channel_title
+            GROUP BY title
+            ORDER BY V.published_at DESC
+            LIMIT 5;
+            `, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+    }
+};
+
 // CS Route 2 (handler) - get the top 100 channels by rank no filters
 async function find_channels(req, res) {
 
