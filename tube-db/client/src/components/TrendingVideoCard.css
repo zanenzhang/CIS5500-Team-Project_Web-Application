@@ -1,0 +1,40 @@
+.videoCard{
+    height: 100%;
+    border: 2px solid white;
+}
+
+
+.trendingVideoNameSection{
+    background-color: darkmagenta;
+    height:100%;
+    width: 100%;
+}
+
+.videoTitleSection {
+    color: whitesmoke;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.videoTitle {
+    margin-top: 0.5rem;
+    word-wrap: normal;
+    color: whitesmoke;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.videoData{
+    padding:0.5rem;
+    color:whitesmoke;
+    text-align: center;
+}
+
+.videoThumbnailSection{
+    background-color: darkgoldenrod;
+    border-radius: 0rem 0rem 0.8rem 0rem;
+    /* height:100%; */
+}

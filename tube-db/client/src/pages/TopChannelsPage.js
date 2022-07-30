@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress, Container, CardSubtitle } from "shards-react";
 import SideMenu from '../components/SideMenu';
 import './TopChannels.css';
+import TrendingVideoCard from '../components/TrendingVideoCard';
 
 //import { FixedSizeList as List } from "react-window";
 
@@ -14,6 +15,7 @@ import {
 } from 'antd'
 
 import { getChannel, getFindChannels } from '../fetcher'
+import { Footer } from 'antd/lib/layout/layout';
 
 const { Column, ColumnGroup } = Table;
 
@@ -116,122 +118,143 @@ class TopChannelsPage extends React.Component {
 
                 {/* Selected Channel will display via below structure */}
                 <Divider />
-                {this.state.selectedChannelDetails ? <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
-                    <Container>
-                     <h2 lex={2} style={{ textAlign: 'center' }}>{this.state.selectedChannelDetails.channel_title}</h2>
-                        <Row>
-                            <Col>
-                                <Card style={{ 'border-radius': '1rem 0rem 0rem 1rem', 'background-color':'black'}}>
-                                    <CardBody >
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign: 'center', margin: '0rem', padding: '0rem'}}>
-                                                <h3 className={'cardText cardTopTitle'}>Statistics</h3>
-                                            </Col>
-
-                                            <Divider className='cardDivider'/>
-                                        
-                                        </Row>
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign: 'center'}}>
-                                                <CardTitle className='cardText'>{"All Time"}</CardTitle>
-                                            </Col>
-                                        </Row>
-
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2}  style={{ textAlign: 'left' }}>
-                                                    <p className='cardTitle'>Views</p>
-                                            </Col>
-                                            <Col flex={2}  style={{ textAlign: 'right' }}>
-                                                    <p className='cardTitle'>Subs</p>
-                                            </Col>
-                                        </Row>
-
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign: 'left' }}>
-                                                <p className='cardText'>{numFormatter(this.state.selectedChannelDetails.views)}</p>
-                                            </Col>
-
-                                            <Col flex={2} style={{ textAlign: 'right' }}>
-                                                <p className='cardText'>{numFormatter(this.state.selectedChannelDetails.subscribers)}</p>
-                                            </Col>
-                                        </Row>
-
-                                        <Divider className='cardDivider'/>
-
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign: 'center' }}>
-                                                <CardTitle className='cardText'>{"Last 3 Months"}</CardTitle>
-                                            </Col>
-                                        </Row>
-
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2}  style={{ textAlign: 'left' }}>
-                                                    <p className='cardTitle'>Views</p>
-                                            </Col>
-                                            <Col flex={2}  style={{ textAlign: 'right' }}>
-                                                    <p className='cardTitle'>Subs</p>
-                                            </Col>
-                                        </Row>
-
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign: 'left' }}>
-                                                <p className='cardText'>{numFormatter(this.state.selectedChannelDetails.views_l3m)}</p>
-                                            </Col>
-
-                                            <Col flex={2} style={{ textAlign: 'right' }}>
-                                                <p className='cardText'>{numFormatter(this.state.selectedChannelDetails.subscribers_l3m)}</p>
-                                            </Col>
-                                        </Row>
-
-
-
-                                        <Row gutter='30' align='middle' justify='center'>
-                                            <Col flex={2} style={{ textAlign: 'left' }}>
-                                                <p className={this.state.selectedChannelDetails.view_growth_rate_l3m > 0 ? 'posGrowth':'negGrowth'}>
-                                                    {growthFormatter(this.state.selectedChannelDetails.view_growth_rate_l3m)}
-                                                </p>
-                                            </Col>
-
-                                            <Col flex={2} style={{ textAlign: 'right' }}>
-                                                <p className={this.state.selectedChannelDetails.subscriber_growth_rate_l3m > 0 ? 'posGrowth':'negGrowth'}>
-                                                    {growthFormatter(this.state.selectedChannelDetails.subscriber_growth_rate_l3m)}
-                                                </p>
-                                            </Col>
-                                        </Row>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-
-                            <Col flex={2} style={{ textAlign: 'right' , 'border-radius': '0 1rem 1rem 0', 'background-color':'#2f4550'}}>
-                                <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Recent Trending Videos</h3>
-                                <Carousel className='carousel' autoplay='true' dotPosition='right'>
-                                    <div>
-                                        <a href='https://www.youtube.com/embed/5WjcDji3xYc'><img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/mqdefault.jpg"/></a>
-                                    </div>
-                                    <div>
-                                        {/* <iframe calssName='center' width="400" height="225" src="https://www.youtube.com/embed/DTvS9lvRxZ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                        </iframe> */}
-                                        <img className='center' src="https://i.ytimg.com/vi/DTvS9lvRxZ8/mqdefault.jpg"/>
-                                    </div>
-                                    <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/9nidKH8cM38/mqdefault.jpg"/>
-                                    </div>
-                                    <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/w-aidBdvZo8/mqdefault.jpg"/>
-                                    </div>
-                                    <div>
-                                        <img className='center' src="https://i.ytimg.com/vi/vePc5V4h_kg/mqdefault.jpg"/>
-                                    </div>
-                                </Carousel>
-                            </Col>
-                        </Row>
-                        
-                    </Container>
+                {this.state.selectedChannelDetails ? 
+                
+                <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}> 
                     
+
+                    {/*    START OF SELECTED CHANNEL CONTAINER    */}    
+                    <h2 lex={2} style={{ textAlign: 'center' }}>{this.state.selectedChannelDetails.channel_title}</h2>
+                        
+                    <Row className='selectedContainer'>
+
+                        {/*    START OF SELECTED CHANNEL STATS SECTION OF CONTAINER   */}    
+                        <Col className='channelStats' span={6}>
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'center', margin: '0rem', padding: '0rem'}}>
+                                    <h3 className='statTopTitle'>Channel<br></br>Statistics</h3>
+                                </Col>
+                            </Row>
+
+
+                            <Divider className='cardDivider'/>
+
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'center'}}>
+                                    <h4 className='statSectionTitle'>All Time</h4>
+                                </Col>
+                            </Row>
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2}  style={{ textAlign: 'left' }}>
+                                        <p className='statTitle'>Views</p>
+                                </Col>
+                                <Col flex={2}  style={{ textAlign: 'right' }}>
+                                        <p className='statTitle'>Subs</p>
+                                </Col>
+                            </Row>
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'left' }}>
+                                    <p className='statText'>{numFormatter(this.state.selectedChannelDetails.views)}</p>
+                                </Col>
+
+                                <Col flex={2} style={{ textAlign: 'right' }}>
+                                    <p className='statText'>{numFormatter(this.state.selectedChannelDetails.subscribers)}</p>
+                                </Col>
+                            </Row>
+
+
+
+                            <Divider className='cardDivider'/>
+
+
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'center' }}>
+                                <h4 className='statSectionTitle'>Last 3 Months</h4>
+                                </Col>
+                            </Row>
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2}  style={{ textAlign: 'left' }}>
+                                        <p className='statTitle'>Views</p>
+                                </Col>
+                                <Col flex={2}  style={{ textAlign: 'right' }}>
+                                        <p className='statTitle'>Subs</p>
+                                </Col>
+                            </Row>
+
+                            <Row gutter='30' align='middle' justify='center'>
+                                <Col flex={2} style={{ textAlign: 'left' }}>
+                                    <p className='statText'>{numFormatter(this.state.selectedChannelDetails.views_l3m)}
+                                        <br></br>
+                                        <p className={this.state.selectedChannelDetails.view_growth_rate_l3m > 0 ? 'posGrowth':'negGrowth'}>
+                                            {growthFormatter(this.state.selectedChannelDetails.view_growth_rate_l3m)}
+                                        </p>
+                                    </p>
+                                    
+                                </Col>
+
+                                <Col flex={2} style={{ textAlign: 'right' }}>
+                                    <p className='statText'>{numFormatter(this.state.selectedChannelDetails.subscribers_l3m)}
+                                        <br></br>
+                                        <p className={this.state.selectedChannelDetails.subscriber_growth_rate_l3m > 0 ? 'posGrowth':'negGrowth'}>
+                                        {growthFormatter(this.state.selectedChannelDetails.subscriber_growth_rate_l3m)}
+                                        </p>
+                                    </p>
+                                </Col>
+                            </Row>
+
+                            <Divider className='cardDividerBottom'/>
+
+                        </Col>
+
+                {/*    START OF TRENDING VIDEO SECTION OF CONTAINER    */}
+                        
+                        <Col className='recentTrendingContainer' span={18}>
+                            <Row className='trendingVideoSectionTitle'>
+                                <h3 className='trendingTopTitle'>Most Recent Trending Videos</h3>
+                            </Row>
+
+                            <Row className='carouselSection'>
+                                <Carousel className='carousel' autoplay='true' dotPosition='right' autoplaySpeed={5000}>
+                                    <TrendingVideoCard/>
+                                    <TrendingVideoCard/>
+                                </Carousel>
+                            </Row>
+                        </Col>
+                    </Row>
+                        
+                    {/* </Container> */}
+                    <Footer></Footer>
                     
                 </div> : null}
                 <Divider />
+                        {/* <Row>
 
+                        <Col flex={2} style={{ textAlign: 'right' , 'border-radius': '0 1rem 1rem 0', 'background-color':'#2f4550'}}>
+                            <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Recent Trending Videos</h3>
+                            <Carousel className='carousel' autoplay='true' dotPosition='right'>
+                                <div>
+                                    <a href='https://www.youtube.com/embed/5WjcDji3xYc'><img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/mqdefault.jpg"/></a>
+                                </div>
+                                <div>
+                                    <img className='center' src="https://i.ytimg.com/vi/DTvS9lvRxZ8/mqdefault.jpg"/>
+                                </div>
+                                <div>
+                                    <img className='center' src="https://i.ytimg.com/vi/9nidKH8cM38/mqdefault.jpg"/>
+                                </div>
+                                <div>
+                                    <img className='center' src="https://i.ytimg.com/vi/w-aidBdvZo8/mqdefault.jpg"/>
+                                </div>
+                                <div>
+                                    <img className='center' src="https://i.ytimg.com/vi/vePc5V4h_kg/mqdefault.jpg"/>
+                                </div>
+                            </Carousel>
+                        </Col>
+                    </Row> */}
             </div>
         )
     }
