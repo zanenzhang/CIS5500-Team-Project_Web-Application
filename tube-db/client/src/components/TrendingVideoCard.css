@@ -1,12 +1,13 @@
 .videoCard{
-    height: 100%;
-    border: 2px solid white;
+    height: 441px;
+    border-radius: 0 0 1rem 0;
 }
 
 
 .trendingVideoNameSection{
-    background-color: darkmagenta;
-    height:100%;
+    background-color: rgb(38, 38, 38);
+    /* border-radius: 0 0 0.9rem 0; */
+    height:30%;
     width: 100%;
 }
 
@@ -33,8 +34,34 @@
     text-align: center;
 }
 
-.videoThumbnailSection{
-    background-color: darkgoldenrod;
-    border-radius: 0rem 0rem 0.8rem 0rem;
-    /* height:100%; */
+.videoDataCountries{
+    padding:1rem;
+    color:whitesmoke;
+    text-align: center;
 }
+
+.videoDataTitle{
+    color:#D6D5A8;
+    font-size: 1.5rem;
+}
+
+.videoThumbnailSection{
+    background-color: rgb(38, 38, 38);
+    border-radius: 0rem 0rem 0.8rem 0rem;
+    height:70%;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 50%; */
+  }
+
+  .videoTile{
+    max-width: 100%;
+    max-height:95%;
+    border-radius: 0rem 0rem 0.8rem 0rem;
+    border: 3px solid #D6D5A8;
+    /* display: block; */
+  }

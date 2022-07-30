@@ -19,6 +19,7 @@ app.get('/hello', routes.hello);
 // Route 1 - register as GET 
 app.get('/channel', routes.channel);
 app.get('/find_channels', routes.find_channels);
+app.get('/selected_channel_recent_trending',routes.selected_channel_recent_trending);
 
 
 app.listen(config.server_port, () => {

@@ -19,7 +19,7 @@ import { Footer } from 'antd/lib/layout/layout';
 
 const { Column, ColumnGroup } = Table;
 
-//add the case that values are negative (test abs. val and append - when negative)
+//add the case that values are negative (test abs. val and append - when negative) //perhaps make a utility.js file 
 function numFormatter(num) {
     if(num >= 1000 && num < 1000000){
         return (num/1000).toFixed(1) + 'K'; // convert to K where num >= 1,000 but num < 1 mil
@@ -90,7 +90,7 @@ class TopChannelsPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='page'>
 
                 {/* <SideMenu /> */}
 
@@ -219,9 +219,12 @@ class TopChannelsPage extends React.Component {
                             </Row>
 
                             <Row className='carouselSection'>
-                                <Carousel className='carousel' autoplay='true' dotPosition='right' autoplaySpeed={5000}>
-                                    <TrendingVideoCard/>
-                                    <TrendingVideoCard/>
+                                <Carousel className='carousel' autoplay='true' dotPosition='right' effect='fade' autoplaySpeed={5000}>
+                                    <TrendingVideoCard num={0}/>
+                                    <TrendingVideoCard num={1}/>
+                                    <TrendingVideoCard num={2}/>
+                                    <TrendingVideoCard num={3}/>
+                                    <TrendingVideoCard num={4}/>
                                 </Carousel>
                             </Row>
                         </Col>

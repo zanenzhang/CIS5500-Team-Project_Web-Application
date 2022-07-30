@@ -135,5 +135,6 @@ module.exports = {
     hello,
     channel,
     find_channels,
-    home_videos
+    home_videos,
+    selected_channel_recent_trending
 }

@@ -1,7 +1,11 @@
+.page{
+    /* background-color: #691d03; */
+}
+
 .selectedContainer{
-    min-height:340px;
-    min-width: 680px;
-    aspect-ratio: 2/1;
+    width: 1000px;
+    height: 500px;
+    /* aspect-ratio: 2/1; */
     border-radius: 1rem;
     margin-bottom: 2.5rem;
 }
@@ -55,7 +59,7 @@
 
 .trendingVideoSectionTitle{
     background-color: rgb(38, 38, 38);
-    border-radius: 0rem 0.8rem 0rem 0rem;
+    border-radius: 0rem 0.5rem 0rem 0rem;
     height:15%;
     align-items: center;
     justify-items: center;
@@ -68,7 +72,7 @@
     font-weight: bold;
     font-size: 2rem;
     margin: 0.5rem 0.2rem;
-    color: whitesmoke;
+    color: #D6D5A8;
 }
 
 .carouselSection{
@@ -82,16 +86,16 @@
     /* border: 5px solid blue; */
 }
 
-.videoCard{
+/* .videoCard{
     height: 100%;
     border: 2px solid lime;
-}
+} */
 
 .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    /* width: 50%; */
   }
 
 
