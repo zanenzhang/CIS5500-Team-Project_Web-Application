@@ -8,6 +8,8 @@ import {
 
 const prototype = [{"title":"I’ve Got a Huge Secret Hiding Behind This Fake Office","published":"2022-06-15T04:00:00.000Z","video_id":"h8g9wfI9nGI","views":9075972,"trend_stop":"2022-06-18T04:00:00.000Z","trend_start":"2022-06-16T04:00:00.000Z","countries":"Canada,Germany,India,United Kingdom,United States"},{"title":"Pranks Destroy Scam Callers- GlitterBomb Payback","published":"2022-05-08T04:00:00.000Z","video_id":"xsLJZyih3Ac","views":30868590,"trend_stop":"2022-05-17T04:00:00.000Z","trend_start":"2022-05-09T04:00:00.000Z","countries":"Canada,Germany,India,United Kingdom,United States"},{"title":"Robot Piano Catches Fire Playing Rush E (World’s Hardest Song)","published":"2022-03-19T04:00:00.000Z","video_id":"uBEL3YVzMwk","views":9185225,"trend_stop":"2022-03-27T04:00:00.000Z","trend_start":"2022-03-27T04:00:00.000Z","countries":"United Kingdom"},{"title":"This Piano Speaks English","published":"2022-03-19T04:00:00.000Z","video_id":"uBEL3YVzMwk","views":8014045,"trend_stop":"2022-03-26T04:00:00.000Z","trend_start":"2022-03-20T04:00:00.000Z","countries":"Canada,Germany,United Kingdom,United States"},{"title":"World's Largest T-Shirt Cannon","published":"2021-12-20T05:00:00.000Z","video_id":"QiKZYt9070U","views":6387831,"trend_stop":"2021-12-22T05:00:00.000Z","trend_start":"2021-12-21T05:00:00.000Z","countries":"Canada,Germany,India,United Kingdom,United States"}];
 
+// const colors = {0:"#8B9A46", 1:"#816797", 2: "#A13333", 3: "#1597BB", 4:"#EC994B"};
+
 function TrendingVideoCard({incoming_data, num}) {
     
     function numFormatter(num) {
@@ -38,6 +40,8 @@ function TrendingVideoCard({incoming_data, num}) {
     const trend_duration_ms = trend_stop.getTime() - trend_start.getTime();
     let trend_duration_hr = (trend_duration_ms / 3600000).toFixed(0);
 
+    let gradient = "videoThumbnailSection"+num;
+
     if (trend_duration_hr < 24){
         trend_duration_hr = '< 24'
     }
@@ -67,7 +71,7 @@ function TrendingVideoCard({incoming_data, num}) {
                 
             </Row>
             
-            <Row className='videoThumbnailSection'>
+            <Row className={gradient}>
                 <Col span={6}>
                     <h5 className='videoDataCountries'><b className="videoDataTitle">Countries:</b><br></br>{countries}</h5>
                 </Col>
@@ -77,6 +81,8 @@ function TrendingVideoCard({incoming_data, num}) {
             </Row>
         </div>
     );
-    }
+ }
 
-    export default TrendingVideoCard;
+ 
+
+export default TrendingVideoCard;
