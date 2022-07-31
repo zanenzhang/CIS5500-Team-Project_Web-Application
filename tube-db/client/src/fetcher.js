@@ -31,10 +31,10 @@ const getHomeVideos = async (country, pageCount) => {
     const setKeys = (array) => {
         var size = array.results.length;
         for (var x=0; x < size; x++ ){
-            array.results[x].key = array.results[x].video_id + " " + array.results[x].trending_date
-            array.results[x].thumbnail_link = array.results[x].thumbnail_link.replace("default", "mqdefault")
+            array.results[x].key = array.results[x].video_id + " " + array.results[x].trending_date;
+            array.results[x].thumbnail_link = array.results[x].thumbnail_link.replace("default", "mqdefault");
         }
-        return array
+        return array;
     }
 
     const final = await setKeys(result);
