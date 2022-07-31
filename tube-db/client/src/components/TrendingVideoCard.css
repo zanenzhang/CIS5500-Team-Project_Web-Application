@@ -47,31 +47,31 @@
 
 
 .videoThumbnailSection0{
-    background-image: linear-gradient(#1B2430, #8B9A46);
+    background-image: linear-gradient(rgb(38, 38, 38), #8B9A46);
     border-radius: 0rem 0rem 0.8rem 0rem;
     height:70%;
 }
 
 .videoThumbnailSection1{
-    background-image: linear-gradient(#1B2430, #816797);
+    background-image: linear-gradient(rgb(38, 38, 38), #816797);
     border-radius: 0rem 0rem 0.8rem 0rem;
     height:70%;
 }
 
 .videoThumbnailSection2{
-    background-image: linear-gradient(#1B2430, #A13333);
+    background-image: linear-gradient(rgb(38, 38, 38), #A13333);
     border-radius: 0rem 0rem 0.8rem 0rem;
     height:70%;
 }
 
 .videoThumbnailSection3{
-    background-image: linear-gradient(#1B2430, #1597BB);
+    background-image: linear-gradient(rgb(38, 38, 38), #1597BB);
     border-radius: 0rem 0rem 0.8rem 0rem;
     height:70%;
 }
 
 .videoThumbnailSection4{
-    background-image: linear-gradient(#1B2430, #EC994B);
+    background-image: linear-gradient(rgb(38, 38, 38), #EC994B);
     border-radius: 0rem 0rem 0.8rem 0rem;
     height:70%;
 }
