@@ -1,6 +1,5 @@
 import React from 'react';
 import SideMenu from '../components/SideMenu';
-import SearchBar from '../components/SearchBar';
 import './HomePage.css'
 import { getHomeVideos } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
@@ -115,7 +114,8 @@ class HomePage extends React.Component {
           }} dataSource={this.state.videoResults} rowKey={'key'} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
             <ColumnGroup title="Random Videos">
               <Column title="Video Title" dataIndex="title" sorter= {(a, b) => a.title.localeCompare(b.title)}/>
-              <Column title="Trending Date" dataIndex="trending_date" sorter= {(a, b) => a.trending_date.localeCompare(b.trending_date)}/>
+              <Column title="Trending Date" dataIndex="trend_start" sorter= {(a, b) => a.trend_start.localeCompare(b.trend_start)}/>
+              <Column title="Trending Date" dataIndex="trend_stop" sorter= {(a, b) => a.trend_stop.localeCompare(b.trend_stop)}/>
               <Column title="Likes" dataIndex="likes" sorter= {(a, b) => a.likes.localeCompare(b.likes)}/>
               <Column title="Picture Thumbnail" dataIndex="thumbnail_link"/>
             </ColumnGroup>

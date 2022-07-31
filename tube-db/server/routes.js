@@ -117,8 +117,19 @@ async function home_videos(req, res) {
     const limit = pageCount * 20
 
     finalQuery = `
-    SELECT DISTINCT video_id, title, trending_date, likes, thumbnail_link   
-    FROM TOP_TRENDING_VIDEOS WHERE country='${country}' LIMIT ${limit};
+    WITH Selected_Channel AS (
+        SELECT channel_title
+        FROM TOP_YOUTUBE_CHANNELS
+        WHERE country = '${country}'
+    )SELECT V.title AS title, V.published_at AS published, V.video_id AS video_id,
+            MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
+            MIN(V.trending_date) AS trend_start, thumbnail_link, likes,
+            GROUP_CONCAT(DISTINCT V.country) AS countries
+    FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Channel AS C
+    WHERE V.channel_title = C.channel_title
+    GROUP BY title
+    ORDER BY V.published_at DESC
+    LIMIT ${limit};
     `
 
     connection.query(finalQuery, function (error, results, fields) {
