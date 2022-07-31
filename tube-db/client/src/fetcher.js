@@ -7,6 +7,13 @@ const getChannel = async (ranking) => {
     return res.json()
 }
 
+const getChannelRecentTrending = async (ranking) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/selected_channel_recent_trending?ranking=${ranking}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
 const getFindChannels = async () => {
     var res = await fetch(`http://${config.server_host}:${config.server_port}/find_channels`, {
         method: 'GET',
@@ -38,5 +45,6 @@ const getHomeVideos = async (country, pageCount) => {
 export {
     getChannel,
     getFindChannels,
-    getHomeVideos
+    getHomeVideos,
+    getChannelRecentTrending
 }

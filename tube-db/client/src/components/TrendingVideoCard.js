@@ -6,12 +6,15 @@ import {
     Col
 } from 'antd'
 
+
+
+
 const prototype = [{"title":"I’ve Got a Huge Secret Hiding Behind This Fake Office","published":"2022-06-15T04:00:00.000Z","video_id":"h8g9wfI9nGI","views":9075972,"trend_stop":"2022-06-18T04:00:00.000Z","trend_start":"2022-06-16T04:00:00.000Z","countries":"Canada,Germany,India,United Kingdom,United States"},{"title":"Pranks Destroy Scam Callers- GlitterBomb Payback","published":"2022-05-08T04:00:00.000Z","video_id":"xsLJZyih3Ac","views":30868590,"trend_stop":"2022-05-17T04:00:00.000Z","trend_start":"2022-05-09T04:00:00.000Z","countries":"Canada,Germany,India,United Kingdom,United States"},{"title":"Robot Piano Catches Fire Playing Rush E (World’s Hardest Song)","published":"2022-03-19T04:00:00.000Z","video_id":"uBEL3YVzMwk","views":9185225,"trend_stop":"2022-03-27T04:00:00.000Z","trend_start":"2022-03-27T04:00:00.000Z","countries":"United Kingdom"},{"title":"This Piano Speaks English","published":"2022-03-19T04:00:00.000Z","video_id":"uBEL3YVzMwk","views":8014045,"trend_stop":"2022-03-26T04:00:00.000Z","trend_start":"2022-03-20T04:00:00.000Z","countries":"Canada,Germany,United Kingdom,United States"},{"title":"World's Largest T-Shirt Cannon","published":"2021-12-20T05:00:00.000Z","video_id":"QiKZYt9070U","views":6387831,"trend_stop":"2021-12-22T05:00:00.000Z","trend_start":"2021-12-21T05:00:00.000Z","countries":"Canada,Germany,India,United Kingdom,United States"}];
 
 // const colors = {0:"#8B9A46", 1:"#816797", 2: "#A13333", 3: "#1597BB", 4:"#EC994B"};
 
-function TrendingVideoCard({incoming_data, num}) {
-    
+function TrendingVideoCard({data, num}) {
+
     function numFormatter(num) {
         if(num >= 1000 && num < 1000000){
             return (num/1000).toFixed(1) + 'K'; // convert to K where num >= 1,000 but num < 1 mil
@@ -23,19 +26,28 @@ function TrendingVideoCard({incoming_data, num}) {
             return num; // if num < 1000, do nothing
         }
     }
-    
-    let data = prototype[num];
+
+
+    console.log(data);
+    let record_data = data;
 
     // if (incoming_data !== null){
     //     data = incoming_data;
     // }
     
-    let days = data.trend_stop - data.trend_stop;
+    let days = record_data.trend_stop - record_data.trend_stop;
 
-    let countries = (data.countries).split(",").join(" ");
+    let countries = "";
 
-    const trend_start = new Date(data.trend_start.slice(0,19));
-    const trend_stop = new Date(data.trend_stop.slice(0,19));
+    if(record_data.countries.includes(",")){
+        countries = (record_data.countries).split(",").join(" ");
+    }else{
+        countries = record_data.countries
+    }
+    
+
+    const trend_start = new Date(record_data.trend_start.slice(0,19));
+    const trend_stop = new Date(record_data.trend_stop.slice(0,19));
 
     const trend_duration_ms = trend_stop.getTime() - trend_start.getTime();
     let trend_duration_hr = (trend_duration_ms / 3600000).toFixed(0);
@@ -46,25 +58,34 @@ function TrendingVideoCard({incoming_data, num}) {
         trend_duration_hr = '< 24'
     }
 
-    let img_url = "https://i.ytimg.com/vi/"+ data.video_id + "/maxresdefault.jpg";
+    let img_url = "https://i.ytimg.com/vi/"+ record_data.video_id + "/hqdefault.jpg";
+
+
+    // console.log("hello")
+    // console.log(checkImage(img_url))
+    // console.log("hello")
+    // if(checkImage(img_url)){
+    //     console.log(record_data.title + " has no max res image");
+    // }
+    
 
     return (
         <div className="videoCard">
             <Row className='trendingVideoNameSection'>
                 <Col className='trendingVideoNameSection'>
                     <Row className='videoTitleContainer'>
-                        <h4 className='videoTitle'>{data.title}</h4>
+                        <h4 className='videoTitle'>{record_data.title}</h4>
                     </Row>
                     
                     <Row>
                         <Col span={6}>
-                            <h5 className='videoData'><b className="videoDataTitle">Views:</b> {numFormatter(data.views)}</h5>
+                            <h5 className='videoData'><b className="videoDataTitle">Views:</b> {numFormatter(record_data.views)}</h5>
                         </Col>
                         <Col span={9}>
                             <h5 className='videoData'><b className="videoDataTitle">Trending for:</b> {trend_duration_hr} hours</h5>
                         </Col>
                         <Col span={9}>
-                            <h5 className='videoData'><b className="videoDataTitle">Published:</b> {data.published.slice(0,10)}</h5>
+                            <h5 className='videoData'><b className="videoDataTitle">Published:</b> {record_data.published.slice(0,10)}</h5>
                         </Col>
                     </Row>
                 </Col>

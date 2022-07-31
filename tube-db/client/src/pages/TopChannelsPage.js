@@ -14,7 +14,7 @@ import {
     Carousel
 } from 'antd'
 
-import { getChannel, getFindChannels } from '../fetcher'
+import { getChannel, getFindChannels, getChannelRecentTrending } from '../fetcher'
 import { Footer } from 'antd/lib/layout/layout';
 
 const { Column, ColumnGroup } = Table;
@@ -44,8 +44,6 @@ function growthFormatter(deci){
 
 class TopChannelsPage extends React.Component {
 
-    
-
     constructor(props) {
         super(props)
         this.state = {
@@ -53,6 +51,7 @@ class TopChannelsPage extends React.Component {
             channelsQuery: "",
             selectedQueryResults: [],
             channelsQueryResults: [],
+            selectedTrendingQueryResults: [],
             selectedChannelDetails: null
         }
         this.updateChannelSearchBar = this.updateChannelSearchBar.bind(this)
@@ -75,6 +74,12 @@ class TopChannelsPage extends React.Component {
             this.setState({ selectedQueryResults: res.results })
             this.setState({ selectedChannelDetails: res.results[0] })
         })
+
+        getChannelRecentTrending(Ranking).then(res => {    // 
+            this.setState({ selectedTrendingQueryResults: res.results })
+        })
+
+        
     }
 
     componentDidMount() {
@@ -86,6 +91,54 @@ class TopChannelsPage extends React.Component {
         getChannel(1).then(res => {
             this.setState({ selectedChannelDetails: res.results[0] })
         })
+
+        getChannelRecentTrending(3430).then(res => {
+            this.setState({ selectedTrendingQueryResults: res.results });
+        })
+    }
+
+    ////////////////////////////////////////////////////
+    // Switch for number of recent trending (up to 5) //
+    ///////////////////////////////////////////////////
+    dynamicCarousel(){
+        switch(this.state.selectedTrendingQueryResults.length){
+            case 1: 
+                return <TrendingVideoCard data={this.state.selectedTrendingQueryResults[0]} num={0}/>;
+            case 2: 
+                return <Carousel className='carousel' autoplay='true' dotPosition='right' effect='fade' autoplaySpeed={5000}>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[0]} num={0}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[1]} num={1}/>
+            </Carousel>;
+            case 3: 
+                return <Carousel className='carousel' autoplay='true' dotPosition='right' effect='fade' autoplaySpeed={5000}>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[0]} num={0}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[1]} num={1}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[2]} num={2}/>
+            </Carousel>;
+            case 4: 
+                return <Carousel className='carousel' autoplay='true' dotPosition='right' effect='fade' autoplaySpeed={5000}>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[0]} num={0}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[1]} num={1}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[2]} num={2}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[3]} num={3}/>
+            </Carousel>;
+            case 5: 
+                return <Carousel className='carousel' autoplay='true' dotPosition='right' effect='fade' autoplaySpeed={5000}>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[0]} num={0}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[1]} num={1}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[2]} num={2}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[3]} num={3}/>
+                <TrendingVideoCard data={this.state.selectedTrendingQueryResults[4]} num={4}/>
+            </Carousel>;
+
+            default: return <Carousel className='carousel' autoplay='true' dotPosition='right' effect='fade' autoplaySpeed={5000}>
+            <TrendingVideoCard data={this.state.selectedTrendingQueryResults[0]} num={0}/>
+            <TrendingVideoCard data={this.state.selectedTrendingQueryResults[1]} num={1}/>
+            <TrendingVideoCard data={this.state.selectedTrendingQueryResults[2]} num={2}/>
+            <TrendingVideoCard data={this.state.selectedTrendingQueryResults[3]} num={3}/>
+            <TrendingVideoCard data={this.state.selectedTrendingQueryResults[4]} num={4}/>
+        </Carousel>
+        }
     }
 
     render() {
@@ -100,7 +153,7 @@ class TopChannelsPage extends React.Component {
                         return {
                         onClick: event => {this.executeSelectedSearch(record.Ranking)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
                         };
-                        }} dataSource={this.state.channelsQueryResults} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 10, showQuickJumper:true }}>
+                        }} dataSource={this.state.channelsQueryResults} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
                                 
                                 <Column title="Ranking" dataIndex="Ranking" key="Ranking" sorter= {(a, b) => a.Ranking-b.Ranking}/>
                                 <Column title="Title" dataIndex="Title" key="Title" sorter= {(a, b) => a.Title.localeCompare(b.Title)}/>
@@ -218,15 +271,16 @@ class TopChannelsPage extends React.Component {
                                 <h3 className='trendingTopTitle'>Most Recent Trending Videos</h3>
                             </Row>
 
-                            <Row className='carouselSection'>
-                                <Carousel className='carousel' autoplay='true' dotPosition='right' effect='fade' autoplaySpeed={5000}>
-                                    <TrendingVideoCard num={0}/>
-                                    <TrendingVideoCard num={1}/>
-                                    <TrendingVideoCard num={2}/>
-                                    <TrendingVideoCard num={3}/>
-                                    <TrendingVideoCard num={4}/>
-                                </Carousel>
-                            </Row>
+                                {this.state.selectedTrendingQueryResults == null || this.state.selectedTrendingQueryResults.length < 1 ?
+                                <Row className='noRecentTrends'>
+                                    <h3 className='noRecentTrendsText'>
+                                        No Recently Trending Videos
+                                    </h3>
+                                </Row>: <Row className='carouselSection'>
+                                        {this.dynamicCarousel()}
+                                    </Row>}
+                                
+                            
                         </Col>
                     </Row>
                         

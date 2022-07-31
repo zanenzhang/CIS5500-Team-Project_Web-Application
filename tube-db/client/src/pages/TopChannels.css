@@ -86,6 +86,17 @@
     /* border: 5px solid blue; */
 }
 
+.noRecentTrends{
+    background-image: linear-gradient(rgb(38, 38, 38), #8B9A46);
+    border-radius: 0rem 0rem 0.8rem 0rem;
+    height:85%;
+    align-items: center;
+}
+
+.noRecentTrendsText{
+    width: 100%;
+    text-align: center;
+}
 /* .videoCard{
     height: 100%;
     border: 2px solid lime;
