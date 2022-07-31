@@ -21,13 +21,18 @@ const { Column, ColumnGroup } = Table;
 
 //add the case that values are negative (test abs. val and append - when negative) //perhaps make a utility.js file 
 function numFormatter(num) {
-    if(num >= 1000 && num < 1000000){
+    let absNum = num;
+    
+    if(num < 0){
+        absNum = Math.abs(num);
+    }
+    if(absNum >= 1000 && absNum < 1000000){
         return (num/1000).toFixed(1) + 'K'; // convert to K where num >= 1,000 but num < 1 mil
-    }else if(num >= 1000000 && num < 1000000000){
+    }else if(absNum >= 1000000 && absNum < 1000000000){
         return (num/1000000).toFixed(1) + 'M'; // convert to M where num >= 1 mil but num < 1 bil
-    }else if(num >= 1000000000){
+    }else if(absNum >= 1000000000){
         return (num/1000000000).toFixed(1) + 'B'; // convert to B where num >= 1 bil
-    }else if(num < 900){
+    }else if(absNum < 900){
         return num; // if num < 1000, do nothing
     }
 }
@@ -88,7 +93,7 @@ class TopChannelsPage extends React.Component {
             this.setState({ channelsQueryResults: res.results })
         })
 
-        getChannel(1).then(res => {
+        getChannel(3430).then(res => {
             this.setState({ selectedChannelDetails: res.results[0] })
         })
 
@@ -289,29 +294,7 @@ class TopChannelsPage extends React.Component {
                     
                 </div> : null}
                 <Divider />
-                        {/* <Row>
 
-                        <Col flex={2} style={{ textAlign: 'right' , 'border-radius': '0 1rem 1rem 0', 'background-color':'#2f4550'}}>
-                            <h3 flex={2} className='cardTopTitle' style={{ textAlign: 'center', margin: '1rem 0 1rem 0'}}>Recent Trending Videos</h3>
-                            <Carousel className='carousel' autoplay='true' dotPosition='right'>
-                                <div>
-                                    <a href='https://www.youtube.com/embed/5WjcDji3xYc'><img className='center' src="https://i.ytimg.com/vi/5WjcDji3xYc/mqdefault.jpg"/></a>
-                                </div>
-                                <div>
-                                    <img className='center' src="https://i.ytimg.com/vi/DTvS9lvRxZ8/mqdefault.jpg"/>
-                                </div>
-                                <div>
-                                    <img className='center' src="https://i.ytimg.com/vi/9nidKH8cM38/mqdefault.jpg"/>
-                                </div>
-                                <div>
-                                    <img className='center' src="https://i.ytimg.com/vi/w-aidBdvZo8/mqdefault.jpg"/>
-                                </div>
-                                <div>
-                                    <img className='center' src="https://i.ytimg.com/vi/vePc5V4h_kg/mqdefault.jpg"/>
-                                </div>
-                            </Carousel>
-                        </Col>
-                    </Row> */}
             </div>
         )
     }

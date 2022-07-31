@@ -11,7 +11,7 @@
 }
 
 .recentTrendingContainer{
-    background-color: rebeccapurple;
+    background-color: #1B2430;
     border-radius: 0rem 1rem 1rem 0rem;
     margin-right: 0;
     border-top:6px solid black;
@@ -84,6 +84,11 @@
     width:100%;
     height:100%;
     /* border: 5px solid blue; */
+}
+
+.singleTrendingVideo{
+    width:800px;
+    border: 2px solid red;
 }
 
 .noRecentTrends{
