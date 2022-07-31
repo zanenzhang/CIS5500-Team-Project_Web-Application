@@ -4,6 +4,8 @@ import SearchBar from '../components/SearchBar';
 import './HomePage.css'
 import { getHomeVideos } from '../fetcher'
 import Header from '../components/HeaderLogo';
+import Grid from '../components/Grid';
+import VideoThumbnail from '../components/VideoThumbnail';
 
 import {
   Table,
@@ -49,6 +51,7 @@ class HomePage extends React.Component {
     super(props)
 
     this.state = {
+      searchTerm: "",
       videoResults: [],
       pageCount: 1,
       country: "United States"
@@ -71,7 +74,6 @@ class HomePage extends React.Component {
   componentDidMount() {
     getHomeVideos(this.state.country, this.state.pageCount).then(res => {
       this.setState({ videoResults: res.results })
-      console.log(this.state.videoResults);
     })
   };
 
@@ -100,9 +102,19 @@ class HomePage extends React.Component {
         </div>
       
         <div id="pageContent">
-        content
         <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh' }}>
-        <h3>Thumbnail Testing</h3>
+        <Grid header={this.state.searchTerm ? 'Search Result' : 'Home'}>
+          
+          {this.state.videoResults.map(video=>(
+            <VideoThumbnail
+              thumbLink = {video.thumbnail_link}
+              videoPage = ""
+            />
+          ))}
+          
+      </Grid>
+
+      <div>
         <Table onRow={(record, rowIndex) => {
             //return {
              // onClick: event => {this.goToMatch(record.MatchId)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
@@ -115,6 +127,7 @@ class HomePage extends React.Component {
               <Column title="Picture Thumbnail" dataIndex="thumbnail_link"/>
             </ColumnGroup>
           </Table>  
+          </div>
         </div>
         </div>
       </div>

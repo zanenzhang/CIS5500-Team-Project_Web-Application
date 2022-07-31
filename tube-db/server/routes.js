@@ -116,7 +116,7 @@ async function home_videos(req, res) {
     pageCount = req.query.page
     const limit = pageCount * 20
 
-    finalQuery = `SELECT video_id, title, trending_date, likes, thumbnail_link   
+    finalQuery = `SELECT video_id, title, trending_date, likes, DISTINCT thumbnail_link   
     FROM TOP_TRENDING_VIDEOS WHERE country='${country}' LIMIT ${limit};
     `
 

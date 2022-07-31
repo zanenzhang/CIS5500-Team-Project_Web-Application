@@ -1,0 +1,18 @@
+#Wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#Wrapper > h1 {
+    color: #faf3dd;
+    @media screen and (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+
+#Content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 2rem;
+}

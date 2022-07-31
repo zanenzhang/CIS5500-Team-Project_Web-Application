@@ -10,12 +10,12 @@
   max-width: 1280px;
   width: 98%;
   height: 55px;
-  background: #8fc0a9;
+  background: #1d1d1d;
   margin: 0 auto;
   border-radius: 40px;
   color: #fff;
   border: solid;
-  border-color: black;
+  border-color: rgb(132, 131, 131);
   box-shadow: none;
 }
 
