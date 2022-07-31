@@ -152,15 +152,15 @@ class TopChannelsPage extends React.Component {
 
                 {/* <SideMenu /> */}
 
-                <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}>
-                    <h3>Top Channels</h3>
-                    <Table onRow={(record, rowIndex) => {
+                <div style={{ width: '70vw', margin: '0 auto' }}>
+                    <h1 className='pageTitle'>Top Channels Search</h1>
+                    <Table className='channelTable' onRow={(record, rowIndex) => {
                         return {
                         onClick: event => {this.executeSelectedSearch(record.Ranking)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
                         };
                         }} dataSource={this.state.channelsQueryResults} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
                                 
-                                <Column title="Ranking" dataIndex="Ranking" key="Ranking" sorter= {(a, b) => a.Ranking-b.Ranking}/>
+                                <Column className='channelTable' title="Ranking" dataIndex="Ranking" key="Ranking" sorter= {(a, b) => a.Ranking-b.Ranking}/>
                                 <Column title="Title" dataIndex="Title" key="Title" sorter= {(a, b) => a.Title.localeCompare(b.Title)}/>
                                 <Column title="Country" dataIndex="country" key="country" sorter= {(a, b) => a.country.localeCompare(b.country)}/> {/* Need a way to deal with null here...*/}
                                 <Column title="Language" dataIndex="language" key="language" sorter= {(a, b) => a.language.localeCompare(b.language)}/>
@@ -182,7 +182,7 @@ class TopChannelsPage extends React.Component {
                     
 
                     {/*    START OF SELECTED CHANNEL CONTAINER    */}    
-                    <h2 lex={2} style={{ textAlign: 'center' }}>{this.state.selectedChannelDetails.channel_title}</h2>
+                    <h1 lex={2} className='selectedChannelName'>{this.state.selectedChannelDetails.channel_title}</h1>
                         
                     <Row className='selectedContainer'>
 
@@ -290,7 +290,7 @@ class TopChannelsPage extends React.Component {
                     </Row>
                         
                     {/* </Container> */}
-                    <Footer></Footer>
+                    {/* <Footer></Footer> */}
                     
                 </div> : null}
                 <Divider />
