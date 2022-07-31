@@ -82,11 +82,8 @@ class HomePage extends React.Component {
     return (
       
       <div>
-
-      <HeaderBar />
-
+        <HeaderBar />
       <div id="page">
-
         <div id="sideBar">
             <div>
             <SideMenu />
