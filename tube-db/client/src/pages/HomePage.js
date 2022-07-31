@@ -3,7 +3,7 @@ import SideMenu from '../components/SideMenu';
 import SearchBar from '../components/SearchBar';
 import './HomePage.css'
 import { getHomeVideos } from '../fetcher'
-import Header from '../components/HeaderLogo';
+import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 
@@ -74,6 +74,7 @@ class HomePage extends React.Component {
   componentDidMount() {
     getHomeVideos(this.state.country, this.state.pageCount).then(res => {
       this.setState({ videoResults: res.results })
+      console.log(this.state.videoResults)
     })
   };
 
@@ -83,15 +84,7 @@ class HomePage extends React.Component {
       
       <div>
 
-      <div id="headerBar">
-        
-        <div id="headerLogo">
-          <Header />
-        </div>
-        <div id="headerContent">
-          <SearchBar />
-        </div>
-      </div>
+      <HeaderBar />
 
       <div id="page">
 

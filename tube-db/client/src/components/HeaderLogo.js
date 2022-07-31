@@ -10,7 +10,7 @@ import TubeDBLogo from '../images/Group_1.svg';
 import './HeaderLogo.css';
 
 
-class Header extends React.Component {
+class HeaderLogo extends React.Component {
   state = {
     current: 'home',
   };
@@ -36,4 +36,4 @@ class Header extends React.Component {
 }
 
 
-export default Header;
+export default HeaderLogo;
