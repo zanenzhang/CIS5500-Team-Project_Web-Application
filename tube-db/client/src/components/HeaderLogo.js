@@ -5,7 +5,7 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import NavbarItem from './NavbarItem';
 import { Nav, NavItem, NavLink } from "shards-react";
 import {Menu} from 'antd';
-import TubeDBLogo from '../images/Group_1.svg';
+import TubeDBLogo from '../images/RedLogo.svg';
 
 import './HeaderLogo.css';
 
