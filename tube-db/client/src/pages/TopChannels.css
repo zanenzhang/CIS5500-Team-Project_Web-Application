@@ -1,5 +1,35 @@
-.page{
-    /* background-color: #691d03; */
+div.page{
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(black, #1B2430);
+}
+
+.pageTitle{
+    padding-top:3rem;
+    /* border: 2px solid red; */
+    text-align: center;
+    margin-bottom: 3rem;
+    color: whitesmoke;
+}
+
+Table{
+    background-image: linear-gradient(to bottom,#fafafa, #cacaca);
+    border: 4px solid rgb(138, 138, 138);
+}
+
+.ant-table {
+    background: #1B2430;
+}
+
+.channelTable{
+    /* color:#E34613; */
+    /* background-color: #1B2430; */
+}
+
+.selectedChannelName{
+    text-align: center;
+    color: whitesmoke;
+
 }
 
 .selectedContainer{
@@ -7,7 +37,7 @@
     height: 500px;
     /* aspect-ratio: 2/1; */
     border-radius: 1rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 10rem;
 }
 
 .recentTrendingContainer{
