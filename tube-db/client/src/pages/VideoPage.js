@@ -1,7 +1,7 @@
 import React from 'react';
 import SideMenu from '../components/SideMenu';
 import './HomePage.css'
-import { getHomeVideos } from '../fetcher'
+import { getHomeVideos, getSingleVideo } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
@@ -17,18 +17,17 @@ const { Option } = Select;
 
 class VideoPage extends React.Component {
 
-    constructor(props) {
-      super(props)
-  
+  constructor(props) {
+    super(props)
+
       this.state = {
-        
+        videoInfo: []
       }
     }
   
     componentDidMount() {
-      getHomeVideos(this.state.country, this.state.pageCount).then(res => {
-        this.setState({ videoResults: res.results })
-        console.log(this.state.videoResults)
+      getSingleVideo(this.state.videoId).then(res => {
+        this.setState({ videoInfo: res.results });
       })
     };
   

@@ -8,7 +8,7 @@
   
   #pageContent {
     background: #000000;
-    flex: 1;
+    flex-grow: 1;
     height: 1200px;
     /* enable grow, disable shrink */
   }

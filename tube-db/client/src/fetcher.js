@@ -28,12 +28,8 @@ const getHomeVideos = async (country, pageCount) => {
     
     const result = await res.json()
 
-    var size = 0;
-
-    const setKeys = (array) => {
-        if ( array.result !== undefined){
-            size = array.results.length;
-        };
+    const setKeysResolution = (array) => {
+        var size = array.results.length;
         for (var x=0; x < size; x++ ){
             array.results[x].key = array.results[x].video_id + " " + array.results[x].trend_start + " " + array.results[x].trend_stop;
             array.results[x].thumbnail_link = array.results[x].thumbnail_link.replace("default", "mqdefault");
@@ -41,9 +37,10 @@ const getHomeVideos = async (country, pageCount) => {
         return array;
     }
 
-    const final = await setKeys(result);
+    const final = await setKeysResolution(result);
     return final
 }
+
 
 const getSingleVideo = async (videoid) => {
     var res = await fetch(`http://${config.server_host}:${config.server_port}/video?videoid=${videoid}`, {

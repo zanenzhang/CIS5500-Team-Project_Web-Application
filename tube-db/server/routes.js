@@ -122,9 +122,7 @@ async function home_videos(req, res) {
         FROM TOP_YOUTUBE_CHANNELS
         WHERE country = '${country}'
     )SELECT V.title AS title, V.published_at AS published, V.video_id AS video_id,
-            MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
-            MIN(V.trending_date) AS trend_start, thumbnail_link, likes,
-            GROUP_CONCAT(DISTINCT V.country) AS countries
+            thumbnail_link
     FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Channel AS C
     WHERE V.channel_title = C.channel_title
     GROUP BY title

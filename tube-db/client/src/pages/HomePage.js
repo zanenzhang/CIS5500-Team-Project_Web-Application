@@ -73,8 +73,6 @@ class HomePage extends React.Component {
   componentDidMount() {
     getHomeVideos(this.state.country, this.state.pageCount).then(res => {
       this.setState({ videoResults: res.results });
-      console.log(this.state.videoResults);
-      console.log(typeof(this.state.videoResults))
     })
   };
 
@@ -105,19 +103,7 @@ class HomePage extends React.Component {
       </Grid>
 
       <div>
-        <Table onRow={(record, rowIndex) => {
-            //return {
-             // onClick: event => {this.goToMatch(record.MatchId)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
-            //};
-          }} dataSource={this.state.videoResults} rowKey={'key'} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
-            <ColumnGroup title="Random Videos">
-              <Column title="Video Title" dataIndex="title" sorter= {(a, b) => a.title.localeCompare(b.title)}/>
-              <Column title="Trending Date" dataIndex="trend_start" sorter= {(a, b) => a.trend_start.localeCompare(b.trend_start)}/>
-              <Column title="Trending Date" dataIndex="trend_stop" sorter= {(a, b) => a.trend_stop.localeCompare(b.trend_stop)}/>
-              <Column title="Likes" dataIndex="likes" sorter= {(a, b) => a.likes.localeCompare(b.likes)}/>
-              <Column title="Picture Thumbnail" dataIndex="thumbnail_link"/>
-            </ColumnGroup>
-          </Table>  
+        
           </div>
         </div>
         </div>
@@ -130,3 +116,20 @@ class HomePage extends React.Component {
 
 export default HomePage
 
+
+
+/*
+<Table onRow={(record, rowIndex) => {
+            //return {
+             // onClick: event => {this.goToMatch(record.MatchId)}, // clicking a row takes the user to a detailed view of the match in the /matches page using the MatchId parameter  
+            //};
+          }} dataSource={this.state.videoResults} rowKey={'key'} pagination={{ pageSizeOptions:[5, 10], defaultPageSize: 5, showQuickJumper:true }}>
+            <ColumnGroup title="Random Videos">
+              <Column title="Video Title" dataIndex="title" sorter= {(a, b) => a.title.localeCompare(b.title)}/>
+              <Column title="Trending Date" dataIndex="trend_start" sorter= {(a, b) => a.trend_start.localeCompare(b.trend_start)}/>
+              <Column title="Trending Date" dataIndex="trend_stop" sorter= {(a, b) => a.trend_stop.localeCompare(b.trend_stop)}/>
+              <Column title="Likes" dataIndex="likes" sorter= {(a, b) => a.likes.localeCompare(b.likes)}/>
+              <Column title="Picture Thumbnail" dataIndex="thumbnail_link"/>
+            </ColumnGroup>
+          </Table>  
+*/
