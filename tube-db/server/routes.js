@@ -117,17 +117,17 @@ async function home_videos(req, res) {
     const limit = pageCount * 20
 
     finalQuery = `
-    WITH Selected_Channel AS (
-        SELECT channel_title
-        FROM TOP_YOUTUBE_CHANNELS
+    WITH Videos AS (
+        SELECT video_id, MAX(trending_date) as trend_stop, thumbnail_link
+        FROM TOP_TRENDING_VIDEOS
         WHERE country = '${country}'
-    )SELECT V.title AS title, V.published_at AS published, V.video_id AS video_id,
-            thumbnail_link
-    FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Channel AS C
-    WHERE V.channel_title = C.channel_title
-    GROUP BY title
-    ORDER BY V.published_at DESC
-    LIMIT ${limit};
+        GROUP BY video_id
+        LIMIT 100
+    )
+    SELECT video_id, trend_stop, thumbnail_link
+        FROM Videos
+        ORDER BY trend_stop DESC
+        LIMIT ${limit};
     `
 
     connection.query(finalQuery, function (error, results, fields) {
