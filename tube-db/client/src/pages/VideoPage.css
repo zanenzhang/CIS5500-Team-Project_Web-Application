@@ -1,0 +1,11 @@
+.videoInfo {
+    justify-content: center;
+    background: #000000;
+    flex-grow: 1;
+    height: 1200px;
+}
+
+#page {
+    display: flex;
+    height: calc( 100vh - 30px);
+  }
