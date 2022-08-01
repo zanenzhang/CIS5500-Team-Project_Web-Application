@@ -114,7 +114,7 @@ async function home_videos(req, res) {
 
     country = req.query.country
     pageCount = req.query.page
-    const limit = pageCount * 12
+    const limit = pageCount * 20
 
     finalQuery = `
     WITH Selected_Channel AS (

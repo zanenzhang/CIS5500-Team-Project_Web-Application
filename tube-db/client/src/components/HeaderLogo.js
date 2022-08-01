@@ -7,7 +7,6 @@ import { Nav, NavItem, NavLink } from "shards-react";
 import {Menu} from 'antd';
 import TubeDBLogo from '../images/RedLogo.svg';
 
-import './HeaderLogo.css';
 
 
 class HeaderLogo extends React.Component {
@@ -27,7 +26,7 @@ class HeaderLogo extends React.Component {
       <Nav justified>
         <div id="header">
         <div id="headerLogo">
-        <img src={TubeDBLogo} width={150} />
+        <img src={TubeDBLogo} width={180} />
         </div>
         </div>
       </Nav>

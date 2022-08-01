@@ -37,31 +37,35 @@ class HeaderBar extends React.Component {
 
     render(){
         return(
-            <div id="headerBar">
-            
-            <div id="headerLogo">
-              <HeaderLogo />
-            </div>
-            <div id="headerContent">
-              <SearchBar />
-              <Select defaultValue="United States" style={{ width: 200 }} onChange="">
-              <Option value="Brazil">Brazil</Option>
-                <Option value="Canada">Canada</Option>
-                <Option value="France">France</Option>
-                <Option value="Germany">Germany</Option>
-                <Option value="India">India</Option>
-                <Option value="Japan">Japan</Option>
-                <Option value="Mexico">Mexico</Option>
-                <Option value="Russia">Russia</Option>
-                <Option value="SouthKorea">South Korea</Option>
-                <Option value="UnitedKingdom">United Kingdom</Option>
-                <Option value="UnitedStates">United States</Option>
-              </Select>
-              <RangePicker style={{width: 250}} />
-              <div id="slider" style={{width: 250}}>
-              <IconSlider min={0} max={20} />;
+          <div className="headerBar">
+
+              <div className="headerLogo">
+                <HeaderLogo />
               </div>
-            </div>
+
+              <div className="headerExLogo">
+
+                <div className="headerSearch">
+                  <SearchBar />
+                </div>
+              
+                <div className="headerSelectors">
+                  <Select defaultValue="United States" id="countrySelector" onChange="">
+                      <Option value="Brazil">Brazil</Option>
+                        <Option value="Canada">Canada</Option>
+                        <Option value="France">France</Option>
+                        <Option value="Germany">Germany</Option>
+                        <Option value="India">India</Option>
+                        <Option value="Japan">Japan</Option>
+                        <Option value="Mexico">Mexico</Option>
+                        <Option value="Russia">Russia</Option>
+                        <Option value="SouthKorea">South Korea</Option>
+                        <Option value="UnitedKingdom">United Kingdom</Option>
+                        <Option value="UnitedStates">United States</Option>
+                    </Select>
+                    <RangePicker />
+                  </div>
+               </div>
           </div>
         )
     }

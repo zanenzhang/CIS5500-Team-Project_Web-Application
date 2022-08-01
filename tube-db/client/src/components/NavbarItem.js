@@ -6,9 +6,11 @@ function NavbarItem(props) {
   const { text, className } = props;
 
   return (
+    <div className>
     <div className="nav-item">
       <img className="view-grid" src={navitemLogo} />
-      <div className="text inter-medium-pearl-lusta-18-7px">{text}</div>
+      <div className="text">{text}</div>
+    </div>
     </div>
   );
 }

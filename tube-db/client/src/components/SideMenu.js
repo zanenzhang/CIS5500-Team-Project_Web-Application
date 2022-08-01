@@ -24,7 +24,7 @@ class SideMenu extends React.Component {
   render () {
     return (
       <Nav justified>
-        <div id="sideMenu">
+        <div className="sideMenuBar">
           <div className='header-labels'>
           <NavbarItem text="Saved Videos" href="#"/>
           <NavbarItem text="Trending Videos" href="#"/>

@@ -91,7 +91,7 @@ class HomePage extends React.Component {
         </div>
       
         <div id="pageContent">
-        <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh' }}>
+        <div >
         <Grid header={this.state.searchTerm ? 'Search Result' : 'Home'}>
           
           {this.state.videoResults.map(video=>(
