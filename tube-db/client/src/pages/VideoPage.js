@@ -15,7 +15,7 @@ const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 
 
-class Vodep extends React.Component {
+class VideoPage extends React.Component {
 
     constructor(props) {
       super(props)

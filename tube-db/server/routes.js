@@ -143,10 +143,34 @@ async function home_videos(req, res) {
     });
 }
 
+async function singleVideo(req, res){
+    videoid = req.query.videoid
+
+    finalQuery = `
+    SELECT title, published_at AS published, video_id,
+            MAX(view_count) AS views, MAX(trending_date) AS trend_stop,
+            MIN(trending_date) AS trend_start, thumbnail_link, likes,
+            GROUP_CONCAT(DISTINCT country) AS countries
+    FROM TOP_TRENDING_VIDEOS
+    WHERE video_id = '${videoid}'
+    GROUP BY title
+    `
+    connection.query(finalQuery, function (error, results, fields) {
+
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+}   
+
 module.exports = {
     hello,
     channel,
     find_channels,
     home_videos,
-    selected_channel_recent_trending
+    selected_channel_recent_trending,
+    singleVideo,
 }

@@ -10,6 +10,7 @@ import {
 import TopChannelsPage from './pages/TopChannelsPage';
 import HomePage from './pages/HomePage';
 import TrendingVideosPage from './pages/TrendingVideosPage';
+import VideoPage from './pages/VideoPage';
 
 import 'antd/dist/antd.css';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,6 +30,11 @@ ReactDOM.render(
 							path="/hello"
 							render={() => (
 								<HomePage />
+							)}/>
+		<Route exact
+							path="/video"
+							render={() => (
+								<VideoPage />
 							)}/>
         <Route exact
 							path="/topchannels"

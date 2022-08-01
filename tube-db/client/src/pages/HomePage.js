@@ -72,8 +72,9 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     getHomeVideos(this.state.country, this.state.pageCount).then(res => {
-      this.setState({ videoResults: res.results })
-      console.log(this.state.videoResults)
+      this.setState({ videoResults: res.results });
+      console.log(this.state.videoResults);
+      console.log(typeof(this.state.videoResults))
     })
   };
 
@@ -91,13 +92,13 @@ class HomePage extends React.Component {
         </div>
       
         <div id="pageContent">
-        <div >
+        <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh' }}>
         <Grid header={this.state.searchTerm ? 'Search Result' : 'Home'}>
           
           {this.state.videoResults.map(video=>(
             <VideoThumbnail
               thumbLink = {video.thumbnail_link}
-              videoPage = ""
+              videoId = {video.video_id}
             />
           ))}
           

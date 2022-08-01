@@ -15,6 +15,7 @@ app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 
 app.get('/home', routes.home_videos);
 app.get('/hello', routes.hello);
+app.get('/video', routes.singleVideo)
 // Channel Specific Routes //
 // Route 1 - register as GET 
 app.get('/channel', routes.channel);
