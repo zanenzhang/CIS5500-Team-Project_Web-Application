@@ -11,6 +11,14 @@
     justify-content: center;
 }
 
+a.menuItem{
+    font-size: 18pt;
+    font-family: sans-serif;
+    color: azure;
+    align-items: center;
+    justify-content: center;
+}
+
 .sideMenuBar {
     width: 250px;
     background: #000000;

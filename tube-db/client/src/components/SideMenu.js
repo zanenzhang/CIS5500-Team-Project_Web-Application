@@ -28,7 +28,7 @@ class SideMenu extends React.Component {
           <div className='header-labels'>
           <NavbarItem text="Saved Videos" href="#"/>
           <NavbarItem text="Trending Videos" href="#"/>
-          <NavbarItem text="Channels" href="#"/>
+          <a className='menuItem' href='./topchannels'><NavbarItem text="Channels"/></a>
           <NavbarItem text="Profile" href="#"/>
         </div>
         </div>
