@@ -1,9 +1,7 @@
 import React from 'react';
-import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress, Container, CardSubtitle } from "shards-react";
 import './TopChannels.css';
 import TrendingVideoCard from '../components/TrendingVideoCard';
 import VideoThumbnail from '../components/VideoThumbnail';
-import HeaderBar from '../components/HeaderBar';
 import ChannelsHeader from '../components/ChannelsHeader';
 import SideMenu from '../components/SideMenu';
 
@@ -151,7 +149,7 @@ class TopChannelsPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='rootWrapper'>
                 <ChannelsHeader />
 
                 <div className='page'>
@@ -165,6 +163,8 @@ class TopChannelsPage extends React.Component {
                     <div className='pageContent'>
 
                         <div style={{ width: '70vw', margin: '0 auto' }}>
+
+                            <p>Search Menu!</p>
                             
                             <Table className='channelTable' onRow={(record, rowIndex) => {
                                 return {
@@ -186,10 +186,13 @@ class TopChannelsPage extends React.Component {
 
 
 
-                        {/* Selected Channel will display via below structure */}
+                        {/* 
+                        /////////////////////////////////////////////////////////////
+                        ////  Selected Channel will display via below structure /////
+                        /////////////////////////////////////////////////////////////
+                                                                                    */}
                         <Divider />
                         {this.state.selectedChannelDetails ? 
-                        
                         <div style={{ width: '70vw', margin: '0 auto', marginTop: '2vh' }}> 
                             
 
