@@ -2,7 +2,7 @@
     background-color: #1B2430;
     margin: 0rem;
     padding: 0rem;
-    height:auto;
+    height:1500px;
     overflow: hidden;
     /* border: 4px solid red; */
 }
@@ -12,7 +12,7 @@ div.page{
     padding: 0;
     background-image: linear-gradient(black, #1B2430);
     display: flex;
-    height: calc( 100vh - 30px);
+    height: 100%
 } 
 
 .pageContent{

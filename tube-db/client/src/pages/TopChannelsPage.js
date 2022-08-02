@@ -4,12 +4,15 @@ import TrendingVideoCard from '../components/TrendingVideoCard';
 import VideoThumbnail from '../components/VideoThumbnail';
 import ChannelsHeader from '../components/ChannelsHeader';
 import SideMenu from '../components/SideMenu';
+import { SearchOutlined } from '@ant-design/icons';
 
 //import { FixedSizeList as List } from "react-window";
 
 import {
     Input,
     Select,
+    Button,
+    Slider,
     Table,
     Row,
     Col,
@@ -202,10 +205,10 @@ class TopChannelsPage extends React.Component {
                             <div className='searchMenu'>
                                 
                                 <Row>
-                                    <Col span={9}>
+                                    <Col span={8}>
                                         <Row>
                                             <Col span={9}>
-                                                <p className='titleSearchName'>Name Includes: </p>
+                                                <p className='titleSearchName'>Title Includes: </p>
                                             </Col>
                                             <Col span={15}>
                                                 <Input placeholder="type here" />
@@ -240,8 +243,8 @@ class TopChannelsPage extends React.Component {
                                         </Row>
                                     </Col>
 
-                                    <Col span={5}>
-                                    <Row>
+                                    <Col span={6}>
+                                        <Row>
                                             <Col span={12}>
                                                 <p className='titleSearchName'>Producer-Type: </p>
                                             </Col>
@@ -258,27 +261,83 @@ class TopChannelsPage extends React.Component {
 
                                 <Row>
                                     <Col span={6}>
-                                        <p>Rank |-----------------|</p>
+                                        <Row>
+                                            <Col span={8}>
+                                                <p className='titleSearchName'>Rank: </p>
+                                            </Col>
+                                            <Col span={10}>
+                                                <Slider range defaultValue={[20, 50]}/>
+                                            </Col>
+                                        </Row>
                                     </Col>
+
                                     <Col span={6}>
-                                        <p>Views |-----------------|</p>
+                                        <Row>
+                                            <Col span={8}>
+                                                <p className='titleSearchName'>Views: </p>
+                                            </Col>
+                                            <Col span={10}>
+                                                <Slider range defaultValue={[20, 50]}/>
+                                            </Col>
+                                        </Row>
                                     </Col>
+
                                     <Col span={6}>
-                                        <p>Subs |-----------------|</p>
+                                        <Row>
+                                            <Col span={8}>
+                                                <p className='titleSearchName'>Subs: </p>
+                                            </Col>
+                                            <Col span={10}>
+                                                <Slider range defaultValue={[20, 50]}/>
+                                            </Col>
+                                        </Row>
                                     </Col>
+
                                     <Col span={6}>
-                                        <p>Lib-Size |-----------------|</p>   
+                                        <Row>
+                                            <Col span={8}>
+                                                <p className='titleSearchName'>Lib-Size: </p>
+                                            </Col>
+                                            <Col span={10}>
+                                                <Slider range defaultValue={[20, 50]}/>
+                                            </Col>
+                                        </Row>   
                                     </Col>
+
                                 </Row>
                                 <Row>
                                     <Col span={8}>
-                                        <p>Views per Video |-----------------|</p>
+                                        <Row>
+                                            <Col span={12}>
+                                                <p className='titleSearchName'>Views per Video: </p>
+                                            </Col>
+                                            <Col span={10}>
+                                                <Slider range defaultValue={[20, 50]}/>
+                                            </Col>
+                                        </Row>
                                     </Col>
-                                    <Col span={8}>
-                                        <p>View Growth |-----------------|</p>
+                                    <Col span={7}>
+                                        <Row>
+                                            <Col span={10}>
+                                                <p className='titleSearchName'>View Growth: </p>
+                                            </Col>
+                                            <Col span={10}>
+                                                <Slider range defaultValue={[20, 50]}/>
+                                            </Col>
+                                        </Row>
                                     </Col>
-                                    <Col span={8}>
-                                        <p>Sub Growth |-----------------|</p>
+                                    <Col span={7}>
+                                        <Row>
+                                            <Col span={10}>
+                                                <p className='titleSearchName'>Sub Growth: </p>
+                                            </Col>
+                                            <Col span={10}>
+                                                <Slider range defaultValue={[20, 50]}/>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col span={2}>
+                                        <Button danger='true' type="primary" shape="circle" icon={<SearchOutlined />} />
                                     </Col>
                                     
                                 </Row>
