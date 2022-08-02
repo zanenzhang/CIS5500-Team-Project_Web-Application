@@ -8,6 +8,8 @@ import SideMenu from '../components/SideMenu';
 //import { FixedSizeList as List } from "react-window";
 
 import {
+    Input,
+    Select,
     Table,
     Row,
     Col,
@@ -15,10 +17,39 @@ import {
     Carousel
 } from 'antd'
 
+
+
 import { getChannel, getFindChannels, getChannelRecentTrending } from '../fetcher'
 import { Footer } from 'antd/lib/layout/layout';
 
+
+const { Option } = Select;
 const { Column, ColumnGroup } = Table;
+
+const countryData = ['Select','Afghanistan', 'Albania', 'Algeria','Argentina', 'Armenia', 'Australia',
+    'Australian Antarctic Territory', 'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Belarus', 'Belgium', 'Bolivia', 
+    'Bosnia and Herzegovina', 'Brazil', 'Bulgaria', 'Cambodia', 'Canada', 'Chile', 'China', 'Colombia', 'Costa Rica', 
+    "Cote d''Ivoire (Ivory Coast)", 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Dominican Republic', 'Ecuador', 
+    'Egypt', 'El Salvador', 'Europe', 'Finland', 'France', 'Gambia, The', 'Georgia', 'Germany', 'Ghana', 'Global', 'Greece', 
+    'Guatemala', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 
+    'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Korea, South', 'Kuwait', 'Kyrgyzstan', 'Latin America', 'Latvia', 'Lebanon', 
+    'Lithuania', 'Malaysia', 'Malta', 'Martinique', 'Mexico', 'Middle East', 'Moldova', 'Monaco', 'Morocco', 'Nepal', 'Netherlands', 
+    'New Zealand', 'Nicaragua', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Panama', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 
+    'Puerto Rico', 'Qatar', 'Romania', 'Russia', 'Senegal', 'Serbia', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'South Africa', 
+    'Spain', 'Sri Lanka', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tanzania', 'Thailand', 'Tunisia', 'Turkey', 'U.S. Virgin Islands', 'Uganda', 
+    'Ukraine', 'Unidentified', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Venezuela'];
+const handleCountryChange = ()=>{return 0};
+
+const languageData = ['Select','Albanian', 'Arabic', 'Armenian', 'Bengali', 'Bhojpuri', 'Bosnian', 'Bulgarian', 'Catalan', 'Chichewa', 
+    'Chinese', 'Croatian', 'Czech', 'Dutch', 'English', 'Estonian', 'Filipino', 'French', 'Georgian', 'German', 'Greek', 'Hebrew', 
+    'Hindi', 'Hungarian', 'Indian', 'Indonesian', 'Italian', 'Japanese', 'Kannada', 'Korean', 'Malay', 'Malayalam', 'Marathi', 'Nepali', 
+    'Norwegian', 'Polish', 'Portuguese', 'Punjabi', 'Romanian', 'Russian', 'Serbian', 'Slovak', 'Slovenian', 'Spanish', 'Swahili', 
+    'Swedish', 'Tagalog', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Vietnamese'];
+const handleLanguageChange = ()=>{return 0};
+
+const producerData = ['Select', 'Creator', 'Entertainer or Event', 'Entertainer/Event', 'Expert', 
+    'Institution', 'Manufacturer', 'Media/Content Brand', 'Retailer', 'Service Provider', 'User'];
+const handleProducerChange = ()=>{return 0};
 
 //add the case that values are negative (test abs. val and append - when negative) //perhaps make a utility.js file 
 function numFormatter(num) {
@@ -47,6 +78,10 @@ function growthFormatter(deci){
         return newNum.toFixed(1) + "%";
     }
 }
+
+const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
 
 class TopChannelsPage extends React.Component {
 
@@ -167,19 +202,59 @@ class TopChannelsPage extends React.Component {
                             <div className='searchMenu'>
                                 
                                 <Row>
-                                    <Col span={8}>
-                                        <p>String Search</p>
+                                    <Col span={9}>
+                                        <Row>
+                                            <Col span={9}>
+                                                <p className='titleSearchName'>Name Includes: </p>
+                                            </Col>
+                                            <Col span={15}>
+                                                <Input placeholder="type here" />
+                                            </Col>
+                                        </Row>
+                                        
                                     </Col>
+                                    
                                     <Col span={5}>
-                                        <p>country drop-down</p>
+                                        <Row>
+                                            <Col span={9}>
+                                                <p className='titleSearchName'>Country: </p>
+                                            </Col>
+                                            <Col span={15}>
+                                                <Select defaultValue={countryData[0]} style={{width: 120,}} onChange={handleCountryChange}>
+                                                    {countryData.map((country) => (<Option key={country}>{country}</Option>))}
+                                                </Select>
+                                            </Col>
+                                        </Row>
                                     </Col>
+
                                     <Col span={5}>
-                                        <p>language drop-down</p>
+                                        <Row>
+                                            <Col span={9}>
+                                                <p className='titleSearchName'>Language: </p>
+                                            </Col>
+                                            <Col span={15}>
+                                                <Select defaultValue={languageData[0]} style={{width: 120,}} onChange={handleLanguageChange}>
+                                                    {languageData.map((language) => (<Option key={language}>{language}</Option>))}
+                                                </Select>
+                                            </Col>
+                                        </Row>
                                     </Col>
-                                    <Col span={6}>
-                                        <p>producer drop-down</p>
+
+                                    <Col span={5}>
+                                    <Row>
+                                            <Col span={12}>
+                                                <p className='titleSearchName'>Producer-Type: </p>
+                                            </Col>
+                                            <Col span={12}>
+                                                <Select defaultValue={producerData[0]} style={{width: 120,}} onChange={handleProducerChange}>
+                                                    {producerData.map((producer) => (<Option key={producer}>{producer}</Option>))}
+                                                </Select>
+                                            </Col>
+                                        </Row>
                                     </Col>
                                 </Row>
+
+
 
                                 <Row>
                                     <Col span={6}>

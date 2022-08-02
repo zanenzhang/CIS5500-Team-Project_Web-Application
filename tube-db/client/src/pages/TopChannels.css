@@ -30,7 +30,18 @@ div.page{
 }
 
 .searchMenu{
-    border: 3px solid red;
+    /* border: 3px solid red; */
+}
+
+.titleSearchName{
+    width: 100%;
+    text-align: center;
+    padding-right: 0.5rem;
+    color: whitesmoke;
+}
+
+.titleSearchBox{
+
 }
 
 Table{
