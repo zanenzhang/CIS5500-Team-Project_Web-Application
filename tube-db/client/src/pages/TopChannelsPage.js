@@ -164,7 +164,50 @@ class TopChannelsPage extends React.Component {
 
                         <div style={{ width: '70vw', margin: '0 auto' }}>
 
-                            <p>Search Menu!</p>
+                            <div className='searchMenu'>
+                                
+                                <Row>
+                                    <Col span={8}>
+                                        <p>String Search</p>
+                                    </Col>
+                                    <Col span={5}>
+                                        <p>country drop-down</p>
+                                    </Col>
+                                    <Col span={5}>
+                                        <p>language drop-down</p>
+                                    </Col>
+                                    <Col span={6}>
+                                        <p>producer drop-down</p>
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col span={6}>
+                                        <p>Rank |-----------------|</p>
+                                    </Col>
+                                    <Col span={6}>
+                                        <p>Views |-----------------|</p>
+                                    </Col>
+                                    <Col span={6}>
+                                        <p>Subs |-----------------|</p>
+                                    </Col>
+                                    <Col span={6}>
+                                        <p>Lib-Size |-----------------|</p>   
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col span={8}>
+                                        <p>Views per Video |-----------------|</p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <p>View Growth |-----------------|</p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <p>Sub Growth |-----------------|</p>
+                                    </Col>
+                                    
+                                </Row>
+                            </div>
                             
                             <Table className='channelTable' onRow={(record, rowIndex) => {
                                 return {

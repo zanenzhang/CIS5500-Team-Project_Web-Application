@@ -29,6 +29,10 @@ div.page{
     color: whitesmoke;
 }
 
+.searchMenu{
+    border: 3px solid red;
+}
+
 Table{
     background-image: linear-gradient(to bottom,#fafafa, #cacaca);
     border: 4px solid rgb(138, 138, 138);
