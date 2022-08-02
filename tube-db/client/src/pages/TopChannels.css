@@ -2,6 +2,8 @@ div.page{
     margin: 0;
     padding: 0;
     background-image: linear-gradient(black, #1B2430);
+    display: flex;
+    height: calc( 100vh - 30px);
 } 
 
 .pageTitle{
