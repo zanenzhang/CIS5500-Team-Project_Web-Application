@@ -39,3 +39,11 @@
     width: 350px;
     position: static;
   }
+
+  .pageTitle{
+    padding-top:3rem;
+    /* border: 2px solid red; */
+    text-align: center;
+    margin-bottom: 3rem;
+    color: whitesmoke;
+}

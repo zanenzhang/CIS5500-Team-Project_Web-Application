@@ -82,32 +82,32 @@ class HomePage extends React.Component {
       
       <div>
         <HeaderBar />
-      <div id="page">
-        <div id="sideBar">
-            <div>
-            <SideMenu />
-            </div>
-        </div>
-      
-        <div id="pageContent">
-        <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh' }}>
-        <Grid header={this.state.searchTerm ? 'Search Result' : 'Home'}>
-          
-          {this.state.videoResults.map(video=>(
-            <VideoThumbnail
-              thumbLink = {video.thumbnail_link}
-              videoId = {video.video_id}
-            />
-          ))}
-          
-      </Grid>
-
-      <div>
+        <div id="page">
+          <div id="sideBar">
+              <div>
+              <SideMenu />
+              </div>
+          </div>
         
+          <div id="pageContent">
+            <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh' }}>
+              <Grid header={this.state.searchTerm ? 'Search Result' : 'Home'}>
+                
+                {this.state.videoResults.map(video=>(
+                  <VideoThumbnail
+                    thumbLink = {video.thumbnail_link}
+                    videoId = {video.video_id}
+                  />
+                ))}
+                
+              </Grid>
+
+            <div>
+          
           </div>
         </div>
-        </div>
       </div>
+    </div>
     </div>
     )
   };
