@@ -1,10 +1,10 @@
-
 import React, {useState} from 'react';
-
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import NavbarItem from './NavbarItem';
 import { Nav, NavItem, NavLink } from "shards-react";
 import {Menu} from 'antd';
+import Navbar from './Navbar';
+import HeaderLogo from './HeaderLogo';
 
 import './SideMenu.css';
 
@@ -23,19 +23,17 @@ class SideMenu extends React.Component {
 
   render () {
     return (
-      <Nav justified>
-        <div className="sideMenuBar">
-          <div className='header-labels'>
-          <NavbarItem text="Saved Videos" href="#"/>
-          <NavbarItem text="Trending Videos" href="#"/>
-          <a className='menuItem' href='./topchannels'><NavbarItem text="Channels"/></a>
-          <NavbarItem text="Profile" href="#"/>
-        </div>
-        </div>
-      </Nav>
+    <>
+      <div className="navigation">
+      <Navbar />
+      </div>
+    </>
+     
     );
   }
 }
 
-
 export default SideMenu;
+
+
+

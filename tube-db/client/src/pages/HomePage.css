@@ -2,14 +2,17 @@
   
   #page {
     display: flex;
-    height: calc( 100vh - 30px);
-    overflow: hidden;
+    height: 1000px;
   }
 
-  
+
   #pageContent {
     background: #000000;
     flex-grow: 1;
-    height: 1200px;
+    height: 1000px;
     /* enable grow, disable shrink */
   }
+
+#sideBar {
+  justify-content: flex-start;
+}

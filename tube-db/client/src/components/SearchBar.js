@@ -16,13 +16,21 @@ const SearchBar = ({ setSearchTerm }) => {
   return (
     <div className="Wrapper">
       <div className="SearchBar">
-        <img src={searchBarIcon} alt='search-icon' class="SearchBarImg"/>
+      
+        
         <input className="SearchTerm"
           type='text'
           placeholder='Search Videos'
           onChange={event => setState(event.currentTarget.value)}
           value={state}
         />
+        
+        
+          <div class="SearchBarImgArea"></div>
+          <a href='./searchVideo'>  
+          <img src={searchBarIcon} alt='search-icon' class="SearchBarImg"/>
+          </a>
+          
       </div>
       </div>
   );
