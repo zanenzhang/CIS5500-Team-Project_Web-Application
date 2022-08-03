@@ -39,13 +39,3 @@
     width: 350px;
     position: static;
   }
-
-  .pageTitle{
-    padding-top:2.5rem;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    /* border: 2px solid red; */
-    text-align: center;
-    font-size: 4rem;
-    margin-bottom: 2rem;
-    color: whitesmoke;
-}
