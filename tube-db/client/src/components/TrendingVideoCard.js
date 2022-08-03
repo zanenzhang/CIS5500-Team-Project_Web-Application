@@ -27,7 +27,7 @@ function TrendingVideoCard({data, num}) {
     }
 
 
-    console.log(data);
+    // console.log(data);
     let record_data = data;
     
     let days = record_data.trend_stop - record_data.trend_stop;

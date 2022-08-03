@@ -88,20 +88,49 @@ async function selected_channel_recent_trending(req, res) {
 // CS Route 2 (handler) - get the top 100 channels by rank no filters
 async function find_channels(req, res) {
 
-    connection.query(
-        `
-        SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
-        FROM TOP_YOUTUBE_CHANNELS
-        ORDER BY Ranking
-        LIMIT 0, 100;
-        `, function (error, results, fields) {
-            if (error) {
-                console.log(error)
-                res.json({ error: error })
-            } else if (results) {
-                res.json({ results: results })
-            }
-        });
+    //switch depending on recieved params
+
+    console.log('???' + req.query.searchString);
+    console.log('!!!' + typeof(req.query.searchString));
+    // console.log(req.query);
+
+    if (req.query.searchString === "none" || req.query.searchString === 'undefined' ){
+        console.log('!!!' + req.query.searchString);
+        connection.query(
+            `
+            SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
+            FROM TOP_YOUTUBE_CHANNELS
+            ORDER BY Ranking
+            LIMIT 0, 100;
+            `, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+    }
+    else {     
+        
+        connection.query(
+            `
+            SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
+            FROM TOP_YOUTUBE_CHANNELS
+            WHERE channel_title LIKE '%${req.query.searchString}%'
+            ORDER BY Ranking
+            LIMIT 0, 100;
+            `, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+    }
+
+    
     
 };
 

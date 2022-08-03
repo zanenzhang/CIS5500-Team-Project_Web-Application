@@ -14,8 +14,8 @@ const getChannelRecentTrending = async (ranking) => {
     return res.json()
 }
 
-const getFindChannels = async () => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/find_channels`, {
+const getFindChannels = async (searchString, country, language) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/find_channels?searchString=${searchString}&country=${country}&language=${language}`, {
         method: 'GET',
     })
     return res.json()

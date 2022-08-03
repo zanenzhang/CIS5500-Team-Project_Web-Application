@@ -41,18 +41,18 @@ const countryData = ['Select','Afghanistan', 'Albania', 'Algeria','Argentina', '
     'Puerto Rico', 'Qatar', 'Romania', 'Russia', 'Senegal', 'Serbia', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'South Africa', 
     'Spain', 'Sri Lanka', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tanzania', 'Thailand', 'Tunisia', 'Turkey', 'U.S. Virgin Islands', 'Uganda', 
     'Ukraine', 'Unidentified', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Venezuela'];
-const handleCountryChange = ()=>{return 0};
+
 
 const languageData = ['Select','Albanian', 'Arabic', 'Armenian', 'Bengali', 'Bhojpuri', 'Bosnian', 'Bulgarian', 'Catalan', 'Chichewa', 
     'Chinese', 'Croatian', 'Czech', 'Dutch', 'English', 'Estonian', 'Filipino', 'French', 'Georgian', 'German', 'Greek', 'Hebrew', 
     'Hindi', 'Hungarian', 'Indian', 'Indonesian', 'Italian', 'Japanese', 'Kannada', 'Korean', 'Malay', 'Malayalam', 'Marathi', 'Nepali', 
     'Norwegian', 'Polish', 'Portuguese', 'Punjabi', 'Romanian', 'Russian', 'Serbian', 'Slovak', 'Slovenian', 'Spanish', 'Swahili', 
     'Swedish', 'Tagalog', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Vietnamese'];
-const handleLanguageChange = ()=>{return 0};
+
 
 const producerData = ['Select', 'Creator', 'Entertainer or Event', 'Entertainer/Event', 'Expert', 
     'Institution', 'Manufacturer', 'Media/Content Brand', 'Retailer', 'Service Provider', 'User'];
-const handleProducerChange = ()=>{return 0};
+
 
 //add the case that values are negative (test abs. val and append - when negative) //perhaps make a utility.js file 
 function numFormatter(num) {
@@ -96,19 +96,56 @@ class TopChannelsPage extends React.Component {
             selectedQueryResults: [],
             channelsQueryResults: [],
             selectedTrendingQueryResults: [],
-            selectedChannelDetails: null
+            selectedChannelDetails: null,
+            searchString: null,
+            country: 'Select',
+            language: 'Select',
+            producer: 'Select',
+            rankingLow: 1,
+            rankingHigh: 10000
         }
         this.updateChannelSearchBar = this.updateChannelSearchBar.bind(this)
         this.executeChannelSearch = this.executeChannelSearch.bind(this)
         this.executeSelectedSearch = this.executeSelectedSearch.bind(this)
+
+        this.handleSearchStringChange = this.handleSearchStringChange.bind(this)
+
+        this.handleCountryChange = this.handleCountryChange.bind(this)
+        this.handleLanguageChange = this.handleLanguageChange.bind(this)
+        this.handleProducerChange = this.handleProducerChange.bind(this)
+
+        this.handleRankingChange = this.handleRankingChange.bind(this)
     }
 
     updateChannelSearchBar(event) {
         this.setState({ selectedQuery: event.target.value })
     }
 
+    handleSearchStringChange(event){
+        this.setState({searchString: event.target.value})
+    }
+
+    handleCountryChange(value) {
+        this.setState({ country: value})
+    }
+
+
+    handleLanguageChange(value) {
+        this.setState({ language: value})
+    }
+
+
+    handleProducerChange(value) {
+        this.setState({ producer: value})
+    }
+
+    handleRankingChange(value) {
+        this.setState({ rankingLow: value[0] })
+        this.setState({ rankingHigh: value[1] })
+    }
+
     executeChannelSearch() {
-        getFindChannels().then(res => {    // 
+        getFindChannels(this.state.searchString,this.state.country, this.state.language).then(res => {    // 
             this.setState({ channelsQueryResults: res.results })
         })
     }
@@ -211,7 +248,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Title Includes: </p>
                                             </Col>
                                             <Col span={15}>
-                                                <Input placeholder="type here" />
+                                                <Input value={this.state.searchString} placeholder="type here" onChange={this.handleSearchStringChange}/>
                                             </Col>
                                         </Row>
                                         
@@ -223,7 +260,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Country: </p>
                                             </Col>
                                             <Col span={15}>
-                                                <Select defaultValue={countryData[0]} style={{width: 120,}} onChange={handleCountryChange}>
+                                                <Select defaultValue={countryData[0]} style={{width: 120,}} onChange={this.handleCountryChange}>
                                                     {countryData.map((country) => (<Option key={country}>{country}</Option>))}
                                                 </Select>
                                             </Col>
@@ -236,7 +273,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Language: </p>
                                             </Col>
                                             <Col span={15}>
-                                                <Select defaultValue={languageData[0]} style={{width: 120,}} onChange={handleLanguageChange}>
+                                                <Select defaultValue={languageData[0]} style={{width: 120,}} onChange={this.handleLanguageChange}>
                                                     {languageData.map((language) => (<Option key={language}>{language}</Option>))}
                                                 </Select>
                                             </Col>
@@ -249,7 +286,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Producer-Type: </p>
                                             </Col>
                                             <Col span={12}>
-                                                <Select defaultValue={producerData[0]} style={{width: 120,}} onChange={handleProducerChange}>
+                                                <Select defaultValue={producerData[0]} style={{width: 120,}} onChange={this.handleProducerChange}>
                                                     {producerData.map((producer) => (<Option key={producer}>{producer}</Option>))}
                                                 </Select>
                                             </Col>
@@ -267,7 +304,8 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Rank: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider tipFormatter={numFormatter} range defaultValue={[1, 10000]} min={1} max={10000}/>
+                                                <Slider tipFormatter={numFormatter} range defaultValue={[1, 10000]} 
+                                                min={1} max={10000} onChange={this.handleRankingChange}/>
                                             </Col>
                                         </Row>
 
@@ -341,7 +379,7 @@ class TopChannelsPage extends React.Component {
                                         </Row>
                                     </Col>
                                     <Col span={2}>
-                                        <Button danger='true' type="primary" shape="circle" icon={<SearchOutlined />} />
+                                        <Button danger='true' type="primary" shape="circle" onClick={this.executeChannelSearch} icon={<SearchOutlined />} />
                                     </Col>
                                     
                                 </Row>
