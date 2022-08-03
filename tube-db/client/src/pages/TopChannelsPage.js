@@ -266,7 +266,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Rank: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[20, 50]}/>
+                                                <Slider tipFormatter={numFormatter} range defaultValue={[1, 10000]} min={1} max={10000}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -277,7 +277,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Views: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[20, 50]}/>
+                                                <Slider range min={1000000} max={194000000000} defaultValue={[2000000, 194000000000]} tipFormatter={numFormatter}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -288,7 +288,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Subs: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[20, 50]}/>
+                                                <Slider range min={100000} max={218000000} defaultValue={[100000, 218000000]} tipFormatter={numFormatter}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -299,7 +299,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Lib-Size: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[20, 50]}/>
+                                                <Slider range defaultValue={[10, 460000]} min={10} max={460000} tipFormatter={numFormatter}/>
                                             </Col>
                                         </Row>   
                                     </Col>
@@ -312,7 +312,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Views per Video: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[20, 50]}/>
+                                                <Slider range defaultValue={[100000, 1100000000]} min={100000} max={1100000000} tipFormatter={numFormatter}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -322,7 +322,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>View Growth: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[20, 50]}/>
+                                                <Slider range defaultValue={[-1, 1]} min={-1} max={1} step={0.01} tipFormatter={growthFormatter}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -332,7 +332,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Sub Growth: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[20, 50]}/>
+                                                <Slider range defaultValue={[-1, 1]} min={-1} max={1} step={0.01} tipFormatter={growthFormatter}/>
                                             </Col>
                                         </Row>
                                     </Col>
