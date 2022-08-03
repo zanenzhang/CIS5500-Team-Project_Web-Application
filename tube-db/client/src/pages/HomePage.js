@@ -5,6 +5,7 @@ import { getHomeVideos } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
+import Navbar from '../components/Navbar';
 
 import {
   Table,
@@ -84,9 +85,7 @@ class HomePage extends React.Component {
         <HeaderBar />
         <div id="page">
           <div id="sideBar">
-              <div>
-              <SideMenu />
-              </div>
+              <Navbar />
           </div>
         
           <div id="pageContent">
