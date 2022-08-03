@@ -1,5 +1,3 @@
-@import '~antd/dist/antd.dark.css';
-
 .rootWrapper{
     background-color: #1B2430;
     margin: 0rem;
@@ -48,7 +46,7 @@ div.page{
 }
 
 Table{
-    background-image: linear-gradient(to bottom,#2d2d2d, #1c1c1c);
+    background-image: linear-gradient(to bottom,#cacaca, #fafafa);
     border: 4px solid rgb(138, 138, 138);
     /* width:1000px; */
 }
