@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './Grid.css';
-import './HeaderBar.css';
+import './ChannelsHeader.css';
 import HeaderLogo from '../components/HeaderLogo';
 import SearchBar from '../components/SearchBar';
 import { DatePicker, Space } from 'antd';
