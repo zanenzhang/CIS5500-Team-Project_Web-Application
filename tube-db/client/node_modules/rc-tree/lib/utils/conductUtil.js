@@ -5,8 +5,8 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isCheckDisabled = isCheckDisabled;
 exports.conductCheck = conductCheck;
+exports.isCheckDisabled = isCheckDisabled;
 
 var _warning = _interopRequireDefault(require("rc-util/lib/warning"));
 

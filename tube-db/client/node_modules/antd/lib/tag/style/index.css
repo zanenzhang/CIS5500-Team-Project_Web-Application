@@ -217,14 +217,14 @@
   border-color: #91d5ff;
 }
 .ant-tag-error {
-  color: #f5222d;
-  background: #fff1f0;
-  border-color: #ffa39e;
+  color: #ff4d4f;
+  background: #fff2f0;
+  border-color: #ffccc7;
 }
 .ant-tag-warning {
-  color: #fa8c16;
-  background: #fff7e6;
-  border-color: #ffd591;
+  color: #faad14;
+  background: #fffbe6;
+  border-color: #ffe58f;
 }
 .ant-tag > .anticon + span,
 .ant-tag > span + .anticon {

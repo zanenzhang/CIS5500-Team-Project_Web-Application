@@ -134,9 +134,6 @@
 .ant-alert.ant-alert-rtl {
   direction: rtl;
 }
-.ant-alert-rtl.ant-alert.ant-alert-no-icon {
-  padding: 8px 15px;
-}
 .ant-alert-rtl .ant-alert-icon {
   margin-right: auto;
   margin-left: 8px;
@@ -148,6 +145,10 @@
 .ant-alert-rtl .ant-alert-close-icon {
   margin-right: 8px;
   margin-left: auto;
+}
+.ant-alert-rtl.ant-alert-with-description {
+  padding-right: 24px;
+  padding-left: 15px;
 }
 .ant-alert-rtl.ant-alert-with-description .ant-alert-icon {
   margin-right: auto;
