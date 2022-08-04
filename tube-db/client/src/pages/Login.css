@@ -1,0 +1,14 @@
+.Login {
+    text-align: center;
+    margin: 20px 0;
+    padding: 70px 20px;
+    flex-grow: 1;
+    height: 1200px;
+    background: url(../images/whatsapp2.webp);
+    background-size: 100%;
+
+}
+
+.white-text {
+    color: rgb(255, 255, 255);
+}
