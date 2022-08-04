@@ -90,8 +90,9 @@ async function find_channels(req, res) {
 
     //switch depending on recieved params
 
-    console.log('???' + req.query.searchString);
-    console.log('!!!' + typeof(req.query.searchString));
+    console.log("??????????????????????????????")
+    console.log(req.query)
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     // console.log(req.query);
 
     if (req.query.searchString === "none" || req.query.searchString === 'undefined' ){

@@ -102,19 +102,36 @@ class TopChannelsPage extends React.Component {
             language: 'Select',
             producer: 'Select',
             rankingLow: 1,
-            rankingHigh: 10000
+            rankingHigh: 10000,
+            viewsLow: 1000000,
+            viewsHigh: 194000000000,
+            subsLow: 100000,
+            subsHigh: 218000000,
+            libSizeLow: 10,
+            libSizeHigh: 100000,
+            viewsPerLow: 100000,
+            viewsPerHigh: 1100000000,
+            viewsGrowthLow: -1,
+            viewsGrowthHigh: 1,
+            subsGrowthLow: -1,
+            subsGrowthHigh: 1
         }
         this.updateChannelSearchBar = this.updateChannelSearchBar.bind(this)
         this.executeChannelSearch = this.executeChannelSearch.bind(this)
         this.executeSelectedSearch = this.executeSelectedSearch.bind(this)
 
         this.handleSearchStringChange = this.handleSearchStringChange.bind(this)
-
         this.handleCountryChange = this.handleCountryChange.bind(this)
         this.handleLanguageChange = this.handleLanguageChange.bind(this)
         this.handleProducerChange = this.handleProducerChange.bind(this)
-
+        
         this.handleRankingChange = this.handleRankingChange.bind(this)
+        this.handleViewsChange = this.handleViewsChange.bind(this)
+        this.handleSubsChange = this.handleSubsChange.bind(this)
+        this.handleLibSizeChange = this.handleLibSizeChange.bind(this)
+        this.handleViewsPerChange = this.handleViewsChange.bind(this)
+        this.handleViewsGrowthChange = this.handleViewsChange.bind(this)
+        this.handleSubsGrowthChange = this.handleSubsGrowthChange.bind(this)
     }
 
     updateChannelSearchBar(event) {
@@ -144,8 +161,42 @@ class TopChannelsPage extends React.Component {
         this.setState({ rankingHigh: value[1] })
     }
 
+    handleViewsChange(value) {
+        this.setState({ viewsLow: value[0] })
+        this.setState({ viewsHigh: value[1] })
+    }
+
+    handleSubsChange(value) {
+        this.setState({ subsLow: value[0] })
+        this.setState({ subsHigh: value[1] })
+    }
+
+    handleLibSizeChange(value) {
+        this.setState({ libSizeLow: value[0] })
+        this.setState({ libSizeHigh: value[1] })
+    }
+
+    handleViewsPerChange(value) {
+        this.setState({ viewsPerLow: value[0] })
+        this.setState({ viewsPerHigh: value[1] })
+    }
+
+    handleViewsGrowthChange(value) {
+        this.setState({ viewsGrowthLow: value[0] })
+        this.setState({ viewsGrowthHigh: value[1] })
+    }
+
+    handleSubsGrowthChange(value) {
+        this.setState({ subsGrowthLow: value[0] })
+        this.setState({ subsGrowthHigh: value[1] })
+    }
+
     executeChannelSearch() {
-        getFindChannels(this.state.searchString,this.state.country, this.state.language).then(res => {    // 
+        getFindChannels(this.state.searchString,this.state.country, this.state.language, this.state.producer, 
+                        this.state.rankingLow, this.state.rankingHigh, this.state.viewsLow, this.state.viewsHigh,
+                        this.state.subsLow, this.state.subsHigh, this.state.libSizeLow, this.state.libSizeHigh,
+                        this.state.viewsPerLow, this.state.viewsPerHigh, this.state.viewsGrowthLow, this.state.viewsGrowthHigh,
+                        this.state.subsGrowthLow, this.state.subsGrowthHigh).then(res => {  
             this.setState({ channelsQueryResults: res.results })
         })
     }
@@ -319,7 +370,8 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Views: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range min={1000000} max={194000000000} defaultValue={[2000000, 194000000000]} tipFormatter={numFormatter}/>
+                                                <Slider range min={1000000} max={194000000000} defaultValue={[2000000, 194000000000]} 
+                                                tipFormatter={numFormatter} onChange={this.handleViewsChange}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -330,7 +382,8 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Subs: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range min={100000} max={218000000} defaultValue={[100000, 218000000]} tipFormatter={numFormatter}/>
+                                                <Slider range min={100000} max={218000000} defaultValue={[100000, 218000000]} 
+                                                tipFormatter={numFormatter} onChange={this.handleSubsChange}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -341,7 +394,8 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Lib-Size: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[10, 460000]} min={10} max={460000} tipFormatter={numFormatter}/>
+                                                <Slider range defaultValue={[10, 460000]} min={10} max={460000} 
+                                                tipFormatter={numFormatter} onChange={this.handleLibSizeChange}/>
                                             </Col>
                                         </Row>   
                                     </Col>
@@ -354,7 +408,8 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Views per Video: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[100000, 1100000000]} min={100000} max={1100000000} tipFormatter={numFormatter}/>
+                                                <Slider range defaultValue={[100000, 1100000000]} min={100000} max={1100000000} 
+                                                tipFormatter={numFormatter} onChange={this.handleViewsPerChange}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -364,7 +419,8 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>View Growth: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[-1, 1]} min={-1} max={1} step={0.01} tipFormatter={growthFormatter}/>
+                                                <Slider range defaultValue={[-1, 1]} min={-1} max={1} step={0.01} 
+                                                tipFormatter={growthFormatter} onChange={this.handleViewsGrowthChange}/>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -374,7 +430,8 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Sub Growth: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[-1, 1]} min={-1} max={1} step={0.01} tipFormatter={growthFormatter}/>
+                                                <Slider range defaultValue={[-1, 1]} min={-1} max={1} step={0.01} 
+                                                tipFormatter={growthFormatter} onChange={this.handleSubsGrowthChange}/>
                                             </Col>
                                         </Row>
                                     </Col>

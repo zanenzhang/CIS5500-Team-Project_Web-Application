@@ -14,8 +14,16 @@ const getChannelRecentTrending = async (ranking) => {
     return res.json()
 }
 
-const getFindChannels = async (searchString, country, language) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/find_channels?searchString=${searchString}&country=${country}&language=${language}`, {
+const getFindChannels = async (searchString, country, language, producer, rankingLow, rankingHigh, 
+    viewsLow, viewsHigh, subsLow, subsHigh, libSizeLow, libSizeHigh, viewsPerLow, viewsPerHigh,
+    viewsGrowthLow, viewsGrowthHigh, subsGrowthLow, subsGrowthHigh) => {
+    
+    let toFetch = `http://${config.server_host}:${config.server_port}/find_channels?searchString=${searchString}`
+    toFetch += `&country=${country}&language=${language}&producer=${producer}&rankingLow=${rankingLow}&rankingHigh=${rankingHigh}`
+    toFetch += `&viewsLow=${viewsLow}&viewsHigh=${viewsHigh}&subsLow=${subsLow}&subsHigh=${subsHigh}&libSizeLow=${libSizeLow}&libSizeHigh=${libSizeHigh}`
+    toFetch += `&viewsPerLow=${viewsPerLow}&viewsPerHigh=${viewsPerHigh}&viewsGrowthLow=${viewsGrowthLow}&viewsGrowthHigh=${viewsGrowthHigh}`
+    toFetch += `&subsGrowthLow=${subsGrowthLow}&subsGrowthHigh=${subsGrowthHigh}`
+    var res = await fetch(toFetch, {
         method: 'GET',
     })
     return res.json()
