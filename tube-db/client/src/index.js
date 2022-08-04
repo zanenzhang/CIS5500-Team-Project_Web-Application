@@ -10,7 +10,7 @@ import {
 import TopChannelsPage from './pages/TopChannelsPage';
 import TrendingVideosPage from './pages/TrendingVideosPage';
 import VideoPage from './pages/VideoPage';
-import LoginPage from './pages/LoginPage';
+// import LoginPage from './pages/LoginPage';
 
 import 'antd/dist/antd.css';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,11 +21,11 @@ ReactDOM.render(
   <div>
     <Router>
       <Switch>
-        <Route exact
+        {/* <Route exact
 							path="/login"
 							render={() => (
 								<LoginPage />
-							)}/>
+							)}/> */}
 		<Route exact
 							path="/video"
 							render={() => (
