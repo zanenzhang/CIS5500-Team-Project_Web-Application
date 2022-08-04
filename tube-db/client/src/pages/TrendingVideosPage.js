@@ -81,7 +81,7 @@ class TrendingVideosPage extends React.Component {
 
     return (
       
-      <div>
+      <div className='outerDiv'>
         <HeaderBar />
         <div id="page">
           <div id="sideBar">
