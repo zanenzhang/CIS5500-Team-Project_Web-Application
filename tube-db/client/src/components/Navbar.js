@@ -22,13 +22,13 @@ const SidebarData = [
   },
   {
     title: 'Favorites',
-    path: '/support',
+    path: '/savedvideos',
     icon: < BsBookmarkHeartFill />,
     cName: 'nav-text'
   },
   {
-    title: 'Profile',
-    path: '/profile',
+    title: 'Login',
+    path: '/login',
     icon: < BsFillPersonFill />,
     cName: 'nav-text'
   },

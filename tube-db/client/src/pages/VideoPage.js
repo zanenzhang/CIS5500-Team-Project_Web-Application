@@ -1,6 +1,5 @@
 import React from 'react';
 import SideMenu from '../components/SideMenu';
-import './HomePage.css'
 import './VideoPage.css'
 import { getHomeVideos, getSingleVideo } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
