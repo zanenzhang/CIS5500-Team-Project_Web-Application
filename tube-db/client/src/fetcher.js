@@ -21,8 +21,8 @@ const getFindChannels = async (searchString, country, language) => {
     return res.json()
 }
 
-const getHomeVideos = async (country, pageCount) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/home?country=${country}&page=${pageCount}`, {
+const getTrendingVideos = async (country, pageCount) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&page=${pageCount}`, {
         method: 'GET',
     })
     
@@ -52,7 +52,7 @@ const getSingleVideo = async (videoid) => {
 export {
     getChannel,
     getFindChannels,
-    getHomeVideos,
+    getTrendingVideos,
     getChannelRecentTrending,
     getSingleVideo
 }
