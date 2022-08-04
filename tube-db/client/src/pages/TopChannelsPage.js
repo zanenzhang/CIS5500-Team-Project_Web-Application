@@ -379,7 +379,7 @@ class TopChannelsPage extends React.Component {
                                         </Row>
                                     </Col>
                                     <Col span={2}>
-                                        <Button style={{display: 'flex','justify-content': 'center','align-items': 'center', backgroundColor:'#d2001a'}} 
+                                        <Button className='searchIcon' style={{display: 'flex','justify-content': 'center','align-items': 'center', backgroundColor:'#d2001a'}} 
                                         shape="circle" onClick={this.executeChannelSearch} 
                                         icon={<SearchOutlined style={{color:'whiteSmoke', fontSize: '18px','margin-left': 'auto', 'margin-right': 'auto', display: 'block !important'}}/>}></Button>
                                     </Col>
