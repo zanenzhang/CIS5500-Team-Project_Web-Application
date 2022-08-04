@@ -93,15 +93,30 @@ async function find_channels(req, res) {
     console.log("??????????????????????????????")
     console.log(req.query)
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    // console.log(req.query);
 
-    if (req.query.searchString === "none" || req.query.searchString === 'undefined' ){
-        console.log('!!!' + req.query.searchString);
+    let countryLangProdClause = ""
+
+    if(req.query.country !== 'Select' && req.query.country !== 'undefined'){
+        countryLangProdClause += ` AND country = '${req.query.country}'`
+    }
+
+    if(req.query.language !== 'Select' && req.query.language !== 'undefined'){
+        countryLangProdClause += ` AND channel_language = '${req.query.language}'`
+    }
+
+    if(req.query.producer !== 'Select' && req.query.producer !== 'undefined'){
+        countryLangProdClause += ` AND producer_type = '${req.query.producer}'`
+    }
+
+    //  SELECT ROW_NUMBER() OVER (ORDER BY subscribers DESC) Ranking this is a good idea, but breaks other items
+
+    if (req.query.searchString === 'undefined'){
         connection.query(
             `
-            SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
+            SELECT channel_rank AS Ranking, 
+                channel_title AS Title, country, channel_language AS language, subscribers, views
             FROM TOP_YOUTUBE_CHANNELS
-            ORDER BY Ranking
+            ORDER BY subscribers DESC
             LIMIT 0, 100;
             `, function (error, results, fields) {
                 if (error) {
@@ -111,15 +126,33 @@ async function find_channels(req, res) {
                     res.json({ results: results })
                 }
             });
-    }
-    else {     
-        
+    
+    } else if (req.query.searchString === "null"){
+        console.log('!!!' + req.query.searchString);
         connection.query(
             `
             SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
             FROM TOP_YOUTUBE_CHANNELS
-            WHERE channel_title LIKE '%${req.query.searchString}%'
-            ORDER BY Ranking
+            WHERE channel_rank >= ${req.query.rankingLow} AND channel_rank >= ${req.query.rankingLow} ${countryLangProdClause}
+            ORDER BY subscribers DESC
+            LIMIT 0, 100;
+            `, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+    
+    } else {     
+        connection.query(
+            `
+            SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
+            FROM TOP_YOUTUBE_CHANNELS
+            WHERE channel_title LIKE '%${req.query.searchString}%' AND channel_rank >= ${req.query.rankingLow} 
+                AND channel_rank >= ${req.query.rankingLow} ${countryLangProdClause}
+            ORDER BY subscribers DESC
             LIMIT 0, 100;
             `, function (error, results, fields) {
                 if (error) {
