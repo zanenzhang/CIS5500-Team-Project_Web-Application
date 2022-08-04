@@ -4,7 +4,7 @@ const getChannel = async (ranking) => {
     var res = await fetch(`http://${config.server_host}:${config.server_port}/channel?ranking=${ranking}`, {
         method: 'GET',
     })
-    return res.json()
+    return res.json() 
 }
 
 const getChannelRecentTrending = async (ranking) => {

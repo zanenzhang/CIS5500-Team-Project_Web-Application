@@ -108,9 +108,9 @@ class TopChannelsPage extends React.Component {
             subsLow: 100000,
             subsHigh: 218000000,
             libSizeLow: 10,
-            libSizeHigh: 100000,
+            libSizeHigh: 50000,
             viewsPerLow: 100000,
-            viewsPerHigh: 1100000000,
+            viewsPerHigh: 100000000,
             viewsGrowthLow: -1,
             viewsGrowthHigh: 1,
             subsGrowthLow: -1,
@@ -129,8 +129,8 @@ class TopChannelsPage extends React.Component {
         this.handleViewsChange = this.handleViewsChange.bind(this)
         this.handleSubsChange = this.handleSubsChange.bind(this)
         this.handleLibSizeChange = this.handleLibSizeChange.bind(this)
-        this.handleViewsPerChange = this.handleViewsChange.bind(this)
-        this.handleViewsGrowthChange = this.handleViewsChange.bind(this)
+        this.handleViewsPerChange = this.handleViewsPerChange.bind(this)
+        this.handleViewsGrowthChange = this.handleViewsGrowthChange.bind(this)
         this.handleSubsGrowthChange = this.handleSubsGrowthChange.bind(this)
     }
 
@@ -394,7 +394,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Lib-Size: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[10, 460000]} min={10} max={460000} 
+                                                <Slider range defaultValue={[10, 50000]} min={10} max={50000} 
                                                 tipFormatter={numFormatter} onChange={this.handleLibSizeChange}/>
                                             </Col>
                                         </Row>   
@@ -408,7 +408,7 @@ class TopChannelsPage extends React.Component {
                                                 <p className='titleSearchName'>Views per Video: </p>
                                             </Col>
                                             <Col span={10}>
-                                                <Slider range defaultValue={[100000, 1100000000]} min={100000} max={1100000000} 
+                                                <Slider range defaultValue={[100000, 100000000]} min={100000} max={100000000} 
                                                 tipFormatter={numFormatter} onChange={this.handleViewsPerChange}/>
                                             </Col>
                                         </Row>
