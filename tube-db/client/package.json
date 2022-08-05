@@ -7,6 +7,8 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@types/gapi": "^0.0.42",
+    "@types/gapi.auth2": "^0.0.56",
     "antd": "^4.22.3",
     "d3-format": "^3.0.1",
     "gapi-script": "^1.2.0",

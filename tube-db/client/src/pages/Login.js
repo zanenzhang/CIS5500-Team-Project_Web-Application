@@ -1,9 +1,11 @@
 import './Login.css';
-import LoginButton from '../components/login';
 import {gapi} from 'gapi-script';
 import { useReducer, useEffect, useState } from 'react';
 import React from 'react';
 import image from '../images/whatsapp2.webp';
+import { GoogleLogin } from 'react-google-login';
+
+var clicked = false;//Global Variable
 
 
 const CLIENT_ID = "1034575332123-8tgla9079nd652nlfttj4lmub58up4ke.apps.googleusercontent.com"
@@ -18,17 +20,41 @@ const formReducer = (state, event) => {
 
 function Login() {
 
+    const onSuccess = (googleData) => {
+
+      console.log(googleData.profileObj);
+
+      //https://stackoverflow.com/questions/32182532/google-signin-doesnt-redirect-after-sign-out
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signIn().then(function () {
+          console.log('User signed in.');
+          window.location.href='http://localhost:3000/trendingvideos';
+        })
+
+  }
+
+  const onFailure = (result) => {
+
+    alert(result);
+}
+
+  function clickLogin() {
+
+      clicked=true;}
+
   const [formData, setFormData] = useReducer(formReducer, {});
 
   useEffect(() => {
     function start() {
+
       gapi.client.init({
         apiKey: API_KEY,
         clientID: CLIENT_ID
-      })
+      });
+
     };
 
-    gapi.load('client:auth2', start);
+    gapi.load('client: auth', start);
 
   });
 
@@ -37,19 +63,9 @@ function Login() {
     alert('You have submitted the form.')
   };
 
-  // const handleFailure = (result) => {
-
-  //   alert(result);
-  // };
-
-  // const handleLogin = (response) => {
-
-  //   console.log(response.credential);
-  //   setUser(response.credential.profileObj);
-  // };
-
   return (
     <div class = "Login">
+      
       <h2 class="white-text">CIS 550 Project: Bug Busters</h2>
       <p class="white-text">(Derek Taylor, Zan Zhang, Sanjeeva Rajapakse, Angela Fan, Fred Qi)</p>
       <h3 class="white-text">Login Page</h3>
@@ -68,7 +84,17 @@ function Login() {
        </fieldset>
        <button type="submit">Submit</button>
       </form>
-      <LoginButton/>
+      <div class='login'>
+      <GoogleLogin
+                id = 'g-login'
+                clientId={CLIENT_ID}
+                buttonText="Login"
+                onSuccess= {onSuccess}
+                onFailure={onFailure}
+                cookiePolicy={'single_host_origin'}
+                isSignedIn={true}
+            />
+        </div>
     </div>
   );
 }
