@@ -73,7 +73,7 @@ function Login() {
       <form onSubmit={handleSubmit}>
       <fieldset>
          <label>
-           <h5 class="white-text">Name</h5>
+           <h5 class="white-text">Username/Email</h5>
            <input name="Username" onChange={setFormData} />
          </label>
        </fieldset>
