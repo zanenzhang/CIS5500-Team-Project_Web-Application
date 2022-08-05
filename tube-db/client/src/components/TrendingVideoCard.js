@@ -26,8 +26,8 @@ function TrendingVideoCard({data, num}) {
         }
     }
 
+    
 
-    // console.log(data);
     let record_data = data;
     
     let days = record_data.trend_stop - record_data.trend_stop;
@@ -54,11 +54,13 @@ function TrendingVideoCard({data, num}) {
     }
 
     let img_url = "https://i.ytimg.com/vi/"+ record_data.video_id + "/hqdefault.jpg";
+    let watch_url = '/video?videoid=' + record_data.video_id
+
 
     return (
         <div className="videoCard">
             <Row className='trendingVideoNameSection'>
-                <Col className='trendingVideoNameSection'>
+                <Col className='trendingVideoNameSection' onClick={watch_url}>
                     <Row className='videoTitleContainer'>
                         <h4 className='videoTitle'>{record_data.title}</h4>
                     </Row>
@@ -83,7 +85,7 @@ function TrendingVideoCard({data, num}) {
                     <h5 className='videoDataCountries'><b className="videoDataTitle">Countries:</b><br></br>{countries}</h5>
                 </Col>
                 <Col span={18}>
-                    <img className='videoTile' src={img_url}/>
+                    <a href={watch_url}><img className='videoTile' src={img_url}/></a>
                 </Col>
             </Row>
         </div>
