@@ -89,11 +89,6 @@ async function selected_channel_recent_trending(req, res) {
 async function find_channels(req, res) {
 
     //switch depending on recieved params
-
-    console.log("??????????????????????????????")
-    console.log(req.query)
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
     let countryLangProdClause = ""
 
     if(req.query.country !== 'Select' && req.query.country !== 'undefined'){
@@ -129,7 +124,6 @@ async function find_channels(req, res) {
             });
     
     } else if (req.query.searchString === "null"){
-        console.log('!!!' + req.query.searchString);
         connection.query(
             `
             SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
@@ -157,7 +151,7 @@ async function find_channels(req, res) {
             SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
             FROM TOP_YOUTUBE_CHANNELS
             WHERE channel_title LIKE '%${req.query.searchString}%' AND channel_rank >= ${req.query.rankingLow} AND 
-                channel_rank <= ${req.query.rankingHigh}} AND views >= ${req.query.viewsLow} AND views <= ${req.query.viewsHigh} AND
+                channel_rank <= ${req.query.rankingHigh} AND views >= ${req.query.viewsLow} AND views <= ${req.query.viewsHigh} AND
                 subscribers >= ${req.query.subsLow} AND subscribers <= ${req.query.subsHigh} AND 
                 library_size >= ${req.query.libSizeLow} AND library_size <= ${req.query.libSizeHigh} AND
                 views_per_video >= ${req.query.viewsPerLow} AND views_per_video <= ${req.query.viewsPerHigh} AND
