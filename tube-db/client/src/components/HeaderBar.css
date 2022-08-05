@@ -1,62 +1,52 @@
-  .Wrapper {
-  display: flex;
-  align-items: center;
-  height: 100px;
-  padding: 0 20px;
-}
 
-.SearchBar {
-  position: relative;
-  max-width: 1280px;
-  width: 98%;
-  height: 55px;
-  background: #1d1d1d;
-  margin: 0 auto;
-  border-radius: 40px;
-  color: #fff;
-  border: solid;
-  border-color: rgb(132, 131, 131);
-  box-shadow: none;
-}
-
-.SearchBarImg {
-    position: absolute;
-    left: 15px;
-    top: 18px;
-    width: 20px;
+  .headerBar {
+    display: flex;
+    height: 160px;
+  }
+  
+  .headerLogo {
+    height: 160px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    color: #000000;
+  }
+  
+  .headerSelectors {
+    flex-grow: 1;
+    background: #000000;
+    justify-content: center;
   }
 
-.SearchBarImgArea {
-    position: absolute;
-      left: 0px;
-      top: 1px;
-      width: 50px;
-      height: 48px;
-      margin: 0 auto;
-      border-radius: 30px;
-      background-color: #ee4444;
-      opacity: 0.7; 
-    border-color: rgb(231, 44, 44);
-    box-shadow: none;
+  .headerSearch {
+    flex-grow: 1;
+    background: #000000;
+    justify-content: center;
   }
 
-.SearchBar > input {
-    font-size: 1.5rem;
+  .headerExLogo{
+    flex-grow: 1;
+    background: #000000;
+  }
+
+  .ant-select{
+    flex-grow: 1;
     position: absolute;
-    left: 0;
-    margin: 8px 0;
-    padding: 0 0 0 60px;
-    border: 0;
-    width: 95%;
-    background: transparent;
-    height: 40px;
-    color: #fff;
-    border-color: transparent;
-}
+    max-width: 500px;
+    width: 30%;
+    left: 25%;
+    margin: 0 auto;
+    
+  }
 
-.SearchBar > input:focus{
-    outline: none;
-    outline-style: none;
-    box-shadow: none;
-}
-
+  .ant-picker {
+    flex-grow: 1;
+    position: absolute;
+    max-width: 450px;
+    width: 30%;
+    left: 28%;
+    margin: 0 auto;
+    
+  }
