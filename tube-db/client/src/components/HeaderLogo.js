@@ -26,7 +26,7 @@ class HeaderLogo extends React.Component {
       <Nav justified>
         <div id="header">
         <div id="headerLogo">
-          <a href="./homepage">
+          <a href="./trendingvideos">
         <img src={TubeDBLogo} width={180} />
         </a>
         </div>

@@ -1,7 +1,9 @@
 
 import React from 'react';
-import './loginPage.css'
-import './loginPage.html'
+
+/*
+import './LoginPage.css'
+import './LoginPage.html'
 
 const loginForm = document.getElementById("login-form");
 const loginButton = document.getElementById("login-form-submit");
@@ -19,5 +21,10 @@ loginButton.addEventListener("click", (e) => {
         loginErrorMsg.style.opacity = 1;
     }
 })
+*/
 
-export default loginPage
+class LoginPage extends React.Component{
+
+}
+
+export default LoginPage

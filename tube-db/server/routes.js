@@ -88,20 +88,94 @@ async function selected_channel_recent_trending(req, res) {
 // CS Route 2 (handler) - get the top 100 channels by rank no filters
 async function find_channels(req, res) {
 
-    connection.query(
-        `
-        SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
-        FROM TOP_YOUTUBE_CHANNELS
-        ORDER BY Ranking
-        LIMIT 0, 100;
-        `, function (error, results, fields) {
-            if (error) {
-                console.log(error)
-                res.json({ error: error })
-            } else if (results) {
-                res.json({ results: results })
-            }
-        });
+    //switch depending on recieved params
+
+    console.log("??????????????????????????????")
+    console.log(req.query)
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
+    let countryLangProdClause = ""
+
+    if(req.query.country !== 'Select' && req.query.country !== 'undefined'){
+        countryLangProdClause += ` AND country = '${req.query.country}'`
+    }
+
+    if(req.query.language !== 'Select' && req.query.language !== 'undefined'){
+        countryLangProdClause += ` AND channel_language = '${req.query.language}'`
+    }
+
+    if(req.query.producer !== 'Select' && req.query.producer !== 'undefined'){
+        countryLangProdClause += ` AND producer_type = '${req.query.producer}'`
+    }
+
+    //  SELECT ROW_NUMBER() OVER (ORDER BY subscribers DESC) Ranking this is a good idea, but breaks other items
+
+    if (req.query.searchString === 'undefined'){
+        console.log("Why?")
+        connection.query(
+            `
+            SELECT channel_rank AS Ranking, 
+                channel_title AS Title, country, channel_language AS language, subscribers, views
+            FROM TOP_YOUTUBE_CHANNELS
+            ORDER BY subscribers DESC
+            LIMIT 0, 100;
+            `, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+    
+    } else if (req.query.searchString === "null"){
+        console.log('!!!' + req.query.searchString);
+        connection.query(
+            `
+            SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
+            FROM TOP_YOUTUBE_CHANNELS
+            WHERE channel_rank >= ${req.query.rankingLow} AND channel_rank <= ${req.query.rankingHigh}
+                AND subscribers >= ${req.query.subsLow} AND subscribers <= ${req.query.subsHigh} AND 
+                library_size >= ${req.query.libSizeLow} AND library_size <= ${req.query.libSizeHigh} AND
+                views_per_video >= ${req.query.viewsPerLow} AND views_per_video <= ${req.query.viewsPerHigh} AND
+                view_growth_rate_l3m >= ${req.query.viewsGrowthLow} AND view_growth_rate_l3m <= ${req.query.viewsGrowthHigh} AND
+                subscriber_growth_rate_l3m >= ${req.query.subsGrowthLow} AND subscriber_growth_rate_l3m<= ${req.query.subsGrowthHigh} ${countryLangProdClause}
+            ORDER BY subscribers DESC
+            LIMIT 0, 100;
+            `, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+    
+    } else {     
+        connection.query(
+            `
+            SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
+            FROM TOP_YOUTUBE_CHANNELS
+            WHERE channel_title LIKE '%${req.query.searchString}%' AND channel_rank >= ${req.query.rankingLow} AND 
+                channel_rank <= ${req.query.rankingHigh} AND views >= ${req.query.viewsLow} AND views <= ${req.query.viewsHigh} AND
+                subscribers >= ${req.query.subsLow} AND subscribers <= ${req.query.subsHigh} AND 
+                library_size >= ${req.query.libSizeLow} AND library_size <= ${req.query.libSizeHigh} AND
+                views_per_video >= ${req.query.viewsPerLow} AND views_per_video <= ${req.query.viewsPerHigh} AND
+                view_growth_rate_l3m >= ${req.query.viewsGrowthLow} AND view_growth_rate_l3m <= ${req.query.viewsGrowthHigh} AND
+                subscriber_growth_rate_l3m >= ${req.query.subsGrowthLow} AND subscriber_growth_rate_l3m<= ${req.query.subsGrowthHigh} ${countryLangProdClause}
+            ORDER BY subscribers DESC
+            LIMIT 0, 100;
+            `, function (error, results, fields) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+    }
+
+    
     
 };
 
@@ -110,7 +184,7 @@ async function find_channels(req, res) {
 // ********************************************
 
 
-async function home_videos(req, res) {
+async function trending_videos(req, res) {
 
     country = req.query.country
     pageCount = req.query.page
@@ -168,7 +242,7 @@ module.exports = {
     hello,
     channel,
     find_channels,
-    home_videos,
+    trending_videos,
     selected_channel_recent_trending,
     singleVideo,
 }

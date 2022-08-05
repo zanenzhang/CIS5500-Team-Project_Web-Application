@@ -13,7 +13,7 @@ app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 
 // Routes //
 
-app.get('/home', routes.home_videos);
+app.get('/trendingvideos', routes.trending_videos);
 app.get('/hello', routes.hello);
 app.get('/video', routes.singleVideo)
 // Channel Specific Routes //

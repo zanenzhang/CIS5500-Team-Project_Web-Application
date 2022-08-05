@@ -4,7 +4,7 @@ const getChannel = async (ranking) => {
     var res = await fetch(`http://${config.server_host}:${config.server_port}/channel?ranking=${ranking}`, {
         method: 'GET',
     })
-    return res.json()
+    return res.json() 
 }
 
 const getChannelRecentTrending = async (ranking) => {
@@ -14,15 +14,23 @@ const getChannelRecentTrending = async (ranking) => {
     return res.json()
 }
 
-const getFindChannels = async () => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/find_channels`, {
+const getFindChannels = async (searchString, country, language, producer, rankingLow, rankingHigh, 
+    viewsLow, viewsHigh, subsLow, subsHigh, libSizeLow, libSizeHigh, viewsPerLow, viewsPerHigh,
+    viewsGrowthLow, viewsGrowthHigh, subsGrowthLow, subsGrowthHigh) => {
+    
+    let toFetch = `http://${config.server_host}:${config.server_port}/find_channels?searchString=${searchString}`
+    toFetch += `&country=${country}&language=${language}&producer=${producer}&rankingLow=${rankingLow}&rankingHigh=${rankingHigh}`
+    toFetch += `&viewsLow=${viewsLow}&viewsHigh=${viewsHigh}&subsLow=${subsLow}&subsHigh=${subsHigh}&libSizeLow=${libSizeLow}&libSizeHigh=${libSizeHigh}`
+    toFetch += `&viewsPerLow=${viewsPerLow}&viewsPerHigh=${viewsPerHigh}&viewsGrowthLow=${viewsGrowthLow}&viewsGrowthHigh=${viewsGrowthHigh}`
+    toFetch += `&subsGrowthLow=${subsGrowthLow}&subsGrowthHigh=${subsGrowthHigh}`
+    var res = await fetch(toFetch, {
         method: 'GET',
     })
     return res.json()
 }
 
-const getHomeVideos = async (country, pageCount) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/home?country=${country}&page=${pageCount}`, {
+const getTrendingVideos = async (country, pageCount) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&page=${pageCount}`, {
         method: 'GET',
     })
     
@@ -52,7 +60,7 @@ const getSingleVideo = async (videoid) => {
 export {
     getChannel,
     getFindChannels,
-    getHomeVideos,
+    getTrendingVideos,
     getChannelRecentTrending,
     getSingleVideo
 }

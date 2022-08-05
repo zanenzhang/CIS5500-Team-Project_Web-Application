@@ -38,7 +38,6 @@ class HeaderBar extends React.Component {
     render(){
         return(
           <div className="headerBar">
-
               <div className="headerLogo">
                 <HeaderLogo />
               </div>
