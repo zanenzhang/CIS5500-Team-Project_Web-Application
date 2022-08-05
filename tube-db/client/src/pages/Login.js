@@ -26,7 +26,7 @@ function Login() {
 
       //https://stackoverflow.com/questions/32182532/google-signin-doesnt-redirect-after-sign-out
         var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signIn().then(function () {
+        auth2.signOut().then(function () {
           console.log('User signed in.');
           window.location.href='http://localhost:3000/trendingvideos';
         })
@@ -88,11 +88,11 @@ function Login() {
       <GoogleLogin
                 id = 'g-login'
                 clientId={CLIENT_ID}
-                buttonText="Login"
+                buttonText="Login with Google"
                 onSuccess= {onSuccess}
                 onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}
-                isSignedIn={true}
+                isSignedIn={false}
             />
         </div>
     </div>
