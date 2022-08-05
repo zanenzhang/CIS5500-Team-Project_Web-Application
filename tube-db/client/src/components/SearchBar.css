@@ -26,22 +26,9 @@
     width: 20px;
   }
 
-.SearchBarImgArea {
-    position: relative;
-      left: -471px;
-      top: 1px;
-      width: 5%;
-      height: 48px;
-      margin: 0 auto;
-      border-radius: 30px;
-      background-color: #ee4444;
-      opacity: 0.7; 
-    border-color: rgb(231, 44, 44);
-    box-shadow: none;
-  }
 
 .SearchBar > input {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     position: absolute;
     left: 0;
     margin: 8px 0;
@@ -52,6 +39,7 @@
     height: 40px;
     color: #fff;
     border-color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .SearchBar > input:focus{
