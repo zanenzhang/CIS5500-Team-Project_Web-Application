@@ -60,7 +60,8 @@ function Login() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    alert('You have submitted the form.')
+    console.log('User signed in.');
+    window.location.href='http://localhost:3000/trendingvideos';
   };
 
   return (
