@@ -89,11 +89,6 @@ async function selected_channel_recent_trending(req, res) {
 async function find_channels(req, res) {
 
     //switch depending on recieved params
-
-    console.log("??????????????????????????????")
-    console.log(req.query)
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
     let countryLangProdClause = ""
 
     if(req.query.country !== 'Select' && req.query.country !== 'undefined'){
@@ -129,7 +124,6 @@ async function find_channels(req, res) {
             });
     
     } else if (req.query.searchString === "null"){
-        console.log('!!!' + req.query.searchString);
         connection.query(
             `
             SELECT channel_rank AS Ranking, channel_title AS Title, country, channel_language AS language, subscribers, views
