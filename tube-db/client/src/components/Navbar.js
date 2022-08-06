@@ -27,8 +27,8 @@ const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Login',
-    path: '/login',
+    title: 'Logout',
+    path: '/',
     icon: < BsFillPersonFill />,
     cName: 'nav-text'
   },
