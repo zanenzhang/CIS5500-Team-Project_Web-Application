@@ -15,13 +15,37 @@
 }
 
 
-  #pageContent {
-    background: #000000;
-    flex-grow: 1;
-    height: 1000px;
-    /* enable grow, disable shrink */
-  }
+#pageContent {
+  background: #000000;
+  flex-grow: 1;
+  height: 1000px;
+  /* enable grow, disable shrink */
+  justify-content: center;
+}
 
 #sideBar {
   justify-content: flex-start;
+}
+
+#loadMoreBtn{
+  display: block;
+  background: #F61212;
+  width: 25%;
+  min-width: 200px;
+  height: 60px;
+  border-radius: 20px;
+  outline: #FFF;
+  color: #000;
+  font-size: 14px;
+  border: 0.5rem solid;
+  border-color: #C02727; 
+  font-size: 1.2rem;
+  margin: 20px auto;
+  outline: none;
+  cursor: pointer;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+#loadMoreBtn:hover{
+  opacity: 0.8;
 }

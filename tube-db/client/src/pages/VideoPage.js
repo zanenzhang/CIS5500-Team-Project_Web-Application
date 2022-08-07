@@ -62,7 +62,7 @@ class VideoPage extends React.Component {
                       src={this.state.fullLink}>
                   </iframe>
 
-                  <h1>"Title: {}"</h1>
+                  <h1>Title: {}</h1>
                   <h2>"Description: {}"</h2>
                   <h2>"Views: {}"</h2>
                   <h2>"Likes: {}"</h2>

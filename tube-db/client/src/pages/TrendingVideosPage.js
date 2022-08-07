@@ -54,6 +54,7 @@ class TrendingVideosPage extends React.Component {
       searchTerm: "",
       videoResults: [],
       pageCount: 1,
+      loadLimit: 3,
       offset: this.getRandomOffset(),
       country: "United States"
     }
@@ -73,19 +74,21 @@ class TrendingVideosPage extends React.Component {
 
 
   updateMoreVideos() {
-    getTrendingVideos(this.state.country, this.state.pageCount).then(res => {
+    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset).then(res => {
       this.setState({ videoResults: res.results })
     })
   }
 
   handleMoreVideos(){
     this.setState({pageCount: (this.state.pageCount + 1)})
+    this.updateMoreVideos();
   }
 
   componentDidMount() {
     getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset).then(res => {
       this.setState({ videoResults: res.results });
     })
+    this.setState({pageCount: (this.state.pageCount + 1)})
   };
 
   render() {
@@ -100,7 +103,7 @@ class TrendingVideosPage extends React.Component {
           </div>
         
           <div id="pageContent">
-            <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh' }}>
+            <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
               <Grid header={this.state.searchTerm ? 'Search Result' : 'Video Search'}>
                 
                 {this.state.videoResults.map(video=>(
@@ -112,9 +115,15 @@ class TrendingVideosPage extends React.Component {
                 ))}
                 
               </Grid>
+              <div >
+                {this.state.pageCount <= this.state.loadLimit && (
+                  <button id="loadMoreBtn" onClick={this.handleMoreVideos}>Load More Videos</button>
+                )}
+              
+              </div>
 
             <div>
-          
+            
           </div>
         </div>
       </div>
