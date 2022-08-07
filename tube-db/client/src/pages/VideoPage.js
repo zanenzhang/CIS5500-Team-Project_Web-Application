@@ -37,7 +37,7 @@ class VideoPage extends React.Component {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results });
-        console.log(this.state.videoInfo[0])
+        console.log(this.state.videoInfo[0].video_title)
       })
     };
     
@@ -62,7 +62,10 @@ class VideoPage extends React.Component {
                       src={this.state.fullLink}>
                   </iframe>
 
-                  <h1></h1>
+                  <h1>"Title: {}"</h1>
+                  <h2>"Description: {}"</h2>
+                  <h2>"Views: {}"</h2>
+                  <h2>"Likes: {}"</h2>
     
                 </div>
             
