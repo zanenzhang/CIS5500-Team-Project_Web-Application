@@ -29,8 +29,8 @@ const getFindChannels = async (searchString, country, language, producer, rankin
     return res.json()
 }
 
-const getTrendingVideos = async (country, pageCount) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&page=${pageCount}`, {
+const getTrendingVideos = async (country, pageCount, offset) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&page=${pageCount}&offset=${offset}`, {
         method: 'GET',
     })
     

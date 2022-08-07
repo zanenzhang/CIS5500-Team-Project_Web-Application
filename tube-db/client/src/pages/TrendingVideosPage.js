@@ -54,12 +54,23 @@ class TrendingVideosPage extends React.Component {
       searchTerm: "",
       videoResults: [],
       pageCount: 1,
+      offset: this.getRandomOffset(),
       country: "United States"
     }
 
     this.handleMoreVideos = this.handleMoreVideos.bind(this)
     this.updateMoreVideos = this.updateMoreVideos.bind(this)
   }
+
+  getRandomOffset(){
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+  
+    let randomRow = getRandomInt(2000);
+    return randomRow;
+  };
+
 
   updateMoreVideos() {
     getTrendingVideos(this.state.country, this.state.pageCount).then(res => {
@@ -72,7 +83,7 @@ class TrendingVideosPage extends React.Component {
   }
 
   componentDidMount() {
-    getTrendingVideos(this.state.country, this.state.pageCount).then(res => {
+    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset).then(res => {
       this.setState({ videoResults: res.results });
     })
   };
