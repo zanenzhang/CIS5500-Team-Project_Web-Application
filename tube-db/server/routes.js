@@ -183,19 +183,25 @@ async function trending_videos(req, res) {
     country = req.query.country
     pageCount = req.query.page
     const limit = pageCount * 20
+    const pagePull = limit * 10
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+    
+    randomRow = getRandomInt(2000);
 
     finalQuery = `
     WITH Videos AS (
-        SELECT video_id, MAX(trending_date) as trend_stop, thumbnail_link
+        SELECT video_id, title, thumbnail_link
         FROM TOP_TRENDING_VIDEOS
         WHERE country = '${country}'
-        GROUP BY video_id
-        LIMIT 100
-    )
-    SELECT video_id, trend_stop, thumbnail_link
+        LIMIT ${pagePull}
+        OFFSET ${randomRow}
+    ) SELECT video_id, title as video_title, thumbnail_link
         FROM Videos
-        ORDER BY trend_stop DESC
-        LIMIT ${limit};
+        GROUP BY video_id
+        Limit ${limit};
     `
 
     connection.query(finalQuery, function (error, results, fields) {

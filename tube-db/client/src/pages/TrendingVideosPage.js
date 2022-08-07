@@ -96,6 +96,7 @@ class TrendingVideosPage extends React.Component {
                   <VideoThumbnail
                     thumbLink = {video.thumbnail_link}
                     videoId = {video.video_id}
+                    videoTitle = {video.video_title}
                   />
                 ))}
                 

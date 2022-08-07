@@ -8,5 +8,11 @@
 .thumbnail:hover {
     opacity: 0.8;
 }
+
+.videoTitle {
+  color: #fff;
+  font-style: normal;
+  font-weight: normal; 
+}
   
   
