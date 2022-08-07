@@ -37,6 +37,7 @@ class VideoPage extends React.Component {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results });
+        console.log(this.state.videoInfo[0])
       })
     };
     
@@ -46,7 +47,6 @@ class VideoPage extends React.Component {
       return (
         
         <div>
-            <HeaderBar />
   
             <div id="page">
     
@@ -58,9 +58,11 @@ class VideoPage extends React.Component {
             
                 <div className="videoInfo">
 
-                  <iframe width="640" height="360" 
+                  <iframe id="videoFrame" width="640" height="360" 
                       src={this.state.fullLink}>
                   </iframe>
+
+                  <h1></h1>
     
                 </div>
             
