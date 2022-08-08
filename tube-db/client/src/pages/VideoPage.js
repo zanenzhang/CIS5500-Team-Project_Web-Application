@@ -66,9 +66,9 @@ class VideoPage extends React.Component {
                   <h2>Title: </h2>
                   {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
                   <h2>Description:</h2>
-                  {this.state.videoInfo.map(info => <h6>Description: {info.description}</h6>)}
+                  {this.state.videoInfo.map(info => <h6>{info.description}</h6>)}
                   <h2>Trending Start Date:</h2>
-                  {this.state.videoInfo.map(info => <h5> {info.trend_start}</h5>)}
+                  {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)}
                   <h2>Countries:</h2>
                   {this.state.videoInfo.map(info => <h5>  {info.countries}</h5>)}
                   <h2>Views:</h2>
