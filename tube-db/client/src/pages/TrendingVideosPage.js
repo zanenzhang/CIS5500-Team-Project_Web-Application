@@ -57,11 +57,16 @@ class TrendingVideosPage extends React.Component {
       loadLimit: 3,
       offset: this.getRandomOffset(),
       country: "United States",
+      trendStart: "2020-08-01",
+      trendStop: "2022-06-20"
     }
 
     this.handleMorePages = this.handleMorePages.bind(this)
     this.handleUpdateVideos = this.handleUpdateVideos.bind(this)
     this.handleCountryChange = this.handleCountryChange.bind(this)
+    this.handleUpdateTrendStart = this.handleUpdateTrendStart.bind(this)
+    this.handleUpdateTrendStop = this.handleUpdateTrendStop.bind(this)
+    this.removeOffset = this.removeOffset.bind(this);
   }
 
   getRandomOffset(){
@@ -73,16 +78,27 @@ class TrendingVideosPage extends React.Component {
     return randomRow;
   };
 
+  removeOffset(){
+    this.setState({offset: 0})
+  }
 
   handleUpdateVideos() {
-    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset).then(res => {
+    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop).then(res => {
       this.setState({ videoResults: res.results })
     })
   }
 
+  handleUpdateTrendStart(value){
+    this.setState({trendStart: value})
+  }
+
+  handleUpdateTrendStop(value){
+    this.setState({trendStop: value})
+  }
+
   handleMorePages(){
     this.setState({pageCount: (this.state.pageCount + 1)})
-    this.updateVideos();
+    this.handleUpdateVideos();
   }
 
   handleCountryChange(value){
@@ -90,7 +106,7 @@ class TrendingVideosPage extends React.Component {
   }
 
   componentDidMount() {
-    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset).then(res => {
+    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop).then(res => {
       this.setState({ videoResults: res.results });
     })
     this.setState({pageCount: (this.state.pageCount + 1)})
@@ -102,7 +118,10 @@ class TrendingVideosPage extends React.Component {
     return (
       
       <div className='outerDiv'>
-        <HeaderBar handleUpdateVideos={this.handleUpdateVideos} handleCountryChange={this.handleCountryChange}/>
+        <HeaderBar handleUpdateVideos={this.handleUpdateVideos} handleCountryChange={this.handleCountryChange}
+        handleUpdateTrendStart={this.handleUpdateTrendStart} handleUpdateTrendStop={this.handleUpdateTrendStop}
+        removeOffset={this.removeOffset}
+        />
         
         <div id="page">
           <div id="sideBar">

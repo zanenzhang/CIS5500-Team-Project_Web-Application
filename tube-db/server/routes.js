@@ -180,17 +180,20 @@ async function find_channels(req, res) {
 
 async function trending_videos(req, res) {
 
-    country = req.query.country
-    pageCount = req.query.page
-    const limit = pageCount * 20
-    const pagePull = limit * 10
-    const offset = req.query.offset
+    var country = req.query.country
+    var pageCount = req.query.page
+    var limit = pageCount * 20
+    var pagePull = limit * 10
+    var offset = req.query.offset
+    var trendStart = req.query.start
+    var trendStop = req.query.stop
 
     finalQuery = `
     WITH Videos AS (
         SELECT video_id, title, thumbnail_link
         FROM TOP_TRENDING_VIDEOS
         WHERE country = '${country}'
+        AND trending_date BETWEEN '${trendStart}' AND '${trendStop}'
         LIMIT ${pagePull}
         OFFSET ${offset}
     ) SELECT video_id, title as video_title, thumbnail_link

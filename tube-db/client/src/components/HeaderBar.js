@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar';
 import { DatePicker, Space } from 'antd';
 import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress } from "shards-react";
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
+import moment from 'moment';
 import {
     Table,
     Pagination,
@@ -34,13 +35,27 @@ return (
 
 const countryData = ['Brazil', 'Canada', 'France', 'Germany', 'India', 'Japan', 'Mexico', 'Russia', 'South Korea', 'United Kingdom', 'United States'];
 
-const HeaderBar =({handleCountryChange, handleUpdateVideos})=> {
+const dateFormat = 'YYYY-MM-DD';
+const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
+
+const HeaderBar =({handleCountryChange, handleUpdateVideos, handleUpdateTrendStart, 
+  handleUpdateTrendStop, removeOffset})=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
 
   const changeCountry = event => {
     setCurrentCountry(event);
     handleCountryChange(event);
+  }
+
+  const changeDates = (date, dateString) => {
+    handleUpdateTrendStart(dateString[0]);
+    handleUpdateTrendStop(dateString[1]);
+  };
+
+  function updateSearch(){
+    removeOffset();
+    handleUpdateVideos();
   }
 
   return(
@@ -61,9 +76,15 @@ const HeaderBar =({handleCountryChange, handleUpdateVideos})=> {
           {countryData.map((country) => (<Option key={country} value={country}>{country}</Option>))}
           </Select>
 
-              <RangePicker />
-              <div>
-              <button id="submitVideoSearch" onClick={handleUpdateVideos}>Submit Search</button>
+          <RangePicker
+            defaultValue={[moment('2020-08-01', dateFormat), moment('2022-06-20', dateFormat)]}
+          format={dateFormat} onChange={changeDates}
+          />
+
+
+
+              <div class="submitSearch">
+              <button id="submitVideoSearch" onClick={updateSearch}>Submit Search</button>
               </div>
               
             </div>
