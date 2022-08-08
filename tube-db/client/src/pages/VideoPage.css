@@ -1,9 +1,15 @@
 .videoInfo {
     justify-content: center;
-    background: rgba(255, 255, 255, 0.849);
+    background: #000000;
     flex-grow: 1;
     height: 1200px;
-    
+}
+div > h2 {
+    color: #ffffff;
+    text-decoration: underline; 
+}
+div > h5 {
+    color: #ffffff;
 }
 
 #videoFrame{
