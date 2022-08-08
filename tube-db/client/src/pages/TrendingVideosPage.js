@@ -44,7 +44,6 @@ const videoDetails = [
 */
 
 
-
 class TrendingVideosPage extends React.Component {
 
   constructor(props) {
@@ -58,14 +57,41 @@ class TrendingVideosPage extends React.Component {
       offset: this.getRandomOffset(),
       country: "United States",
       trendStart: "2020-08-01",
-      trendStop: "2022-06-20"
+      trendStop: "2022-06-20",
+      publishStart: "",
+      publishStop: "",
+
+      videoTitleString: "",
+      channelTitleString: "",
+      tagString: "",
+      descriptionString: "",
+      categoryString: '',
+
+      viewsLow: 1000000,
+      viewsHigh: 194000000000,
+      likesLow: 10000,
+      likesHigh: 1000000000,
+      dislikesLow: 10000,
+      dislikesHigh: 100000,
+      commentsLow: 10000,
+      commentsHigh: 100000000
     }
 
     this.handleMorePages = this.handleMorePages.bind(this)
     this.handleUpdateVideos = this.handleUpdateVideos.bind(this)
     this.handleCountryChange = this.handleCountryChange.bind(this)
+
     this.handleUpdateTrendStart = this.handleUpdateTrendStart.bind(this)
     this.handleUpdateTrendStop = this.handleUpdateTrendStop.bind(this)
+    this.handleUpdatePublishStart = this.handleUpdatePublishStart.bind(this)
+    this.handleUpdatePublishStop = this.handleUpdatePublishStop.bind(this)
+
+    this.handleVideoTitleString = this.handleVideoTitleString.bind(this)
+    this.handleChannelTitleString = this.handleChannelTitleString.bind(this)
+    this.handleTagString = this.handleTagString.bind(this)
+    this.handleDescriptionString = this.handleDescriptionString.bind(this)
+    this.handleCategoryString = this.handleCategoryString.bind(this)
+
     this.removeOffset = this.removeOffset.bind(this);
   }
 
@@ -83,9 +109,71 @@ class TrendingVideosPage extends React.Component {
   }
 
   handleUpdateVideos() {
-    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop).then(res => {
+    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop,
+      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString,
+      this.state.tagString).then(res => {
       this.setState({ videoResults: res.results })
     })
+  }
+
+  handleVideoTitleString(value){
+    this.setState({videoTitleString: value})
+  }
+
+  handleChannelTitleString(value){
+    this.setState({channelTitleString: value})
+  }
+
+  handleTagString(value){
+    this.setState({tagString: value})
+  }
+
+  handleDescriptionString(value){
+    this.setState({descriptionString: value})
+  }
+
+  handleCategoryString(value){
+    this.setState({categoryString: value})
+  }
+
+  handleViewsLow(value){
+    this.setState({viewsLow: value})
+  }
+
+  handleViewsHigh(value){
+    this.setState({viewsHigh: value})
+  }
+
+  handleCommentsLow(value){
+    this.setState({commentsLow: value})
+  }
+
+  handleCommentsHigh(value){
+    this.setState({commentsHigh: value})
+  }
+
+  handleLikesLow(value){
+    this.setState({likesLow: value})
+  }
+
+  handleLikesHigh(value){
+    this.setState({likesHigh: value})
+  }
+
+  handleDislikesLow(value){
+    this.setState({dislikesLow: value})
+  }
+
+  handleDislikesHigh(value){
+    this.setState({dislikesHigh: value})
+  }
+
+  handleUpdatePublishStart(value){
+    this.setState({publishStart: value})
+  }
+
+  handleUpdatePublishStop(value){
+    this.setState({publishStop: value})
   }
 
   handleUpdateTrendStart(value){
@@ -120,7 +208,10 @@ class TrendingVideosPage extends React.Component {
       <div className='outerDiv'>
         <HeaderBar handleUpdateVideos={this.handleUpdateVideos} handleCountryChange={this.handleCountryChange}
         handleUpdateTrendStart={this.handleUpdateTrendStart} handleUpdateTrendStop={this.handleUpdateTrendStop}
-        removeOffset={this.removeOffset}
+        handleUpdatePublishStart={this.handleUpdatePublishStart} handleUpdatePublishStop={this.handleUpdatePublishStop}
+        removeOffset={this.removeOffset} handleVideoTitleString={this.handleVideoTitleString}
+        handleChannelTitleString={this.handleChannelTitleString} handleTagString={this.handleTagString}
+        
         />
         
         <div id="page">

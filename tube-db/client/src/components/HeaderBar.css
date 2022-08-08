@@ -15,16 +15,17 @@
   }
   
   .headerSelectors {
-    flex-grow: 1;
+    flex-grow: flex-start;
     background: #000000;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: flex-start;
   }
 
   .headerSearch {
-    flex-grow: 1;
+    flex-grow: flex-start;
     background: #000000;
-    justify-content: center;
+    justify-content: flex-start;
+    align-content: flex-start;
   }
 
   .headerExLogo{
@@ -53,5 +54,9 @@
   }
 
   .submitSearch {
+    width: 50px;
+  }
+
+  #countrySelector {
     width: 50px;
   }

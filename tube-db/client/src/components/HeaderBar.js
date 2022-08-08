@@ -11,7 +11,10 @@ import {
     Table,
     Pagination,
     Select,
-    Slider
+    Slider,
+    Row,
+    Col,
+    Input
   } from 'antd'
 
 const { Column, ColumnGroup } = Table;
@@ -39,18 +42,45 @@ const dateFormat = 'YYYY-MM-DD';
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
 const HeaderBar =({handleCountryChange, handleUpdateVideos, handleUpdateTrendStart, 
-  handleUpdateTrendStop, removeOffset})=> {
+  handleUpdateTrendStop, removeOffset, handleVideoTitleString, handleChannelTitleString, 
+  handleTagString, handleUpdatePublishStart, handleUpdatePublishStop})=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
+  const [videoTitle, setVideoTitle] = useState('');
+  const [channelTitle, setChannelTitle] = useState('');
+  const [tagString, setTagString] = useState('');
 
   const changeCountry = event => {
     setCurrentCountry(event);
     handleCountryChange(event);
   }
 
-  const changeDates = (date, dateString) => {
+  const changeTrendingDates = (date, dateString) => {
     handleUpdateTrendStart(dateString[0]);
     handleUpdateTrendStop(dateString[1]);
+  };
+
+  const changePublishedDates = (date, dateString) => {
+    handleUpdatePublishStart(dateString[0]);
+    handleUpdatePublishStop(dateString[1]);
+  };
+
+  const changeVideoTitleString = (event) => {
+    console.log(event.target.value);
+    setVideoTitle(event.target.value);
+    handleVideoTitleString(event.target.value);
+  };
+
+  const changeChannelTitleString = (event) => {
+    console.log(event.target.value);
+    setChannelTitle(event.target.value);
+    handleChannelTitleString(event.target.value);
+  };
+
+  const changeTagString = (event) => {
+    console.log(event.target.value);
+    setTagString(event.target.value);
+    handleTagString(event.target.value);
   };
 
   function updateSearch(){
@@ -66,30 +96,101 @@ const HeaderBar =({handleCountryChange, handleUpdateVideos, handleUpdateTrendSta
 
         <div className="headerExLogo">
 
-          <div className="headerSearch">
-            <SearchBar />
-          </div>
+              <div className="headerSearch">
+              <Row>
+                  <Col span={8}>
+                      <Row>
+                          <Col span={9}>
+                              <p className='videoTitleSearch'>Video Title Includes: </p>
+                          </Col>
+                          <Col span={15}>
+                              <Input value={videoTitle} placeholder="type here" onChange={changeVideoTitleString}/>
+                          </Col>
+                      </Row>
+                      
+                  </Col>
+              
+                  <Col span={8}>
+                      <Row>
+                          <Col span={9}>
+                              <p className='channelTitleSearch'>Channel Title Includes: </p>
+                          </Col>
+                          <Col span={15}>
+                              <Input value={channelTitle} placeholder="type here" onChange={changeChannelTitleString}/>
+                          </Col>
+                      </Row>
+                      
+                  </Col>
+              
+                  <Col span={8}>
+                      <Row>
+                          <Col span={9}>
+                              <p className='tagSearch'>Tag Keyword Includes: </p>
+                          </Col>
+                          <Col span={15}>
+                              <Input value={tagString} placeholder="type here" onChange={changeTagString}/>
+                          </Col>
+                      </Row>
+                      
+                  </Col>
+              </Row>
+              </div>
         
-          <div className="headerSelectors">
+              <div className="headerSelectors">
+              <Row>
+                  <Col span={8}>
+                          <Row>
+                              <Col span={9}>
+                                  <p className='countrySelectText'>Country: </p>
+                              </Col>
+                              <Col span={15}>
+                              <Select value={currentCountry} id="countrySelector" onChange={changeCountry} >
+                              {countryData.map((country) => (<Option key={country} value={country}>{country}</Option>))}
+                              </Select>
+                              </Col>
+                          </Row>
+                          
+                      </Col>
 
-          <Select value={currentCountry} id="countrySelector" onChange={changeCountry} >
-          {countryData.map((country) => (<Option key={country} value={country}>{country}</Option>))}
-          </Select>
+                      <Col span={8}>
+                          <Row>
+                              <Col span={9}>
+                                  <p className='selectTrendingDates'>Trending Dates: </p>
+                              </Col>
+                              <Col span={15}>
+                              <RangePicker
+                                defaultValue={[moment('2020-08-01', dateFormat), moment('2022-06-20', dateFormat)]}
+                              format={dateFormat} onChange={changeTrendingDates}
+                              />
+                              </Col>
+                          </Row>
+                          
+                      </Col>
 
-          <RangePicker
-            defaultValue={[moment('2020-08-01', dateFormat), moment('2022-06-20', dateFormat)]}
-          format={dateFormat} onChange={changeDates}
-          />
+                      <Col span={8}>
+                          <Row>
+                              <Col span={9}>
+                                  <p className='selectPublishDates'>Publish Date: </p>
+                              </Col>
+                              <Col span={15}>
+                              <RangePicker
+                              format={dateFormat} onChange={changePublishedDates}
+                              />
+                              </Col>
+                          </Row>
+                          
+                      </Col>
 
-
+              </Row>
+              </div>
 
               <div class="submitSearch">
               <button id="submitVideoSearch" onClick={updateSearch}>Submit Search</button>
               </div>
-              
-            </div>
-          </div>
-    </div>
+                  
+              </div>
+        
+  </div>
   )     
 };
 

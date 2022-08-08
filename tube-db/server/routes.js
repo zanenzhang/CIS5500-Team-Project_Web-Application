@@ -4,6 +4,7 @@
 const config = require('./config.json')
 const mysql = require('mysql');
 const e = require('express');
+const { query } = require('express');
 //const { connect } = require('./server');
 
 // TODO: fill in your connection details here
@@ -185,22 +186,48 @@ async function trending_videos(req, res) {
     var limit = pageCount * 20
     var pagePull = limit * 10
     var offset = req.query.offset
-    var trendStart = req.query.start
-    var trendStop = req.query.stop
 
-    finalQuery = `
-    WITH Videos AS (
+    var trendStart = req.query.trendstart
+    var trendStop = req.query.trendstop
+    var publishStart = req.query.publishstart
+    var publishStop = req.query.publishstop
+
+    var videoTitle = req.query.video
+    var channelTitle = req.query.channel
+    var tag = req.query.tag
+
+    searchclauses = ""
+
+    if (publishStart !== undefined && publishStop !== undefined)  {
+        searchclauses + `AND published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
+    if (trendStart !== undefined && trendStop !== undefined)  {
+        searchclauses + `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
+    if (videoTitle !== undefined )  {
+        searchclauses + `AND title like '%${videoTitle}%' `} 
+    if (channelTitle !== undefined)  {
+        searchclauses + `AND channel_title like '%${channelTitle}%' `} 
+    if (tag !== undefined)  {
+        searchclauses + `AND tags like '%${tag}%' `} 
+     
+
+    let firstLeg = `WITH Videos AS (
         SELECT video_id, title, thumbnail_link
         FROM TOP_TRENDING_VIDEOS
-        WHERE country = '${country}'
-        AND trending_date BETWEEN '${trendStart}' AND '${trendStop}'
-        LIMIT ${pagePull}
+        WHERE country = '${country}' `
+
+        
+    let secondLeg = `LIMIT ${pagePull}
         OFFSET ${offset}
     ) SELECT video_id, title as video_title, thumbnail_link
         FROM Videos
         GROUP BY video_id
         Limit ${limit};
     `
+
+    finalQuery = firstLeg + searchclauses + secondLeg
+
+    console.log("Final query: ")
+    console.log(finalQuery)
 
     connection.query(finalQuery, function (error, results, fields) {
 
