@@ -132,60 +132,60 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                       </Row>
                       
                   </Col>
-              </Row>
-              <Row>
-                  <Col span={5}>
-                          <Row>
-                              <Col span={12}>
-                                  <p className='countryLabel'>Country: </p>
-                              </Col>
-                              <Col span={8} id="countrySelectCol">
-                              <Select value={currentCountry} id="countrySelector" onChange={changeCountry} >
-                              {countryData.map((country) => (<Option key={country} value={country}>{country}</Option>))}
-                              </Select>
-                              </Col>
-                          </Row>
-                          
-                      </Col>
+                </Row>
+                <Row>
+                    <Col span={6}>
+                        <Row>
+                            <Col span={9}>
+                                <p className='countryLabel'>Country: </p>
+                            </Col>
+                            <Col span={15} id="countrySelectCol">
+                            <Select value={currentCountry} id="countrySelector" onChange={changeCountry} >
+                            {countryData.map((country) => (<Option key={country} value={country}>{country}</Option>))}
+                            </Select>
+                            </Col>
+                        </Row>
+                        
+                    </Col>
 
-                      <Col span={10}>
-                          <Row>
-                              <Col span={9}>
-                                  <p className='selectTrendingDates'>Trending Dates: </p>
-                              </Col>
-                              <Col span={16} id="publishDateSelectCol">
-                              <RangePicker
-                                defaultValue={[moment('2020-08-01', dateFormat), moment('2022-06-20', dateFormat)]}
-                              format={dateFormat} onChange={changeTrendingDates}
-                              />
-                              </Col>
-                          </Row>
-                          
-                      </Col>
+                    <Col span={8}>
+                        <Row>
+                            <Col span={10}>
+                                <p className='selectTrendingDates'>Trending Dates: </p>
+                            </Col>
+                            <Col span={14} id="trendDateSelectCol">
+                            <RangePicker
+                            defaultValue={[moment('2020-08-01', dateFormat), moment('2022-06-20', dateFormat)]}
+                            format={dateFormat} onChange={changeTrendingDates} id="trendDatePicker"
+                            />
+                            </Col>
+                        </Row>
+                        
+                    </Col>
 
-                      <Col span={8}>
-                          <Row>
-                              <Col span={8}>
-                                  <p className='selectPublishDates'>Publish Dates: </p>
-                              </Col>
-                              <Col span={10}>
-                              <RangePicker
-                              format={dateFormat} onChange={changePublishedDates}
-                              />
-                              </Col>
-                          </Row>
-                          
-                      </Col>
+                    <Col span={10}>
+                        <Row>
+                            <Col span={10}>
+                                <p className='selectPublishDates'>Publish Dates: </p>
+                            </Col>
+                            <Col span={14} id="publishDatePicker">
+                            <RangePicker
+                            format={dateFormat} onChange={changePublishedDates}
+                            />
+                            </Col>
+                        </Row>
+                        
+                    </Col>
 
-              </Row>
+                </Row>
+                    <Row>
+                    <div class="submitSearch">
+                        <button id="submitVideoSearch" onClick={updateSearch}>Submit Search</button>
+                    </div>
+                    </Row>
               </div>
               <div className="headerSelectors">
               </div>
-
-              <div class="submitSearch">
-              <button id="submitVideoSearch" onClick={updateSearch}>Submit Search</button>
-              </div>
-                  
               </div>
         
   </div>
