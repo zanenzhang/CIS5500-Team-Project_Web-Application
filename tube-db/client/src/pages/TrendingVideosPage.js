@@ -68,7 +68,7 @@ class TrendingVideosPage extends React.Component {
       categoryString: "",
 
       viewsLow: 1000000,
-      viewsHigh: 194000000000,
+      viewsHigh: 200000000000,
       likesLow: 10000,
       likesHigh: 1000000000,
       dislikesLow: 10000,
@@ -92,6 +92,15 @@ class TrendingVideosPage extends React.Component {
     this.handleTagString = this.handleTagString.bind(this)
     this.handleDescriptionString = this.handleDescriptionString.bind(this)
     this.handleCategoryString = this.handleCategoryString.bind(this)
+
+    this.handleLikesLow = this.handleLikesLow.bind(this)
+    this.handleLikesHigh = this.handleLikesHigh.bind(this)
+    this.handleDislikesLow = this.handleDislikesLow.bind(this)
+    this.handleDislikesHigh = this.handleDislikesHigh.bind(this)
+    this.handleViewsLow = this.handleViewsLow.bind(this)
+    this.handleViewsHigh = this.handleViewsHigh.bind(this)
+    this.handleCommentsLow = this.handleCommentsLow.bind(this)
+    this.handleCommentsHigh = this.handleCommentsHigh.bind(this)
   }
 
   getRandomOffset(){
@@ -192,7 +201,9 @@ class TrendingVideosPage extends React.Component {
   }
 
   componentDidMount() {
-    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop).then(res => {
+    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop, 
+      this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
+      this.state.commentsLow, this.state.commentsHigh).then(res => {
       this.setState({ videoResults: res.results });
     })
   };
@@ -206,7 +217,8 @@ class TrendingVideosPage extends React.Component {
         handleUpdatePublishStart={this.handleUpdatePublishStart} handleUpdatePublishStop={this.handleUpdatePublishStop}
         removeOffsetAndUpdate={this.removeOffsetAndUpdate} handleVideoTitleString={this.handleVideoTitleString}
         handleChannelTitleString={this.handleChannelTitleString} handleTagString={this.handleTagString}
-        
+        handleViewsLow={this.handleViewsLow} handleViewsHigh={this.handleViewsHigh} handleLikesLow={this.handleLikesLow} handleLikesHigh={this.handleLikesHigh} 
+        handleDislikesLow={this.handleDislikesLow} handleDislikesHigh={this.handleDislikesHigh} handleCommentsLow={this.handleCommentsLow} handleCommentsHigh={this.handleCommentsHigh} 
         />
         
         <div id="page">

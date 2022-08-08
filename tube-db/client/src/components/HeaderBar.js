@@ -43,7 +43,9 @@ const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
 const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendStart, 
   handleUpdateTrendStop, handleVideoTitleString, handleChannelTitleString, 
-  handleTagString, handleUpdatePublishStart, handleUpdatePublishStop})=> {
+  handleTagString, handleUpdatePublishStart, handleUpdatePublishStop, handleViewsLow,
+  handleViewsHigh, handleLikesLow, handleLikesHigh, handleDislikesLow, handleDislikesHigh,
+  handleCommentsLow, handleCommentsHigh   })=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
   const [videoTitle, setVideoTitle] = useState('');
@@ -59,6 +61,26 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
     handleUpdateTrendStart(dateString[0]);
     handleUpdateTrendStop(dateString[1]);
   };
+
+  const changeViews = event => {
+    handleViewsLow(event[0]);
+    handleViewsHigh(event[1]);
+  }
+
+  const changeLikes = event => {
+    handleLikesLow(event[0]);
+    handleLikesHigh(event[1]);
+  }
+
+  const changeDislikes = event => {
+    handleDislikesLow(event[0]);
+    handleDislikesHigh(event[1]);
+  }
+
+  const changeComments = event => {
+    handleCommentsLow(event[0]);
+    handleCommentsHigh(event[1]);
+  }
 
   const changePublishedDates = (date, dateString) => {
     handleUpdatePublishStart(dateString[0]);
@@ -86,6 +108,23 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
   const updateSearch = (event) =>{
     removeOffsetAndUpdate(0);
   }
+
+  function numFormatter(num) {
+    let absNum = num;
+    
+    if(num < 0){
+        absNum = Math.abs(num);
+    }
+    if(absNum >= 1000 && absNum < 1000000){
+        return (num/1000).toFixed(1) + 'K'; // convert to K where num >= 1,000 but num < 1 mil
+    }else if(absNum >= 1000000 && absNum < 1000000000){
+        return (num/1000000).toFixed(1) + 'M'; // convert to M where num >= 1 mil but num < 1 bil
+    }else if(absNum >= 1000000000){
+        return (num/1000000000).toFixed(1) + 'B'; // convert to B where num >= 1 bil
+    }else if(absNum < 900){
+        return num; // if num < 1000, do nothing
+    }
+}
 
   return(
     <div className="headerBar">
@@ -178,11 +217,62 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                     </Col>
 
                 </Row>
-                    <Row>
-                    <div class="submitSearch">
-                        <button id="submitVideoSearch" onClick={updateSearch}>Submit Search</button>
-                    </div>
-                    </Row>
+                <Row>
+                    <Col span={6}>
+
+                        <Row>
+                            <Col span={10}>
+                                <p className='viewsLabel'>Views: </p>
+                            </Col>
+                            <Col span={14}>
+                                <Slider tipFormatter={numFormatter} range defaultValue={[1, 10000]} 
+                                min={1} max={10000} onChange={changeViews}/>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col span={6}>
+                        <Row>
+                            <Col span={10}>
+                                <p className='likesLabel'>Likes: </p>
+                            </Col>
+                            <Col span={14}>
+                                <Slider range min={1000000} max={194000000000} defaultValue={[2000000, 194000000000]} 
+                                tipFormatter={numFormatter} onChange={changeLikes}/>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col span={6}>
+                        <Row>
+                            <Col span={10}>
+                                <p className='dislikesLabel'>Dislikes: </p>
+                            </Col>
+                            <Col span={14}>
+                                <Slider range min={100000} max={218000000} defaultValue={[100000, 218000000]} 
+                                tipFormatter={numFormatter} onChange={changeDislikes}/>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col span={6}>
+                        <Row>
+                            <Col span={10}>
+                                <p className='commentsLabel'>Comments: </p>
+                            </Col>
+                            <Col span={14}>
+                                <Slider range defaultValue={[10, 50000]} min={10} max={50000} 
+                                tipFormatter={numFormatter} onChange={changeComments}/>
+                            </Col>
+                        </Row>   
+                    </Col>
+
+                </Row>
+                <Row>
+                <div class="submitSearch">
+                    <button id="submitVideoSearch" onClick={updateSearch}>Submit Search</button>
+                </div>
+                </Row>
               </div>
               <div className="headerSelectors">
               </div>
