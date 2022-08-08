@@ -37,8 +37,9 @@ class VideoPage extends React.Component {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results });
-        const map1 = this.state.videoInfo.map(x=> x.video_title);
-        console.log(map1);
+        // const map1 = this.state.videoInfo.map(x=> x.video_title);
+        // var array = JSON.parse("[" + x.video_title + "]");
+        // console.log(array);
       })
     };
     
@@ -66,11 +67,12 @@ class VideoPage extends React.Component {
                   <h2>Title: </h2>
                   {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
                   <h2>Description:</h2>
-                  {this.state.videoInfo.map(info => <h6>{info.description}</h6>)}
+                  {this.state.videoInfo.map(info => <h5>{info.description.substring(0, info.description.indexOf('.'))}</h5>)}
                   <h2>Trending Start Date:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)}
                   <h2>Countries:</h2>
                   {this.state.videoInfo.map(info => <h5>  {info.countries}</h5>)}
+                  
                   <h2>Views:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
                   <h2>Likes:</h2>
@@ -88,3 +90,5 @@ class VideoPage extends React.Component {
   }
   
   export default VideoPage
+
+
