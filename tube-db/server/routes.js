@@ -181,32 +181,32 @@ async function find_channels(req, res) {
 
 async function trending_videos(req, res) {
 
-    var country = req.query.country
-    var pageCount = req.query.page
-    var limit = pageCount * 20
-    var pagePull = limit * 10
-    var offset = req.query.offset
+    let country = req.query.country
+    let pageCount = req.query.page
+    let limit = pageCount * 20
+    let pagePull = limit * 10
+    let offset = req.query.offset
 
-    var trendStart = req.query.trendstart
-    var trendStop = req.query.trendstop
-    var publishStart = req.query.publishstart
-    var publishStop = req.query.publishstop
+    let trendStart = req.query.trendstart
+    let trendStop = req.query.trendstop
+    let publishStart = req.query.publishstart
+    let publishStop = req.query.publishstop
 
-    var videoTitle = req.query.video
-    var channelTitle = req.query.channel
-    var tag = req.query.tag
+    let videoTitle = req.query.video
+    let channelTitle = req.query.channel
+    let tag = req.query.tag
 
     searchclauses = ""
 
-    if (publishStart !== undefined && publishStop !== undefined)  {
+    if (publishStart !== 'undefined' && publishStop !== 'undefined')  {
         searchclauses + `AND published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
-    if (trendStart !== undefined && trendStop !== undefined)  {
+    if (trendStart !== 'undefined' && trendStop !== 'undefined')  {
         searchclauses + `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
-    if (videoTitle !== undefined )  {
+    if (videoTitle !== 'undefined' )  {
         searchclauses + `AND title like '%${videoTitle}%' `} 
-    if (channelTitle !== undefined)  {
+    if (channelTitle !== 'undefined')  {
         searchclauses + `AND channel_title like '%${channelTitle}%' `} 
-    if (tag !== undefined)  {
+    if (tag !== 'undefined')  {
         searchclauses + `AND tags like '%${tag}%' `} 
      
 

@@ -65,7 +65,7 @@ class TrendingVideosPage extends React.Component {
       channelTitleString: "",
       tagString: "",
       descriptionString: "",
-      categoryString: '',
+      categoryString: "",
 
       viewsLow: 1000000,
       viewsHigh: 194000000000,
@@ -80,6 +80,7 @@ class TrendingVideosPage extends React.Component {
     this.handleMorePages = this.handleMorePages.bind(this)
     this.handleUpdateVideos = this.handleUpdateVideos.bind(this)
     this.handleCountryChange = this.handleCountryChange.bind(this)
+    this.removeOffsetAndUpdate = this.removeOffsetAndUpdate.bind(this)
 
     this.handleUpdateTrendStart = this.handleUpdateTrendStart.bind(this)
     this.handleUpdateTrendStop = this.handleUpdateTrendStop.bind(this)
@@ -91,8 +92,6 @@ class TrendingVideosPage extends React.Component {
     this.handleTagString = this.handleTagString.bind(this)
     this.handleDescriptionString = this.handleDescriptionString.bind(this)
     this.handleCategoryString = this.handleCategoryString.bind(this)
-
-    this.removeOffset = this.removeOffset.bind(this);
   }
 
   getRandomOffset(){
@@ -104,11 +103,12 @@ class TrendingVideosPage extends React.Component {
     return randomRow;
   };
 
-  removeOffset(){
-    this.setState({offset: 0})
+  removeOffsetAndUpdate(value){
+    this.setState({offset: value}, this.handleUpdateVideos());
   }
 
   handleUpdateVideos() {
+    console.log(this.state.offset)
     getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop,
       this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString,
       this.state.tagString).then(res => {
@@ -196,20 +196,18 @@ class TrendingVideosPage extends React.Component {
   componentDidMount() {
     getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop).then(res => {
       this.setState({ videoResults: res.results });
+      this.setState({pageCount: (this.state.pageCount + 1)});
     })
-    this.setState({pageCount: (this.state.pageCount + 1)})
   };
-
 
   render() {
 
     return (
       
       <div className='outerDiv'>
-        <HeaderBar handleUpdateVideos={this.handleUpdateVideos} handleCountryChange={this.handleCountryChange}
-        handleUpdateTrendStart={this.handleUpdateTrendStart} handleUpdateTrendStop={this.handleUpdateTrendStop}
+        <HeaderBar handleCountryChange={this.handleCountryChange} handleUpdateTrendStart={this.handleUpdateTrendStart} handleUpdateTrendStop={this.handleUpdateTrendStop}
         handleUpdatePublishStart={this.handleUpdatePublishStart} handleUpdatePublishStop={this.handleUpdatePublishStop}
-        removeOffset={this.removeOffset} handleVideoTitleString={this.handleVideoTitleString}
+        removeOffsetAndUpdate={this.removeOffsetAndUpdate} handleVideoTitleString={this.handleVideoTitleString}
         handleChannelTitleString={this.handleChannelTitleString} handleTagString={this.handleTagString}
         
         />

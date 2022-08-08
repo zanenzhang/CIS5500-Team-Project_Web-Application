@@ -41,8 +41,8 @@ const countryData = ['Brazil', 'Canada', 'France', 'Germany', 'India', 'Japan', 
 const dateFormat = 'YYYY-MM-DD';
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
-const HeaderBar =({handleCountryChange, handleUpdateVideos, handleUpdateTrendStart, 
-  handleUpdateTrendStop, removeOffset, handleVideoTitleString, handleChannelTitleString, 
+const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendStart, 
+  handleUpdateTrendStop, handleVideoTitleString, handleChannelTitleString, 
   handleTagString, handleUpdatePublishStart, handleUpdatePublishStop})=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
@@ -83,9 +83,8 @@ const HeaderBar =({handleCountryChange, handleUpdateVideos, handleUpdateTrendSta
     handleTagString(event.target.value);
   };
 
-  function updateSearch(){
-    removeOffset();
-    handleUpdateVideos();
+  const updateSearch = (event) =>{
+    removeOffsetAndUpdate(0);
   }
 
   return(

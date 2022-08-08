@@ -30,8 +30,7 @@ const getFindChannels = async (searchString, country, language, producer, rankin
 }
 
 const getTrendingVideos = async (country, pageCount, offset, trendStart, trendStop, publishStart, publishStop, videoTitle, channelTitle, tag) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&page=${pageCount}&offset=${offset}&trendstart=${trendStart}&trendstop=${trendStop}
-    &publishstart=${publishStart}&publishstop=${publishStop}&video=${videoTitle}&channel=${channelTitle}&tag=${tag}`, {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&page=${pageCount}&offset=${offset}&trendstart=${trendStart}&trendstop=${trendStop}&publishstart=${publishStart}&publishstop=${publishStop}&video=${videoTitle}&channel=${channelTitle}&tag=${tag}`, {
         method: 'GET',
     })
     
