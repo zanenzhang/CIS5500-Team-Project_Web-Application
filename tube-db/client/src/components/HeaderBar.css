@@ -55,8 +55,9 @@
     
   }
 
-  .submitSearch {
-    width: 50px;
+  #submitVideoSearch {
+    width: 150px;
+    border-radius: 10px;
   }
 
   #countrySelector {
