@@ -34,35 +34,44 @@ return (
 
 const countryData = ['Brazil', 'Canada', 'France', 'Germany', 'India', 'Japan', 'Mexico', 'Russia', 'South Korea', 'United Kingdom', 'United States'];
 
-class HeaderBar extends React.Component {
+const HeaderBar =({handleCountryChange, handleUpdateVideos})=> {
 
-    render(){
-        return(
-          <div className="headerBar">
-              <div className="headerLogo">
-                <HeaderLogo />
-              </div>
+  const [currentCountry, setCurrentCountry] = useState("United States");
 
-              <div className="headerExLogo">
+  const changeCountry = event => {
+    setCurrentCountry(event);
+    handleCountryChange(event);
+  }
 
-                <div className="headerSearch">
-                  <SearchBar />
-                </div>
-              
-                <div className="headerSelectors">
+  return(
+    <div className="headerBar">
+        <div className="headerLogo">
+          <HeaderLogo />
+        </div>
 
-                <Select defaultValue={countryData[10]} id="countrySelector" >
-                  {countryData.map((country) => (<Option key={country}>{country}</Option>))}
-                </Select>
+        <div className="headerExLogo">
 
-                    <RangePicker />
-                  </div>
-               </div>
+          <div className="headerSearch">
+            <SearchBar />
           </div>
-        )
-    }
-}
+        
+          <div className="headerSelectors">
 
-export default HeaderBar
+          <Select value={currentCountry} id="countrySelector" onChange={changeCountry} >
+          {countryData.map((country) => (<Option key={country} value={country}>{country}</Option>))}
+          </Select>
+
+              <RangePicker />
+              <div>
+              <button id="submitVideoSearch" onClick={handleUpdateVideos}>Submit Search</button>
+              </div>
+              
+            </div>
+          </div>
+    </div>
+  )     
+};
+
+export default HeaderBar;
 
 

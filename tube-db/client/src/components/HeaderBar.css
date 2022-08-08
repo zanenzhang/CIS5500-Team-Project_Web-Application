@@ -18,6 +18,7 @@
     flex-grow: 1;
     background: #000000;
     justify-content: center;
+    align-content: flex-start;
   }
 
   .headerSearch {
@@ -32,9 +33,9 @@
   }
 
   .ant-select{
-    flex-grow: 1;
-    position: absolute;
-    max-width: 500px;
+    flex-grow: 0;
+    position: static;
+    max-width: 200px;
     width: 30%;
     left: 25%;
     margin: 0 auto;
@@ -42,8 +43,8 @@
   }
 
   .ant-picker {
-    flex-grow: 1;
-    position: absolute;
+    flex-grow: 0;
+    position: static;
     max-width: 450px;
     width: 30%;
     left: 28%;

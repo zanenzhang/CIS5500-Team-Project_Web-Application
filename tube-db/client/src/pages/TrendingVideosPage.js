@@ -60,7 +60,8 @@ class TrendingVideosPage extends React.Component {
     }
 
     this.handleMorePages = this.handleMorePages.bind(this)
-    this.updateMoreVideos = this.updateMoreVideos.bind(this)
+    this.handleUpdateVideos = this.handleUpdateVideos.bind(this)
+    this.handleCountryChange = this.handleCountryChange.bind(this)
   }
 
   getRandomOffset(){
@@ -73,7 +74,7 @@ class TrendingVideosPage extends React.Component {
   };
 
 
-  updateMoreVideos() {
+  handleUpdateVideos() {
     getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset).then(res => {
       this.setState({ videoResults: res.results })
     })
@@ -81,7 +82,11 @@ class TrendingVideosPage extends React.Component {
 
   handleMorePages(){
     this.setState({pageCount: (this.state.pageCount + 1)})
-    this.updateMoreVideos();
+    this.updateVideos();
+  }
+
+  handleCountryChange(value){
+    this.setState({country: value})
   }
 
   componentDidMount() {
@@ -97,7 +102,7 @@ class TrendingVideosPage extends React.Component {
     return (
       
       <div className='outerDiv'>
-        <HeaderBar />
+        <HeaderBar handleUpdateVideos={this.handleUpdateVideos} handleCountryChange={this.handleCountryChange}/>
         
         <div id="page">
           <div id="sideBar">
