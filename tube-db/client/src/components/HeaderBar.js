@@ -32,6 +32,7 @@ return (
 );
 };
 
+const countryData = ['Brazil', 'Canada', 'France', 'Germany', 'India', 'Japan', 'Mexico', 'Russia', 'South Korea', 'United Kingdom', 'United States'];
 
 class HeaderBar extends React.Component {
 
@@ -49,19 +50,11 @@ class HeaderBar extends React.Component {
                 </div>
               
                 <div className="headerSelectors">
-                  <Select defaultValue="United States" id="countrySelector" onChange="">
-                      <Option value="Brazil">Brazil</Option>
-                        <Option value="Canada">Canada</Option>
-                        <Option value="France">France</Option>
-                        <Option value="Germany">Germany</Option>
-                        <Option value="India">India</Option>
-                        <Option value="Japan">Japan</Option>
-                        <Option value="Mexico">Mexico</Option>
-                        <Option value="Russia">Russia</Option>
-                        <Option value="SouthKorea">South Korea</Option>
-                        <Option value="UnitedKingdom">United Kingdom</Option>
-                        <Option value="UnitedStates">United States</Option>
-                    </Select>
+
+                <Select defaultValue={countryData[10]} id="countrySelector" >
+                  {countryData.map((country) => (<Option key={country}>{country}</Option>))}
+                </Select>
+
                     <RangePicker />
                   </div>
                </div>

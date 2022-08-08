@@ -1,15 +1,14 @@
 import React from 'react';
-import SideMenu from '../components/SideMenu';
 import './TrendingVideosPage.css'
-import { getTrendingVideos } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
+import { getTrendingVideos } from '../fetcher'
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import Navbar from '../components/Navbar';
 
 import {
   Table,
-  Select
+  Select,
 } from 'antd'
 
 const { Column, ColumnGroup } = Table;
@@ -45,6 +44,7 @@ const videoDetails = [
 */
 
 
+
 class TrendingVideosPage extends React.Component {
 
   constructor(props) {
@@ -56,10 +56,10 @@ class TrendingVideosPage extends React.Component {
       pageCount: 1,
       loadLimit: 3,
       offset: this.getRandomOffset(),
-      country: "United States"
+      country: "United States",
     }
 
-    this.handleMoreVideos = this.handleMoreVideos.bind(this)
+    this.handleMorePages = this.handleMorePages.bind(this)
     this.updateMoreVideos = this.updateMoreVideos.bind(this)
   }
 
@@ -79,7 +79,7 @@ class TrendingVideosPage extends React.Component {
     })
   }
 
-  handleMoreVideos(){
+  handleMorePages(){
     this.setState({pageCount: (this.state.pageCount + 1)})
     this.updateMoreVideos();
   }
@@ -91,12 +91,14 @@ class TrendingVideosPage extends React.Component {
     this.setState({pageCount: (this.state.pageCount + 1)})
   };
 
+
   render() {
 
     return (
       
       <div className='outerDiv'>
         <HeaderBar />
+        
         <div id="page">
           <div id="sideBar">
               <Navbar />
@@ -117,7 +119,7 @@ class TrendingVideosPage extends React.Component {
               </Grid>
               <div >
                 {this.state.pageCount <= this.state.loadLimit && (
-                  <button id="loadMoreBtn" onClick={this.handleMoreVideos}>Load More Videos</button>
+                  <button id="loadMoreBtn" onClick={this.handleMorePages}>Load More Videos</button>
                 )}
               
               </div>
