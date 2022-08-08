@@ -22,6 +22,8 @@
   }
 
   .headerSearch {
+    margin-top: 20px;
+    margin-right: 30px;
     flex-grow: flex-start;
     background: #000000;
     justify-content: flex-start;
@@ -60,3 +62,79 @@
   #countrySelector {
     width: 50px;
   }
+
+  .videoTitleSearch {
+    width: 100%;
+    text-align: right;
+    padding-right: 0.5rem;
+    color: whitesmoke;
+  }
+
+.channelTitleSearch {
+  width: 100%;
+  text-align: right;
+  padding-right: 0.5rem;
+  color: whitesmoke;
+}
+
+.tagSearch{
+  width: 100%;
+  text-align: right;
+  padding-right: 0.5rem;
+  color: whitesmoke;
+}
+
+.countryLabel{
+  width: 100%;
+  text-align: right;
+  padding-right: 0.5rem;
+  color: whitesmoke;
+}
+
+.ant-select {
+  width: 150px;
+  margin-left: 0px;
+}
+
+#countrySelectCol {
+  align-content: flex-start;
+  display: flex;
+}
+
+.selectTrendingDates{
+  width: 100%;
+  text-align: right;
+  padding-right: 0.5rem;
+  color: whitesmoke;
+}
+
+#publishDateSelectCol {
+  align-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 0;
+}
+
+.ant-picker {
+  margin-left: 0px;
+  width: 300px;
+  left: 100%;
+}
+
+.ant-picker-input {
+  font-size: 10px;
+  width: 100px;
+}
+
+.ant-picker-separator {
+  margin-left: 5px;
+  width: 2px;
+}
+
+.selectPublishDates {
+  width: 100%;
+  text-align: right;
+  padding-right: 0.5rem;
+  color: whitesmoke;
+}
+

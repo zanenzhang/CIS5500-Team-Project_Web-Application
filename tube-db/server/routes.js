@@ -196,18 +196,22 @@ async function trending_videos(req, res) {
     let channelTitle = req.query.channel
     let tag = req.query.tag
 
-    searchclauses = ""
+    searchClauses = "";
 
-    if (publishStart !== 'undefined' && publishStop !== 'undefined')  {
-        searchclauses + `AND published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
-    if (trendStart !== 'undefined' && trendStop !== 'undefined')  {
-        searchclauses + `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
-    if (videoTitle !== 'undefined' )  {
-        searchclauses + `AND title like '%${videoTitle}%' `} 
-    if (channelTitle !== 'undefined')  {
-        searchclauses + `AND channel_title like '%${channelTitle}%' `} 
-    if (tag !== 'undefined')  {
-        searchclauses + `AND tags like '%${tag}%' `} 
+    console.log('HERE')
+    console.log(publishStart=='')
+    console.log(publishStart=='undefined')
+
+    if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
+        searchClauses += `AND published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
+    if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
+        searchClauses += `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
+    if (videoTitle != '' && videoTitle != 'undefined')  {
+        searchClauses += `AND title LIKE '%${videoTitle}%' `} 
+    if (channelTitle != '' && channelTitle != 'undefined')  {
+        searchClauses += `AND channel_title LIKE '%${channelTitle}%' `} 
+    if (tag != '' && tag != 'undefined')  {
+        searchClauses += `AND tags LIKE '%${tag}%' `} 
      
 
     let firstLeg = `WITH Videos AS (
@@ -224,7 +228,7 @@ async function trending_videos(req, res) {
         Limit ${limit};
     `
 
-    finalQuery = firstLeg + searchclauses + secondLeg
+    finalQuery = firstLeg + searchClauses + secondLeg
 
     console.log("Final query: ")
     console.log(finalQuery)

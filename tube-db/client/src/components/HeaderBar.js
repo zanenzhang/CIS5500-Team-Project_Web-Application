@@ -100,7 +100,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                   <Col span={8}>
                       <Row>
                           <Col span={9}>
-                              <p className='videoTitleSearch'>Video Title Includes: </p>
+                              <p className='videoTitleSearch'>Video Title: </p>
                           </Col>
                           <Col span={15}>
                               <Input value={videoTitle} placeholder="type here" onChange={changeVideoTitleString}/>
@@ -112,7 +112,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                   <Col span={8}>
                       <Row>
                           <Col span={9}>
-                              <p className='channelTitleSearch'>Channel Title Includes: </p>
+                              <p className='channelTitleSearch'>Channel Title: </p>
                           </Col>
                           <Col span={15}>
                               <Input value={channelTitle} placeholder="type here" onChange={changeChannelTitleString}/>
@@ -124,7 +124,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                   <Col span={8}>
                       <Row>
                           <Col span={9}>
-                              <p className='tagSearch'>Tag Keyword Includes: </p>
+                              <p className='tagSearch'>Tag Keyword: </p>
                           </Col>
                           <Col span={15}>
                               <Input value={tagString} placeholder="type here" onChange={changeTagString}/>
@@ -133,16 +133,13 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                       
                   </Col>
               </Row>
-              </div>
-        
-              <div className="headerSelectors">
               <Row>
-                  <Col span={8}>
+                  <Col span={5}>
                           <Row>
-                              <Col span={9}>
-                                  <p className='countrySelectText'>Country: </p>
+                              <Col span={12}>
+                                  <p className='countryLabel'>Country: </p>
                               </Col>
-                              <Col span={15}>
+                              <Col span={8} id="countrySelectCol">
                               <Select value={currentCountry} id="countrySelector" onChange={changeCountry} >
                               {countryData.map((country) => (<Option key={country} value={country}>{country}</Option>))}
                               </Select>
@@ -151,12 +148,12 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                           
                       </Col>
 
-                      <Col span={8}>
+                      <Col span={10}>
                           <Row>
                               <Col span={9}>
                                   <p className='selectTrendingDates'>Trending Dates: </p>
                               </Col>
-                              <Col span={15}>
+                              <Col span={16} id="publishDateSelectCol">
                               <RangePicker
                                 defaultValue={[moment('2020-08-01', dateFormat), moment('2022-06-20', dateFormat)]}
                               format={dateFormat} onChange={changeTrendingDates}
@@ -168,10 +165,10 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
 
                       <Col span={8}>
                           <Row>
-                              <Col span={9}>
-                                  <p className='selectPublishDates'>Publish Date: </p>
+                              <Col span={8}>
+                                  <p className='selectPublishDates'>Publish Dates: </p>
                               </Col>
-                              <Col span={15}>
+                              <Col span={10}>
                               <RangePicker
                               format={dateFormat} onChange={changePublishedDates}
                               />
@@ -181,6 +178,8 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                       </Col>
 
               </Row>
+              </div>
+              <div className="headerSelectors">
               </div>
 
               <div class="submitSearch">

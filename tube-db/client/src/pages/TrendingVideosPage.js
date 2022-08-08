@@ -56,8 +56,8 @@ class TrendingVideosPage extends React.Component {
       loadLimit: 3,
       offset: this.getRandomOffset(),
       country: "United States",
-      trendStart: "2020-08-01",
-      trendStop: "2022-06-20",
+      trendStart: "",
+      trendStop: "",
       publishStart: "",
       publishStop: "",
 
@@ -104,11 +104,10 @@ class TrendingVideosPage extends React.Component {
   };
 
   removeOffsetAndUpdate(value){
-    this.setState({offset: value}, this.handleUpdateVideos());
+    this.setState({offset: value}, this.handleUpdateVideos);
   }
 
   handleUpdateVideos() {
-    console.log(this.state.offset)
     getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop,
       this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString,
       this.state.tagString).then(res => {
@@ -185,8 +184,7 @@ class TrendingVideosPage extends React.Component {
   }
 
   handleMorePages(){
-    this.setState({pageCount: (this.state.pageCount + 1)})
-    this.handleUpdateVideos();
+    this.setState({pageCount: (this.state.pageCount + 1)},this.handleUpdateVideos);
   }
 
   handleCountryChange(value){
@@ -196,7 +194,6 @@ class TrendingVideosPage extends React.Component {
   componentDidMount() {
     getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop).then(res => {
       this.setState({ videoResults: res.results });
-      this.setState({pageCount: (this.state.pageCount + 1)});
     })
   };
 
