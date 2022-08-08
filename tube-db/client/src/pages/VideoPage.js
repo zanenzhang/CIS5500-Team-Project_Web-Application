@@ -37,7 +37,8 @@ class VideoPage extends React.Component {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results });
-        console.log(this.state.videoInfo[0].video_title)
+        const map1 = this.state.videoInfo.map(x=> x.video_title);
+        console.log(map1);
       })
     };
     
@@ -62,10 +63,19 @@ class VideoPage extends React.Component {
                       src={this.state.fullLink}>
                   </iframe>
 
-                  <h1>Title: {}</h1>
-                  <h2>"Description: {}"</h2>
-                  <h2>"Views: {}"</h2>
-                  <h2>"Likes: {}"</h2>
+                  <h2>Title: </h2>
+                  {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
+                  <h2>Description:</h2>
+                  {this.state.videoInfo.map(info => <h6>Description: {info.description}</h6>)}
+                  <h2>Trending Start Date:</h2>
+                  {this.state.videoInfo.map(info => <h5> {info.trend_start}</h5>)}
+                  <h2>Countries:</h2>
+                  {this.state.videoInfo.map(info => <h5>  {info.countries}</h5>)}
+                  <h2>Views:</h2>
+                  {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
+                  <h2>Likes:</h2>
+                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
+                  
     
                 </div>
             
