@@ -93,8 +93,8 @@ class TrendingVideosPage extends React.Component {
     this.handleDescriptionString = this.handleDescriptionString.bind(this)
     this.handleCategoryString = this.handleCategoryString.bind(this)
 
-    this.handleLikesLow = this.handleUpdateLikesLow.bind(this)
-    this.handleLikesHigh = this.handleUpdateLikesHigh.bind(this)
+    this.handleUpdateLikesLow = this.handleUpdateLikesLow.bind(this)
+    this.handleUpdateLikesHigh = this.handleUpdateLikesHigh.bind(this)
     this.handleUpdateDislikesLow = this.handleUpdateDislikesLow.bind(this)
     this.handleUpdateDislikesHigh = this.handleUpdateDislikesHigh.bind(this)
     this.handleUpdateViewsLow = this.handleUpdateViewsLow.bind(this)

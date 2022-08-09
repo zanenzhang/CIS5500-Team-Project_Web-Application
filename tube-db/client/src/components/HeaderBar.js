@@ -142,7 +142,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                               <p className='videoTitleSearch'>Video Title: </p>
                           </Col>
                           <Col span={15}>
-                              <Input value={videoTitle} placeholder="type here" onChange={changeVideoTitleString}/>
+                              <Input value={videoTitle} placeholder="Type here" onChange={changeVideoTitleString}/>
                           </Col>
                       </Row>
                       
@@ -154,7 +154,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                               <p className='channelTitleSearch'>Channel Title: </p>
                           </Col>
                           <Col span={15}>
-                              <Input value={channelTitle} placeholder="type here" onChange={changeChannelTitleString}/>
+                              <Input value={channelTitle} placeholder="Type here" onChange={changeChannelTitleString}/>
                           </Col>
                       </Row>
                       
@@ -166,7 +166,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                               <p className='tagSearch'>Tag Keyword: </p>
                           </Col>
                           <Col span={15}>
-                              <Input value={tagString} placeholder="type here" onChange={changeTagString}/>
+                              <Input value={tagString} placeholder="Type here" onChange={changeTagString}/>
                           </Col>
                       </Row>
                       
@@ -225,9 +225,9 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                             <Col span={12}>
                                 <p className='viewsLabel'>Video Views: </p>
                             </Col>
-                            <Col span={12} id="sliderCol">
-                                <Slider tipFormatter={numFormatter} range defaultValue={[1, 10000]} 
-                                min={1} max={10000} onChange={changeViews}/>
+                            <Col span={12} id="viewsSlider">
+                                <Slider tipFormatter={numFormatter} range defaultValue={[1000000, 50000000]} 
+                                min={1} max={300000000} onChange={changeViews}/>
                             </Col>
                         </Row>
                     </Col>
@@ -237,8 +237,8 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                             <Col span={9}>
                                 <p className='likesLabel'>Likes: </p>
                             </Col>
-                            <Col span={15} id="sliderCol">
-                                <Slider range min={1000000} max={194000000000} defaultValue={[2000000, 194000000000]} 
+                            <Col span={15} id="likesSlider">
+                                <Slider range min={0} max={17000000} defaultValue={[5000, 5000000]} 
                                 tipFormatter={numFormatter} onChange={changeLikes}/>
                             </Col>
                         </Row>
@@ -250,7 +250,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                                 <p className='dislikesLabel'>Dislikes: </p>
                             </Col>
                             <Col span={15} class='sliderCol'>
-                                <Slider range min={100000} max={218000000} defaultValue={[100000, 218000000]} 
+                                <Slider range min={0} max={13000000} defaultValue={[3000, 3000000]} 
                                 tipFormatter={numFormatter} onChange={changeDislikes}/>
                             </Col>
                         </Row>
@@ -262,7 +262,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                                 <p className='commentsLabel'>Comments: </p>
                             </Col>
                             <Col span={15} class='sliderCol'>
-                                <Slider range defaultValue={[10, 50000]} min={10} max={50000} 
+                                <Slider range defaultValue={[7000, 5000000]} min={0} max={7000000} 
                                 tipFormatter={numFormatter} onChange={changeComments}/>
                             </Col>
                         </Row>   

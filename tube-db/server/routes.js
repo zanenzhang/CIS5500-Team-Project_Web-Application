@@ -196,6 +196,15 @@ async function trending_videos(req, res) {
     let channelTitle = req.query.channel
     let tag = req.query.tag
 
+    let viewsLow = req.query.viewslow
+    let viewsHigh = req.query.viewshigh
+    let likesLow = req.query.likeslow
+    let likesHigh = req.query.likeshigh
+    let dislikesLow = req.query.dislikeslow
+    let dislikesHigh = req.query.dislikeshigh
+    let commentsLow = req.query.commentslow
+    let commentsHigh = req.query.commentshigh
+
     searchClauses = "";
 
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
@@ -208,6 +217,14 @@ async function trending_videos(req, res) {
         searchClauses += `AND channel_title LIKE '%${channelTitle}%' `} 
     if (tag != '' && tag != 'undefined')  {
         searchClauses += `AND tags LIKE '%${tag}%' `} 
+    if (viewsHigh != 0){
+        searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
+    if (likesHigh != 0){
+        searchClauses += `AND likes BETWEEN ${likesLow} AND ${likesHigh} `} 
+    if (dislikesHigh != 0){
+        searchClauses += `AND dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
+    if (commentsHigh != 0){
+        searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
      
 
     let firstLeg = `WITH Videos AS (
