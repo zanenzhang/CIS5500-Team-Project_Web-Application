@@ -231,7 +231,8 @@ class TrendingVideosPage extends React.Component {
         
           <div id="pageContent">
             <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
-              <Grid header={this.state.searchTerm ? 'Search Result' : 'Video Search'}>
+              <h1 id="pageTitle">{this.state.searchTerm ? 'Search Results' : 'Video Search'}</h1>
+              <Grid>
                 
                 {this.state.videoResults.map(video=>(
                   <VideoThumbnail

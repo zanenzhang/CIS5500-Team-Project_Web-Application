@@ -6,6 +6,7 @@ import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import { useParams } from 'react-router-dom';
+import HeaderLogo from '../components/HeaderLogo';
 
 import {
   Table,
@@ -49,8 +50,17 @@ class VideoPage extends React.Component {
       return (
         
         <div>
+              <div className="headerBar">
+            <div className="headerLogo">
+              <HeaderLogo />
+            </div>
+            <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
+              <h1 id="videoPageTitle">Video Details</h1>
+              </div>
+            </div>
   
             <div id="page">
+            
     
                 <div id="sideBar">
                     <div>
