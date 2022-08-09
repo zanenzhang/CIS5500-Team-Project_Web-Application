@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import cn from "classnames";
 import { ReactComponent as Hand } from "../images/hand.svg";
 
-import "./LikeButton.scss";
+import "./LikeButton.css";
 
 const particleList = Array.from(Array(10));
 

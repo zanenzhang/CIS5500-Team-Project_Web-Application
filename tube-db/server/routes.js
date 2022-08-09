@@ -212,9 +212,9 @@ async function trending_videos(req, res) {
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
         searchClauses += `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
     if (videoTitle != '' && videoTitle != 'undefined')  {
-        searchClauses += `AND title LIKE '%${videoTitle}%' `} 
+        searchClauses += `AND title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
-        searchClauses += `AND channel_title LIKE '%${channelTitle}%' `} 
+        searchClauses += `AND channel_title LIKE '${channelTitle}%' `} 
     if (tag != '' && tag != 'undefined')  {
         searchClauses += `AND tags LIKE '%${tag}%' `} 
     if (viewsHigh != 0){

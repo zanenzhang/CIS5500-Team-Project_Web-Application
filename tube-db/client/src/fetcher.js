@@ -29,8 +29,8 @@ const getFindChannels = async (searchString, country, language, producer, rankin
     return res.json()
 }
 
-const getTrendingVideos = async (country, pageCount, offset, trendStart, trendStop, publishStart, publishStop, videoTitle, channelTitle, tag, viewsLow, viewsHigh, likesLow, likesHigh, dislikesLow, dislikesHigh, commentsLow, commentsHigh) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&page=${pageCount}&offset=${offset}&trendstart=${trendStart}&trendstop=${trendStop}&publishstart=${publishStart}&publishstop=${publishStop}&video=${videoTitle}&channel=${channelTitle}&tag=${tag}&viewslow=${viewsLow}&viewshigh=${viewsHigh}&likeslow=${likesLow}&likeshigh=${likesHigh}&dislikeslow=${dislikesLow}&dislikeshigh=${dislikesHigh}&commentslow=${commentsLow}&commentshigh=${commentsHigh}`, {
+const getTrendingVideos = async (country, channelLanguage, pageCount, offset, trendStart, trendStop, publishStart, publishStop, videoTitle, channelTitle, tag, category, viewsLow, viewsHigh, likesLow, likesHigh, dislikesLow, dislikesHigh, commentsLow, commentsHigh, subscribersLow, subscribersHigh, libraryLow, libraryHigh) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/trendingvideos?country=${country}&language=${channelLanguage}&page=${pageCount}&offset=${offset}&trendstart=${trendStart}&trendstop=${trendStop}&publishstart=${publishStart}&publishstop=${publishStop}&video=${videoTitle}&channel=${channelTitle}&tag=${tag}&category=${category}&viewslow=${viewsLow}&viewshigh=${viewsHigh}&likeslow=${likesLow}&likeshigh=${likesHigh}&dislikeslow=${dislikesLow}&dislikeshigh=${dislikesHigh}&commentslow=${commentsLow}&commentshigh=${commentsHigh}&subscriberslow=${subscribersLow}&subscribershigh=${subscribersHigh}&librarylow=${libraryLow}&libraryhigh=${libraryHigh}`, {
         method: 'GET',
     })
     

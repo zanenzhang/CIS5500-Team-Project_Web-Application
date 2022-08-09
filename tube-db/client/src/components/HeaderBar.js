@@ -36,13 +36,16 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
   handleUpdateTrendStop, handleVideoTitleString, handleChannelTitleString, 
   handleTagString, handleUpdatePublishStart, handleUpdatePublishStop, handleUpdateViewsLow,
   handleUpdateViewsHigh, handleUpdateLikesLow, handleUpdateLikesHigh, handleUpdateDislikesLow, 
-  handleUpdateDislikesHigh, handleUpdateCommentsLow, handleUpdateCommentsHigh})=> {
+  handleUpdateDislikesHigh, handleUpdateCommentsLow, handleUpdateCommentsHigh,
+handleLanguageChange, handleUpdateSubscribersLow, handleUpdateSubscribersHigh,
+handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
   const [currentLanguage, setCurrentLanguage] = useState("English");
   const [videoTitle, setVideoTitle] = useState('');
   const [channelTitle, setChannelTitle] = useState('');
   const [tagString, setTagString] = useState('');
+  const [categoryString, setCategoryString] = useState('');
 
   const changeCountry = event => {
     setCurrentCountry(event);
@@ -51,6 +54,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
 
   const changeLanguage = event => {
     setCurrentLanguage(event);
+    handleLanguageChange(event);
   }
 
   const changeTrendingDates = (date, dateString) => {
@@ -78,6 +82,16 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
     handleUpdateCommentsHigh(event[1]);
   };
 
+  const changeSubscribers = event => {
+    handleUpdateSubscribersLow(event[0]);
+    handleUpdateSubscribersHigh(event[1]);
+  };
+
+  const changeLibrarySize = event => {
+    handleUpdateLibraryLow(event[0]);
+    handleUpdateLibraryHigh(event[1]);
+  };
+
   const changePublishedDates = (date, dateString) => {
     handleUpdatePublishStart(dateString[0]);
     handleUpdatePublishStop(dateString[1]);
@@ -99,6 +113,12 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
     console.log(event.target.value);
     setTagString(event.target.value);
     handleTagString(event.target.value);
+  };
+
+  const changeCategoryString = (event) => {
+    console.log(event.target.value);
+    setCategoryString(event.target.value);
+    handleCategoryString(event.target.value);
   };
 
   const updateSearch = (event) =>{
@@ -138,7 +158,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                               <p className='videoTitleSearch'>Video Title: </p>
                           </Col>
                           <Col span={15}>
-                              <Input value={videoTitle} placeholder="Type here" onChange={changeVideoTitleString}/>
+                              <Input value={videoTitle} placeholder="Starts with..." onChange={changeVideoTitleString}/>
                           </Col>
                       </Row>
                       
@@ -150,7 +170,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                               <p className='channelTitleSearch'>Channel Title: </p>
                           </Col>
                           <Col span={15}>
-                              <Input value={channelTitle} placeholder="Type here" onChange={changeChannelTitleString}/>
+                              <Input id="channelTitleInput" value={channelTitle} placeholder="Starts with..." onChange={changeChannelTitleString}/>
                           </Col>
                       </Row>
                       
@@ -159,10 +179,10 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                   <Col span={8}>
                       <Row>
                           <Col span={9}>
-                              <p className='tagSearch'>Tag Keyword: </p>
+                              <p className='categorySearch'>Category: </p>
                           </Col>
                           <Col span={15}>
-                              <Input value={tagString} placeholder="Type here" onChange={changeTagString}/>
+                              <Input value={categoryString} placeholder="Type here" onChange={changeCategoryString}/>
                           </Col>
                       </Row>
                       
@@ -233,8 +253,8 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                             <Col span={9}>
                                 <p className='likesLabel'>Likes: </p>
                             </Col>
-                            <Col span={15} id="likesSlider">
-                                <Slider range min={0} max={17000000} defaultValue={[5000, 5000000]} 
+                            <Col span={15} id="likesSliderCol">
+                                <Slider id="likesSlider" range min={0} max={17000000} defaultValue={[5000, 5000000]} 
                                 tipFormatter={numFormatter} onChange={changeLikes}/>
                             </Col>
                         </Row>
@@ -258,7 +278,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                                 <p className='commentsLabel'>Comments: </p>
                             </Col>
                             <Col span={15} class='sliderCol'>
-                                <Slider range defaultValue={[7000, 5000000]} min={0} max={7000000} 
+                                <Slider range defaultValue={[7000, 2000000]} min={0} max={7000000} 
                                 tipFormatter={numFormatter} onChange={changeComments}/>
                             </Col>
                         </Row>   
@@ -275,8 +295,20 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                                 <p className='channelSubscribersLabel'>Channel Subscribers: </p>
                             </Col>
                             <Col span={12} id="channelSubscribersCol">
-                                <Slider tipFormatter={numFormatter} range defaultValue={[1000000, 50000000]} 
-                                min={1} max={300000000} />
+                                <Slider tipFormatter={numFormatter} range defaultValue={[10000, 40000000]} 
+                                min={10000} max={220000000} onChange={changeSubscribers}/>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col span={6}>
+                        <Row>
+                            <Col span={9}>
+                                <p className='channelLibraryLabel'>Channel Library: </p>
+                            </Col>
+                            <Col span={14} id="channelLibraryCol">
+                                <Slider id="librarySlider" tipFormatter={numFormatter} range defaultValue={[10, 15000]} 
+                                min={10} max={50000} onChange={changeLibrarySize}/>
                             </Col>
                         </Row>
                     </Col>
@@ -290,17 +322,6 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                             <Select value={currentLanguage} id="languageSelector" onChange={changeLanguage} >
                             {languageData.map((language) => (<Option key={language} value={language}>{language}</Option>))}
                             </Select>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    <Col span={6}>
-                        <Row>
-                            <Col span={9}>
-                                <p className='categorySearchLabel'>Category: </p>
-                            </Col>
-                            <Col span={15} class='sliderCol'>
-                            <Input value={tagString} placeholder="Type here" />
                             </Col>
                         </Row>
                     </Col>

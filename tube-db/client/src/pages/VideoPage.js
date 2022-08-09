@@ -88,12 +88,8 @@ class VideoPage extends React.Component {
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
                   <h2>Likes:</h2>
                   {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
-                  
-                    <div id="LikeButton">
-                      <div>
-                      <LikeButton />
-                      </div>
-                  </div>
+                    
+                    
                 </div>
             
             
@@ -104,6 +100,12 @@ class VideoPage extends React.Component {
   
   }
   
-  export default VideoPage
+  export default VideoPage;
 
 
+let Likecomment = `div id="LikeButton">
+                      <div>
+                      <LikeButton />
+                      </div>
+                  </div>
+                  `

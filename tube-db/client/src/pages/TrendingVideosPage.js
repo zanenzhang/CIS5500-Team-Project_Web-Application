@@ -65,7 +65,7 @@ class TrendingVideosPage extends React.Component {
       videoTitleString: "",
       channelTitleString: "",
       tagString: "",
-      descriptionString: "",
+      channelLanguage: "",
       categoryString: "",
 
       viewsLow: 0,
@@ -75,12 +75,17 @@ class TrendingVideosPage extends React.Component {
       dislikesLow: 0,
       dislikesHigh: 0,
       commentsLow: 0,
-      commentsHigh: 0
+      commentsHigh: 0,
+      subscribersLow: 0,
+      subscribersHigh: 0,
+      libraryLow: 0,
+      libraryHigh: 0
     }
 
     this.handleMorePages = this.handleMorePages.bind(this)
     this.handleUpdateVideos = this.handleUpdateVideos.bind(this)
     this.handleCountryChange = this.handleCountryChange.bind(this)
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
     this.removeOffsetAndUpdate = this.removeOffsetAndUpdate.bind(this)
 
     this.handleUpdateTrendStart = this.handleUpdateTrendStart.bind(this)
@@ -91,7 +96,6 @@ class TrendingVideosPage extends React.Component {
     this.handleVideoTitleString = this.handleVideoTitleString.bind(this)
     this.handleChannelTitleString = this.handleChannelTitleString.bind(this)
     this.handleTagString = this.handleTagString.bind(this)
-    this.handleDescriptionString = this.handleDescriptionString.bind(this)
     this.handleCategoryString = this.handleCategoryString.bind(this)
 
     this.handleUpdateLikesLow = this.handleUpdateLikesLow.bind(this)
@@ -102,6 +106,10 @@ class TrendingVideosPage extends React.Component {
     this.handleUpdateViewsHigh = this.handleUpdateViewsHigh.bind(this)
     this.handleUpdateCommentsLow = this.handleUpdateCommentsLow.bind(this)
     this.handleUpdateCommentsHigh = this.handleUpdateCommentsHigh.bind(this)
+    this.handleUpdateSubscribersLow = this.handleUpdateSubscribersLow.bind(this)
+    this.handleUpdateSubscribersHigh = this.handleUpdateSubscribersHigh.bind(this)
+    this.handleUpdateLibraryLow = this.handleUpdateLibraryLow.bind(this)
+    this.handleUpdateLibraryHigh = this.handleUpdateLibraryHigh.bind(this)
   }
 
   getRandomOffset(){
@@ -118,10 +126,10 @@ class TrendingVideosPage extends React.Component {
   }
 
   handleUpdateVideos() {
-    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop, 
-      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString,
+    getTrendingVideos(this.state.country, this.state.channelLanguage, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop, 
+      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString, this.state.categoryString,
       this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
-      this.state.commentsLow, this.state.commentsHigh).then(res => {
+      this.state.commentsLow, this.state.commentsHigh,this.state.subscribersLow, this.state.subscribersHigh, this.state.libraryLow, this.state.libraryHigh).then(res => {
       this.setState({ videoResults: res.results });
     })
   }
@@ -138,8 +146,8 @@ class TrendingVideosPage extends React.Component {
     this.setState({tagString: value})
   }
 
-  handleDescriptionString(value){
-    this.setState({descriptionString: value})
+  handleLanguageChange(value){
+    this.setState({channelLanguage: value})
   }
 
   handleCategoryString(value){
@@ -178,6 +186,22 @@ class TrendingVideosPage extends React.Component {
     this.setState({commentsHigh: value})
   }
 
+  handleUpdateSubscribersLow(value){
+    this.setState({subscribersLow: value})
+  }
+
+  handleUpdateSubscribersHigh(value){
+    this.setState({subscribersHigh: value})
+  }
+
+  handleUpdateLibraryLow(value){
+    this.setState({libraryLow: value})
+  }
+
+  handleUpdateLibraryHigh(value){
+    this.setState({libraryHigh: value})
+  }
+
   handleUpdatePublishStart(value){
     this.setState({publishStart: value})
   }
@@ -202,11 +226,15 @@ class TrendingVideosPage extends React.Component {
     this.setState({country: value})
   }
 
+  handleLanguageChange(value){
+    this.setState({channelLanguage: value})
+  }
+
   componentDidMount() {
-    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop, 
-      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString,
+    getTrendingVideos(this.state.country, this.state.channelLanguage, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop, 
+      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString, this.state.categoryString,
       this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
-      this.state.commentsLow, this.state.commentsHigh).then(res => {
+      this.state.commentsLow, this.state.commentsHigh,this.state.subscribersLow, this.state.subscribersHigh, this.state.libraryLow, this.state.libraryHigh).then(res => {
       this.setState({ videoResults: res.results });
     })
   };
@@ -222,6 +250,7 @@ class TrendingVideosPage extends React.Component {
         handleChannelTitleString={this.handleChannelTitleString} handleTagString={this.handleTagString}
         handleUpdateViewsLow={this.handleUpdateViewsLow} handleUpdateViewsHigh={this.handleUpdateViewsHigh} handleUpdateLikesLow={this.handleUpdateLikesLow} handleUpdateLikesHigh={this.handleUpdateLikesHigh} 
         handleUpdateDislikesLow={this.handleUpdateDislikesLow} handleUpdateDislikesHigh={this.handleUpdateDislikesHigh} handleUpdateCommentsLow={this.handleUpdateCommentsLow} handleUpdateCommentsHigh={this.handleUpdateCommentsHigh} 
+        handleUpdateLibraryLow={this.handleUpdateLibraryLow} handleUpdateLibraryHigh={this.handleUpdateLibraryHigh} handleLanguageChange={this.handleLanguageChange}
         />
         
         <div id="page">
