@@ -67,14 +67,14 @@ class TrendingVideosPage extends React.Component {
       descriptionString: "",
       categoryString: "",
 
-      viewsLow: 1000000,
-      viewsHigh: 200000000000,
-      likesLow: 10000,
-      likesHigh: 1000000000,
-      dislikesLow: 10000,
-      dislikesHigh: 100000,
-      commentsLow: 10000,
-      commentsHigh: 100000000
+      viewsLow: 0,
+      viewsHigh: 0,
+      likesLow: 0,
+      likesHigh: 0,
+      dislikesLow: 0,
+      dislikesHigh: 0,
+      commentsLow: 0,
+      commentsHigh: 0
     }
 
     this.handleMorePages = this.handleMorePages.bind(this)
@@ -93,14 +93,14 @@ class TrendingVideosPage extends React.Component {
     this.handleDescriptionString = this.handleDescriptionString.bind(this)
     this.handleCategoryString = this.handleCategoryString.bind(this)
 
-    this.handleLikesLow = this.handleLikesLow.bind(this)
-    this.handleLikesHigh = this.handleLikesHigh.bind(this)
-    this.handleDislikesLow = this.handleDislikesLow.bind(this)
-    this.handleDislikesHigh = this.handleDislikesHigh.bind(this)
-    this.handleViewsLow = this.handleViewsLow.bind(this)
-    this.handleViewsHigh = this.handleViewsHigh.bind(this)
-    this.handleCommentsLow = this.handleCommentsLow.bind(this)
-    this.handleCommentsHigh = this.handleCommentsHigh.bind(this)
+    this.handleLikesLow = this.handleUpdateLikesLow.bind(this)
+    this.handleLikesHigh = this.handleUpdateLikesHigh.bind(this)
+    this.handleUpdateDislikesLow = this.handleUpdateDislikesLow.bind(this)
+    this.handleUpdateDislikesHigh = this.handleUpdateDislikesHigh.bind(this)
+    this.handleUpdateViewsLow = this.handleUpdateViewsLow.bind(this)
+    this.handleUpdateViewsHigh = this.handleUpdateViewsHigh.bind(this)
+    this.handleUpdateCommentsLow = this.handleUpdateCommentsLow.bind(this)
+    this.handleUpdateCommentsHigh = this.handleUpdateCommentsHigh.bind(this)
   }
 
   getRandomOffset(){
@@ -117,10 +117,11 @@ class TrendingVideosPage extends React.Component {
   }
 
   handleUpdateVideos() {
-    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop,
-      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString,
-      this.state.tagString).then(res => {
-      this.setState({ videoResults: res.results })
+    getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop, 
+      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString,
+      this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
+      this.state.commentsLow, this.state.commentsHigh).then(res => {
+      this.setState({ videoResults: res.results });
     })
   }
 
@@ -144,36 +145,36 @@ class TrendingVideosPage extends React.Component {
     this.setState({categoryString: value})
   }
 
-  handleViewsLow(value){
+  handleUpdateViewsLow(value){
     this.setState({viewsLow: value})
   }
 
-  handleViewsHigh(value){
+  handleUpdateViewsHigh(value){
     this.setState({viewsHigh: value})
   }
 
-  handleCommentsLow(value){
-    this.setState({commentsLow: value})
-  }
-
-  handleCommentsHigh(value){
-    this.setState({commentsHigh: value})
-  }
-
-  handleLikesLow(value){
+  handleUpdateLikesLow(value){
     this.setState({likesLow: value})
   }
 
-  handleLikesHigh(value){
+  handleUpdateLikesHigh(value){
     this.setState({likesHigh: value})
   }
 
-  handleDislikesLow(value){
+  handleUpdateDislikesLow(value){
     this.setState({dislikesLow: value})
   }
 
-  handleDislikesHigh(value){
+  handleUpdateDislikesHigh(value){
     this.setState({dislikesHigh: value})
+  }
+
+  handleUpdateCommentsLow(value){
+    this.setState({commentsLow: value})
+  }
+
+  handleUpdateCommentsHigh(value){
+    this.setState({commentsHigh: value})
   }
 
   handleUpdatePublishStart(value){
@@ -202,6 +203,7 @@ class TrendingVideosPage extends React.Component {
 
   componentDidMount() {
     getTrendingVideos(this.state.country, this.state.pageCount, this.state.offset, this.state.trendStart, this.state.trendStop, 
+      this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString,
       this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
       this.state.commentsLow, this.state.commentsHigh).then(res => {
       this.setState({ videoResults: res.results });
@@ -217,8 +219,8 @@ class TrendingVideosPage extends React.Component {
         handleUpdatePublishStart={this.handleUpdatePublishStart} handleUpdatePublishStop={this.handleUpdatePublishStop}
         removeOffsetAndUpdate={this.removeOffsetAndUpdate} handleVideoTitleString={this.handleVideoTitleString}
         handleChannelTitleString={this.handleChannelTitleString} handleTagString={this.handleTagString}
-        handleViewsLow={this.handleViewsLow} handleViewsHigh={this.handleViewsHigh} handleLikesLow={this.handleLikesLow} handleLikesHigh={this.handleLikesHigh} 
-        handleDislikesLow={this.handleDislikesLow} handleDislikesHigh={this.handleDislikesHigh} handleCommentsLow={this.handleCommentsLow} handleCommentsHigh={this.handleCommentsHigh} 
+        handleUpdateViewsLow={this.handleUpdateViewsLow} handleUpdateViewsHigh={this.handleUpdateViewsHigh} handleUpdateLikesLow={this.handleUpdateLikesLow} handleUpdateLikesHigh={this.handleUpdateLikesHigh} 
+        handleUpdateDislikesLow={this.handleUpdateDislikesLow} handleUpdateDislikesHigh={this.handleUpdateDislikesHigh} handleUpdateCommentsLow={this.handleUpdateCommentsLow} handleUpdateCommentsHigh={this.handleUpdateCommentsHigh} 
         />
         
         <div id="page">

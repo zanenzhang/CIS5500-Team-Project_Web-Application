@@ -43,9 +43,9 @@ const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
 const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendStart, 
   handleUpdateTrendStop, handleVideoTitleString, handleChannelTitleString, 
-  handleTagString, handleUpdatePublishStart, handleUpdatePublishStop, handleViewsLow,
-  handleViewsHigh, handleLikesLow, handleLikesHigh, handleDislikesLow, handleDislikesHigh,
-  handleCommentsLow, handleCommentsHigh   })=> {
+  handleTagString, handleUpdatePublishStart, handleUpdatePublishStop, handleUpdateViewsLow,
+  handleUpdateViewsHigh, handleUpdateLikesLow, handleUpdateLikesHigh, handleUpdateDislikesLow, 
+  handleUpdateDislikesHigh, handleUpdateCommentsLow, handleUpdateCommentsHigh})=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
   const [videoTitle, setVideoTitle] = useState('');
@@ -63,24 +63,24 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
   };
 
   const changeViews = event => {
-    handleViewsLow(event[0]);
-    handleViewsHigh(event[1]);
-  }
+    handleUpdateViewsLow(event[0]);
+    handleUpdateViewsHigh(event[1]);
+  };
 
   const changeLikes = event => {
-    handleLikesLow(event[0]);
-    handleLikesHigh(event[1]);
-  }
+    handleUpdateLikesLow(event[0]);
+    handleUpdateLikesHigh(event[1]);
+  };
 
   const changeDislikes = event => {
-    handleDislikesLow(event[0]);
-    handleDislikesHigh(event[1]);
-  }
+    handleUpdateDislikesLow(event[0]);
+    handleUpdateDislikesHigh(event[1]);
+  };
 
   const changeComments = event => {
-    handleCommentsLow(event[0]);
-    handleCommentsHigh(event[1]);
-  }
+    handleUpdateCommentsLow(event[0]);
+    handleUpdateCommentsHigh(event[1]);
+  };
 
   const changePublishedDates = (date, dateString) => {
     handleUpdatePublishStart(dateString[0]);
@@ -187,12 +187,12 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                         
                     </Col>
 
-                    <Col span={8}>
+                    <Col span={9}>
                         <Row>
-                            <Col span={10}>
+                            <Col span={9}>
                                 <p className='selectTrendingDates'>Trending Dates: </p>
                             </Col>
-                            <Col span={14} id="trendDateSelectCol">
+                            <Col span={5} id="trendDateSelectCol">
                             <RangePicker
                             defaultValue={[moment('2020-08-01', dateFormat), moment('2022-06-20', dateFormat)]}
                             format={dateFormat} onChange={changeTrendingDates} id="trendDatePicker"
@@ -202,12 +202,12 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                         
                     </Col>
 
-                    <Col span={10}>
+                    <Col span={9}>
                         <Row>
-                            <Col span={10}>
+                            <Col span={8}>
                                 <p className='selectPublishDates'>Publish Dates: </p>
                             </Col>
-                            <Col span={14} id="publishDatePicker">
+                            <Col span={5} id="publishDatePicker">
                             <RangePicker
                             format={dateFormat} onChange={changePublishedDates}
                             />
@@ -218,13 +218,14 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
 
                 </Row>
                 <Row>
+                    
                     <Col span={6}>
 
                         <Row>
-                            <Col span={10}>
-                                <p className='viewsLabel'>Views: </p>
+                            <Col span={12}>
+                                <p className='viewsLabel'>Video Views: </p>
                             </Col>
-                            <Col span={14}>
+                            <Col span={12} id="sliderCol">
                                 <Slider tipFormatter={numFormatter} range defaultValue={[1, 10000]} 
                                 min={1} max={10000} onChange={changeViews}/>
                             </Col>
@@ -233,10 +234,10 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
 
                     <Col span={6}>
                         <Row>
-                            <Col span={10}>
+                            <Col span={9}>
                                 <p className='likesLabel'>Likes: </p>
                             </Col>
-                            <Col span={14}>
+                            <Col span={15} id="sliderCol">
                                 <Slider range min={1000000} max={194000000000} defaultValue={[2000000, 194000000000]} 
                                 tipFormatter={numFormatter} onChange={changeLikes}/>
                             </Col>
@@ -245,10 +246,10 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
 
                     <Col span={6}>
                         <Row>
-                            <Col span={10}>
+                            <Col span={9}>
                                 <p className='dislikesLabel'>Dislikes: </p>
                             </Col>
-                            <Col span={14}>
+                            <Col span={15} class='sliderCol'>
                                 <Slider range min={100000} max={218000000} defaultValue={[100000, 218000000]} 
                                 tipFormatter={numFormatter} onChange={changeDislikes}/>
                             </Col>
@@ -257,10 +258,10 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
 
                     <Col span={6}>
                         <Row>
-                            <Col span={10}>
+                            <Col span={9}>
                                 <p className='commentsLabel'>Comments: </p>
                             </Col>
-                            <Col span={14}>
+                            <Col span={15} class='sliderCol'>
                                 <Slider range defaultValue={[10, 50000]} min={10} max={50000} 
                                 tipFormatter={numFormatter} onChange={changeComments}/>
                             </Col>

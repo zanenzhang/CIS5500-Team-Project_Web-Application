@@ -67,21 +67,21 @@
   .videoTitleSearch {
     width: 100%;
     text-align: right;
-    padding-right: 0.5rem;
+    padding-right: 15px;
     color: whitesmoke;
   }
 
 .channelTitleSearch {
   width: 100%;
   text-align: right;
-  padding-right: 0.5rem;
+  padding-right: 15px;
   color: whitesmoke;
 }
 
 .tagSearch{
   width: 100%;
   text-align: right;
-  padding-right: 0.5rem;
+  padding-right: 15px;
   color: whitesmoke;
 }
 
@@ -107,17 +107,21 @@
 .selectTrendingDates{
   width: 100%;
   text-align: right;
-  padding-right: 0.5rem;
+  margin-right: 0.5rem;
   color: whitesmoke;
 }
 
 #trendDateSelectCol {
-  padding-right: 200px;
+  
+}
+
+.ant-input {
+  display: inline-block;
 }
 
 .ant-picker {
-  margin-left: 0px;
-  width: 280px;
+  margin-left: 20px;
+  width: 270px;
 }
 
 .ant-picker-input {
@@ -134,11 +138,44 @@
 .selectPublishDates {
   width: 100%;
   text-align: right;
-  padding-right: 0.5rem;
+  margin-right: 0.5rem;
   color: whitesmoke;
 }
 
 #publishDatePicker {
-  padding-right: 280px
+  margin-right: 10px
 }
+
+.likesLabel{
+  width: 100%;
+  text-align: center;
+  margin-left: 18px;
+  color: whitesmoke;
+}
+
+.dislikesLabel{
+  width: 100%;
+  text-align: center;
+  margin-left: 18px;
+  color: whitesmoke;
+}
+
+.viewsLabel{
+  width: 100%;
+  text-align: center;
+  margin-left: 18px;
+  color: whitesmoke;
+}
+
+.commentsLabel{
+  width: 100%;
+  text-align: center;
+  margin-left: 5px;
+  color: whitesmoke;
+}
+
+.ant-slider{
+  width: 150px;
+}
+
 

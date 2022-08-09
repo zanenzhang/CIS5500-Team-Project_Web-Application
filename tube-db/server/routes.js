@@ -198,10 +198,6 @@ async function trending_videos(req, res) {
 
     searchClauses = "";
 
-    console.log('HERE')
-    console.log(publishStart=='')
-    console.log(publishStart=='undefined')
-
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
         searchClauses += `AND published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
