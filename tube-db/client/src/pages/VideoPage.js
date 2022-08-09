@@ -7,6 +7,7 @@ import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import { useParams } from 'react-router-dom';
 import HeaderLogo from '../components/HeaderLogo';
+import LikeButton from '../components/LikeButton';
 
 import {
   Table,
@@ -88,7 +89,11 @@ class VideoPage extends React.Component {
                   <h2>Likes:</h2>
                   {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
                   
-    
+                    <div id="LikeButton">
+                      <div>
+                      <LikeButton />
+                      </div>
+                  </div>
                 </div>
             
             

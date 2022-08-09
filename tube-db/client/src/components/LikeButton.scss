@@ -51,7 +51,7 @@ $primary: #54a0ff;
       background-color: $primary;
     }
     svg {
-      animation: hop 500ms;
+      animation: hop 600ms;
     }
   }
 
@@ -128,11 +128,11 @@ $primary: #54a0ff;
   }
 
   svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     margin-right: 8px;
     transform: translateY(-2px);
-    transition: transform 0.2s;
+    transition: transform 0.3s;
 
     #thumb-end {
       transition: transform 0.2s;
@@ -145,8 +145,8 @@ $primary: #54a0ff;
     transform: translateX(15px);
 
     &.liked {
-      opacity: 1;
-      transform: translateX(0);
+      opacity: 2;
+      transform: translateX(-14.5px);
     }
   }
 }
