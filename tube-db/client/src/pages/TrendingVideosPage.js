@@ -5,6 +5,7 @@ import { getTrendingVideos } from '../fetcher'
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import Navbar from '../components/Navbar';
+import loadIcon from '../images/load-icon.png';
 
 import {
   Table,
@@ -53,7 +54,7 @@ class TrendingVideosPage extends React.Component {
       searchTerm: "",
       videoResults: [],
       pageCount: 1,
-      loadLimit: 3,
+      loadLimit: 2,
       offset: this.getRandomOffset(),
       country: "United States",
       trendStart: "",
@@ -243,7 +244,7 @@ class TrendingVideosPage extends React.Component {
               </Grid>
               <div >
                 {this.state.pageCount <= this.state.loadLimit && (
-                  <button id="loadMoreBtn" onClick={this.handleMorePages}>Load More Videos</button>
+                  <button id="loadMoreBtn" onClick={this.handleMorePages}><img id="loadIcon" src={loadIcon}/> Load More Videos</button>
                 )}
               
               </div>

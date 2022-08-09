@@ -4,40 +4,31 @@ import './HeaderBar.css';
 import HeaderLogo from '../components/HeaderLogo';
 import SearchBar from '../components/SearchBar';
 import { DatePicker, Space } from 'antd';
-import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress } from "shards-react";
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import { SearchOutlined } from '@ant-design/icons';
+import searchBarIcon from '../images/searchicon.svg';
 import {
     Table,
-    Pagination,
     Select,
     Slider,
     Row,
     Col,
-    Input
+    Input,
+    Button
   } from 'antd'
 
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const IconSlider = (props) => {
-const { max, min } = props;
-const [value, setValue] = useState(0);
-const mid = Number(((max - min) / 2).toFixed(5));
-const preColorCls = value >= mid ? '' : 'icon-wrapper-active';
-const nextColorCls = value >= mid ? 'icon-wrapper-active' : '';
-return (
-    <div className="icon-wrapper">
-    <FrownOutlined className={preColorCls} />
-    <Slider {...props} onChange={setValue} value={value} />
-    <SmileOutlined className={nextColorCls} />
-    </div>
-);
-};
 
 const countryData = ['Brazil', 'Canada', 'France', 'Germany', 'India', 'Japan', 'Mexico', 'Russia', 'South Korea', 'United Kingdom', 'United States'];
-
+const languageData = ['Albanian', 'Arabic', 'Armenian', 'Bengali', 'Bhojpuri', 'Bosnian', 'Bulgarian', 'Catalan', 'Chichewa', 
+    'Chinese', 'Croatian', 'Czech', 'Dutch', 'English', 'Estonian', 'Filipino', 'French', 'Georgian', 'German', 'Greek', 'Hebrew', 
+    'Hindi', 'Hungarian', 'Indian', 'Indonesian', 'Italian', 'Japanese', 'Kannada', 'Korean', 'Malay', 'Malayalam', 'Marathi', 'Nepali', 
+    'Norwegian', 'Polish', 'Portuguese', 'Punjabi', 'Romanian', 'Russian', 'Serbian', 'Slovak', 'Slovenian', 'Spanish', 'Swahili', 
+    'Swedish', 'Tagalog', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Vietnamese'];
 const dateFormat = 'YYYY-MM-DD';
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
@@ -48,6 +39,7 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
   handleUpdateDislikesHigh, handleUpdateCommentsLow, handleUpdateCommentsHigh})=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
+  const [currentLanguage, setCurrentLanguage] = useState("English");
   const [videoTitle, setVideoTitle] = useState('');
   const [channelTitle, setChannelTitle] = useState('');
   const [tagString, setTagString] = useState('');
@@ -55,6 +47,10 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
   const changeCountry = event => {
     setCurrentCountry(event);
     handleCountryChange(event);
+  }
+
+  const changeLanguage = event => {
+    setCurrentLanguage(event);
   }
 
   const changeTrendingDates = (date, dateString) => {
@@ -269,11 +265,56 @@ const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendS
                     </Col>
 
                 </Row>
+
                 <Row>
-                <div class="submitSearch">
-                    <button id="submitVideoSearch" onClick={updateSearch}>Submit Search</button>
-                </div>
+                    
+                    <Col span={6}>
+
+                        <Row>
+                            <Col span={12}>
+                                <p className='channelSubscribersLabel'>Channel Subscribers: </p>
+                            </Col>
+                            <Col span={12} id="channelSubscribersCol">
+                                <Slider tipFormatter={numFormatter} range defaultValue={[1000000, 50000000]} 
+                                min={1} max={300000000} />
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col span={6}>
+                        <Row>
+                            <Col span={8}>
+                                <p className='channelLanguageLabel'>Channel Language: </p>
+                            </Col>
+                            <Col span={10} id="languageCol">
+                            <Select value={currentLanguage} id="languageSelector" onChange={changeLanguage} >
+                            {languageData.map((language) => (<Option key={language} value={language}>{language}</Option>))}
+                            </Select>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col span={6}>
+                        <Row>
+                            <Col span={9}>
+                                <p className='categorySearchLabel'>Category: </p>
+                            </Col>
+                            <Col span={15} class='sliderCol'>
+                            <Input value={tagString} placeholder="Type here" />
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col span={6} id="submitButtonWrap">
+                        
+                    <div class="submitSearch">
+                        <Button id="submitVideoSearch" onClick={updateSearch}><img id="searchIcon" src={searchBarIcon}/>Search</Button>
+                    </div>
+                            
+                    </Col>
+
                 </Row>
+
               </div>
               <div className="headerSelectors">
               </div>
