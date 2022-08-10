@@ -46,6 +46,12 @@ function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  var user = sessionStorage.getItem('userInfo');
+
+  console.log(user);
+
+
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
@@ -64,6 +70,7 @@ function Navbar() {
             })}
           </ul>
         </nav>
+        <h6 class="white-text">Logged in as: {user} </h6>
         </div>
       </IconContext.Provider>
     </>
