@@ -7,14 +7,13 @@ import { GoogleLogin } from 'react-google-login';
 
 var clicked = false;//Global Variable
 
-
 const CLIENT_ID = "1034575332123-8tgla9079nd652nlfttj4lmub58up4ke.apps.googleusercontent.com"
 const API_KEY = "AIzaSyCrG2ljgMyqUl9JS-mdHwrKZbbGscficYo"
 
 const formReducer = (state, event) => {
     return {
       ...state,
-      [event.target.name]: event.target.value
+      [event.name]: event.value
     }
    }
 
@@ -40,11 +39,18 @@ function Login() {
 
   }
 
-  function clickLogin() {
-
-      clicked=true;}
-
   const [formData, setFormData] = useReducer(formReducer, {});
+
+  const handleChange = event => {
+
+    setFormData({
+      name: event.target.name,
+      value: event.target.value,
+    });
+
+
+
+  }
 
   useEffect(() => {
     function start() {
@@ -65,10 +71,12 @@ function Login() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    sessionStorage.setItem('userInfo', JSON.stringify(googleData.profileObj));
-    var user = JSON.parse(sessionStorage.getItem('userInfo'));
-    
-    window.location.href='http://localhost:3000/trendingvideos';
+    sessionStorage.setItem('userInfo', event.target.name);
+    var user = sessionStorage.getItem('userInfo');
+
+    console.log(user);
+
+    // window.location.href='http://localhost:3000/trendingvideos';
 
   };
 
@@ -82,7 +90,7 @@ function Login() {
       <fieldset>
          <label>
            <h5 class="white-text">Username/Email</h5>
-           <input name="Username" onChange={setFormData} />
+           <input name="Username" onChange={handleChange} />
          </label>
        </fieldset>
        <fieldset>
