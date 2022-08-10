@@ -42,7 +42,7 @@ function Login() {
 
     function start() {
 
-      sessionStorage.clear();
+      sessionStorage.removeItem('userInfo');
 
       gapi.client.init({
         apiKey: API_KEY,
