@@ -70,7 +70,7 @@ function Navbar() {
             })}
           </ul>
         </nav>
-        <h6 class="white-text">Logged in as: {user} </h6>
+        <h6 class="white-text">Logged in as: <br></br> <u>{user}</u></h6>
         </div>
       </IconContext.Provider>
     </>
