@@ -22,7 +22,8 @@ function Login() {
 
     const onSuccess = (googleData) => {
 
-      console.log(googleData.profileObj);
+      sessionStorage.setItem('userInfo', JSON.stringify(googleData.profileObj));
+      var user = JSON.parse(sessionStorage.getItem('userInfo'));
 
       //https://stackoverflow.com/questions/32182532/google-signin-doesnt-redirect-after-sign-out
         var auth2 = gapi.auth2.getAuthInstance();
@@ -36,7 +37,8 @@ function Login() {
   const onFailure = (result) => {
 
     alert(result);
-}
+
+  }
 
   function clickLogin() {
 
@@ -46,6 +48,8 @@ function Login() {
 
   useEffect(() => {
     function start() {
+
+      sessionStorage.clear();
 
       gapi.client.init({
         apiKey: API_KEY,
@@ -60,8 +64,12 @@ function Login() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('User signed in.');
+
+    sessionStorage.setItem('userInfo', JSON.stringify(googleData.profileObj));
+    var user = JSON.parse(sessionStorage.getItem('userInfo'));
+    
     window.location.href='http://localhost:3000/trendingvideos';
+
   };
 
   return (
