@@ -37,7 +37,8 @@ function Login() {
   const onFailure = (result) => {
 
     alert(result);
-}
+
+  }
 
   function clickLogin() {
 
@@ -63,8 +64,12 @@ function Login() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('User signed in.');
+
+    sessionStorage.setItem('userInfo', JSON.stringify(googleData.profileObj));
+    var user = JSON.parse(sessionStorage.getItem('userInfo'));
+    
     window.location.href='http://localhost:3000/trendingvideos';
+
   };
 
   return (
