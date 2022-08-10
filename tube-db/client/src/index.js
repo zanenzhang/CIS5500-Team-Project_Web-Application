@@ -11,6 +11,8 @@ import TopChannelsPage from './pages/TopChannelsPage';
 import TrendingVideosPage from './pages/TrendingVideosPage';
 import VideoPage from './pages/VideoPage';
 import Login from './pages/Login';
+import SavedVideos from './pages/SavedVideos';
+
 
 import 'antd/dist/antd.css';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -40,6 +42,11 @@ ReactDOM.render(
 							path="/trendingvideos"
 							render={() => (
 								<TrendingVideosPage />
+							)}/>
+		<Route exact
+							path="/savedvideos"
+							render={() => (
+								<SavedVideos />
 							)}/>
       </Switch>
     </Router>

@@ -58,10 +58,18 @@ const getSingleVideo = async (videoid) => {
     return res.json()
 }
 
+const getRecommendedVideo = async (videoid) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/recommendation?videoid=${videoid}`, {
+        method: 'GET',
+    })
+    return res.json()
+    
+}
 export {
     getChannel,
     getFindChannels,
     getTrendingVideos,
     getChannelRecentTrending,
-    getSingleVideo
+    getSingleVideo,
+    getRecommendedVideo
 }
