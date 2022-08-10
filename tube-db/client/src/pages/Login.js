@@ -10,26 +10,25 @@ var clicked = false;//Global Variable
 const CLIENT_ID = "1034575332123-8tgla9079nd652nlfttj4lmub58up4ke.apps.googleusercontent.com"
 const API_KEY = "AIzaSyCrG2ljgMyqUl9JS-mdHwrKZbbGscficYo"
 
-const formReducer = (state, event) => {
-    return {
-      ...state,
-      [event.name]: event.value
-    }
-   }
 
 function Login() {
 
-    const onSuccess = (googleData) => {
+  const [userName, setUserName] = useState('');
+  const [passWord, setPassword] = useState('');
 
-      sessionStorage.setItem('userInfo', JSON.stringify(googleData.profileObj));
-      var user = JSON.parse(sessionStorage.getItem('userInfo'));
+  const onSuccess = (googleData) => {
 
-      //https://stackoverflow.com/questions/32182532/google-signin-doesnt-redirect-after-sign-out
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-          console.log('User signed in.');
-          window.location.href='http://localhost:3000/trendingvideos';
-        })
+    sessionStorage.setItem('userInfo', googleData.profileObj.email);
+    var user = sessionStorage.getItem('userInfo');
+
+    console.log(user);
+
+    //https://stackoverflow.com/questions/32182532/google-signin-doesnt-redirect-after-sign-out
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed in.');
+        window.location.href='http://localhost:3000/trendingvideos';
+      })
 
   }
 
@@ -39,20 +38,8 @@ function Login() {
 
   }
 
-  const [formData, setFormData] = useReducer(formReducer, {});
-
-  const handleChange = event => {
-
-    setFormData({
-      name: event.target.name,
-      value: event.target.value,
-    });
-
-
-
-  }
-
   useEffect(() => {
+
     function start() {
 
       sessionStorage.clear();
@@ -69,14 +56,17 @@ function Login() {
   });
 
   const handleSubmit = event => {
+
     event.preventDefault();
 
-    sessionStorage.setItem('userInfo', event.target.name);
+    //Get input values on Form submit in React
+    //https://bobbyhadz.com/blog/react-get-form-input-value-on-submit#:~:text=To%20get%20input%20values%20on,fields%20in%20your%20handleSubmit%20function.
+    sessionStorage.setItem('userInfo', userName);
     var user = sessionStorage.getItem('userInfo');
 
     console.log(user);
 
-    // window.location.href='http://localhost:3000/trendingvideos';
+    window.location.href='http://localhost:3000/trendingvideos';
 
   };
 
@@ -90,13 +80,13 @@ function Login() {
       <fieldset>
          <label>
            <h5 class="white-text">Username/Email</h5>
-           <input name="Username" onChange={handleChange} />
+           <input name="Username" onChange={event => setUserName(event.target.value)} />
          </label>
        </fieldset>
        <fieldset>
          <label>
            <h5 class="white-text">Password</h5>
-           <input name="Password" />
+           <input name="Password" onChange={event => setPassword(event.target.value)} />
          </label>
        </fieldset>
        <button type="submit">Submit</button>
