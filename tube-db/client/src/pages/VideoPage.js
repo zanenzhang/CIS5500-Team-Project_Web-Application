@@ -14,6 +14,7 @@ import {
   Select
 } from 'antd'
 
+
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 
@@ -25,7 +26,7 @@ class VideoPage extends React.Component {
         videoInfo: [],
         videoId: ""
       };
-
+    
     fetchVideoId = async () => {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
@@ -33,6 +34,7 @@ class VideoPage extends React.Component {
       this.state.videoId = videoId;
       var linkBegin = "https://www.youtube.com/embed/";
       this.state.fullLink = linkBegin + `${this.state.videoId}`;
+      window.localStorage.setItem('link', this.state.fullLink)
     };
   
     componentDidMount() {
@@ -44,8 +46,10 @@ class VideoPage extends React.Component {
         // console.log(array);
       })
     };
+
     
   
+   
     render() {
   
       return (
@@ -61,7 +65,6 @@ class VideoPage extends React.Component {
             </div>
   
             <div id="page">
-            
     
                 <div id="sideBar">
                     <div>
@@ -88,7 +91,12 @@ class VideoPage extends React.Component {
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
                   <h2>Likes:</h2>
                   {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
-                    
+                
+                  <div id="likeButton">
+                    <div>
+                    <LikeButton />
+                    </div>
+                </div>
                     
                 </div>
             
@@ -100,6 +108,7 @@ class VideoPage extends React.Component {
   
   }
   
+ 
   export default VideoPage;
 
 

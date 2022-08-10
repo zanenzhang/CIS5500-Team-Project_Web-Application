@@ -270,6 +270,8 @@ async function singleVideo(req, res){
     WHERE video_id = '${videoid}'
     GROUP BY video_id
     `
+    console.log(finalQuery)
+
     connection.query(finalQuery, function (error, results, fields) {
 
         if (error) {
@@ -281,6 +283,48 @@ async function singleVideo(req, res){
     });
 }   
 
+async function recommendedVideos (req,res){
+    videoId = req.query.videoId
+    // finalQuery = 
+    // `
+    // WITH Selected_Video AS (
+    //     SELECT category_id 
+    //     FROM TOP_TRENDING_VIDEOS
+    //     WHERE video_id = ${videoId}
+    // )SELECT V.title as video_title, V.published_at AS published, V.video_id,
+    // MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
+    // MIN(V.trending_date) AS trend_start, V.thumbnail_link, V.likes,
+    // GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title,
+    // V.description, V.tags
+    // FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Video AS S
+    // WHERE V.category_id = S.category_id
+    // GROUP BY video_id
+    // LIMIT 3;
+    // `
+    finalQuery = `
+    SELECT title as video_title, published_at AS published, video_id,
+            MAX(view_count) AS views, MAX(trending_date) AS trend_stop,
+            MIN(trending_date) AS trend_start, thumbnail_link, likes,
+            GROUP_CONCAT(DISTINCT country) AS countries, channel_title,
+            description, tags,category_id
+    FROM TOP_TRENDING_VIDEOS
+    WHERE video_id = '${videoId}'
+    GROUP BY video_id
+    `
+    console.log(finalQuery)
+    connection.query(finalQuery, function (error, results, fields) {
+
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+    
+}
+
+
 module.exports = {
     hello,
     channel,
@@ -288,4 +332,5 @@ module.exports = {
     trending_videos,
     selected_channel_recent_trending,
     singleVideo,
+    recommendedVideos
 }
