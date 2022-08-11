@@ -93,9 +93,15 @@ class VideoPage extends React.Component {
                   {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
                 
                   <div id="likeButton">
-                    <div>
-                    <LikeButton />
-                    </div>
+                  <div>
+                  {this.state.videoInfo.map(info=>(
+                    <LikeButton
+                      thumbLink = {info.thumbnail_link}
+                      videoId = {info.video_id}
+                      videoTitle = {info.video_title}
+                    />
+                  ))}
+                  </div>
                 </div>
                     
                 </div>

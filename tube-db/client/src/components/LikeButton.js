@@ -7,11 +7,11 @@ import "./LikeButton.scss";
 const particleList = Array.from(Array(10));
 
 
-const LikeButton = () => {
+const LikeButton = ({thumbLink, videoId, videoTitle}) => {
   const [liked, setLiked] = useState(null);
   const [clicked, setClicked] = useState(false);
 
-
+  var user = sessionStorage.getItem("userInfo");
 
   return (
     <button
@@ -21,8 +21,14 @@ const LikeButton = () => {
        
         var fullLink = window.localStorage.getItem('link');
         window.localStorage.setItem('likedLink', fullLink)
+
+        console.log(user);
+        console.log(thumbLink);
+        console.log(videoId);
+        console.log(videoTitle);
         
       }}
+
       onAnimationEnd={() => setClicked(false)
         
       }
