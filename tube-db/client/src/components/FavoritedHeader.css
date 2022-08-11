@@ -1,44 +1,6 @@
- .headerBar {
-    display: flex;
-    height: 160px;
-  }
   
-  .headerLogo {
-    height: 160px;
-    width: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #000000;
-    color: #000000;
-  }
   
-  .headerSelectors {
-    flex-grow: 1;
-    background: #000000;
-    justify-content: center;
-  }
 
-  .headerSearch {
-    flex-grow: 1;
-    background: #000000;
-    justify-content: center;
-  }
-
-  .headerExLogo{
-    flex-grow: 1;
-    background: #000000;
-  }
-
-  .ant-select{
-    width: 250px;
-    position: static;
-  }
-
-  .ant-picker {
-    width: 350px;
-    position: static;
-  }
 
   .pageTitle{
     padding-top:2.5rem;
