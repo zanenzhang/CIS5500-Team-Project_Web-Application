@@ -1,13 +1,17 @@
 import React from 'react';
 import SideMenu from '../components/SideMenu';
 import './SavedVideos.css'
-import { getRecommendedVideo, getSingleVideo } from '../fetcher'
+import './TrendingVideosPage.css'
+import { getFavoritedVideos, getRecommendedVideo, getSingleVideo } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import { useParams } from 'react-router-dom';
 import HeaderLogo from '../components/HeaderLogo';
 import LikeButton from '../components/LikeButton';
+import loadIcon from '../images/load-icon.png';
+
+
 
 import {
   Table,
@@ -17,6 +21,7 @@ import {
 
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
+
 var fullLink = null
 var linkBegin = "https://www.youtube.com/embed/";
 if (window.localStorage.getItem('likedLink')== null){
@@ -32,8 +37,9 @@ else{
 
 class VideoPage extends React.Component {
     
-    // constructor (props){
-    //   super(props);
+  constructor (props){
+
+      super(props);
     //   this.state={
     //     videoInfo : [],
     //     videoId : ""
@@ -48,12 +54,16 @@ class VideoPage extends React.Component {
     //     this.setState({ videoInfo: res.results });
     //   })
     // };
-    state = {
+    this.state = {
+      user: sessionStorage.getItem('userInfo'),
+      videoResults: [],
       fullLink: "",
       videoInfo: [],
       videoId: ""
     };
   
+  }
+
     fetchVideoId = async () => {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
@@ -67,9 +77,19 @@ class VideoPage extends React.Component {
       }
       
     };
+
+    handleUpdateVideos() {
+      getFavoritedVideos(this.state.user).then(res => {
+        this.setState({ videoResults: res.results });
+      })
+    }
   
     componentDidMount() {
       this.fetchVideoId();
+
+      getFavoritedVideos(this.state.user).then(res => {
+        this.setState({ videoResults: res.results });
+      })
     
       getRecommendedVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results });
@@ -123,9 +143,19 @@ class VideoPage extends React.Component {
             
                 <div className="videoInfo">
 
-                 <center><iframe id="videoFrame" width="320" height="180" 
-                      src={fullLink}>
-                  </iframe>
+                 <center>
+
+                    <Grid>
+                
+                      {this.state.videoResults?.map(video=>(
+                        <VideoThumbnail
+                          thumbLink = {video.thumbnail_link}
+                          videoId = {video.video_id}
+                          videoTitle = {video.video_title}
+                        />
+                      ))}
+                
+                   </Grid>
                   </center> 
 
                   {/* recommendedVideos page */}
