@@ -274,7 +274,7 @@ class TrendingVideosPage extends React.Component {
               </Grid>
               <div >
                 {this.state.pageCount <= this.state.loadLimit && (
-                  <button id="loadMoreBtn" onClick={this.handleMorePages}><img id="loadIcon" src={loadIcon}/> Load More Videos</button>
+                  <button id="loadMoreBtn" onClick={this.handleMorePages}>Load More Videos</button>
                 )}
               
               </div>
