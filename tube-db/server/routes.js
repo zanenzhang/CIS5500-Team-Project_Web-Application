@@ -243,8 +243,8 @@ async function trending_videos(req, res) {
 
     finalQuery = firstLeg + searchClauses + secondLeg
 
-    console.log("Final query: ")
-    console.log(finalQuery)
+    // console.log("Final query: ")
+    // console.log(finalQuery)
 
     connection.query(finalQuery, function (error, results, fields) {
 
@@ -259,7 +259,6 @@ async function trending_videos(req, res) {
 
 async function singleVideo(req, res){
     videoid = req.query.videoid
-
     finalQuery = `
     SELECT title as video_title, published_at AS published, video_id,
             MAX(view_count) AS views, MAX(trending_date) AS trend_stop,
@@ -270,7 +269,7 @@ async function singleVideo(req, res){
     WHERE video_id = '${videoid}'
     GROUP BY video_id
     `
-    console.log(finalQuery)
+    // console.log(finalQuery)
 
     connection.query(finalQuery, function (error, results, fields) {
 
@@ -285,12 +284,12 @@ async function singleVideo(req, res){
 
 async function favoritedVideos(req, res){
 
-    user = req.query.user
+    videoid = req.query.videoid
 
     finalQuery = `
     SELECT video_id, title as video_title, thumbnail_link
-    FROM FAVORITES
-    WHERE user = '${user}'
+    FROM TOP_TRENDING_VIDEOS
+    WHERE video_id = '${videoid}'
     `
 
     connection.query(finalQuery, function (error, results, fields) {
@@ -305,7 +304,7 @@ async function favoritedVideos(req, res){
 }   
 
 async function recommendedVideos (req,res){
-    videoId = req.query.videoId
+    videoid = req.query.videoid
     // finalQuery = 
     // `
     // WITH Selected_Video AS (
@@ -318,21 +317,59 @@ async function recommendedVideos (req,res){
     // GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title,
     // V.description, V.tags
     // FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Video AS S
-    // WHERE V.category_id = S.category_id
-    // GROUP BY video_id
-    // LIMIT 3;
+    // WHERE V.category_id = S.category_id 
+    // GROUP BY video_id;
     // `
+    // // finayQuery = 
+    // // `
+    //         WITH Selected_Channel AS (
+    //             SELECT category_id
+    //             FROM TOP_YOUTUBE_VIDEOS
+    //             WHERE video_id = ${videoid}
+    //         )
+    //         SELECT V.title AS video_title, V.published_at AS published, V.video_id AS video_id,
+    //                 MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
+    //                 MIN(V.trending_date) AS trend_start, GROUP_CONCAT(DISTINCT V.country) AS countries
+    //         FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Channel AS C
+    //         WHERE V.category_id= C.category_id
+    //         GROUP BY video_id
+    //         LIMIT 3;`
+
     finalQuery = `
     SELECT title as video_title, published_at AS published, video_id,
-            MAX(view_count) AS views, MAX(trending_date) AS trend_stop,
-            MIN(trending_date) AS trend_start, thumbnail_link, likes,
-            GROUP_CONCAT(DISTINCT country) AS countries, channel_title,
-            description, tags,category_id
+    MAX(view_count) AS views, MAX(trending_date) AS trend_stop,
+    MIN(trending_date) AS trend_start, thumbnail_link, likes,
+    GROUP_CONCAT(DISTINCT country) AS countries, channel_title,
+    description, tags 
     FROM TOP_TRENDING_VIDEOS
-    WHERE video_id = '${videoId}'
+    WHERE category_id IN
+    (SELECT category_id  
+    FROM TOP_TRENDING_VIDEOS
+    WHERE video_id = '${videoid}')
+    AND video_id <>'${videoid}'
     GROUP BY video_id
-    `
+    LIMIT 8
+    ; `
+    
+
+
+    // finalQuery = `SELECT A.title as video_title, A.published_at AS published, A.video_id
+    // FROM  TOP_TRENDING_VIDEOS A JOIN TOP_TRENDING_VIDEOS B ON A.video_id = B.video_id
+    // WHERE B.video_id = '${videoid}' AND A.category_id = B.category_id AND A.video_id != '${videoid}'
+    // GROUP BY A.video_id,B.video_id 
+    // LIMIT 0,2000;`
+
+    
+    // finalQuery = `
+    // SELECT title as video_title
+    // FROM TOP_TRENDING_VIDEOS
+    // WHERE video_id = '${videoid}'
+    // GROUP BY video_id
+    // `
+    
+   
     console.log(finalQuery)
+    console.log(videoid)
     connection.query(finalQuery, function (error, results, fields) {
 
         if (error) {
