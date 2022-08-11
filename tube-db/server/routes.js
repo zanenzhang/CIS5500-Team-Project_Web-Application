@@ -283,6 +283,27 @@ async function singleVideo(req, res){
     });
 }   
 
+async function favoritedVideos(req, res){
+
+    videoid = req.query.videoid
+
+    finalQuery = `
+    SELECT video_id, title as video_title, thumbnail_link
+    FROM TOP_TRENDING_VIDEOS
+    WHERE video_id = '${videoid}'
+    `
+
+    connection.query(finalQuery, function (error, results, fields) {
+
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+}   
+
 async function recommendedVideos (req,res){
     videoId = req.query.videoId
     // finalQuery = 
@@ -332,5 +353,6 @@ module.exports = {
     trending_videos,
     selected_channel_recent_trending,
     singleVideo,
+    favoritedVideos,
     recommendedVideos
 }

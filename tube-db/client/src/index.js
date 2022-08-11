@@ -12,6 +12,8 @@ import TrendingVideosPage from './pages/TrendingVideosPage';
 import VideoPage from './pages/VideoPage';
 import Login from './pages/Login';
 import SavedVideos from './pages/SavedVideos';
+import FavoritePage from './pages/FavoritedVideos';
+
 
 
 import 'antd/dist/antd.css';
@@ -32,6 +34,11 @@ ReactDOM.render(
 							path="/video"
 							render={() => (
 								<VideoPage />
+							)}/>
+		<Route exact
+							path="/favorite"
+							render={() => (
+								<FavoritePage />
 							)}/>
         <Route exact
 							path="/topchannels"
