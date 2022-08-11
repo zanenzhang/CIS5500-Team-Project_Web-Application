@@ -13,6 +13,7 @@ import loadIcon from '../images/load-icon.png';
 
 
 
+
 import {
   Table,
   Select
@@ -142,8 +143,7 @@ class VideoPage extends React.Component {
                 </div>
             
                 <div className="videoInfo">
-
-                 <center>
+                  <div style={{ width: '67vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh'}}>
 
                     <Grid>
                 
@@ -156,13 +156,15 @@ class VideoPage extends React.Component {
                       ))}
                 
                    </Grid>
-                  </center> 
+
+                   </div>
+                  
 
                   {/* recommendedVideos page */}
                 <div id="pageContent">
                   <div id ="headerBar"></div>
                       <div style={{ width: '67vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
-                  <h6 id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos Based'}</h6>
+                  <p id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos Based'}</p>
                   <h6 id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'On Your Recent Like'}</h6>
                           <div class ="fade-in-videos">
                               <Grid>
