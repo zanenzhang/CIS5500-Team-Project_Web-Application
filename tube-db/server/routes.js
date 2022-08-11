@@ -285,12 +285,12 @@ async function singleVideo(req, res){
 
 async function favoritedVideos(req, res){
 
-    videoid = req.query.videoid
+    user = req.query.user
 
     finalQuery = `
     SELECT video_id, title as video_title, thumbnail_link
-    FROM TOP_TRENDING_VIDEOS
-    WHERE video_id = '${videoid}'
+    FROM FAVORITES
+    WHERE user = '${user}'
     `
 
     connection.query(finalQuery, function (error, results, fields) {

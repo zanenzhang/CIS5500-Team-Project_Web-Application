@@ -30,13 +30,13 @@ class FavoritedVideosPage extends React.Component {
   }
 
   handleUpdateVideos() {
-    getFavoritedVideos(this.state.videoid).then(res => {
+    getFavoritedVideos(this.state.user).then(res => {
       this.setState({ videoResults: res.results });
     })
   }
 
   componentDidMount() {
-    getFavoritedVideos(this.state.videoid).then(res => {
+    getFavoritedVideos(this.state.user).then(res => {
       this.setState({ videoResults: res.results });
     })
   };
