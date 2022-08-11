@@ -50,3 +50,9 @@ div > h5 {
     color: #F61212;
   }
 
+  .fade-in-videos { animation: fadeIn 5s; }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }

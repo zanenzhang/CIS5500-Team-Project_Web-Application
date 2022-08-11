@@ -50,8 +50,8 @@ const getTrendingVideos = async (country, channelLanguage, pageCount, offset, tr
     return final
 }
 
-const getFavoritedVideos = async (user) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/favorited?user=${user}`, {
+const getFavoritedVideos = async (videoid) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/favorited?videoid=${videoid}`, {
         method: 'GET',
     })
 
