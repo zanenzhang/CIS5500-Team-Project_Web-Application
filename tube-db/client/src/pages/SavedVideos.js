@@ -127,7 +127,7 @@ class VideoPage extends React.Component {
 
             <div style={{ width: '67vw', margin: '0 auto', marginTop: '-1vh', marginBottom: '5vh' }}>
 
-              <h1 id="videoPageTitle">Liked Videos</h1>
+              <h1 id="videoPageTitle">Liked Videos Playlist</h1>
 
               </div>
 
