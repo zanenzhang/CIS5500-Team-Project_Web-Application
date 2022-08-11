@@ -5,6 +5,7 @@ const config = require('./config.json')
 const mysql = require('mysql');
 const e = require('express');
 const { query } = require('express');
+const app = require('./server');
 //const { connect } = require('./server');
 
 // TODO: fill in your connection details here
@@ -303,6 +304,26 @@ async function favoritedVideos(req, res){
     });
 }   
 
+async function insert(req, res){
+ 
+    const videoId = req.body.videoId
+    const thumbLink = req.body.thumbLink
+    const videoTitle = req.body.videoTitle
+    const user = req.body.user
+  
+    finalQuery = `INSERT INTO FAVORITES (video_id, thumbnail_link, title, user) VALUES ('${videoId}', '${thumbLink}', '${videoTitle}','${user}');`
+  
+    connection.query(finalQuery, function (error, results, fields) {
+  
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+} 
+
 async function recommendedVideos (req,res){
     videoid = req.query.videoid
     // finalQuery = 
@@ -391,5 +412,6 @@ module.exports = {
     selected_channel_recent_trending,
     singleVideo,
     favoritedVideos,
+    insert,
     recommendedVideos
 }

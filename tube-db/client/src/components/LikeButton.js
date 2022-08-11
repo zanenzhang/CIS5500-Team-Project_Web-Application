@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import cn from "classnames";
 import { ReactComponent as Hand } from "../images/hand.svg";
+import Axios from 'axios';
 
 import "./LikeButton.scss";
 
@@ -20,7 +21,16 @@ const LikeButton = ({thumbLink, videoId, videoTitle}) => {
         setClicked(true);
        
         var fullLink = window.localStorage.getItem('link');
-        window.localStorage.setItem('likedLink', fullLink)
+        window.localStorage.setItem('likedLink', fullLink);
+
+        Axios.post('http://localhost:8080/',
+            {user: user,
+            thumbLink: thumbLink,
+            videoId: videoId,
+            videoTitle: videoTitle}).then(() => {
+              alert("succesful insert")
+            });
+
 
         console.log(user);
         console.log(thumbLink);
