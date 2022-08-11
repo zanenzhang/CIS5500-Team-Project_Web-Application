@@ -132,7 +132,8 @@ class VideoPage extends React.Component {
                 <div id="pageContent">
                   <div id ="headerBar"></div>
                       <div style={{ width: '67vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
-                  <h1 id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos For U'}</h1>
+                  <h6 id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos Based'}</h6>
+                  <h6 id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'On Your Recent Like'}</h6>
                           <div class ="fade-in-videos">
                               <Grid>
                               {this.state.videoInfo.map(video=>(
