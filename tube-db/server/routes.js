@@ -183,6 +183,7 @@ async function find_channels(req, res) {
 async function trending_videos(req, res) {
 
     let country = req.query.country
+    let language = req.query.language
     let pageCount = req.query.page
     let limit = pageCount * 20
     let pagePull = limit * 10
@@ -195,7 +196,7 @@ async function trending_videos(req, res) {
 
     let videoTitle = req.query.video
     let channelTitle = req.query.channel
-    let tag = req.query.tag
+    let category = req.query.category
 
     let viewsLow = req.query.viewslow
     let viewsHigh = req.query.viewshigh
@@ -205,6 +206,11 @@ async function trending_videos(req, res) {
     let dislikesHigh = req.query.dislikeshigh
     let commentsLow = req.query.commentslow
     let commentsHigh = req.query.commentshigh
+
+    let subscribersLow = req.query.subscriberslow
+    let subscribersHigh = req.query.subscribershigh
+    let libraryLow = req.query.librarylow
+    let libraryHigh = req.query.libraryhigh
 
     searchClauses = "";
 
@@ -216,8 +222,9 @@ async function trending_videos(req, res) {
         searchClauses += `AND title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
         searchClauses += `AND channel_title LIKE '${channelTitle}%' `} 
-    if (tag != '' && tag != 'undefined')  {
+    if (category != '' && category != 'undefined')  {
         searchClauses += `AND tags LIKE '%${tag}%' `} 
+
     if (viewsHigh != 0){
         searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
     if (likesHigh != 0){
@@ -226,6 +233,8 @@ async function trending_videos(req, res) {
         searchClauses += `AND dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
     if (commentsHigh != 0){
         searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
+
+
      
 
     let firstLeg = `WITH Videos AS (
@@ -241,6 +250,10 @@ async function trending_videos(req, res) {
         GROUP BY video_id
         Limit ${limit};
     `
+
+    let channels = `WITH Channels AS (
+        SELECT 
+    )`
 
     finalQuery = firstLeg + searchClauses + secondLeg
 

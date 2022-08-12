@@ -41,7 +41,7 @@ const rows = [[
 ];
 const data = [columns, ...rows];
 
-const options = {
+export const options = {
   height: 70,
   backgroundColor: "black",
   gantt: {
@@ -49,7 +49,7 @@ const options = {
   },
 };
 
-const geoMapData = [
+export const geoMapData = [
   ["Country", "Popularity"],
   ["Japan", 300],
   ["United States", 300],
@@ -71,8 +71,6 @@ class VideoPage extends React.Component {
         year: "",
       };
       
-      
-    
       
     fetchVideoId = async () => {
       
