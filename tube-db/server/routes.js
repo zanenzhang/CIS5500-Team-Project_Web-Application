@@ -214,6 +214,25 @@ async function trending_videos(req, res) {
 
     searchClauses = "";
 
+    let channelsCTE = `WITH Channels AS (
+        SELECT channel_title FROM TOP_YOUTUBE_CHANNELS
+        WHERE channel_language='${language}' `
+
+    let videosCTE = `WITH Videos AS (
+        SELECT video_id, title, thumbnail_link
+        FROM TOP_TRENDING_VIDEOS
+        WHERE country = '${country}' `
+
+    let secondLeg = `LIMIT ${pagePull}
+        OFFSET ${offset}
+    ) SELECT V.video_id, V.title as video_title, V.thumbnail_link
+        FROM Videos V `
+
+
+    let fifthLeg = `GROUP BY video_id
+        Limit ${limit};
+    `
+
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
         searchClauses += `AND published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
@@ -234,28 +253,14 @@ async function trending_videos(req, res) {
     if (commentsHigh != 0){
         searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
 
+    if (subscribersHigh != 0){
+        channelsCTE += `AND subscribes BETWEEN ${subscribersLow} AND ${subscribersHigh} `} 
+    if (libraryHigh != 0){
+        channelsCTE += `AND library_size BETWEEN ${libraryLow} AND ${libraryHigh} `} 
     
-     
+    channelsCTE += `);`
 
-    let firstLeg = `WITH Videos AS (
-        SELECT video_id, title, thumbnail_link
-        FROM TOP_TRENDING_VIDEOS
-        WHERE country = '${country}' `
-
-        
-    let secondLeg = `LIMIT ${pagePull}
-        OFFSET ${offset}
-    ) SELECT video_id, title as video_title, thumbnail_link
-        FROM Videos
-        GROUP BY video_id
-        Limit ${limit};
-    `
-
-    let channels = `WITH Channels AS (
-        SELECT channel_title FROM TOP_YOUTUBE_CHANNELS
-        WHERE `
-
-    finalQuery = firstLeg + searchClauses + secondLeg
+    finalQuery = ((subscribersHigh!=0 || libraryHigh!=0 ? channelsCTE : "")) + videosCTE +  searchClauses + secondLeg + fifthLeg
 
     // console.log("Final query: ")
     // console.log(finalQuery)
