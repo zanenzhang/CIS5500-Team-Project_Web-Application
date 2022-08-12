@@ -223,7 +223,7 @@ async function trending_videos(req, res) {
     ), `
 
     let videosCTE = `Videos AS (
-        SELECT video_id, title, thumbnail_link, category_id
+        SELECT video_id, title, thumbnail_link, category_id, channel_title
         FROM TOP_TRENDING_VIDEOS
         WHERE country = '${country}' `
 
@@ -231,9 +231,9 @@ async function trending_videos(req, res) {
         OFFSET ${offset}
     ) SELECT V.video_id, V.title as video_title, V.thumbnail_link, V.category_id `
 
-    let secondLeg = (language != 'Select' && subscribersHigh != 0 && libraryHigh !=0) ? `FROM Channels C JOIN ` : `FROM `    
+    let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels C JOIN ` : `FROM `    
     
-    let thirdLeg = (language != 'Select' && subscribersHigh != 0 && libraryHigh !=0) ? `Videos V ON C.channel_title=V.channel_title ` : `Videos V `
+    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos V ON C.channel_title=V.channel_title ` : `Videos V `
 
 
     let fifthLeg = `GROUP BY V.video_id
@@ -265,13 +265,13 @@ async function trending_videos(req, res) {
     if (language != 'Select'){
         channelsCTE += ` channel_language = '${language}' `}
     else if (subscribersHigh != 0){
-        channelsCTE += `subscribes BETWEEN ${subscribersLow} AND ${subscribersHigh} `}
+        channelsCTE += `subscribers BETWEEN ${subscribersLow} AND ${subscribersHigh} `}
     else if (libraryHigh != 0){
         channelsCTE += ` library_size BETWEEN ${libraryLow} AND ${libraryHigh} `}
         
         
     if (subscribersHigh != 0 && language != 'Select'){
-        channelsCTE += `AND subscribes BETWEEN ${subscribersLow} AND ${subscribersHigh} `}
+        channelsCTE += `AND subscribers BETWEEN ${subscribersLow} AND ${subscribersHigh} `}
     if ((subscribersHigh != 0 || language != 'Select') && libraryHigh != 0){
         channelsCTE += `AND library_size BETWEEN ${libraryLow} AND ${libraryHigh} `} 
     

@@ -5,7 +5,6 @@ import { getTrendingVideos } from '../fetcher'
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import Navbar from '../components/Navbar';
-import Autocomplete from '../components/Autocomplete';
 import loadIcon from '../images/load-icon.png';
 
 import {
@@ -252,6 +251,7 @@ class TrendingVideosPage extends React.Component {
         handleUpdateViewsLow={this.handleUpdateViewsLow} handleUpdateViewsHigh={this.handleUpdateViewsHigh} handleUpdateLikesLow={this.handleUpdateLikesLow} handleUpdateLikesHigh={this.handleUpdateLikesHigh} 
         handleUpdateDislikesLow={this.handleUpdateDislikesLow} handleUpdateDislikesHigh={this.handleUpdateDislikesHigh} handleUpdateCommentsLow={this.handleUpdateCommentsLow} handleUpdateCommentsHigh={this.handleUpdateCommentsHigh} 
         handleUpdateLibraryLow={this.handleUpdateLibraryLow} handleUpdateLibraryHigh={this.handleUpdateLibraryHigh} handleLanguageChange={this.handleLanguageChange}
+        handleUpdateSubscribersLow={this.handleUpdateSubscribersLow} handleUpdateSubscribersHigh={this.handleUpdateSubscribersHigh}
         />
         
         <div id="page">

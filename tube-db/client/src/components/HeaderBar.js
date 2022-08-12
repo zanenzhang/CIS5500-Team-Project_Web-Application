@@ -85,46 +85,55 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
   }
 
   const changeLanguage = event => {
+    console.log(event)
     setCurrentLanguage(event);
     handleLanguageChange(event);
   }
 
   const changeTrendingDates = (date, dateString) => {
+    console.log(dateString)
     handleUpdateTrendStart(dateString[0]);
     handleUpdateTrendStop(dateString[1]);
   };
 
   const changeViews = event => {
+    console.log(event)
     handleUpdateViewsLow(event[0]);
     handleUpdateViewsHigh(event[1]);
   };
 
   const changeLikes = event => {
+    console.log(event)
     handleUpdateLikesLow(event[0]);
     handleUpdateLikesHigh(event[1]);
   };
 
   const changeDislikes = event => {
+    console.log(event)
     handleUpdateDislikesLow(event[0]);
     handleUpdateDislikesHigh(event[1]);
   };
 
   const changeComments = event => {
+    console.log(event)
     handleUpdateCommentsLow(event[0]);
     handleUpdateCommentsHigh(event[1]);
   };
 
   const changeSubscribers = event => {
+    console.log(event)
     handleUpdateSubscribersLow(event[0]);
     handleUpdateSubscribersHigh(event[1]);
   };
 
   const changeLibrarySize = event => {
+    console.log(event)
     handleUpdateLibraryLow(event[0]);
     handleUpdateLibraryHigh(event[1]);
   };
 
   const changePublishedDates = (date, dateString) => {
+    console.log(dateString)
     handleUpdatePublishStart(dateString[0]);
     handleUpdatePublishStop(dateString[1]);
   };
@@ -277,7 +286,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='viewsLabel'>Video Views: </p>
                             </Col>
                             <Col span={12} id="viewsSlider">
-                                <Slider tipFormatter={numFormatter} range defaultValue={[1000000, 50000000]} 
+                                <Slider tipFormatter={numFormatter} range defaultValue={[0, 0]} 
                                 min={1} max={300000000} onChange={changeViews}/>
                             </Col>
                         </Row>
@@ -289,7 +298,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='likesLabel'>Likes: </p>
                             </Col>
                             <Col span={15} id="likesSliderCol">
-                                <Slider id="likesSlider" range min={0} max={17000000} defaultValue={[5000, 5000000]} 
+                                <Slider id="likesSlider" range min={0} max={17000000} defaultValue={[0, 0]} 
                                 tipFormatter={numFormatter} onChange={changeLikes}/>
                             </Col>
                         </Row>
@@ -301,7 +310,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='dislikesLabel'>Dislikes: </p>
                             </Col>
                             <Col span={15} class='sliderCol'>
-                                <Slider range min={0} max={13000000} defaultValue={[3000, 3000000]} 
+                                <Slider range min={0} max={13000000} defaultValue={[0, 0]} 
                                 tipFormatter={numFormatter} onChange={changeDislikes}/>
                             </Col>
                         </Row>
@@ -313,7 +322,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='commentsLabel'>Comments: </p>
                             </Col>
                             <Col span={15} class='sliderCol'>
-                                <Slider range defaultValue={[7000, 2000000]} min={0} max={7000000} 
+                                <Slider range defaultValue={[0, 0]} min={0} max={7000000} 
                                 tipFormatter={numFormatter} onChange={changeComments}/>
                             </Col>
                         </Row>   
@@ -330,8 +339,8 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='channelSubscribersLabel'>Channel Subscribers: </p>
                             </Col>
                             <Col span={12} id="channelSubscribersCol">
-                                <Slider tipFormatter={numFormatter} range defaultValue={[10000, 40000000]} 
-                                min={10000} max={220000000} onChange={changeSubscribers}/>
+                                <Slider tipFormatter={numFormatter} range defaultValue={[0, 0]} 
+                                min={100} max={220000000} onChange={changeSubscribers}/>
                             </Col>
                         </Row>
                     </Col>
@@ -342,8 +351,8 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='channelLibraryLabel'>Channel Library: </p>
                             </Col>
                             <Col span={14} id="channelLibraryCol">
-                                <Slider id="librarySlider" tipFormatter={numFormatter} range defaultValue={[10, 15000]} 
-                                min={10} max={50000} onChange={changeLibrarySize}/>
+                                <Slider id="librarySlider" tipFormatter={numFormatter} range defaultValue={[0, 0]} 
+                                min={1} max={500000} onChange={changeLibrarySize}/>
                             </Col>
                         </Row>
                     </Col>
