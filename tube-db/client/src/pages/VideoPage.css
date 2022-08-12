@@ -50,3 +50,38 @@ div > h5 {
     color: #F61212;
   }
 
+  .videoInfo {
+    justify-content: center;
+    background: #000000;
+    flex-grow: 1;
+    height: 1200px;
+}
+
+.info1 {
+    margin-left: 650px;
+    margin-top: -300px;
+    
+}
+
+.info2 {
+    margin-top: 80px;
+}
+div > h2 {
+    color: #ffffff;
+    text-decoration: underline; 
+}
+div > h5 {
+    color: #ffffff;
+}
+
+#videoFrame{
+    border-radius: 20px;
+}
+
+#page {
+    display: flex;
+    height: calc( 100vh - 30px);
+  }
+
+
+
