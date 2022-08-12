@@ -37,7 +37,6 @@ const categoryData = [
     { label: "Videoblogging" }
 ]
     
-
    const ComboBox = ({value, onChange}) => {
     return (
       <Autocomplete
@@ -45,7 +44,8 @@ const categoryData = [
         id="combo-box-demo"
         options={categoryData}
         sx={{ width: 250 }}
-        renderInput={(params) => <TextField {...params} placeholder="Type Here" value={value} onChange={onChange}/>}
+        renderInput={(params) => <TextField {...params} placeholder="Type Here" intputValue={value} onChange={onChange}
+        onSelect={onChange}/>}
         
       />
     );
