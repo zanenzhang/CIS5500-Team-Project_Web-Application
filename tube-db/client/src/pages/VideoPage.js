@@ -93,6 +93,10 @@ class VideoPage extends React.Component {
       this.state.fullLink = linkBegin + `${this.state.videoId}`;
       window.localStorage.setItem('link', this.state.fullLink)
     };
+
+    //"["United States, Canada, Mexico"]" => ["United States", "Canada", "Mexico"]
+    //var finalCountriesArray = [["Country", "Popularity"],["United States", 300],["Canada", 300],['Mexico', 300]];
+
   
     componentDidMount() {
       this.fetchVideoId();
@@ -110,10 +114,10 @@ class VideoPage extends React.Component {
 
       var countriesString = JSON.stringify(countriesListObject);
       var countriesListString = countriesString.substring(2,countriesString.length-2);
-
+      
       var slicedString = countriesString.slice(2,(countriesString.length -2))
       var countriesStringArr = slicedString.split(",");
-      console.log(slicedString)
+
       for (var i=0; i<countriesStringArr.length; i++){
         console.log(countriesStringArr[i]);
         var countryPlaceholder = [];
@@ -123,9 +127,6 @@ class VideoPage extends React.Component {
         countryPlaceholder = [];
       }
         
-      
-
-      console.log(finalCountriesArray)
 
       const countriesArray = [];
       for (var i = 0; i < countriesListString.length; i++) {
