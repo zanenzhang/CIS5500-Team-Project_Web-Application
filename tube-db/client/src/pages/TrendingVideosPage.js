@@ -6,6 +6,7 @@ import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import Navbar from '../components/Navbar';
 import loadIcon from '../images/load-icon.png';
+import axios from 'axios';
 
 import {
   Table,
@@ -87,6 +88,7 @@ class TrendingVideosPage extends React.Component {
     this.handleCountryChange = this.handleCountryChange.bind(this)
     this.handleLanguageChange = this.handleLanguageChange.bind(this)
     this.removeOffsetAndUpdate = this.removeOffsetAndUpdate.bind(this)
+    this.replacePrivateThumbs = this.replacePrivateThumbs.bind(this)
 
     this.handleUpdateTrendStart = this.handleUpdateTrendStart.bind(this)
     this.handleUpdateTrendStop = this.handleUpdateTrendStop.bind(this)
@@ -130,8 +132,14 @@ class TrendingVideosPage extends React.Component {
       this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString, this.state.categoryString,
       this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
       this.state.commentsLow, this.state.commentsHigh,this.state.subscribersLow, this.state.subscribersHigh, this.state.libraryLow, this.state.libraryHigh).then(res => {
-      this.setState({ videoResults: res.results });
+      this.setState({ videoResults: res.results }, this.replacePrivateThumbs);
     })
+  }
+
+  replacePrivateThumbs(){
+    for (var item of this.state.videoResults){
+      
+    }
   }
 
   handleVideoTitleString(value){
@@ -235,7 +243,7 @@ class TrendingVideosPage extends React.Component {
       this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString, this.state.categoryString,
       this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
       this.state.commentsLow, this.state.commentsHigh,this.state.subscribersLow, this.state.subscribersHigh, this.state.libraryLow, this.state.libraryHigh).then(res => {
-      this.setState({ videoResults: res.results });
+      this.setState({ videoResults: res.results }, this.replacePrivateThumbs);
     })
   };
 

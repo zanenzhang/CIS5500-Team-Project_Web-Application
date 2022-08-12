@@ -34,7 +34,7 @@ const getTrendingVideos = async (country, channelLanguage, pageCount, offset, tr
         method: 'GET',
     })
     
-    const result = await res.json()
+    var result = await res.json()
 
     const setKeysResolution = (array) => {
         var size = array.results.length;
