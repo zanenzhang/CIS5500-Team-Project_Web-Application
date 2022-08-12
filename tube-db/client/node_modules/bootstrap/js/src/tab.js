@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.6.2): tab.js
+ * Bootstrap (v4.6.0): tab.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -9,27 +9,29 @@ import $ from 'jquery'
 import Util from './util'
 
 /**
+ * ------------------------------------------------------------------------
  * Constants
+ * ------------------------------------------------------------------------
  */
 
 const NAME = 'tab'
-const VERSION = '4.6.2'
+const VERSION = '4.6.0'
 const DATA_KEY = 'bs.tab'
 const EVENT_KEY = `.${DATA_KEY}`
 const DATA_API_KEY = '.data-api'
 const JQUERY_NO_CONFLICT = $.fn[NAME]
-
-const CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu'
-const CLASS_NAME_ACTIVE = 'active'
-const CLASS_NAME_DISABLED = 'disabled'
-const CLASS_NAME_FADE = 'fade'
-const CLASS_NAME_SHOW = 'show'
 
 const EVENT_HIDE = `hide${EVENT_KEY}`
 const EVENT_HIDDEN = `hidden${EVENT_KEY}`
 const EVENT_SHOW = `show${EVENT_KEY}`
 const EVENT_SHOWN = `shown${EVENT_KEY}`
 const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`
+
+const CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu'
+const CLASS_NAME_ACTIVE = 'active'
+const CLASS_NAME_DISABLED = 'disabled'
+const CLASS_NAME_FADE = 'fade'
+const CLASS_NAME_SHOW = 'show'
 
 const SELECTOR_DROPDOWN = '.dropdown'
 const SELECTOR_NAV_LIST_GROUP = '.nav, .list-group'
@@ -40,7 +42,9 @@ const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle'
 const SELECTOR_DROPDOWN_ACTIVE_CHILD = '> .dropdown-menu .active'
 
 /**
- * Class definition
+ * ------------------------------------------------------------------------
+ * Class Definition
+ * ------------------------------------------------------------------------
  */
 
 class Tab {
@@ -49,17 +53,18 @@ class Tab {
   }
 
   // Getters
+
   static get VERSION() {
     return VERSION
   }
 
   // Public
+
   show() {
     if (this._element.parentNode &&
         this._element.parentNode.nodeType === Node.ELEMENT_NODE &&
         $(this._element).hasClass(CLASS_NAME_ACTIVE) ||
-        $(this._element).hasClass(CLASS_NAME_DISABLED) ||
-        this._element.hasAttribute('disabled')) {
+        $(this._element).hasClass(CLASS_NAME_DISABLED)) {
       return
     }
 
@@ -128,6 +133,7 @@ class Tab {
   }
 
   // Private
+
   _activate(element, container, callback) {
     const activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ?
       $(container).find(SELECTOR_ACTIVE_UL) :
@@ -181,12 +187,7 @@ class Tab {
       element.classList.add(CLASS_NAME_SHOW)
     }
 
-    let parent = element.parentNode
-    if (parent && parent.nodeName === 'LI') {
-      parent = parent.parentNode
-    }
-
-    if (parent && $(parent).hasClass(CLASS_NAME_DROPDOWN_MENU)) {
+    if (element.parentNode && $(element.parentNode).hasClass(CLASS_NAME_DROPDOWN_MENU)) {
       const dropdownElement = $(element).closest(SELECTOR_DROPDOWN)[0]
 
       if (dropdownElement) {
@@ -204,6 +205,7 @@ class Tab {
   }
 
   // Static
+
   static _jQueryInterface(config) {
     return this.each(function () {
       const $this = $(this)
@@ -226,7 +228,9 @@ class Tab {
 }
 
 /**
- * Data API implementation
+ * ------------------------------------------------------------------------
+ * Data Api implementation
+ * ------------------------------------------------------------------------
  */
 
 $(document)
@@ -236,7 +240,9 @@ $(document)
   })
 
 /**
+ * ------------------------------------------------------------------------
  * jQuery
+ * ------------------------------------------------------------------------
  */
 
 $.fn[NAME] = Tab._jQueryInterface

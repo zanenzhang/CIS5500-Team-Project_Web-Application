@@ -5,6 +5,7 @@ import { getTrendingVideos } from '../fetcher'
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import Navbar from '../components/Navbar';
+import Autocomplete from '../components/Autocomplete';
 import loadIcon from '../images/load-icon.png';
 
 import {
@@ -65,7 +66,7 @@ class TrendingVideosPage extends React.Component {
       videoTitleString: "",
       channelTitleString: "",
       tagString: "",
-      channelLanguage: "",
+      channelLanguage: "Select",
       categoryString: "",
 
       viewsLow: 0,
@@ -247,7 +248,7 @@ class TrendingVideosPage extends React.Component {
         <HeaderBar handleCountryChange={this.handleCountryChange} handleUpdateTrendStart={this.handleUpdateTrendStart} handleUpdateTrendStop={this.handleUpdateTrendStop}
         handleUpdatePublishStart={this.handleUpdatePublishStart} handleUpdatePublishStop={this.handleUpdatePublishStop}
         removeOffsetAndUpdate={this.removeOffsetAndUpdate} handleVideoTitleString={this.handleVideoTitleString}
-        handleChannelTitleString={this.handleChannelTitleString} handleTagString={this.handleTagString}
+        handleChannelTitleString={this.handleChannelTitleString} handleTagString={this.handleTagString} handleCategoryString={this.handleCategoryString}
         handleUpdateViewsLow={this.handleUpdateViewsLow} handleUpdateViewsHigh={this.handleUpdateViewsHigh} handleUpdateLikesLow={this.handleUpdateLikesLow} handleUpdateLikesHigh={this.handleUpdateLikesHigh} 
         handleUpdateDislikesLow={this.handleUpdateDislikesLow} handleUpdateDislikesHigh={this.handleUpdateDislikesHigh} handleUpdateCommentsLow={this.handleUpdateCommentsLow} handleUpdateCommentsHigh={this.handleUpdateCommentsHigh} 
         handleUpdateLibraryLow={this.handleUpdateLibraryLow} handleUpdateLibraryHigh={this.handleUpdateLibraryHigh} handleLanguageChange={this.handleLanguageChange}

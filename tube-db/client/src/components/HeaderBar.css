@@ -45,9 +45,8 @@
     width: 150px;
     left: 25%;
     margin: 0 auto;
-    
   }
-
+  
   .ant-picker {
     flex-grow: 0;
     position: static;
@@ -97,6 +96,7 @@
   width: 270px;
 }
 
+
 .categorySearch{
   width: 100%;
   text-align: right;
@@ -130,6 +130,7 @@
 
 .ant-input {
   display: inline-block;
+  width: 200px;
 }
 
 .ant-picker {
@@ -238,4 +239,82 @@
   width: 25px;
   height: 25px;
 }
+
+#autocompleteInput {
+  
+}
+
+.MuiAutocomplete-root{
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  color: rgba(0, 0, 0, 0.85);
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  width: 100px;
+  height: 35px;
+}
+
+.fieldset {
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-block-start: 0.01em;
+  padding-inline-start: 0.01em;
+  padding-inline-end: 0.01em;
+  padding-block-end: 0.01em;
+  min-inline-size: min-content;
+  border-width: 0px;
+  border-style: groove;
+  border-color: rgb(192, 192, 192);
+  border-image: initial;
+  height: 5px
+}
+
+
+#autoCompleteInput {
+  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: 'tnum', "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    height: 1.0rem;
+}
+
+#combo-box-demo{
+  height: 20px;
+}
+
+.MuiAutocomplete-inputRoot {
+  flex-wrap: nowrap !important;
+}
+
+.MuiInputBase-root {
+  height: 35px;
+}
+
+.MuiFormLabel-root{
+  height: 35px;
+}
+
+.MuiFormLabel-root .label{
+  margin-bottom: 10px;
+}
+
+#combo-box-demo-label {
+  padding-bottom: 10px;
+}
+
 

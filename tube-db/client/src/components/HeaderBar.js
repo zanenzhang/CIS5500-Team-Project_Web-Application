@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './Grid.css';
 import './HeaderBar.css';
 import HeaderLogo from '../components/HeaderLogo';
-import SearchBar from '../components/SearchBar';
+import ComboBox from '../components/Autocomplete';
 import { DatePicker, Space } from 'antd';
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -24,12 +24,31 @@ const { RangePicker } = DatePicker;
 
 
 const countryData = ['Brazil', 'Canada', 'France', 'Germany', 'India', 'Japan', 'Mexico', 'Russia', 'South Korea', 'United Kingdom', 'United States'];
-const languageData = ['Albanian', 'Arabic', 'Armenian', 'Bengali', 'Bhojpuri', 'Bosnian', 'Bulgarian', 'Catalan', 'Chichewa', 
+const languageData = ['Select','Albanian', 'Arabic', 'Armenian', 'Bengali', 'Bhojpuri', 'Bosnian', 'Bulgarian', 'Catalan', 'Chichewa', 
     'Chinese', 'Croatian', 'Czech', 'Dutch', 'English', 'Estonian', 'Filipino', 'French', 'Georgian', 'German', 'Greek', 'Hebrew', 
     'Hindi', 'Hungarian', 'Indian', 'Indonesian', 'Italian', 'Japanese', 'Kannada', 'Korean', 'Malay', 'Malayalam', 'Marathi', 'Nepali', 
     'Norwegian', 'Polish', 'Portuguese', 'Punjabi', 'Romanian', 'Russian', 'Serbian', 'Slovak', 'Slovenian', 'Spanish', 'Swahili', 
     'Swedish', 'Tagalog', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Vietnamese'];
 const dateFormat = 'YYYY-MM-DD';
+const autoCompleteSource = [
+    { key: 1, value: "Apple", price: 4.8 },
+    { key: 2, value: "Apricot", price: 5 },
+    { key: 3, value: "Blueberry", price: 5 },
+    { key: 4, value: "Banana", price: 5.1 },
+    { key: 5, value: "Cantaloupe", price: 3 },
+    { key: 6, value: "Grape", price: 3.5 },
+    { key: 7, value: "Guava", price: 5.1 },
+    { key: 8, value: "Kiwi", price: 4.6 },
+    { key: 9, value: "Lemon", price: 3.2 },
+    { key: 10, value: "Lime", price: 2.8 },
+    { key: 11, value: "Lychee", price: 2.8 },
+    { key: 12, value: "Mango", price: 2.8 },
+    { key: 13, value: "Melon", price: 2.8 },
+    { key: 14, value: "Pear", price: 2.8 },
+    { key: 15, value: "Pineapple", price: 2.8 },
+    { key: 16, value: "Plum", price: 2.8 },
+    { key: 17, value: "Orange", price: 2.8 }
+  ];
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
 const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendStart, 
@@ -41,11 +60,24 @@ handleLanguageChange, handleUpdateSubscribersLow, handleUpdateSubscribersHigh,
 handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
 
   const [currentCountry, setCurrentCountry] = useState("United States");
-  const [currentLanguage, setCurrentLanguage] = useState("English");
+  const [currentLanguage, setCurrentLanguage] = useState("Select");
   const [videoTitle, setVideoTitle] = useState('');
   const [channelTitle, setChannelTitle] = useState('');
   const [tagString, setTagString] = useState('');
   const [categoryString, setCategoryString] = useState('');
+
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0.0);
+  const [options, setOptions] = useState([]);
+
+  const onAutoSearch = (val) => {
+    let filtered = autoCompleteSource.filter(
+      (obj) => obj.key !== 0 && obj.value.toString().toLowerCase().includes(val)
+    );
+    setOptions(filtered);
+  };
+
+
 
   const changeCountry = event => {
     setCurrentCountry(event);
@@ -115,8 +147,9 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
     handleTagString(event.target.value);
   };
 
-  const changeCategoryString = (event) => {
+  const changeCategoryString = (event, value) => {
     console.log(event.target.value);
+    console.log(value);
     setCategoryString(event.target.value);
     handleCategoryString(event.target.value);
   };
@@ -182,7 +215,9 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                               <p className='categorySearch'>Category: </p>
                           </Col>
                           <Col span={15}>
-                              <Input value={categoryString} placeholder="Type here" onChange={changeCategoryString}/>
+                          <div style={{display: 'flex'}}>
+                            <ComboBox id="autoCompleteInput" value={categoryString} onChange={changeCategoryString}/>
+                            </div>
                           </Col>
                       </Row>
                       
@@ -319,7 +354,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='channelLanguageLabel'>Channel Language: </p>
                             </Col>
                             <Col span={10} id="languageCol">
-                            <Select value={currentLanguage} id="languageSelector" onChange={changeLanguage} >
+                            <Select value={currentLanguage} id="languageSelector" onChange={changeLanguage}>
                             {languageData.map((language) => (<Option key={language} value={language}>{language}</Option>))}
                             </Select>
                             </Col>

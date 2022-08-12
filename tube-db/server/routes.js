@@ -215,21 +215,28 @@ async function trending_videos(req, res) {
     searchClauses = "";
 
     let channelsCTE = `WITH Channels AS (
-        SELECT channel_title FROM TOP_YOUTUBE_CHANNELS
-        WHERE channel_language='${language}' `
+        SELECT channel_title FROM TOP_YOUTUBE_CHANNELS `
 
-    let videosCTE = `WITH Videos AS (
-        SELECT video_id, title, thumbnail_link
+    let categoryCTE = `Categories AS (
+        SELECT category_id, category_title FROM VIDEO_CATEGORIES
+        WHERE category_title = '${category}'
+    ), `
+
+    let videosCTE = `Videos AS (
+        SELECT video_id, title, thumbnail_link, category_id
         FROM TOP_TRENDING_VIDEOS
         WHERE country = '${country}' `
 
-    let secondLeg = `LIMIT ${pagePull}
+    let firstLeg = `LIMIT ${pagePull}
         OFFSET ${offset}
-    ) SELECT V.video_id, V.title as video_title, V.thumbnail_link
-        FROM Videos V `
+    ) SELECT V.video_id, V.title as video_title, V.thumbnail_link, V.category_id `
+
+    let secondLeg = (language != 'Select' && subscribersHigh != 0 && libraryHigh !=0) ? `FROM Channels C JOIN ` : `FROM `    
+    
+    let thirdLeg = (language != 'Select' && subscribersHigh != 0 && libraryHigh !=0) ? `Videos V ON C.channel_title=V.channel_title ` : `Videos V `
 
 
-    let fifthLeg = `GROUP BY video_id
+    let fifthLeg = `GROUP BY V.video_id
         Limit ${limit};
     `
 
@@ -241,8 +248,8 @@ async function trending_videos(req, res) {
         searchClauses += `AND title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
         searchClauses += `AND channel_title LIKE '${channelTitle}%' `} 
-    if (category != '' && category != 'undefined')  {
-        searchClauses += `AND tags LIKE '%${tag}%' `} 
+    if (category != '' && category != 'undefined'){
+        searchClauses += `AND category_id IN (Select category_id From Categories) `}
 
     if (viewsHigh != 0){
         searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
@@ -253,17 +260,35 @@ async function trending_videos(req, res) {
     if (commentsHigh != 0){
         searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
 
-    if (subscribersHigh != 0){
-        channelsCTE += `AND subscribes BETWEEN ${subscribersLow} AND ${subscribersHigh} `} 
-    if (libraryHigh != 0){
+    
+    channelsCTE += 'WHERE '
+    if (language != 'Select'){
+        channelsCTE += ` channel_language = '${language}' `}
+    else if (subscribersHigh != 0){
+        channelsCTE += `subscribes BETWEEN ${subscribersLow} AND ${subscribersHigh} `}
+    else if (libraryHigh != 0){
+        channelsCTE += ` library_size BETWEEN ${libraryLow} AND ${libraryHigh} `}
+        
+        
+    if (subscribersHigh != 0 && language != 'Select'){
+        channelsCTE += `AND subscribes BETWEEN ${subscribersLow} AND ${subscribersHigh} `}
+    if ((subscribersHigh != 0 || language != 'Select') && libraryHigh != 0){
         channelsCTE += `AND library_size BETWEEN ${libraryLow} AND ${libraryHigh} `} 
     
-    channelsCTE += `);`
+    channelsCTE += `), `
 
-    finalQuery = ((subscribersHigh!=0 || libraryHigh!=0 ? channelsCTE : "")) + videosCTE +  searchClauses + secondLeg + fifthLeg
+    let finalQuery = ((subscribersHigh!=0 || libraryHigh!=0 || language != 'Select') ? channelsCTE : "") 
+    if (finalQuery == ""){
+        finalQuery += `WITH `}
+    if (category != '' && category != 'undefined') {
+        pagePull = pagePull * 10
+        finalQuery += categoryCTE} 
+    if (finalQuery == ""){
+        finalQuery += `WITH `}
+    finalQuery += videosCTE +  searchClauses + firstLeg + secondLeg + thirdLeg + fifthLeg
 
-    // console.log("Final query: ")
-    // console.log(finalQuery)
+    console.log("Final query: ")
+    console.log(finalQuery)
 
     connection.query(finalQuery, function (error, results, fields) {
 
@@ -275,6 +300,7 @@ async function trending_videos(req, res) {
         }
     });
 }
+
 
 async function singleVideo(req, res){
     videoid = req.query.videoid

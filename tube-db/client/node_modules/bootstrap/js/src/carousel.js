@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.6.2): carousel.js
+ * Bootstrap (v4.6.0): carousel.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -9,11 +9,13 @@ import $ from 'jquery'
 import Util from './util'
 
 /**
+ * ------------------------------------------------------------------------
  * Constants
+ * ------------------------------------------------------------------------
  */
 
 const NAME = 'carousel'
-const VERSION = '4.6.2'
+const VERSION = '4.6.0'
 const DATA_KEY = 'bs.carousel'
 const EVENT_KEY = `.${DATA_KEY}`
 const DATA_API_KEY = '.data-api'
@@ -23,14 +25,23 @@ const ARROW_RIGHT_KEYCODE = 39 // KeyboardEvent.which value for right arrow key
 const TOUCHEVENT_COMPAT_WAIT = 500 // Time for mouse compat events to fire after touch
 const SWIPE_THRESHOLD = 40
 
-const CLASS_NAME_CAROUSEL = 'carousel'
-const CLASS_NAME_ACTIVE = 'active'
-const CLASS_NAME_SLIDE = 'slide'
-const CLASS_NAME_RIGHT = 'carousel-item-right'
-const CLASS_NAME_LEFT = 'carousel-item-left'
-const CLASS_NAME_NEXT = 'carousel-item-next'
-const CLASS_NAME_PREV = 'carousel-item-prev'
-const CLASS_NAME_POINTER_EVENT = 'pointer-event'
+const Default = {
+  interval: 5000,
+  keyboard: true,
+  slide: false,
+  pause: 'hover',
+  wrap: true,
+  touch: true
+}
+
+const DefaultType = {
+  interval: '(number|boolean)',
+  keyboard: 'boolean',
+  slide: '(boolean|string)',
+  pause: '(string|boolean)',
+  wrap: 'boolean',
+  touch: 'boolean'
+}
 
 const DIRECTION_NEXT = 'next'
 const DIRECTION_PREV = 'prev'
@@ -51,6 +62,15 @@ const EVENT_DRAG_START = `dragstart${EVENT_KEY}`
 const EVENT_LOAD_DATA_API = `load${EVENT_KEY}${DATA_API_KEY}`
 const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`
 
+const CLASS_NAME_CAROUSEL = 'carousel'
+const CLASS_NAME_ACTIVE = 'active'
+const CLASS_NAME_SLIDE = 'slide'
+const CLASS_NAME_RIGHT = 'carousel-item-right'
+const CLASS_NAME_LEFT = 'carousel-item-left'
+const CLASS_NAME_NEXT = 'carousel-item-next'
+const CLASS_NAME_PREV = 'carousel-item-prev'
+const CLASS_NAME_POINTER_EVENT = 'pointer-event'
+
 const SELECTOR_ACTIVE = '.active'
 const SELECTOR_ACTIVE_ITEM = '.active.carousel-item'
 const SELECTOR_ITEM = '.carousel-item'
@@ -60,33 +80,16 @@ const SELECTOR_INDICATORS = '.carousel-indicators'
 const SELECTOR_DATA_SLIDE = '[data-slide], [data-slide-to]'
 const SELECTOR_DATA_RIDE = '[data-ride="carousel"]'
 
-const Default = {
-  interval: 5000,
-  keyboard: true,
-  slide: false,
-  pause: 'hover',
-  wrap: true,
-  touch: true
-}
-
-const DefaultType = {
-  interval: '(number|boolean)',
-  keyboard: 'boolean',
-  slide: '(boolean|string)',
-  pause: '(string|boolean)',
-  wrap: 'boolean',
-  touch: 'boolean'
-}
-
 const PointerType = {
   TOUCH: 'touch',
   PEN: 'pen'
 }
 
 /**
- * Class definition
+ * ------------------------------------------------------------------------
+ * Class Definition
+ * ------------------------------------------------------------------------
  */
-
 class Carousel {
   constructor(element, config) {
     this._items = null
@@ -108,6 +111,7 @@ class Carousel {
   }
 
   // Getters
+
   static get VERSION() {
     return VERSION
   }
@@ -117,6 +121,7 @@ class Carousel {
   }
 
   // Public
+
   next() {
     if (!this._isSliding) {
       this._slide(DIRECTION_NEXT)
@@ -215,6 +220,7 @@ class Carousel {
   }
 
   // Private
+
   _getConfig(config) {
     config = {
       ...Default,
@@ -277,9 +283,11 @@ class Carousel {
 
     const move = event => {
       // ensure swiping with one touch and not pinching
-      this.touchDeltaX = event.originalEvent.touches && event.originalEvent.touches.length > 1 ?
-        0 :
-        event.originalEvent.touches[0].clientX - this.touchStartX
+      if (event.originalEvent.touches && event.originalEvent.touches.length > 1) {
+        this.touchDeltaX = 0
+      } else {
+        this.touchDeltaX = event.originalEvent.touches[0].clientX - this.touchStartX
+      }
     }
 
     const end = event => {
@@ -502,6 +510,7 @@ class Carousel {
   }
 
   // Static
+
   static _jQueryInterface(config) {
     return this.each(function () {
       let data = $(this).data(DATA_KEY)
@@ -573,7 +582,9 @@ class Carousel {
 }
 
 /**
- * Data API implementation
+ * ------------------------------------------------------------------------
+ * Data Api implementation
+ * ------------------------------------------------------------------------
  */
 
 $(document).on(EVENT_CLICK_DATA_API, SELECTOR_DATA_SLIDE, Carousel._dataApiClickHandler)
@@ -587,7 +598,9 @@ $(window).on(EVENT_LOAD_DATA_API, () => {
 })
 
 /**
+ * ------------------------------------------------------------------------
  * jQuery
+ * ------------------------------------------------------------------------
  */
 
 $.fn[NAME] = Carousel._jQueryInterface
