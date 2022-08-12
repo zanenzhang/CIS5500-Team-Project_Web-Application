@@ -66,8 +66,6 @@ const geoOptions = {
   backgroundColor: "black"
 }
 
-var finalCountriesArray = [];
-
 class VideoPage extends React.Component {
 
   constructor(props) {
@@ -161,7 +159,7 @@ class VideoPage extends React.Component {
                     <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
                     <h2></h2>
                     
-                  <h2>Trending Counries:</h2>
+                  <h2>Trending Countries:</h2>
                   <Chart chartType="GeoChart" width="100%" height="300px" data={this.state.finalCountriesArray} options = {geoOptions} />
                 
                 
