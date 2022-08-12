@@ -62,12 +62,11 @@ const geoMapData = [
   ["RU", 300]
 ];
 
-var finalCountriesArray = [["Country", "Popularity"]];
-
 const geoOptions = {
   backgroundColor: "black"
 }
 
+var finalCountriesArray = [];
 
 class VideoPage extends React.Component {
 
@@ -77,12 +76,11 @@ class VideoPage extends React.Component {
       this.state = {
         fullLink: "",
         videoInfo: [],
-        videoId: ""
+        videoId: "",
       };
 
       this.loadCountries = this.loadCountries.bind(this)
   }
-
 
     fetchVideoId = async () => {
       const queryString = window.location.search;
@@ -94,55 +92,35 @@ class VideoPage extends React.Component {
       window.localStorage.setItem('link', this.state.fullLink)
     };
 
-    //"["United States, Canada, Mexico"]" => ["United States", "Canada", "Mexico"]
-    //var finalCountriesArray = [["Country", "Popularity"],["United States", 300],["Canada", 300],['Mexico', 300]];
-
-  
     componentDidMount() {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results }, this.loadCountries);
         // const map1 = this.state.videoInfo.map(x=> x.video_title);
         // var array = JSON.parse("[" + x.video_title + "]");
-        // console.log(array);
-      })
+      });
     };
 
-    loadCountries() {
+    loadCountries(){
       //return this.props.videoInfo[0].countries.substring(0,3);
+      var countriesArray = [["Country", "Popularity"]];
+
       var countriesListObject = this.state.videoInfo.map(info =>  info.countries)
 
       var countriesString = JSON.stringify(countriesListObject);
-      var countriesListString = countriesString.substring(2,countriesString.length-2);
       
       var slicedString = countriesString.slice(2,(countriesString.length -2))
       var countriesStringArr = slicedString.split(",");
 
       for (var i=0; i<countriesStringArr.length; i++){
-        console.log(countriesStringArr[i]);
         var countryPlaceholder = [];
         countryPlaceholder.push(countriesStringArr[i]);
         countryPlaceholder.push(300);
-        finalCountriesArray.push(countryPlaceholder);
+        countriesArray.push(countryPlaceholder);
         countryPlaceholder = [];
       }
-        
-
-      const countriesArray = [];
-      for (var i = 0; i < countriesListString.length; i++) {
-        var string = '';
-        string += countriesListString[i];
-        if (countriesListString.charAt(i) == ',') {
-          //add the string to arry
-          countriesArray.push(string);
-          string = ''; //reset string for the next country
-          continue;
-        }
-      }
-      //countriesListString.substring(0, countriesString.indexOf(",")-2)
-      return(countriesListString);
-      // return countriesListString.split(",");
-
+      console.log(countriesArray);
+      this.setState({finalCountriesArray : countriesArray});
     }
    
     render() {
@@ -184,7 +162,7 @@ class VideoPage extends React.Component {
                     <h2></h2>
                     
                   <h2>Trending Counries:</h2>
-                  <Chart chartType="GeoChart" width="100%" height="300px" data={finalCountriesArray} options = {geoOptions} />
+                  <Chart chartType="GeoChart" width="100%" height="300px" data={this.state.finalCountriesArray} options = {geoOptions} />
                 
                 
                   <h2>Countries:</h2>
