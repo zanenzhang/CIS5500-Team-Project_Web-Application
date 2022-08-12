@@ -6,17 +6,20 @@ import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import { useParams } from 'react-router-dom';
+import HeaderLogo from '../components/HeaderLogo';
+import LikeButton from '../components/LikeButton';
 import { Chart } from "react-google-charts";
 import { useState } from 'react';
+
 
 import {
   Table,
   Select
 } from 'antd'
-import { FaBlackberry } from 'react-icons/fa';
 
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
+
 const columns = [
   { type: "string", label: "Task ID" },
   { type: "string", label: "Task Name" },
@@ -41,7 +44,7 @@ const rows = [[
 ];
 const data = [columns, ...rows];
 
-export const options = {
+const options = {
   height: 70,
   backgroundColor: "black",
   gantt: {
@@ -49,7 +52,7 @@ export const options = {
   },
 };
 
-export const geoMapData = [
+const geoMapData = [
   ["Country", "Popularity"],
   ["Japan", 300],
   ["United States", 300],
@@ -62,39 +65,36 @@ export const geoMapData = [
 const geoOptions = {
   backgroundColor: "black"
 }
+
+
 class VideoPage extends React.Component {
 
       state = {
         fullLink: "",
         videoInfo: [],
-        videoId: "",
-        year: "",
+        videoId: ""
       };
-      
-      
+    
     fetchVideoId = async () => {
-      
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const videoId = urlParams.get("videoid");
       this.state.videoId = videoId;
       var linkBegin = "https://www.youtube.com/embed/";
       this.state.fullLink = linkBegin + `${this.state.videoId}`;
-      //const year = this.state.videoInfo.map(info => info.trend_start.substring(0,4));
+      window.localStorage.setItem('link', this.state.fullLink)
     };
   
     componentDidMount() {
       this.fetchVideoId();
-      //this.getDate();
       getSingleVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results });
-        //const year = this.state.videoInfo.map(info => info.trend_start.substring(0,4)); 
-        
+        // const map1 = this.state.videoInfo.map(x=> x.video_title);
+        // var array = JSON.parse("[" + x.video_title + "]");
+        // console.log(array);
       })
     };
-  
-    //function that obtains the dereferenced 
-    //separate the comma
+
     countries = () => {
       //return this.props.videoInfo[0].countries.substring(0,3);
       var countriesListObject = this.state.videoInfo.map(info =>  info.countries)
@@ -116,12 +116,22 @@ class VideoPage extends React.Component {
       // return countriesListString.split(",");
 
     }
+
+  
+   
     render() {
-      const country = this.countries();
-      //const {year} = this.state.videoInfo.map(info => info.trend_start.substring(0,4)); 
+  
       return (
         
         <div>
+              <div className="headerBar">
+            <div className="headerLogo">
+              <HeaderLogo />
+            </div>
+            <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
+              <h1 id="videoPageTitle">Video Details</h1>
+              </div>
+            </div>
   
             <div id="page">
     
@@ -136,40 +146,41 @@ class VideoPage extends React.Component {
                   <iframe id="videoFrame" width="640" height="360" 
                       src={this.state.fullLink}>
                   </iframe>
-                  <div className="info1">
-                    <h2>Title: </h2>
-                    {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
-                    <h2>Description:</h2>
-                    {this.state.videoInfo.map(info => <h5>{info.description.substring(0, 150)}</h5>)}
-                    <h2>Trending Time:</h2>
+
+                  <h2>Title: </h2>
+                  {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
+                  <h2>Description:</h2>
+                  {this.state.videoInfo.map(info => <h5>{info.description.substring(0, 150)}</h5>)}
+                  <h2>Trending Start Date:</h2>
+                  {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)}
+                  <h2>Trending Time:</h2>
                     <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
-                  </div>
-                  
-                  {/* <h2>Trending Start Date:</h2>
-                  {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)} */}
-                  {/* <h2>Trending End Date:</h2>
-                  <h5>{year}</h5> */}
-                  {/* <h2>Trending End Date:</h2>
-                  <h5>{new Date({year}, 10, 10)}</h5> */}
-                  {/* <h2>Trending End Date:</h2>
-                  {this.state.videoInfo.map(info => <h5> {info.trend_stop.substring(0,10)}</h5>)} */}
-                  
-                  <div className="info2">
-                  
-                  <h2></h2>
+                    <h2></h2>
+                    
                   <h2>Trending Counries:</h2>
                   <Chart chartType="GeoChart" width="100%" height="300px" data={geoMapData} options = {geoOptions} />
+                
+                
                   <h2>Countries:</h2>
                   {this.state.videoInfo.map(info => <h5>  {info.countries}</h5>)}
-                  {/* <h2>Dereferenced Country:</h2>
-                  <h5>{country}</h5> */}
-                  </div>
+                  
                   <h2>Views:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
                   <h2>Likes:</h2>
                   {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
-                  
-    
+                
+                  <div id="likeButton">
+                  <div>
+                  {this.state.videoInfo.map(info=>(
+                    <LikeButton
+                      thumbLink = {info.thumbnail_link}
+                      videoId = {info.video_id}
+                      videoTitle = {info.video_title}
+                    />
+                  ))}
+                  </div>
+                </div>
+                    
                 </div>
             
             
@@ -180,4 +191,5 @@ class VideoPage extends React.Component {
   
   }
   
-  export default VideoPage
+ 
+  export default VideoPage;

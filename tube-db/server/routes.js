@@ -234,7 +234,7 @@ async function trending_videos(req, res) {
     if (commentsHigh != 0){
         searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
 
-
+    
      
 
     let firstLeg = `WITH Videos AS (
@@ -252,8 +252,8 @@ async function trending_videos(req, res) {
     `
 
     let channels = `WITH Channels AS (
-        SELECT 
-    )`
+        SELECT channel_title FROM TOP_YOUTUBE_CHANNELS
+        WHERE `
 
     finalQuery = firstLeg + searchClauses + secondLeg
 
