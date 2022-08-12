@@ -62,6 +62,8 @@ const geoMapData = [
   ["RU", 300]
 ];
 
+var finalCountriesArray = [["Country", "Popularity"]];
+
 const geoOptions = {
   backgroundColor: "black"
 }
@@ -69,12 +71,19 @@ const geoOptions = {
 
 class VideoPage extends React.Component {
 
-      state = {
+  constructor(props) {
+    super(props)
+
+      this.state = {
         fullLink: "",
         videoInfo: [],
         videoId: ""
       };
-    
+
+      this.loadCountries = this.loadCountries.bind(this)
+  }
+
+
     fetchVideoId = async () => {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
@@ -88,18 +97,36 @@ class VideoPage extends React.Component {
     componentDidMount() {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
-        this.setState({ videoInfo: res.results });
+        this.setState({ videoInfo: res.results }, this.loadCountries);
         // const map1 = this.state.videoInfo.map(x=> x.video_title);
         // var array = JSON.parse("[" + x.video_title + "]");
         // console.log(array);
       })
     };
 
-    countries = () => {
+    loadCountries() {
       //return this.props.videoInfo[0].countries.substring(0,3);
       var countriesListObject = this.state.videoInfo.map(info =>  info.countries)
+
       var countriesString = JSON.stringify(countriesListObject);
       var countriesListString = countriesString.substring(2,countriesString.length-2);
+
+      var slicedString = countriesString.slice(2,(countriesString.length -2))
+      var countriesStringArr = slicedString.split(",");
+      console.log(slicedString)
+      for (var i=0; i<countriesStringArr.length; i++){
+        console.log(countriesStringArr[i]);
+        var countryPlaceholder = [];
+        countryPlaceholder.push(countriesStringArr[i]);
+        countryPlaceholder.push(300);
+        finalCountriesArray.push(countryPlaceholder);
+        countryPlaceholder = [];
+      }
+        
+      
+
+      console.log(finalCountriesArray)
+
       const countriesArray = [];
       for (var i = 0; i < countriesListString.length; i++) {
         var string = '';
@@ -116,8 +143,6 @@ class VideoPage extends React.Component {
       // return countriesListString.split(",");
 
     }
-
-  
    
     render() {
   
@@ -158,7 +183,7 @@ class VideoPage extends React.Component {
                     <h2></h2>
                     
                   <h2>Trending Counries:</h2>
-                  <Chart chartType="GeoChart" width="100%" height="300px" data={geoMapData} options = {geoOptions} />
+                  <Chart chartType="GeoChart" width="100%" height="300px" data={finalCountriesArray} options = {geoOptions} />
                 
                 
                   <h2>Countries:</h2>
