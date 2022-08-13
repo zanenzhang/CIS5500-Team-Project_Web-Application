@@ -88,7 +88,6 @@ class TrendingVideosPage extends React.Component {
     this.handleCountryChange = this.handleCountryChange.bind(this)
     this.handleLanguageChange = this.handleLanguageChange.bind(this)
     this.removeOffsetAndUpdate = this.removeOffsetAndUpdate.bind(this)
-    this.replacePrivateThumbs = this.replacePrivateThumbs.bind(this)
 
     this.handleUpdateTrendStart = this.handleUpdateTrendStart.bind(this)
     this.handleUpdateTrendStop = this.handleUpdateTrendStop.bind(this)
