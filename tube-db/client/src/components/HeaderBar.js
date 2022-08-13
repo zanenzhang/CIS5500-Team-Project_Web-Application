@@ -30,25 +30,7 @@ const languageData = ['Select','Albanian', 'Arabic', 'Armenian', 'Bengali', 'Bho
     'Norwegian', 'Polish', 'Portuguese', 'Punjabi', 'Romanian', 'Russian', 'Serbian', 'Slovak', 'Slovenian', 'Spanish', 'Swahili', 
     'Swedish', 'Tagalog', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Vietnamese'];
 const dateFormat = 'YYYY-MM-DD';
-const autoCompleteSource = [
-    { key: 1, value: "Apple", price: 4.8 },
-    { key: 2, value: "Apricot", price: 5 },
-    { key: 3, value: "Blueberry", price: 5 },
-    { key: 4, value: "Banana", price: 5.1 },
-    { key: 5, value: "Cantaloupe", price: 3 },
-    { key: 6, value: "Grape", price: 3.5 },
-    { key: 7, value: "Guava", price: 5.1 },
-    { key: 8, value: "Kiwi", price: 4.6 },
-    { key: 9, value: "Lemon", price: 3.2 },
-    { key: 10, value: "Lime", price: 2.8 },
-    { key: 11, value: "Lychee", price: 2.8 },
-    { key: 12, value: "Mango", price: 2.8 },
-    { key: 13, value: "Melon", price: 2.8 },
-    { key: 14, value: "Pear", price: 2.8 },
-    { key: 15, value: "Pineapple", price: 2.8 },
-    { key: 16, value: "Plum", price: 2.8 },
-    { key: 17, value: "Orange", price: 2.8 }
-  ];
+
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
 const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendStart, 
@@ -65,19 +47,6 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
   const [channelTitle, setChannelTitle] = useState('');
   const [tagString, setTagString] = useState('');
   const [categoryString, setCategoryString] = useState('');
-
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0.0);
-  const [options, setOptions] = useState([]);
-
-  const onAutoSearch = (val) => {
-    let filtered = autoCompleteSource.filter(
-      (obj) => obj.key !== 0 && obj.value.toString().toLowerCase().includes(val)
-    );
-    setOptions(filtered);
-  };
-
-
 
   const changeCountry = event => {
     setCurrentCountry(event);
