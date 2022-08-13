@@ -132,14 +132,8 @@ class TrendingVideosPage extends React.Component {
       this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString, this.state.categoryString,
       this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
       this.state.commentsLow, this.state.commentsHigh,this.state.subscribersLow, this.state.subscribersHigh, this.state.libraryLow, this.state.libraryHigh).then(res => {
-      this.setState({ videoResults: res.results }, this.replacePrivateThumbs);
+      this.setState({ videoResults: res.results });
     })
-  }
-
-  replacePrivateThumbs(){
-    for (var item of this.state.videoResults){
-      
-    }
   }
 
   handleVideoTitleString(value){
@@ -243,7 +237,7 @@ class TrendingVideosPage extends React.Component {
       this.state.publishStart, this.state.publishStop, this.state.videoTitleString, this.state.channelTitleString, this.state.tagString, this.state.categoryString,
       this.state.viewsLow, this.state.viewsHigh, this.state.likesLow, this.state.likesHigh, this.state.dislikesLow, this.state.dislikesHigh, 
       this.state.commentsLow, this.state.commentsHigh,this.state.subscribersLow, this.state.subscribersHigh, this.state.libraryLow, this.state.libraryHigh).then(res => {
-      this.setState({ videoResults: res.results }, this.replacePrivateThumbs);
+      this.setState({ videoResults: res.results });
     })
   };
 

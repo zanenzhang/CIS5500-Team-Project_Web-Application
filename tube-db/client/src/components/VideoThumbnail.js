@@ -17,7 +17,7 @@ const VideoThumbnail = ({thumbLink, videoId, videoTitle}) => {
     <div>
       <Link to={`/video?videoid=${videoId}`}>
         <p1 className="videoTitle">{videoTitle}</p1>
-        <img className="thumbnail" src={imgSrc} alt='video-thumb' onError={errorHandler}/>
+        <img className="thumbnail" src={thumbLink} alt='video-thumb'/>
       </Link>
     </div>
   )
