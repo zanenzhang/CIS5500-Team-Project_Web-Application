@@ -27,6 +27,7 @@
     justify-content: center;
     align-content: center;
     transition: 0ms;
+    align-items: center;
   }
 
   .headerSearch {
@@ -343,5 +344,6 @@
   margin-bottom: 2rem;
   color: #F61212;
   transition: 0ms;
+  vertical-align: center;
 }
 
