@@ -7,6 +7,11 @@ import { DatePicker, Space } from 'antd';
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { SearchOutlined } from '@ant-design/icons';
+import './TopDropdown.css';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import { IconContext } from 'react-icons';
+import { Link } from 'react-router-dom';
 import searchBarIcon from '../images/searchicon.svg';
 import {
     Table,
@@ -33,6 +38,7 @@ const dateFormat = 'YYYY-MM-DD';
 
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
+
 const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendStart, 
   handleUpdateTrendStop, handleVideoTitleString, handleChannelTitleString, 
   handleTagString, handleUpdatePublishStart, handleUpdatePublishStop, handleUpdateViewsLow,
@@ -47,6 +53,10 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
   const [channelTitle, setChannelTitle] = useState('');
   const [tagString, setTagString] = useState('');
   const [categoryString, setCategoryString] = useState('');
+
+  const [dropSwitch, setDropSwitch] = useState(false);
+
+  const showDropdown = () => setDropSwitch(!dropSwitch);
 
   const changeCountry = event => {
     setCurrentCountry(event);
@@ -155,16 +165,35 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
 
   return(
     <div className="headerBar">
+            
         <div className="headerLogo">
           <HeaderLogo />
         </div>
 
         <div className="headerExLogo">
+        
 
+        <div className="dropdownwrapper">
+        <IconContext.Provider value={{ color: '#fff' }}>
+        <div className='dropdown'>
+        <Link to='#' className='dropdown-bars'>
+            <FaIcons.FaBars id="dropdownicon" onClick={showDropdown} />
+        </Link>
+        </div>
+        <nav className={dropSwitch ? 'dropdown active' : 'dropdown inactive'}>
+        <ul className='dropdown-click' >
+            <li className='dropdown-toggle'>
+            <Link to='#' className='dropdown-bars'>
+                <AiIcons.AiOutlineClose id="closebutton" onClick={showDropdown} />
+            </Link>
+            </li>
+            
               <div className="headerSearch">
               <Row>
+              
                   <Col span={8}>
                       <Row>
+                        
                           <Col span={9}>
                               <p className='videoTitleSearch'>Video Title: </p>
                           </Col>
@@ -344,20 +373,34 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                     <div class="submitSearch">
                         <Button id="submitVideoSearch" onClick={updateSearch}><img id="searchIcon" src={searchBarIcon}/>Search</Button>
                     </div>
+
+                    
                             
                     </Col>
 
                 </Row>
 
+                
+
               </div>
+              </ul>
+        </nav>
+        </IconContext.Provider>
+        </div>
               <div className="headerSelectors">
+                
+              <h1 id='trendingVideosTitle'>Video Search</h1>
               </div>
-              </div>
-        
-  </div>
+            </div>
+            
+            
+
+        </div>
+       
   )     
 };
 
 export default HeaderBar;
 
 
+//{dropSwitch ? '' : 'Video Search'}
