@@ -50,11 +50,23 @@ div > h5 {
     color: #F61212;
   }
 
-  .videoInfo {
-    justify-content: center;
+  .likes{
+    /* justify-content: center;
     background: #000000;
     flex-grow: 1;
-    height: 1200px;
+    height: 1200px; */
+    margin-left: 700px;
+    margin-top: -100px;
+}
+
+.trending {
+    margin-left: 0px;
+    margin-top: 30px;
+}
+
+.description {
+    margin-left: 700px;
+    margin-top: -350px;
 }
 
 .info1 {
@@ -66,13 +78,7 @@ div > h5 {
 .info2 {
     margin-top: 80px;
 }
-div > h2 {
-    color: #ffffff;
-    text-decoration: underline; 
-}
-div > h5 {
-    color: #ffffff;
-}
+
 
 #videoFrame{
     border-radius: 20px;
@@ -83,5 +89,18 @@ div > h5 {
     height: calc( 100vh - 30px);
   }
 
+/* .VideoInfoArea {
+    position: absolute;
+      left: 950px;
+      top: 200px;
+      width: 420px;
+      height: 500px;
+      margin: 0 auto;
+      border-radius: 30px;
+      background-color: #ee4444;
+      opacity: 0.6; 
+    border-color: rgb(231, 44, 44);
+    box-shadow: none;
+  } */
 
 
