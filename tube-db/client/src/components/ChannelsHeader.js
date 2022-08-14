@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import './Grid.css';
+// import './Grid.css';
 import './ChannelsHeader.css';
 import HeaderLogo from '../components/HeaderLogo';
-import SearchBar from '../components/SearchBar';
+// import SearchBar from '../components/SearchBar';
 import { DatePicker, Space } from 'antd';
 import { Form, FormInput, FormGroup, Button, Card, CardBody, CardTitle, Progress } from "shards-react";
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
@@ -37,14 +37,14 @@ class ChannelsHeader extends React.Component {
 
     render(){
         return(
-          <div className="headerBar">
+          <div className="chanHeadBar">
 
-            <div className="headerLogo">
+            <div className="chanHeaderLogo">
                 <HeaderLogo />
             </div>
 
-            <div className="headerExLogo">
-                <h1 className='pageTitle'>Channel Search</h1>
+            <div className="chanHeaderExLogo">
+                <h1 className='chanPageTitle'>Channel Search</h1>
             </div>
             
           </div>

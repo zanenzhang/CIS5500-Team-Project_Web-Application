@@ -7,6 +7,10 @@
     /* border: 4px solid red; */
 }
 
+ChannelsHeader {
+    border: 2px solid red;
+}
+
 div.page{
     margin: 0;
     padding: 0;
