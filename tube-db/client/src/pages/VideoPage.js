@@ -49,11 +49,26 @@ const options = {
   height: 70,
   gantt: {
     trackHeight: 30,
-    criticalPathEnabled: true,
+    backgroundColor: '#000000',
+    criticalPathEnabled: false,
             criticalPathStyle: {
               stroke: '#e64a19',
               strokeWidth: 5
-            }
+            },
+    // labelStyle: {
+    //   color: "#cf2b08",
+    //   fontName: 'Arial',
+    // fontSize: 20
+    // },
+    palette: [
+      {
+        
+        "color": "#cf2b08",
+        "dark": "#ff0000",
+        "light": "#ffffff"
+      },
+    ]
+    
   },
 };
 
@@ -69,9 +84,9 @@ const geoMapData = [
 
 const geoOptions = {
   backgroundColor: '#000000',
-  datalessRegionColor: '#FFFFFF',
+  // datalessRegionColor: '#FFFFFF',
   colorAxis: {
-    colors: ["#d43b08"]
+    colors: "#ff0000"
   },
   legend: "none",
   tooltip: {
