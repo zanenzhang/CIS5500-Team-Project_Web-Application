@@ -24,7 +24,7 @@ div > h5 {
 
 .headerBar {
     display: flex;
-    height: 200px;
+    height: 240px;
     background: #000000;
     color: #000000;
 }
@@ -56,12 +56,12 @@ div > h5 {
     flex-grow: 1;
     height: 1200px; */
     margin-left: 700px;
-    margin-top: -100px;
+    margin-top: -200px;
 }
 
 .trending {
     margin-left: 0px;
-    margin-top: 30px;
+    margin-top: 10%;
 }
 
 .description {
