@@ -370,7 +370,7 @@ class VideoPage extends React.Component {
                   <h2>Title: </h2>
                   {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
                   <h2>Description:</h2>
-                  {this.state.videoInfo.map(info => <h5>{info.description.substring(0, 150)}</h5>)}
+                  ({this.state.videoInfo.description} ? {this.state.videoInfo.map(info => <h5>{info.description.substring(0, 150)}</h5>)} : "No Description")
                   {/* <h2>Trending Start Date:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)} */}
                   
