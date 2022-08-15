@@ -56,16 +56,20 @@ div > h5 {
     flex-grow: 1;
     height: 1200px; */
     margin-left: 700px;
-    margin-top: -200px;
+    margin-top: -300px;
+    margin-right: 700px;
+    margin-bottom: 100px;
 }
 
 .trending {
     margin-left: 0px;
-    margin-top: 10%;
+    margin-right: 100px;
+    margin-top: 80px;
 }
 
 .description {
     margin-left: 700px;
+    margin-right: 700px;
     margin-top: -350px;
 }
 
