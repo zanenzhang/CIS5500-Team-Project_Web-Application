@@ -105,6 +105,7 @@ class VideoPage extends React.Component {
         videoInfo: [],
         videoId: "",
         finalTrendingDates: [],
+        finalCountriesArray: [],
       };
 
       this.loadCountries = this.loadCountries.bind(this)
@@ -125,10 +126,10 @@ class VideoPage extends React.Component {
     componentDidMount() {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
-        this.setState({ videoInfo: res.results }, this.loadCountries);
+        this.setState({ videoInfo: res.results });
         // const map1 = this.state.videoInfo.map(x=> x.video_title);
         // var array = JSON.parse("[" + x.video_title + "]");
-      }).then(this.loadGanttTimes);
+      }).then(this.loadCountries).then(this.loadGanttTimes);
     };
 
     loadCountries(){
@@ -166,7 +167,13 @@ class VideoPage extends React.Component {
 
       var trendingDateRows = []; 
       
-      for (var country in this.state.finalCountriesArray){
+      for (var idx =0; idx < this.state.finalCountriesArray.length; idx++){
+
+        console.log(this.state.finalCountriesArray);
+
+        var country = this.state.finalCountriesArray[idx][0];
+
+        console.log(country);
 
         getCountryGantt(this.videoId, country).then(res =>{
 
@@ -212,7 +219,7 @@ class VideoPage extends React.Component {
       this.setState({finalTrendingDates : data});
     }
 
-    
+
 
     trendingTime(){
       const columns = [
