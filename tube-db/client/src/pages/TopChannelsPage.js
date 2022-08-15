@@ -308,7 +308,7 @@ class TopChannelsPage extends React.Component {
                                     <Col span={5}>
                                         <Row>
                                             <Col span={9}>
-                                                <p className='titleSearchName'>Country: </p>
+                                                <p className='titleSearchNameAlt'>Country: </p>
                                             </Col>
                                             <Col span={15}>
                                                 <Select defaultValue={countryData[0]} style={{width: 120,}} onChange={this.handleCountryChange}>
@@ -321,7 +321,7 @@ class TopChannelsPage extends React.Component {
                                     <Col span={5}>
                                         <Row>
                                             <Col span={9}>
-                                                <p className='titleSearchName'>Language: </p>
+                                                <p className='titleSearchNameAlt'>Language: </p>
                                             </Col>
                                             <Col span={15}>
                                                 <Select defaultValue={languageData[0]} style={{width: 120,}} onChange={this.handleLanguageChange}>
@@ -333,8 +333,8 @@ class TopChannelsPage extends React.Component {
 
                                     <Col span={6}>
                                         <Row>
-                                            <Col span={12}>
-                                                <p className='titleSearchName'>Producer-Type: </p>
+                                            <Col span={8}>
+                                                <p className='titleSearchNameAlt'>Type: </p>
                                             </Col>
                                             <Col span={12}>
                                                 <Select defaultValue={producerData[0]} style={{width: 120,}} onChange={this.handleProducerChange}>

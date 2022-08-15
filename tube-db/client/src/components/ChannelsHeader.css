@@ -27,11 +27,8 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     width: 1000px;
     text-align: center;
-    font-size: 4rem;
+    font-size: 5rem;
     margin-bottom: 2rem;
-    color: whitesmoke;
+    color: #F61212;
 }
 
-.chanPageTitle{
-  color: #F61212;
-}
