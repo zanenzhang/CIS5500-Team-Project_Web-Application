@@ -223,17 +223,17 @@ async function trending_videos(req, res) {
     ), `
 
     let videosCTE = `Videos AS (
-        SELECT video_id, title, thumbnail_link, category_id, channel_title
-        FROM TOP_TRENDING_VIDEOS
-        WHERE country = '${country}' `
+        SELECT V.video_id, VI.title, VI.thumbnail_link, VI.category_id, V.channel_title
+        FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
+        WHERE V.country = '${country}' `
 
     let firstLeg = `LIMIT ${pagePull}
         OFFSET ${offset}
-    ) SELECT V.video_id, V.title as video_title, V.thumbnail_link, V.category_id `
+    ) SELECT V.video_id, VI.title as video_title, VI.thumbnail_link, VI.category_id `
 
-    let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels C JOIN ` : `FROM `    
+    let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels AS C JOIN ` : `FROM `    
     
-    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos V ON C.channel_title=V.channel_title ` : `Videos V `
+    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title JOIN VIDEOS AS VI ON V.video_id = VI.video_id ` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
 
 
     let forthLeg = `GROUP BY V.video_id
@@ -241,24 +241,24 @@ async function trending_videos(req, res) {
     `
 
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
-        searchClauses += `AND published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
+        searchClauses += `AND VI.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
-        searchClauses += `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
+        searchClauses += `AND V.trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
     if (videoTitle != '' && videoTitle != 'undefined')  {
-        searchClauses += `AND title LIKE '${videoTitle}%' `} 
+        searchClauses += `AND VI.title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
-        searchClauses += `AND channel_title LIKE '${channelTitle}%' `} 
+        searchClauses += `AND V.channel_title LIKE '${channelTitle}%' `} 
     if (category != '' && category != 'undefined'){
-        searchClauses += `AND category_id IN (Select category_id From Categories) `}
+        searchClauses += `AND VI.category_id IN (Select category_id From Categories) `}
 
     if (viewsHigh != 0){
-        searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
+        searchClauses += `AND V.view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
     if (likesHigh != 0){
-        searchClauses += `AND likes BETWEEN ${likesLow} AND ${likesHigh} `} 
+        searchClauses += `AND V.likes BETWEEN ${likesLow} AND ${likesHigh} `} 
     if (dislikesHigh != 0){
-        searchClauses += `AND dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
+        searchClauses += `AND V.dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
     if (commentsHigh != 0){
-        searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
+        searchClauses += `AND V.comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
 
     
     channelsCTE += 'WHERE '
@@ -305,11 +305,11 @@ async function trending_videos(req, res) {
 async function singleVideo(req, res){
     videoid = req.query.videoid
     finalQuery = `
-    SELECT VI.title as video_title, VI.published_at AS published_at, V.video_id as video_id,
+    SELECT VI.title as video_title, VI.published_at, V.video_id,
             MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
-            MIN(V.trending_date) AS trend_start, VI.thumbnail_link as thumbnail_link, V.likes as likes, V.dislikes as dislikes,
-            V.comment_count as comment_count, GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title as channel_title,
-            VI.description as description, VI.tags as tags
+            MIN(V.trending_date) AS trend_start, VI.thumbnail_link, V.likes, V.dislikes,
+            V.comment_count, GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title,
+            VI.description, VI.tags
     FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
     WHERE V.video_id = '${videoid}'
     GROUP BY V.video_id;
@@ -424,7 +424,7 @@ async function recommendedVideos(req,res){
     //         LIMIT 3;`
 
     finalQuery = `
-    SELECT DISTINCT B.title as video_title, B.video_id as video_id, B.thumbnail_link as thumbnail_link
+    SELECT DISTINCT B.title as video_title, B.video_id, B.thumbnail_link
     FROM TOP_TRENDING_VIDEOS AS A JOIN VIDEOS AS B ON A.video_id = B.video_id
     WHERE B.category_id IN
     (SELECT VI.category_id  
