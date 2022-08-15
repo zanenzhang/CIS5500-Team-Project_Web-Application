@@ -132,7 +132,7 @@ class VideoPage extends React.Component {
 
     loadCountries(){
       //return this.props.videoInfo[0].countries.substring(0,3);
-      var countriesArray = [["Country"]];
+      var countriesArray = [["Country","Popularity"]];
 
       var countriesListObject = this.state.videoInfo.map(info =>  info.countries)
       
@@ -144,7 +144,7 @@ class VideoPage extends React.Component {
       for (var i=0; i<countriesStringArr.length; i++){
         var countryPlaceholder = [];
         countryPlaceholder.push(countriesStringArr[i]);
-        //countryPlaceholder.push(300);
+        countryPlaceholder.push(1);
         countriesArray.push(countryPlaceholder);
         countryPlaceholder = [];
       }
@@ -247,8 +247,7 @@ class VideoPage extends React.Component {
                   
                   <h2>Views:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
-                  <h2>Likes:</h2>
-                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
+                  
                   </div>
                   <div className="trending">
                   <h2>Trending Time:</h2>
@@ -256,6 +255,7 @@ class VideoPage extends React.Component {
                     {/* <h2>Trending Time:</h2>
                     <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
                      */}
+                  <h2></h2>
                   <h2>Trending Countries:</h2>
                   <Chart chartType="GeoChart" width="300px" height="300px" data={this.state.finalCountriesArray} options = {geoOptions} />
                   
@@ -266,7 +266,8 @@ class VideoPage extends React.Component {
                   {/* <div className="viewsLikes"> */}
 
                   <div className="likes">
-                  
+                  <h2>Likes:</h2>
+                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
                      
                   <div id="likeButton">
                   
