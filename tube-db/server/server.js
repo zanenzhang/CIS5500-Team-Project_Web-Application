@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/trendingvideos', routes.trending_videos);
 app.get('/hello', routes.hello);
 app.get('/video', routes.singleVideo);
-app.get('/country', routes.countryGantt);
+app.get('/gantt', routes.countryGantt);
 // Channel Specific Routes //
 // Route 1 - register as GET 
 app.get('/channel', routes.channel);

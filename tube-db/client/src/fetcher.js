@@ -82,7 +82,7 @@ const getSingleVideo = async (videoid) => {
 }
 
 const getCountryGantt = async (videoid, country) => {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/country?videoid=${videoid}country=${country}`, {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/gantt?videoid=${videoid}&country=${country}`, {
         method: 'GET',
     })
     return res.json()

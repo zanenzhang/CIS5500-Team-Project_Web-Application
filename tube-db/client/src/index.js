@@ -36,7 +36,7 @@ ReactDOM.render(
 								<VideoPage />
 							)}/>
 		<Route exact
-							path="/country"
+							path="/gantt"
 							render={() => (
 								<VideoPage />
 							)}/>
