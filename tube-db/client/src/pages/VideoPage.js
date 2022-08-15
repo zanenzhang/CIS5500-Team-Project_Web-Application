@@ -11,7 +11,6 @@ import LikeButton from '../components/LikeButton';
 import { Chart } from "react-google-charts";
 import { useState } from 'react';
 
-
 import {
   Table,
   Select
@@ -95,6 +94,16 @@ const geoOptions = {
   }
 }
 
+const ganttColumns = [
+  { type: "string", label: "Task ID" },
+  { type: "string", label: "Task Name" },
+  { type: "date", label: "Start Date" },
+  { type: "date", label: "End Date" },
+  { type: "number", label: "Duration" },
+  { type: "number", label: "Percent Complete" },
+  { type: "string", label: "Dependencies" },
+];
+
 class VideoPage extends React.Component {
 
   constructor(props) {
@@ -105,13 +114,11 @@ class VideoPage extends React.Component {
         videoInfo: [],
         videoId: "",
         finalTrendingDates: [],
-        finalCountriesArray: [],
-        dateRows: [],
+        finalCountriesArray: []
       };
 
       this.loadCountries = this.loadCountries.bind(this)
       this.trendingTime = this.trendingTime.bind(this)
-      this.loadGanttTimes = this.loadGanttTimes.bind(this)
   }
 
     fetchVideoId = async () => {
@@ -130,7 +137,7 @@ class VideoPage extends React.Component {
         this.setState({ videoInfo: res.results });
         // const map1 = this.state.videoInfo.map(x=> x.video_title);
         // var array = JSON.parse("[" + x.video_title + "]");
-      }).then(this.loadCountries).then(this.createDates).then(this.loadGanttTimes);
+      }).then(this.loadCountries).then(this.createDates);
     };
 
     loadCountries(){
@@ -153,13 +160,13 @@ class VideoPage extends React.Component {
       this.setState({finalCountriesArray : countriesArray});
     }
 
-    createDates() {
+    createDates = async () => {
 
       var trendingDateRows = []; 
 
       for (var idx =1; idx < this.state.finalCountriesArray.length; idx++){
 
-        getCountryGantt(this.state.videoId, this.state.finalCountriesArray[idx][0]).then(res =>{
+        await getCountryGantt(this.state.videoId, this.state.finalCountriesArray[idx][0]).then(res =>{
 
           var countriesListObject = res.results.map(info =>  info.country)
       
@@ -202,27 +209,20 @@ class VideoPage extends React.Component {
         });
       }
 
-      console.log(trendingDateRows)
-      this.setState({dateRows : trendingDateRows});
-    }
-    
+      console.log(trendingDateRows.length)
 
-    loadGanttTimes() {
-      const columns = [
-        { type: "string", label: "Task ID" },
-        { type: "string", label: "Task Name" },
-        { type: "date", label: "Start Date" },
-        { type: "date", label: "End Date" },
-        { type: "number", label: "Duration" },
-        { type: "number", label: "Percent Complete" },
-        { type: "string", label: "Dependencies" },
-      ];
-     
-        const data = [columns, ...this.state.dateRows]; //columns x rows 
-        this.setState({finalTrendingDates : data});
-        console.log(this.state.finalTrendingDates)
-    }
+      if (trendingDateRows.length == this.state.finalCountriesArray.length - 1){
+        console.log(trendingDateRows)
 
+      const data = [ganttColumns, ...trendingDateRows]; //columns x rows 
+
+      console.log(data)
+      this.setState({finalTrendingDates : data});
+        console.log(this.state.finalTrendingDates);
+      }
+
+      return trendingDateRows
+    }
 
     trendingTime(){
       const columns = [
@@ -361,10 +361,11 @@ class VideoPage extends React.Component {
                 </div>
             
                 <div className="videoInfo">
-
+                  <div>
                   <iframe id="videoFrame" width="640" height="360" 
                       src={this.state.fullLink}>
                   </iframe>
+
                   <div className="description">
                   <h2>Title: </h2>
                   {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
@@ -377,21 +378,30 @@ class VideoPage extends React.Component {
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
                   
                   </div>
-                  <div className="trending">
-                  <h2>Trending Time:</h2>
-                    <Chart chartType="Gantt" data={this.state.finalTrendingDates} width = "60%" height = "5%" options={options}/>
-                    {/* <h2>Trending Time:</h2>
-                    <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
-                     */}
-                  <h2></h2>
-                  <h2>Trending Countries:</h2>
+
+                  
+                 <div id="geochart">
+                  
+                  <h2 id="trendingCountryLabel">Trending Countries:</h2>
                   <Chart chartType="GeoChart" width="300px" height="300px" data={this.state.finalCountriesArray} options = {geoOptions} />
                   
                   </div>
+                  </div>
+                  
+                  
+                  
                   {/* <h2>Countries:</h2> */}
                   <div class="VideoInfoArea"></div>
                   {this.state.videoInfo.map(info => <h5>  {info.countries}</h5>)}
                   {/* <div className="viewsLikes"> */}
+
+                  <div className="trending">
+                  <h2>Trending Time:</h2>
+                    <Chart id="countryGantt" chartType="Gantt" data={this.state.finalTrendingDates} width = "80%" height = "50%" options={options}/>
+                    {/* <h2>Trending Time:</h2>
+                    <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
+                     */}
+                 </div>
 
                   <div className="likes">
                   <h2>Likes:</h2>
@@ -423,3 +433,6 @@ class VideoPage extends React.Component {
   
  
   export default VideoPage;
+
+
+

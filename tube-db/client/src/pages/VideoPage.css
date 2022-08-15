@@ -46,7 +46,7 @@ div > h5 {
     width: 1000px;
     text-align: center;
     font-size: 4rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: #F61212;
   }
 
@@ -61,15 +61,14 @@ div > h5 {
     margin-bottom: 100px;
 }
 
-.trending {
-    margin-left: 0px;
-    margin-right: 100px;
-    margin-top: 80px;
+
+#geochart {
+    padding-top: 20px;
 }
 
 .description {
     margin-left: 700px;
-    margin-right: 700px;
+    margin-right: 435px;
     margin-top: -350px;
 }
 
@@ -92,6 +91,9 @@ div > h5 {
     display: flex;
     height: calc( 100vh - 30px);
   }
+
+#countryGantt {
+}
 
 /* .VideoInfoArea {
     position: absolute;
