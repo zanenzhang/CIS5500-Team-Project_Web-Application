@@ -28,7 +28,6 @@ const LikeButton = ({thumbLink, videoId, videoTitle}) => {
             thumbLink: thumbLink,
             videoId: videoId,
             videoTitle: videoTitle}).then(() => {
-              alert("succesful insert")
             });
 
 
