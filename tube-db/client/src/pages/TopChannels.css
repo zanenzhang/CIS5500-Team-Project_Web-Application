@@ -31,18 +31,33 @@ div.page{
     /* border: 2px solid red; */
     text-align: center;
     margin-bottom: 3rem;
-    color: whitesmoke;
+    color: #F61212;
 }
 
 .searchMenu{
    width: 1000px;
 }
 
+.sideMenuWrapper{
+    /* border: 2px solid red; */
+    background: #000000;
+    height: 2000px;
+}
+
 .titleSearchName{
     width: 100%;
     text-align: center;
-    padding-right: 0.5rem;
+    /* padding-right: 1.5rem; */
     color: whitesmoke;
+}
+
+.titleSearchNameAlt{
+    width: 100%;
+    text-align: center;
+    /* padding-right: 1.5rem; */
+    color: whitesmoke;
+    /* border: 1px solid red; */
+    padding-left: 2rem;
 }
 
 .titleSearchBox{
