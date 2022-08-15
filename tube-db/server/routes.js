@@ -413,7 +413,7 @@ async function recommendedVideos (req,res){
     WHERE video_id = '${videoid}')
     AND video_id <>'${videoid}'
     GROUP BY video_id
-    LIMIT 8
+    LIMIT 12
     ; `
     
 
