@@ -38,6 +38,12 @@ div.page{
    width: 1000px;
 }
 
+.sideMenuWrapper{
+    /* border: 2px solid red; */
+    background: #000000;
+    height: 2000px;
+}
+
 .titleSearchName{
     width: 100%;
     text-align: center;

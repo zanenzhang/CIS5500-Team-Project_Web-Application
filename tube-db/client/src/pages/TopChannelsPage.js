@@ -281,7 +281,7 @@ class TopChannelsPage extends React.Component {
                 <div className='page'>
                     
                     <div id="sideBar">
-                        <div>
+                        <div className='sideMenuWrapper'>
                             <SideMenu />
                         </div>
                     </div>
