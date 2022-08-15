@@ -32,13 +32,6 @@ const SidebarData = [
     icon: < BsFillPersonFill />,
     cName: 'nav-text'
   },
-  
-  {
-    title: 'Support',
-    path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
-    cName: 'nav-text'
-  }
 ];
 
 function Navbar() {

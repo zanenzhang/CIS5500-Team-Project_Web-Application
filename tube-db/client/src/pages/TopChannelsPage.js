@@ -276,7 +276,7 @@ class TopChannelsPage extends React.Component {
     render() {
         return (
             <div className='rootWrapper'>
-                <ChannelsHeader />
+                <ChannelsHeader/> 
 
                 <div className='page'>
                     

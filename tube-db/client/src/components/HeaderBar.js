@@ -7,6 +7,11 @@ import { DatePicker, Space } from 'antd';
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { SearchOutlined } from '@ant-design/icons';
+import './TopDropdown.css';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import { IconContext } from 'react-icons';
+import { Link } from 'react-router-dom';
 import searchBarIcon from '../images/searchicon.svg';
 import {
     Table,
@@ -30,26 +35,9 @@ const languageData = ['Select','Albanian', 'Arabic', 'Armenian', 'Bengali', 'Bho
     'Norwegian', 'Polish', 'Portuguese', 'Punjabi', 'Romanian', 'Russian', 'Serbian', 'Slovak', 'Slovenian', 'Spanish', 'Swahili', 
     'Swedish', 'Tagalog', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Vietnamese'];
 const dateFormat = 'YYYY-MM-DD';
-const autoCompleteSource = [
-    { key: 1, value: "Apple", price: 4.8 },
-    { key: 2, value: "Apricot", price: 5 },
-    { key: 3, value: "Blueberry", price: 5 },
-    { key: 4, value: "Banana", price: 5.1 },
-    { key: 5, value: "Cantaloupe", price: 3 },
-    { key: 6, value: "Grape", price: 3.5 },
-    { key: 7, value: "Guava", price: 5.1 },
-    { key: 8, value: "Kiwi", price: 4.6 },
-    { key: 9, value: "Lemon", price: 3.2 },
-    { key: 10, value: "Lime", price: 2.8 },
-    { key: 11, value: "Lychee", price: 2.8 },
-    { key: 12, value: "Mango", price: 2.8 },
-    { key: 13, value: "Melon", price: 2.8 },
-    { key: 14, value: "Pear", price: 2.8 },
-    { key: 15, value: "Pineapple", price: 2.8 },
-    { key: 16, value: "Plum", price: 2.8 },
-    { key: 17, value: "Orange", price: 2.8 }
-  ];
+
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
+
 
 const HeaderBar =({removeOffsetAndUpdate,handleCountryChange, handleUpdateTrendStart, 
   handleUpdateTrendStop, handleVideoTitleString, handleChannelTitleString, 
@@ -66,18 +54,9 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
   const [tagString, setTagString] = useState('');
   const [categoryString, setCategoryString] = useState('');
 
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0.0);
-  const [options, setOptions] = useState([]);
+  const [dropSwitch, setDropSwitch] = useState(false);
 
-  const onAutoSearch = (val) => {
-    let filtered = autoCompleteSource.filter(
-      (obj) => obj.key !== 0 && obj.value.toString().toLowerCase().includes(val)
-    );
-    setOptions(filtered);
-  };
-
-
+  const showDropdown = () => setDropSwitch(!dropSwitch);
 
   const changeCountry = event => {
     setCurrentCountry(event);
@@ -85,46 +64,55 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
   }
 
   const changeLanguage = event => {
+    console.log(event)
     setCurrentLanguage(event);
     handleLanguageChange(event);
   }
 
   const changeTrendingDates = (date, dateString) => {
+    console.log(dateString)
     handleUpdateTrendStart(dateString[0]);
     handleUpdateTrendStop(dateString[1]);
   };
 
   const changeViews = event => {
+    console.log(event)
     handleUpdateViewsLow(event[0]);
     handleUpdateViewsHigh(event[1]);
   };
 
   const changeLikes = event => {
+    console.log(event)
     handleUpdateLikesLow(event[0]);
     handleUpdateLikesHigh(event[1]);
   };
 
   const changeDislikes = event => {
+    console.log(event)
     handleUpdateDislikesLow(event[0]);
     handleUpdateDislikesHigh(event[1]);
   };
 
   const changeComments = event => {
+    console.log(event)
     handleUpdateCommentsLow(event[0]);
     handleUpdateCommentsHigh(event[1]);
   };
 
   const changeSubscribers = event => {
+    console.log(event)
     handleUpdateSubscribersLow(event[0]);
     handleUpdateSubscribersHigh(event[1]);
   };
 
   const changeLibrarySize = event => {
+    console.log(event)
     handleUpdateLibraryLow(event[0]);
     handleUpdateLibraryHigh(event[1]);
   };
 
   const changePublishedDates = (date, dateString) => {
+    console.log(dateString)
     handleUpdatePublishStart(dateString[0]);
     handleUpdatePublishStop(dateString[1]);
   };
@@ -177,16 +165,35 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
 
   return(
     <div className="headerBar">
+            
         <div className="headerLogo">
           <HeaderLogo />
         </div>
 
         <div className="headerExLogo">
+        
 
+        <div className="dropdownwrapper">
+        <IconContext.Provider value={{ color: '#fff' }}>
+        <div className='dropdown'>
+        <Link to='#' className='dropdown-bars'>
+            <FaIcons.FaBars id="dropdownicon" onClick={showDropdown} />
+        </Link>
+        </div>
+        <nav className={dropSwitch ? 'dropdown active' : 'dropdown inactive'}>
+        <ul className='dropdown-click' >
+            <li className='dropdown-toggle'>
+            <Link to='#' className='dropdown-bars'>
+                <AiIcons.AiOutlineClose id="closebutton" onClick={showDropdown} />
+            </Link>
+            </li>
+            
               <div className="headerSearch">
               <Row>
+              
                   <Col span={8}>
                       <Row>
+                        
                           <Col span={9}>
                               <p className='videoTitleSearch'>Video Title: </p>
                           </Col>
@@ -277,7 +284,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='viewsLabel'>Video Views: </p>
                             </Col>
                             <Col span={12} id="viewsSlider">
-                                <Slider tipFormatter={numFormatter} range defaultValue={[1000000, 50000000]} 
+                                <Slider tipFormatter={numFormatter} range defaultValue={[0, 300000000]} 
                                 min={1} max={300000000} onChange={changeViews}/>
                             </Col>
                         </Row>
@@ -289,7 +296,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='likesLabel'>Likes: </p>
                             </Col>
                             <Col span={15} id="likesSliderCol">
-                                <Slider id="likesSlider" range min={0} max={17000000} defaultValue={[5000, 5000000]} 
+                                <Slider id="likesSlider" range min={0} max={17000000} defaultValue={[0, 17000000]} 
                                 tipFormatter={numFormatter} onChange={changeLikes}/>
                             </Col>
                         </Row>
@@ -301,7 +308,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='dislikesLabel'>Dislikes: </p>
                             </Col>
                             <Col span={15} class='sliderCol'>
-                                <Slider range min={0} max={13000000} defaultValue={[3000, 3000000]} 
+                                <Slider range min={0} max={13000000} defaultValue={[0, 13000000]} 
                                 tipFormatter={numFormatter} onChange={changeDislikes}/>
                             </Col>
                         </Row>
@@ -313,7 +320,7 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='commentsLabel'>Comments: </p>
                             </Col>
                             <Col span={15} class='sliderCol'>
-                                <Slider range defaultValue={[7000, 2000000]} min={0} max={7000000} 
+                                <Slider range defaultValue={[0, 7000000]} min={0} max={7000000} 
                                 tipFormatter={numFormatter} onChange={changeComments}/>
                             </Col>
                         </Row>   
@@ -330,8 +337,8 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='channelSubscribersLabel'>Channel Subscribers: </p>
                             </Col>
                             <Col span={12} id="channelSubscribersCol">
-                                <Slider tipFormatter={numFormatter} range defaultValue={[10000, 40000000]} 
-                                min={10000} max={220000000} onChange={changeSubscribers}/>
+                                <Slider tipFormatter={numFormatter} range defaultValue={[1, 220000000]} 
+                                min={1} max={220000000} onChange={changeSubscribers}/>
                             </Col>
                         </Row>
                     </Col>
@@ -342,8 +349,8 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                                 <p className='channelLibraryLabel'>Channel Library: </p>
                             </Col>
                             <Col span={14} id="channelLibraryCol">
-                                <Slider id="librarySlider" tipFormatter={numFormatter} range defaultValue={[10, 15000]} 
-                                min={10} max={50000} onChange={changeLibrarySize}/>
+                                <Slider id="librarySlider" tipFormatter={numFormatter} range defaultValue={[0, 500000]} 
+                                min={1} max={500000} onChange={changeLibrarySize}/>
                             </Col>
                         </Row>
                     </Col>
@@ -366,20 +373,34 @@ handleUpdateLibraryLow, handleUpdateLibraryHigh, handleCategoryString})=> {
                     <div class="submitSearch">
                         <Button id="submitVideoSearch" onClick={updateSearch}><img id="searchIcon" src={searchBarIcon}/>Search</Button>
                     </div>
+
+                    
                             
                     </Col>
 
                 </Row>
 
+                
+
               </div>
+              </ul>
+        </nav>
+        </IconContext.Provider>
+        </div>
               <div className="headerSelectors">
+                
+              <h1 id='trendingVideosTitle'>Video Search</h1>
               </div>
-              </div>
-        
-  </div>
+            </div>
+            
+            
+
+        </div>
+       
   )     
 };
 
 export default HeaderBar;
 
 
+//{dropSwitch ? '' : 'Video Search'}

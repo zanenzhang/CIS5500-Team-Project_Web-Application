@@ -24,7 +24,7 @@ div > h5 {
 
 .headerBar {
     display: flex;
-    height: 240px;
+    height: 200px;
     background: #000000;
     color: #000000;
 }

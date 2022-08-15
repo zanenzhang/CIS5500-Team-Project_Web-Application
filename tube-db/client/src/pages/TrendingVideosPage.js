@@ -5,8 +5,8 @@ import { getTrendingVideos } from '../fetcher'
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
 import Navbar from '../components/Navbar';
-import Autocomplete from '../components/Autocomplete';
 import loadIcon from '../images/load-icon.png';
+import axios from 'axios';
 
 import {
   Table,
@@ -245,6 +245,7 @@ class TrendingVideosPage extends React.Component {
     return (
       
       <div className='outerDiv'>
+
         <HeaderBar handleCountryChange={this.handleCountryChange} handleUpdateTrendStart={this.handleUpdateTrendStart} handleUpdateTrendStop={this.handleUpdateTrendStop}
         handleUpdatePublishStart={this.handleUpdatePublishStart} handleUpdatePublishStop={this.handleUpdatePublishStop}
         removeOffsetAndUpdate={this.removeOffsetAndUpdate} handleVideoTitleString={this.handleVideoTitleString}
@@ -252,6 +253,7 @@ class TrendingVideosPage extends React.Component {
         handleUpdateViewsLow={this.handleUpdateViewsLow} handleUpdateViewsHigh={this.handleUpdateViewsHigh} handleUpdateLikesLow={this.handleUpdateLikesLow} handleUpdateLikesHigh={this.handleUpdateLikesHigh} 
         handleUpdateDislikesLow={this.handleUpdateDislikesLow} handleUpdateDislikesHigh={this.handleUpdateDislikesHigh} handleUpdateCommentsLow={this.handleUpdateCommentsLow} handleUpdateCommentsHigh={this.handleUpdateCommentsHigh} 
         handleUpdateLibraryLow={this.handleUpdateLibraryLow} handleUpdateLibraryHigh={this.handleUpdateLibraryHigh} handleLanguageChange={this.handleLanguageChange}
+        handleUpdateSubscribersLow={this.handleUpdateSubscribersLow} handleUpdateSubscribersHigh={this.handleUpdateSubscribersHigh}
         />
         
         <div id="page">
@@ -261,7 +263,6 @@ class TrendingVideosPage extends React.Component {
         
           <div id="pageContent">
             <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
-              <h1 id="pageTitle">{this.state.searchTerm ? 'Search Results' : 'Video Search'}</h1>
               <Grid>
                 
                 {this.state.videoResults.map(video=>(
