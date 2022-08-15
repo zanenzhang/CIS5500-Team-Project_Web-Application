@@ -391,7 +391,7 @@ async function insert(req, res){
     });
 } 
 
-async function recommendedVideos (req,res){
+async function recommendedVideos(req,res){
     videoid = req.query.videoid
     // finalQuery = 
     // `
