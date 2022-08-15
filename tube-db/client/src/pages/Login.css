@@ -1,18 +1,49 @@
 .Login {
     text-align: center;
-    margin: 20px 0;
-    padding: 70px 20px;
+    margin: 00px 0;
+    padding: 30px 00px;
     flex-grow: 1;
     height: 1200px;
-    background: url(../images/whatsapp2.webp);
+    background: #000;
     background-size: 100%;
-
 }
 
 .white-text {
     color: rgb(255, 255, 255);
 }
 
-.login{
-    padding: 20px;
+.loginGoogle{
+    padding: 10px;
+}
+
+.nav.nav-justified {
+    align-items: center;
+    justify-content: center;
+}
+
+#loginLogo {
+    margin-bottom: 50px;
+}
+
+#startingText {
+    margin-top: 20px;
+}
+
+#loginButtonSubmit{
+  display: block;
+  background: #F61212;
+  width: 10%;
+  min-width: 100px;
+  height: 60px;
+  border-radius: 20px;
+  outline: #000;
+  color: #FFF;
+  font-size: 1.2rem;
+  border: 0.5rem solid;
+  border-color: #C02727; 
+  margin: 10px auto;
+  cursor: pointer;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  justify-content: center;
+  align-items: center;
 }

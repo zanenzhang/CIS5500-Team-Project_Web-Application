@@ -1,6 +1,7 @@
 import './Login.css';
 import {gapi} from 'gapi-script';
 import { useReducer, useEffect, useState } from 'react';
+import HeaderLogo from '../components/HeaderLogo';
 import React from 'react';
 import image from '../images/whatsapp2.webp';
 import { GoogleLogin } from 'react-google-login';
@@ -72,8 +73,9 @@ function Login() {
 
   return (
     <div class = "Login">
+      <HeaderLogo id="loginLogo" />
       
-      <h2 class="white-text">CIS 550 Project: Bug Busters</h2>
+      <h2 id="startingText" class="white-text">CIS 550 Project: Bug Busters</h2>
       <p class="white-text">(Derek Taylor, Zan Zhang, Sanjeeva Rajapakse, Angela Fan, Fred Qi)</p>
       <h3 class="white-text">Login Page</h3>
       <form onSubmit={handleSubmit}>
@@ -89,9 +91,9 @@ function Login() {
            <input name="Password" onChange={event => setPassword(event.target.value)} />
          </label>
        </fieldset>
-       <button type="submit">Submit</button>
+       <button id="loginButtonSubmit" type="submit">Submit</button>
       </form>
-      <div class='login'>
+      <div class='loginGoogle'>
       <GoogleLogin
                 id = 'g-login'
                 clientId={CLIENT_ID}
