@@ -68,13 +68,13 @@ async function selected_channel_recent_trending(req, res) {
                 SELECT channel_title
                 FROM TOP_YOUTUBE_CHANNELS
                 WHERE channel_rank = ${req.query.ranking}
-            )SELECT V.title AS title, V.published_at AS published, V.video_id AS video_id,
+            )SELECT V.title AS title, VI.published_at AS published, V.video_id AS video_id,
                     MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
                     MIN(V.trending_date) AS trend_start, GROUP_CONCAT(DISTINCT V.country) AS countries
-            FROM TOP_TRENDING_VIDEOS AS V JOIN Selected_Channel AS C
-            WHERE V.channel_title = C.channel_title
+            FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id JOIN Selected_Channel AS C
+            ON V.channel_title = C.channel_title
             GROUP BY title
-            ORDER BY V.published_at DESC
+            ORDER BY VI.published_at DESC
             LIMIT 5;
             `, function (error, results, fields) {
                 if (error) {
@@ -305,14 +305,14 @@ async function trending_videos(req, res) {
 async function singleVideo(req, res){
     videoid = req.query.videoid
     finalQuery = `
-    SELECT title as video_title, published_at AS published, video_id,
-            MAX(view_count) AS views, MAX(trending_date) AS trend_stop,
-            MIN(trending_date) AS trend_start, thumbnail_link, likes, dislikes,
-            comment_count, GROUP_CONCAT(DISTINCT country) AS countries, channel_title,
-            description, tags
-    FROM TOP_TRENDING_VIDEOS
-    WHERE video_id = '${videoid}'
-    GROUP BY video_id;
+    SELECT VI.title as video_title, VI.published_at AS published_at, V.video_id as video_id,
+            MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
+            MIN(V.trending_date) AS trend_start, VI.thumbnail_link as thumbnail_link, V.likes as likes, V.dislikes as dislikes,
+            V.comment_count as comment_count, GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title as channel_title,
+            VI.description as description, VI.tags as tags
+    FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
+    WHERE V.video_id = '${videoid}'
+    GROUP BY V.video_id;
     `
     // console.log(finalQuery)
 
@@ -424,18 +424,13 @@ async function recommendedVideos (req,res){
     //         LIMIT 3;`
 
     finalQuery = `
-    SELECT title as video_title, published_at AS published, video_id,
-    MAX(view_count) AS views, MAX(trending_date) AS trend_stop,
-    MIN(trending_date) AS trend_start, thumbnail_link, likes,
-    GROUP_CONCAT(DISTINCT country) AS countries, channel_title,
-    description, tags 
-    FROM TOP_TRENDING_VIDEOS
-    WHERE category_id IN
-    (SELECT category_id  
-    FROM TOP_TRENDING_VIDEOS
-    WHERE video_id = '${videoid}')
-    AND video_id <>'${videoid}'
-    GROUP BY video_id
+    SELECT DISTINCT B.title as video_title, B.video_id as video_id, B.thumbnail_link as thumbnail_link
+    FROM TOP_TRENDING_VIDEOS AS A JOIN VIDEOS AS B ON A.video_id = B.video_id
+    WHERE B.category_id IN
+    (SELECT VI.category_id  
+    FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
+    WHERE V.video_id = '${videoid}')
+    AND A.video_id <>'${videoid}'
     LIMIT 12
     ; `
     
