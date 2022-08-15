@@ -68,7 +68,7 @@ async function selected_channel_recent_trending(req, res) {
                 SELECT channel_title
                 FROM TOP_YOUTUBE_CHANNELS
                 WHERE channel_rank = ${req.query.ranking}
-            )SELECT V.title AS title, VI.published_at AS published, V.video_id AS video_id,
+            )SELECT VI.title AS title, VI.published_at AS published, V.video_id AS video_id,
                     MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
                     MIN(V.trending_date) AS trend_start, GROUP_CONCAT(DISTINCT V.country) AS countries
             FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id JOIN Selected_Channel AS C
