@@ -81,6 +81,13 @@ const getSingleVideo = async (videoid) => {
     return res.json()
 }
 
+const getCountryGantt = async (videoid, country) => {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/country?videoid=${videoid}country=${country}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
 const getRecommendedVideo = async (videoid) => {
     var res = await fetch(`http://${config.server_host}:${config.server_port}/recommendation?videoid=${videoid}`, {
         method: 'GET',
@@ -110,5 +117,6 @@ export {
     getChannelRecentTrending,
     getSingleVideo,
     getFavoritedVideos,
-    getRecommendedVideo
+    getRecommendedVideo,
+    getCountryGantt
 }

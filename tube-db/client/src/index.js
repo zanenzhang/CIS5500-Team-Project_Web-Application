@@ -36,6 +36,11 @@ ReactDOM.render(
 								<VideoPage />
 							)}/>
 		<Route exact
+							path="/country"
+							render={() => (
+								<VideoPage />
+							)}/>
+		<Route exact
 							path="/favorite"
 							render={() => (
 								<FavoritePage />

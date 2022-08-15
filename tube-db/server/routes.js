@@ -236,7 +236,7 @@ async function trending_videos(req, res) {
     let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos V ON C.channel_title=V.channel_title ` : `Videos V `
 
 
-    let fifthLeg = `GROUP BY V.video_id
+    let forthLeg = `GROUP BY V.video_id
         Limit ${limit};
     `
 
@@ -285,7 +285,7 @@ async function trending_videos(req, res) {
         finalQuery += categoryCTE} 
     if (finalQuery == ""){
         finalQuery += `WITH `}
-    finalQuery += videosCTE +  searchClauses + firstLeg + secondLeg + thirdLeg + fifthLeg
+    finalQuery += videosCTE +  searchClauses + firstLeg + secondLeg + thirdLeg + forthLeg
 
     console.log("Final query: ")
     console.log(finalQuery)
@@ -312,7 +312,7 @@ async function singleVideo(req, res){
             description, tags
     FROM TOP_TRENDING_VIDEOS
     WHERE video_id = '${videoid}'
-    GROUP BY video_id
+    GROUP BY video_id;
     `
     // console.log(finalQuery)
 
@@ -326,6 +326,29 @@ async function singleVideo(req, res){
         }
     });
 }   
+
+async function countryGantt(req, res){
+    videoid = req.query.videoid;
+    country = req.query.country;
+    finalQuery = `
+    SELECT video_id, MAX(trending_date) AS trend_stop,
+            MIN(trending_date) AS trend_start
+    FROM TOP_TRENDING_VIDEOS
+    WHERE video_id = '${videoid} and country = '${country}'
+    GROUP BY video_id
+    `
+    // console.log(finalQuery)
+
+    connection.query(finalQuery, function (error, results, fields) {
+
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+} 
 
 async function favoritedVideos(req, res){
 
@@ -457,5 +480,6 @@ module.exports = {
     singleVideo,
     favoritedVideos,
     insert,
-    recommendedVideos
+    recommendedVideos,
+    countryGantt
 }

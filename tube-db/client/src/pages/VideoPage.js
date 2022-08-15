@@ -1,7 +1,7 @@
 import React from 'react';
 import SideMenu from '../components/SideMenu';
 import './VideoPage.css'
-import { getHomeVideos, getSingleVideo } from '../fetcher'
+import { getHomeVideos, getSingleVideo, getCountryGantt } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
@@ -104,10 +104,12 @@ class VideoPage extends React.Component {
         fullLink: "",
         videoInfo: [],
         videoId: "",
+        finalTrendingDates: [],
       };
 
       this.loadCountries = this.loadCountries.bind(this)
       this.trendingTime = this.trendingTime.bind(this)
+      this.loadGanttTimes = this.loadGanttTimes.bind(this)
   }
 
     fetchVideoId = async () => {
@@ -124,10 +126,9 @@ class VideoPage extends React.Component {
       this.fetchVideoId();
       getSingleVideo(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results }, this.loadCountries);
-        this.setState({ videoInfo: res.results }, this.trendingTime);
         // const map1 = this.state.videoInfo.map(x=> x.video_title);
         // var array = JSON.parse("[" + x.video_title + "]");
-      });
+      }).then(this.loadGanttTimes);
     };
 
     loadCountries(){
@@ -151,6 +152,67 @@ class VideoPage extends React.Component {
       console.log(countriesArray);
       this.setState({finalCountriesArray : countriesArray});
     }
+
+    loadGanttTimes() {
+      const columns = [
+        { type: "string", label: "Task ID" },
+        { type: "string", label: "Task Name" },
+        { type: "date", label: "Start Date" },
+        { type: "date", label: "End Date" },
+        { type: "number", label: "Duration" },
+        { type: "number", label: "Percent Complete" },
+        { type: "string", label: "Dependencies" },
+      ];
+
+      var trendingDateRows = []; 
+      
+      for (var country in this.state.finalCountriesArray){
+
+        getCountryGantt(this.videoId, country).then(res =>{
+
+          console.log(res.results);
+
+          var trendingDate = ["TimePeriod", "Time period"];
+          var trendStartObject = res.results.map(info => info.trend_start.substring(0,10));
+          var trendEndObject = res.results.map(info => info.trend_stop.substring(0,10));
+
+          var trendStartString = JSON.stringify(trendStartObject);
+          //console.log(trendStartString);
+          var slicedString = trendStartString.slice(2,(trendStartString.length -2));
+          var trendingStartStringArr = slicedString.split("-"); //year-month-day 
+          //console.log(trendingStartStringArr);
+          var yearS = trendingStartStringArr[0];
+          var monthS = trendingStartStringArr[1]; 
+          var dayS = trendingStartStringArr[2]; 
+          console.log(trendingStartStringArr);
+          //push the New Date trending start into trendingDate
+          trendingDate.push(new Date(yearS, monthS, dayS));
+
+          var trendEndString = JSON.stringify(trendEndObject);
+          //console.log(trendEndString);
+          var slicedEndString = trendEndString.slice(2,(trendEndString.length -2));
+          //console.log(slicedEndString);
+          var trendingEndStringArr = slicedEndString.split("-"); //year-month-day 
+          //console.log(trendingEndStringArr);
+          //year
+          var year = trendingEndStringArr[0];
+          var month = trendingEndStringArr[1]; 
+          var day = trendingEndStringArr[2]; 
+          //console.log(trendingEndStringArr);
+          trendingDate.push(new Date(year, month, day));
+          trendingDate.push(null);
+          trendingDate.push(100);
+          trendingDate.push(null);
+
+          trendingDateRows.push(trendingDate);
+        })
+      }
+      const data = [columns, ...trendingDateRows]; //columns x rows 
+     
+      this.setState({finalTrendingDates : data});
+    }
+
+    
 
     trendingTime(){
       const columns = [
@@ -205,7 +267,7 @@ class VideoPage extends React.Component {
 
       const data = [columns, ...trendingDateRows]; //columns x rows 
      
-      this.setState({finalTrendingDate : data});
+      this.setState({finalTrendingDates : data});
 
     }
 
@@ -251,7 +313,7 @@ class VideoPage extends React.Component {
                   </div>
                   <div className="trending">
                   <h2>Trending Time:</h2>
-                    <Chart chartType="Gantt" data={this.state.finalTrendingDate} width = "60%" height = "5%" options={options}/>
+                    <Chart chartType="Gantt" data={this.state.finalTrendingDates} width = "60%" height = "5%" options={options}/>
                     {/* <h2>Trending Time:</h2>
                     <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
                      */}
