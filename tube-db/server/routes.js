@@ -334,7 +334,7 @@ async function countryGantt(req, res){
     SELECT video_id, MAX(trending_date) AS trend_stop,
             MIN(trending_date) AS trend_start
     FROM TOP_TRENDING_VIDEOS
-    WHERE video_id = '${videoid} and country = '${country}'
+    WHERE video_id = '${videoid}' and country = '${country}'
     GROUP BY video_id
     `
     // console.log(finalQuery)
