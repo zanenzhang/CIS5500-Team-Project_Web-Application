@@ -47,8 +47,17 @@ div.page{
 .titleSearchName{
     width: 100%;
     text-align: center;
-    padding-right: 0.5rem;
+    /* padding-right: 1.5rem; */
     color: whitesmoke;
+}
+
+.titleSearchNameAlt{
+    width: 100%;
+    text-align: center;
+    /* padding-right: 1.5rem; */
+    color: whitesmoke;
+    border: 1px solid red;
+    padding-left: 2rem;
 }
 
 .titleSearchBox{
