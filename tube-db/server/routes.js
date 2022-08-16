@@ -72,7 +72,7 @@ async function selected_channel_recent_trending(req, res) {
                     MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
                     MIN(V.trending_date) AS trend_start, GROUP_CONCAT(DISTINCT V.country) AS countries
             FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id JOIN Selected_Channel AS C
-            ON V.channel_title = C.channel_title
+            ON VI.channel_title = C.channel_title
             GROUP BY title
             ORDER BY VI.published_at DESC
             LIMIT 5;
@@ -223,7 +223,7 @@ async function trendingVideos(req, res) {
     ), `
 
     let videosCTE = `Videos AS (
-        SELECT V.video_id, VI.title, VI.thumbnail_link, VI.category_id, V.channel_title
+        SELECT V.video_id, VI.title, VI.thumbnail_link, VI.category_id, VI.channel_title
         FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
         WHERE V.country = '${country}' `
 
@@ -233,7 +233,7 @@ async function trendingVideos(req, res) {
 
     let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels AS C JOIN ` : `FROM `    
     
-    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title JOIN VIDEOS AS VI ON V.video_id = VI.video_id ` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
+    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `VIDEOS AS VI ON VI.channel_title = V.channel_title JOIN Videos AS V ON V.video_id = VI.video_id` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
 
 
     let forthLeg = `GROUP BY V.video_id
@@ -243,22 +243,22 @@ async function trendingVideos(req, res) {
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
         searchClauses += `AND VI.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
-        searchClauses += `AND V.trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
+        searchClauses += `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
     if (videoTitle != '' && videoTitle != 'undefined')  {
         searchClauses += `AND VI.title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
-        searchClauses += `AND V.channel_title LIKE '${channelTitle}%' `} 
+        searchClauses += `AND VI.channel_title LIKE '${channelTitle}%' `} 
     if (category != '' && category != 'undefined'){
         searchClauses += `AND VI.category_id IN (Select category_id From Categories) `}
 
     if (viewsHigh != 0){
-        searchClauses += `AND V.view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
+        searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
     if (likesHigh != 0){
-        searchClauses += `AND V.likes BETWEEN ${likesLow} AND ${likesHigh} `} 
+        searchClauses += `AND likes BETWEEN ${likesLow} AND ${likesHigh} `} 
     if (dislikesHigh != 0){
-        searchClauses += `AND V.dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
+        searchClauses += `AND dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
     if (commentsHigh != 0){
-        searchClauses += `AND V.comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
+        searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
 
     
     channelsCTE += 'WHERE '
@@ -309,7 +309,7 @@ async function singleVideo(req, res){
             MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
             MIN(V.trending_date) AS trend_start, VI.thumbnail_link, MAX(V.likes) AS likes, 
             MAX(V.dislikes) AS dislikes, MAX(V.comment_count) AS comments, 
-            GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title,
+            GROUP_CONCAT(DISTINCT V.country) AS countries, VI.channel_title,
             VI.description, VI.tags
     FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
     WHERE V.video_id = '${videoid}'
