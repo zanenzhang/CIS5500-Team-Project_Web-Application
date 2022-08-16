@@ -58,7 +58,7 @@ const LikeButton = ({thumbLink, videoId, videoTitle}) => {
       )}
       <div className="like-button">
         <Hand />
-        <span>Like</span>
+        <span>Favorite This Video</span>
         <span className={cn("suffix", {liked})}>d</span>
       </div>
     </button>
