@@ -1,17 +1,19 @@
 .videoInfo {
+    font-size:2vmax;
     justify-content: center;
     background: #000000;
     /* flex-grow: 1; */
-    width: 1900px;
+    min-width: 1500px;
+    max-width: 1600px;
     min-height: 1454.5px; 
     max-height: 1500px;
 }
 .likesNum {
     flex-grow: 1;
-    width: 500px;
-    margin-left: 900px;
+    width: 200px;
+    margin-left: 800px;
     margin-right: 100px;
-    margin-top: -82px;
+    margin-top: -84px;
 }
 div > h2 {
     color: #ffffff;
@@ -22,7 +24,12 @@ div > h5 {
 }
 
 #videoFrame{
+    /* width: auto; */
+    /* max-width: 40%; */
     border-radius: 20px;
+    margin-left: -490px;
+    margin-right: 300px;
+    margin-top:10px;
 }
 
 #page {
@@ -78,22 +85,33 @@ height: 800px;
     background: #000000;
     flex-grow: 1;
     height: 1200px; */
-    margin-left: 900px;
-    margin-top: -600px;
+    margin-left: 680px;
+    margin-top: -430px;
     margin-right: 10%;
     margin-bottom: 10%;
 }
 
 
 #geochart {
+    text-align: left;
     padding-top: 10%;
+}
+
+.trending {
+    text-align: left;
+    /* padding-top: 10%; */
+    margin-left: 400px;
+    margin-top: -383px;
+    margin-right: 10%;
+    margin-bottom: 10%;
 }
 
 .description {
     /* display: flex; */
-    
+    font-size:2vmax;
+    text-align: left;
     flex-grow: 1;
-    width: 500px;
+    width: 30%;
     margin-left: 700px;
     margin-right: -100px;
     margin-top: -370px;
