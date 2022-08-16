@@ -223,7 +223,11 @@ async function trendingVideos(req, res) {
     ), `
 
     let videosCTE = `Videos AS (
+<<<<<<< HEAD
         SELECT V.video_id, VI.title, VI.thumbnail_link, VI.category_id, VI.channel_title
+=======
+        SELECT V.video_id, V.published_at, VI.title, VI.thumbnail_link, VI.category_id, V.channel_title
+>>>>>>> 56ae8f410b07e99e241a78a87954ea942ed8c17b
         FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
         WHERE V.country = '${country}' `
 
