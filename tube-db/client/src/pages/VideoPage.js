@@ -114,7 +114,8 @@ class VideoPage extends React.Component {
         videoInfo: [],
         videoId: "",
         finalTrendingDates: [],
-        finalCountriesArray: []
+        finalCountriesArray: [],
+        desciption: ""
       };
 
       this.loadCountries = this.loadCountries.bind(this)
@@ -150,6 +151,11 @@ class VideoPage extends React.Component {
       console.log(countriesString);
       var slicedString = countriesString.slice(2,(countriesString.length -2))
       var countriesStringArr = slicedString.split(",");
+
+      if (this.state.videoInfo.description != null){
+        var descriptionText = this.state.videoInfo.map(info => info.description.substring(0, 150)) 
+        this.setState({description: descriptionText})
+      }
 
       for (var i=0; i<countriesStringArr.length; i++){
         var countryPlaceholder = [];
@@ -370,7 +376,7 @@ class VideoPage extends React.Component {
                   <h2>Title: </h2>
                   {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
                   <h2>Description:</h2>
-                  {this.state.videoInfo.map(info => <h5>{info.description.substring(0, 150)}</h5>)} 
+                  <h5>{this.state.description}</h5>
                   {/* <h2>Trending Start Date:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)} */}
                   
