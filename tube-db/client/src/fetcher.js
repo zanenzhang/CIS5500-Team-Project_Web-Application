@@ -78,7 +78,23 @@ const getSingleVideo = async (videoid) => {
     var res = await fetch(`http://${config.server_host}:${config.server_port}/video?videoid=${videoid}`, {
         method: 'GET',
     })
-    return res.json()
+    const result = await res.json()
+
+    const setKeysResolution = (array) => {
+        var size = array.results?.length;
+        for (var x=0; x < size; x++ ){
+            if (array.results[x].description){
+                array.results[x].description = array.results[x].description.slice(0,160) + "..."
+            } else {
+                array.results[x].description = "No description available."
+            }
+        };
+
+        return array;
+    }
+
+    const final = await setKeysResolution(result);
+    return final
 }
 
 const getCountryGantt = async (videoid, country) => {

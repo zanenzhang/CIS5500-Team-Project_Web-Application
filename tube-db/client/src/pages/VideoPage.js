@@ -115,7 +115,6 @@ class VideoPage extends React.Component {
         videoId: "",
         finalTrendingDates: [],
         finalCountriesArray: [],
-        desciption: "",
         gantHeight: ""
       };
 
@@ -411,8 +410,8 @@ class VideoPage extends React.Component {
                   <div className="description">
                   <h2>Title: </h2>
                   {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
-                  <h2>Description:</h2>
-                  <h5>{this.state.description}</h5>
+                  {<h2>Description:</h2>}
+                  {this.state.videoInfo.map(info => <h5>{info.description} </h5> ) }
                   {/* <h2>Trending Start Date:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)} */}
                   
