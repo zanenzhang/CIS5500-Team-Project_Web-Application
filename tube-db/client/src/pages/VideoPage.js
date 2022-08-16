@@ -163,7 +163,7 @@ class VideoPage extends React.Component {
         countriesArray.push(countryPlaceholder);;
       }
       //get the size of countries array Gantt chart height will be based on 
-      var height = countriesArray.length *30 + 40;
+      var height = countriesArray.length *43 + 30;
       this.setState({gantHeight: height}); 
       this.setState({finalCountriesArray : countriesArray});
     }
@@ -379,7 +379,7 @@ class VideoPage extends React.Component {
               </div>
             </div>
   
-            <div id="page">
+                <div id="page">
     
                 <div id="sideBar">
                     <div>
@@ -403,10 +403,13 @@ class VideoPage extends React.Component {
                   
                   <h2>Views:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
-                  <h2>Likes:</h2>
-                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
+                  
                   </div>
 
+                <div className="likesNum">
+                <h2>Likes:</h2>
+                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
+                  </div>
                   
                  <div id="geochart">
                   
@@ -446,6 +449,8 @@ class VideoPage extends React.Component {
                   ))}
                   </div>
                   </div>
+                  <div className="bottom"></div>
+
                   
                 </div>
                     
