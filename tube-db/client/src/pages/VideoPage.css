@@ -1,8 +1,18 @@
 .videoInfo {
     justify-content: center;
     background: #000000;
+    /* flex-grow: 1; */
+    width: 1900px;
+    max-width: 2000px;
+    
+    /* height: 1600px; */
+}
+.likesNum {
     flex-grow: 1;
-    height: 1200px;
+    width: 500px;
+    margin-left: 900px;
+    margin-right: 100px;
+    margin-top: -82px;
 }
 div > h2 {
     color: #ffffff;
@@ -18,13 +28,27 @@ div > h5 {
 
 #page {
     display: flex;
-    height: calc( 100vh - 30px);
+    height: 800px;
+    overflow: visible;
   }
 
+#sideBar {
+justify-content: flex-start;
+height: 800px;
+}
 
+#pageContent {
+    background: #000000;
+    flex-grow: 1;
+    width: 200%; 
+    height: 1000px;
+    /* enable grow, disable shrink */
+    justify-content: center;
+  }
 .headerBar {
     display: flex;
     height: 240px;
+    width: 1750px;
     background: #000000;
     color: #000000;
 }
@@ -55,21 +79,25 @@ div > h5 {
     background: #000000;
     flex-grow: 1;
     height: 1200px; */
-    margin-left: 700px;
-    margin-top: -300px;
-    margin-right: 700px;
-    margin-bottom: 100px;
+    margin-left: 900px;
+    margin-top: -600px;
+    margin-right: 10%;
+    margin-bottom: 10%;
 }
 
 
 #geochart {
-    padding-top: 20px;
+    padding-top: 10%;
 }
 
 .description {
+    /* display: flex; */
+    
+    flex-grow: 1;
+    width: 500px;
     margin-left: 700px;
-    margin-right: 435px;
-    margin-top: -350px;
+    margin-right: -100px;
+    margin-top: -370px;
 }
 
 .info1 {
@@ -87,10 +115,10 @@ div > h5 {
     border-radius: 20px;
 }
 
-#page {
+/* #page {
     display: flex;
     height: calc( 100vh - 30px);
-  }
+  } */
 
 #countryGantt {
 }
@@ -110,3 +138,11 @@ div > h5 {
   } */
 
 
+  .bottom {
+    display: flex;
+    height: 468px;
+    margin-top:453.5px;
+    margin-bottom: -100px;
+    background: #000000;
+    color: #000000;
+}
