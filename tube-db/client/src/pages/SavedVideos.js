@@ -2,7 +2,7 @@ import React from 'react';
 import SideMenu from '../components/SideMenu';
 import './SavedVideos.css'
 import './TrendingVideosPage.css'
-import { getFavoritedVideos, getRecommendedVideo, getSingleVideo } from '../fetcher'
+import { getFavoritedVideos, getRecommendedVideos, getSingleVideo } from '../fetcher'
 import HeaderBar from '../components/HeaderBar';
 import Grid from '../components/Grid';
 import VideoThumbnail from '../components/VideoThumbnail';
@@ -92,7 +92,7 @@ class VideoPage extends React.Component {
         this.setState({ videoResults: res.results });
       })
     
-      getRecommendedVideo(this.state.videoId).then(res => {
+      getRecommendedVideos(this.state.videoId).then(res => {
         this.setState({ videoInfo: res.results });
         // const map1 = this.state.videoInfo.map(x=> x.video_title);
         // var array = JSON.parse("[" + x.video_title + "]");

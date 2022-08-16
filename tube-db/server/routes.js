@@ -307,8 +307,9 @@ async function singleVideo(req, res){
     finalQuery = `
     SELECT VI.title as video_title, VI.published_at, V.video_id,
             MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
-            MIN(V.trending_date) AS trend_start, VI.thumbnail_link, V.likes, V.dislikes,
-            V.comment_count, GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title,
+            MIN(V.trending_date) AS trend_start, VI.thumbnail_link, MAX(V.likes) AS likes, 
+            MAX(V.dislikes) AS dislikes, MAX(V.comment_count) AS comments, 
+            GROUP_CONCAT(DISTINCT V.country) AS countries, V.channel_title,
             VI.description, VI.tags
     FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
     WHERE V.video_id = '${videoid}'
