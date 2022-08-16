@@ -125,7 +125,7 @@ class VideoPage extends React.Component {
               <HeaderLogo />
             </div>
 
-            <div style={{ width: '67vw', margin: '0 auto', marginTop: '-1vh', marginBottom: '5vh' }}>
+            <div style={{ width: '67vw', margin: '0.5 auto', marginTop: '-1vh', marginBottom: '5vh' }}>
 
               <h1 id="videoPageTitle">Liked Videos Playlist</h1>
 
@@ -162,8 +162,7 @@ class VideoPage extends React.Component {
 
                   {/* recommendedVideos page */}
                 <div id="pageContent">
-                  <div id ="headerBar"></div>
-                      <div style={{ width: '67vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
+                      <div style={{ width: '67vw', margin: '1 auto', marginTop: '5vh', marginBottom: '5vh' }}>
                   <p id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos Based'}</p>
                   <h6 id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'On Your Recent Like'}</h6>
                           <div class ="fade-in-videos">

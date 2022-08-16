@@ -4,6 +4,14 @@
     flex-grow: 1;
     height: 1200px;
 }
+
+.pageContent{
+    margin-bottom: 0rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    max-width:1000px
+}
+
 div > h2 {
     color: #ffffff;
     text-decoration: underline; 
@@ -17,8 +25,9 @@ div > h5 {
 }
 
 #page {
+    text-align: center;
     display: flex;
-    height: calc( 100vh - 30px);
+    height: calc( 120vh - 30px);
   }
 
 
