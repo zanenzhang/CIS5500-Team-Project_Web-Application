@@ -355,9 +355,9 @@ async function favoritedVideos(req, res){
     user = req.query.user
 
     finalQuery = `
-    SELECT video_id, title as video_title, thumbnail_link
-    FROM FAVORITES
-    WHERE user = '${user}'
+    SELECT F.video_id, VI.title as video_title, VI.thumbnail_link
+    FROM FAVORITES AS F JOIN VIDEOS AS VI ON F.video_id = VI.video_id
+    WHERE F.user = '${user}'
     `
 
     connection.query(finalQuery, function (error, results, fields) {
@@ -374,11 +374,9 @@ async function favoritedVideos(req, res){
 async function insert(req, res){
  
     const videoId = req.body.videoId
-    const thumbLink = req.body.thumbLink
-    const videoTitle = req.body.videoTitle
     const user = req.body.user
   
-    finalQuery = `INSERT INTO FAVORITES (video_id, thumbnail_link, title, user) VALUES ('${videoId}', '${thumbLink}', '${videoTitle}','${user}');`
+    finalQuery = `INSERT INTO FAVORITES (video_id, user) VALUES ('${videoId}', '${user}');`
   
     connection.query(finalQuery, function (error, results, fields) {
   
