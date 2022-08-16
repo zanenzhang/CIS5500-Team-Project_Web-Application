@@ -3,9 +3,8 @@
     background: #000000;
     /* flex-grow: 1; */
     width: 1900px;
-    max-width: 2000px;
-    
-    /* height: 1600px; */
+    min-height: 1454.5px; 
+    max-height: 1500px;
 }
 .likesNum {
     flex-grow: 1;
