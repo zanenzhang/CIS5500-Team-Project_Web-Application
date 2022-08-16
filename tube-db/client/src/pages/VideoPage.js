@@ -44,32 +44,32 @@ const rows = [[
 ];
 const data = [columns, ...rows];
 
-const options = {
-  height: 70,
-  gantt: {
-    trackHeight: 30,
-    backgroundColor: '#000000',
-    criticalPathEnabled: false,
-            criticalPathStyle: {
-              stroke: '#e64a19',
-              strokeWidth: 5
-            },
-    // labelStyle: {
-    //   color: "#cf2b08",
-    //   fontName: 'Arial',
-    // fontSize: 20
-    // },
-    palette: [
-      {
+// const options = {
+//   height: 70,
+//   gantt: {
+//     trackHeight: 30,
+//     backgroundColor: '#000000',
+//     criticalPathEnabled: false,
+//             criticalPathStyle: {
+//               stroke: '#e64a19',
+//               strokeWidth: 5
+//             },
+//     // labelStyle: {
+//     //   color: "#cf2b08",
+//     //   fontName: 'Arial',
+//     // fontSize: 20
+//     // },
+//     palette: [
+//       {
         
-        "color": "#cf2b08",
-        "dark": "#ff0000",
-        "light": "#ffffff"
-      },
-    ]
+//         "color": "#cf2b08",
+//         "dark": "#ff0000",
+//         "light": "#ffffff"
+//       },
+//     ]
     
-  },
-};
+//   },
+// };
 
 const geoMapData = [
   ["Country", "Popularity"],
@@ -115,7 +115,8 @@ class VideoPage extends React.Component {
         videoId: "",
         finalTrendingDates: [],
         finalCountriesArray: [],
-        desciption: ""
+        desciption: "",
+        gantHeight: ""
       };
 
       this.loadCountries = this.loadCountries.bind(this)
@@ -163,6 +164,9 @@ class VideoPage extends React.Component {
         countryPlaceholder.push(1);
         countriesArray.push(countryPlaceholder);;
       }
+      //get the size of countries array Gantt chart height will be based on 
+      var height = countriesArray.length *30 + 40;
+      this.setState({gantHeight: height}); 
       this.setState({finalCountriesArray : countriesArray});
     }
 
@@ -346,6 +350,38 @@ class VideoPage extends React.Component {
     }
    
     render() {
+      const options = {
+        height: this.state.gantHeight,
+        gantt: {
+          trackHeight: this.state.numCountries,
+          // Colors only the chart area, with opacity
+        chartArea: {
+          backgroundColor: {
+            fill: '#000000',
+            fillOpacity: 0.1
+          },
+        },
+          criticalPathEnabled: false,
+                  criticalPathStyle: {
+                    stroke: '#e64a19',
+                    strokeWidth: 5
+                  },
+          // labelStyle: {
+          //   color: "#cf2b08",
+          //   fontName: 'Arial',
+          // fontSize: 20
+          // },
+          palette: [
+            {
+              
+              "color": "#cf2b08",
+              "dark": "#ff0000",
+              "light": "#ffffff"
+            },
+          ]
+          
+        },
+      };
       return (
         
         <div>
@@ -382,7 +418,8 @@ class VideoPage extends React.Component {
                   
                   <h2>Views:</h2>
                   {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
-                  
+                  <h2>Likes:</h2>
+                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
                   </div>
 
                   
@@ -403,6 +440,7 @@ class VideoPage extends React.Component {
 
                   <div className="trending">
                   <h2>Trending Time:</h2>
+                  <h2></h2>
                     <Chart id="countryGantt" chartType="Gantt" data={this.state.finalTrendingDates} width = "80%" height = "50%" options={options}/>
                     {/* <h2>Trending Time:</h2>
                     <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
@@ -410,8 +448,7 @@ class VideoPage extends React.Component {
                  </div>
 
                   <div className="likes">
-                  <h2>Likes:</h2>
-                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
+                  
                      
                   <div id="likeButton">
                   
