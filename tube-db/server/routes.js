@@ -180,7 +180,7 @@ async function find_channels(req, res) {
 // ********************************************
 
 
-async function trending_videos(req, res) {
+async function trendingVideos(req, res) {
 
     let country = req.query.country
     let language = req.query.language
@@ -468,7 +468,7 @@ module.exports = {
     hello,
     channel,
     find_channels,
-    trending_videos,
+    trendingVideos,
     selected_channel_recent_trending,
     singleVideo,
     favoritedVideos,

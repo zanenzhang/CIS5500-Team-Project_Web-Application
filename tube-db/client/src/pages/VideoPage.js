@@ -148,7 +148,6 @@ class VideoPage extends React.Component {
       var countriesListObject = this.state.videoInfo.map(info =>  info.countries)
       
       var countriesString = JSON.stringify(countriesListObject);
-      console.log(countriesString);
       var slicedString = countriesString.slice(2,(countriesString.length -2))
       var countriesStringArr = slicedString.split(",");
 
@@ -218,16 +217,11 @@ class VideoPage extends React.Component {
         });
       }
 
-      console.log(trendingDateRows.length)
 
       if (trendingDateRows.length == this.state.finalCountriesArray.length - 1){
-        console.log(trendingDateRows)
 
-      const data = [ganttColumns, ...trendingDateRows]; //columns x rows 
-
-      console.log(data)
-      this.setState({finalTrendingDates : data});
-        console.log(this.state.finalTrendingDates);
+        const data = [ganttColumns, ...trendingDateRows]; //columns x rows 
+        this.setState({finalTrendingDates : data});
       }
 
       return trendingDateRows
@@ -244,8 +238,6 @@ class VideoPage extends React.Component {
         { type: "string", label: "Dependencies" },
       ];
 
-      console.log(columns)
-      console.log(typeof(columns))
       var trendingDateRows = []; 
       var trendingDate = ["TimePeriod", "Time period"];
       var trendStartObject = this.state.videoInfo.map(info =>  info.trend_start.substring(0,10));
@@ -258,7 +250,6 @@ class VideoPage extends React.Component {
       var yearS = trendingStartStringArr[0];
       var monthS = trendingStartStringArr[1]; 
       var dayS = trendingStartStringArr[2]; 
-      console.log(trendingStartStringArr);
       //push the New Date trending start into trendingDate
       trendingDate.push(new Date(yearS, monthS, dayS));
       
@@ -277,15 +268,12 @@ class VideoPage extends React.Component {
       var year = trendingEndStringArr[0];
       var month = trendingEndStringArr[1]; 
       var day = trendingEndStringArr[2]; 
-      console.log(trendingEndStringArr);
       trendingDate.push(new Date(year, month, day));
       trendingDate.push(null);
       trendingDate.push(100);
       trendingDate.push(null);
-      console.log(trendingDate);
       //push trendingDate into trendingDateRows
       trendingDateRows.push(trendingDate);
-      console.log(trendingDateRows);
 
       const rows = [
         [
@@ -341,8 +329,6 @@ class VideoPage extends React.Component {
 
       const data = [columns, ...rows]; //columns x rows 
 
-      console.log(rows)
-      console.log(typeof(rows))
      
       this.setState({finalTrendingDates : data});
 
