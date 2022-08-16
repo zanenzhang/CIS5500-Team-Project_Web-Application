@@ -25,16 +25,8 @@ const LikeButton = ({thumbLink, videoId, videoTitle}) => {
 
         Axios.post('http://localhost:8080/',
             {user: user,
-            thumbLink: thumbLink,
-            videoId: videoId,
-            videoTitle: videoTitle}).then(() => {
+            videoId: videoId}).then(() => {
             });
-
-
-        console.log(user);
-        console.log(thumbLink);
-        console.log(videoId);
-        console.log(videoTitle);
         
       }}
 
