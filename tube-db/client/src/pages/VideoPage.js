@@ -415,7 +415,7 @@ class VideoPage extends React.Component {
                   
                   <h2 id="trendingCountryLabel">Trending Countries:</h2>
                   <Chart chartType="GeoChart" width="300px" height="300px" data={this.state.finalCountriesArray} options = {geoOptions} />
-                  {this.state.videoInfo.map(info => <h5>  {info.countries}</h5>)}
+                  <h5> {} </h5>
                   </div>
                   </div>
                   
