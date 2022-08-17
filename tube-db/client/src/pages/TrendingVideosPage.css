@@ -6,7 +6,7 @@
   }
 
 .outerDiv{
-  height: 1200px;
+  height: 1500px;
   overflow: auto;
   background: #000000;
   margin:0rem;
@@ -16,6 +16,7 @@
 
 
 #pageContent {
+  /* border: 2px solid red; */
   background: #000000;
   flex-grow: 1;
   height: 1000px;

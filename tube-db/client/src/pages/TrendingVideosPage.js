@@ -244,7 +244,7 @@ class TrendingVideosPage extends React.Component {
 
     return (
       
-      <div className='outerDiv'>
+      <div className='outerDiv'> 
 
         <HeaderBar handleCountryChange={this.handleCountryChange} handleUpdateTrendStart={this.handleUpdateTrendStart} handleUpdateTrendStop={this.handleUpdateTrendStop}
         handleUpdatePublishStart={this.handleUpdatePublishStart} handleUpdatePublishStop={this.handleUpdatePublishStop}
@@ -262,7 +262,7 @@ class TrendingVideosPage extends React.Component {
           </div>
         
           <div id="pageContent">
-            <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
+            <div style={{ width: '70vw', margin: '0 auto',  marginBottom: '5vh' }}>
               <Grid>
                 
                 {this.state.videoResults.map(video=>(
