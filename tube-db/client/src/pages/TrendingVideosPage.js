@@ -263,6 +263,7 @@ class TrendingVideosPage extends React.Component {
         
           <div id="pageContent">
             <div style={{ width: '70vw', margin: '0 auto',  marginBottom: '5vh' }}>
+              <h4 id="trendingVideosSep"/>
               <Grid>
                 
                 {this.state.videoResults.map(video=>(

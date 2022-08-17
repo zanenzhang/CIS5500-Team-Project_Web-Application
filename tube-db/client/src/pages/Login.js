@@ -75,7 +75,7 @@ function Login() {
     <div class = "Login">
       <HeaderLogo id="loginLogo" />
       
-      <h2 id="startingText" class="white-text">CIS 550 Project: Bug Busters</h2>
+      <h2 id="startingText" class="white-text">CIS5500 Team BugBusters</h2>
       <p class="white-text">(Derek Taylor, Zan Zhang, Sanjeeva Rajapakse, Angela Fan, Fred Qi)</p>
       <h3 class="white-text">Login Page</h3>
       <form onSubmit={handleSubmit}>
