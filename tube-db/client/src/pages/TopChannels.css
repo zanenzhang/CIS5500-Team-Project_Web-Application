@@ -41,6 +41,7 @@ div.page{
 .sideMenuWrapper{
     /* border: 2px solid red; */
     background: #000000;
+    margin-top: 1.6rem;
     height: 2000px;
 }
 
