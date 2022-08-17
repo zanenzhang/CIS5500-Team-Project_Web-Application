@@ -232,11 +232,11 @@ async function trendingVideos(req, res) {
 
     let firstLeg = `LIMIT ${pagePull}
         OFFSET ${offset}
-    ) SELECT V.video_id, VI.title as video_title, VI.thumbnail_link, VI.category_id `
+    ) SELECT V.video_id, V.title as video_title, V.thumbnail_link, V.category_id `
 
     let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels AS C JOIN ` : `FROM `    
     
-    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title JOIN VIDEOS AS VI ON V.video_id = VI.video_id` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
+    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
 
 
     let forthLeg = `GROUP BY V.video_id
@@ -244,15 +244,15 @@ async function trendingVideos(req, res) {
     `
 
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
-        searchClauses += `AND VI.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
+        searchClauses += `AND V.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
         searchClauses += `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
     if (videoTitle != '' && videoTitle != 'undefined')  {
-        searchClauses += `AND VI.title LIKE '${videoTitle}%' `} 
+        searchClauses += `AND V.title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
-        searchClauses += `AND VI.channel_title LIKE '${channelTitle}%' `} 
+        searchClauses += `AND V.channel_title LIKE '${channelTitle}%' `} 
     if (category != '' && category != 'undefined'){
-        searchClauses += `AND VI.category_id IN (Select category_id From Categories) `}
+        searchClauses += `AND V.category_id IN (Select category_id From Categories) `}
 
     if (viewsHigh != 0){
         searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
