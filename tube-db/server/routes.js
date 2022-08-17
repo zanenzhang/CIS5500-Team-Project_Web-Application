@@ -244,24 +244,24 @@ async function trendingVideos(req, res) {
     `
 
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
-        searchClauses += `AND V.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
+        searchClauses += `AND VI.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
-        searchClauses += `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
+        searchClauses += `AND V.trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
     if (videoTitle != '' && videoTitle != 'undefined')  {
-        searchClauses += `AND V.title LIKE '${videoTitle}%' `} 
+        searchClauses += `AND VI.title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
-        searchClauses += `AND V.channel_title LIKE '${channelTitle}%' `} 
+        searchClauses += `AND VI.channel_title LIKE '${channelTitle}%' `} 
     if (category != '' && category != 'undefined'){
-        searchClauses += `AND V.category_id IN (Select category_id From Categories) `}
+        searchClauses += `AND VI.category_id IN (Select category_id From Categories) `}
 
     if (viewsHigh != 0){
-        searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
+        searchClauses += `AND V.view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
     if (likesHigh != 0){
-        searchClauses += `AND likes BETWEEN ${likesLow} AND ${likesHigh} `} 
+        searchClauses += `AND V.likes BETWEEN ${likesLow} AND ${likesHigh} `} 
     if (dislikesHigh != 0){
-        searchClauses += `AND dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
+        searchClauses += `AND V.dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
     if (commentsHigh != 0){
-        searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
+        searchClauses += `AND V.comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
 
     
     channelsCTE += 'WHERE '
