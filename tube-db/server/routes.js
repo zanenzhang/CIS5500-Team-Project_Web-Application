@@ -225,43 +225,43 @@ async function trendingVideos(req, res) {
         WHERE category_title = '${category}'
     ), `
 
-    let videosCTE = `Videos AS (
+    let videosCTE = `FilteredVideos AS (
         SELECT V.video_id, VI.published_at, VI.title, VI.thumbnail_link, VI.category_id, VI.channel_title
         FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
         WHERE V.country = '${country}' `
 
     let firstLeg = `LIMIT ${pagePull}
         OFFSET ${offset}
-    ) SELECT V.video_id, V.title as video_title, V.thumbnail_link, V.category_id `
+    ) SELECT F.video_id, F.title as video_title, F.thumbnail_link, F.category_id `
 
     let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels AS C JOIN ` : `FROM `    
     
-    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
+    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FilteredVideos AS F ON C.channel_title=F.channel_title ` : `FilteredVideos AS F  `
 
 
-    let forthLeg = `GROUP BY V.video_id
+    let forthLeg = `GROUP BY F.video_id
         Limit ${limit};
     `
 
     if (publishStart !='' && publishStop != '' && publishStart !='undefined' && publishStop !='undefined')  {
-        searchClauses += `AND V.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
+        searchClauses += `AND VI.published_at BETWEEN '${publishStart}' AND '${publishStop}' `} 
     if (trendStart != '' && trendStop != '' && trendStart != 'undefined' && trendStop != 'undefined')  {
-        searchClauses += `AND trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
+        searchClauses += `AND V.trending_date BETWEEN '${trendStart}' AND '${trendStop}' `} 
     if (videoTitle != '' && videoTitle != 'undefined')  {
-        searchClauses += `AND V.title LIKE '${videoTitle}%' `} 
+        searchClauses += `AND VI.title LIKE '${videoTitle}%' `} 
     if (channelTitle != '' && channelTitle != 'undefined')  {
-        searchClauses += `AND V.channel_title LIKE '${channelTitle}%' `} 
+        searchClauses += `AND VI.channel_title LIKE '${channelTitle}%' `} 
     if (category != '' && category != 'undefined'){
-        searchClauses += `AND V.category_id IN (Select category_id From Categories) `}
+        searchClauses += `AND VI.category_id IN (Select category_id From Categories) `}
 
     if (viewsHigh != 0){
-        searchClauses += `AND view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
+        searchClauses += `AND V.view_count BETWEEN ${viewsLow} AND ${viewsHigh} `} 
     if (likesHigh != 0){
-        searchClauses += `AND likes BETWEEN ${likesLow} AND ${likesHigh} `} 
+        searchClauses += `AND V.likes BETWEEN ${likesLow} AND ${likesHigh} `} 
     if (dislikesHigh != 0){
-        searchClauses += `AND dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
+        searchClauses += `AND V.dislikes BETWEEN ${dislikesLow} AND ${dislikesHigh} `} 
     if (commentsHigh != 0){
-        searchClauses += `AND comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
+        searchClauses += `AND V.comment_count BETWEEN ${commentsLow} AND ${commentsHigh} `} 
 
     
     channelsCTE += 'WHERE '
