@@ -309,7 +309,7 @@ class VideoPage extends React.Component {
     }
    
     render() {
-      onst options = {
+      const options = {
         textStyle: {
           color: "#FFFFFF"
         },
