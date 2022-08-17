@@ -118,18 +118,18 @@ class VideoPage extends React.Component {
       return (
         
         <div className = "rootWrapper">
-              <div className="headerBar">
+          <div className="headerBar">
 
             <div className="headerLogo">
               
               <HeaderLogo />
             </div>
 
-            <div style={{ width: '67vw', margin: '0 auto', marginTop: '-1vh', marginBottom: '5vh' , textIndent:'-500px'}}>
+            <div className='videoPageTitleWrapper'>
 
               <h1 id="videoPageTitle">Liked Videos Playlist</h1>
 
-              </div>
+            </div>
 
             </div>
   
@@ -142,7 +142,7 @@ class VideoPage extends React.Component {
                     </div>
                 </div>
                 <div className="videoInfo" style = {{fontSize:'15px'}}>
-                  <div style={{ width: '67vw', margin: '1 auto', marginTop: '5vh', marginBottom: '5vh'}}>
+                  <div className='likedPlaylist'>
 
                     <Grid>
                 
@@ -156,12 +156,12 @@ class VideoPage extends React.Component {
                 
                    </Grid>
 
-                   </div>
+                  </div>
                   
 
                   {/* recommendedVideos page */}
                 <div id="pageContent">
-                      <div style={{ width: '67vw', margin: '1 auto', marginTop: '5vh', marginBottom: '5vh'}}>
+                      <div className='recPlaylist'>
                   <p id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos'}</p>
                  
                           <div class ="fade-in-videos" style = {{fontSize:'15px'}}>
