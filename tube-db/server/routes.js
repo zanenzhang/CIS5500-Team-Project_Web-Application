@@ -61,26 +61,29 @@ async function channel(req, res) {
 // this runs in DG in about 100 seconds without optimization.
 async function selected_channel_recent_trending(req, res) {
 
+    var finalQuery = `
+    WITH Selected_Channel AS (
+        SELECT channel_title
+        FROM TOP_YOUTUBE_CHANNELS
+        WHERE channel_rank = ${req.query.ranking}
+    )SELECT VI.title AS title, VI.published_at AS published, V.video_id AS video_id,
+            MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
+            MIN(V.trending_date) AS trend_start, GROUP_CONCAT(DISTINCT V.country) AS countries
+    FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id JOIN Selected_Channel AS C
+    ON VI.channel_title = C.channel_title
+    GROUP BY title
+    ORDER BY VI.published_at DESC
+    LIMIT 5;
+    `
+
     if (req.query.ranking){
         connection.query(
-            `
-            WITH Selected_Channel AS (
-                SELECT channel_title
-                FROM TOP_YOUTUBE_CHANNELS
-                WHERE channel_rank = ${req.query.ranking}
-            )SELECT VI.title AS title, VI.published_at AS published, V.video_id AS video_id,
-                    MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
-                    MIN(V.trending_date) AS trend_start, GROUP_CONCAT(DISTINCT V.country) AS countries
-            FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id JOIN Selected_Channel AS C
-            ON VI.channel_title = C.channel_title
-            GROUP BY title
-            ORDER BY VI.published_at DESC
-            LIMIT 5;
-            `, function (error, results, fields) {
+            finalQuery, function (error, results, fields) {
                 if (error) {
                     console.log(error)
                     res.json({ error: error })
                 } else if (results) {
+                    console.log(finalQuery)
                     res.json({ results: results })
                 }
             });
@@ -367,6 +370,7 @@ async function favoritedVideos(req, res){
             console.log(error)
             res.json({ error: error })
         } else if (results) {
+            console.log(finalQuery)
             res.json({ results: results })
         }
     });
