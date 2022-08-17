@@ -117,7 +117,7 @@ class VideoPage extends React.Component {
   
       return (
         
-        <div>
+        <div className = "rootWrapper">
               <div className="headerBar">
 
             <div className="headerLogo">
@@ -125,7 +125,7 @@ class VideoPage extends React.Component {
               <HeaderLogo />
             </div>
 
-            <div style={{ width: '67vw', margin: '0.5 auto', marginTop: '-1vh', marginBottom: '5vh' }}>
+            <div style={{ width: '67vw', margin: '0 auto', marginTop: '-1vh', marginBottom: '5vh' , textIndent:'-500px'}}>
 
               <h1 id="videoPageTitle">Liked Videos Playlist</h1>
 
@@ -137,13 +137,12 @@ class VideoPage extends React.Component {
             
     
                 <div id="sideBar">
-                    <div>
+                    <div className='sideMenuWrapper'>  
                     <SideMenu />
                     </div>
                 </div>
-            
-                <div className="videoInfo">
-                  <div style={{ width: '67vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh'}}>
+                <div className="videoInfo" style = {{fontSize:'15px'}}>
+                  <div style={{ width: '67vw', margin: '1 auto', marginTop: '5vh', marginBottom: '5vh'}}>
 
                     <Grid>
                 
@@ -162,16 +161,16 @@ class VideoPage extends React.Component {
 
                   {/* recommendedVideos page */}
                 <div id="pageContent">
-                      <div style={{ width: '67vw', margin: '1 auto', marginTop: '5vh', marginBottom: '5vh' }}>
-                  <p id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos Based'}</p>
-                  <h6 id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'On Your Recent Like'}</h6>
-                          <div class ="fade-in-videos">
+                      <div style={{ width: '67vw', margin: '1 auto', marginTop: '5vh', marginBottom: '5vh'}}>
+                  <p id="pageTitle">{this.state.searchTerm ? 'recommended videos' : 'Recommended Videos'}</p>
+                 
+                          <div class ="fade-in-videos" style = {{fontSize:'15px'}}>
                               <Grid>
                               {this.state.videoInfo.map(video=>(
                               <VideoThumbnail
                                 // src = {linkBegin + `${video.videoId}`}
                                   thumbLink = {video.thumbnail_link}
-                                  videoTitle = {video.video_title.substring(0,20)+"..."}
+                                  videoTitle = {video.video_title.substring(0,20)+"..." }
                                   Country = {video.channel_title}
                                   videoId = {video.video_id}
                                 
