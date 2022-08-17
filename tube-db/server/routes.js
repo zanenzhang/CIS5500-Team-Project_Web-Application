@@ -424,16 +424,15 @@ async function recommendedVideos(req,res){
 
     finalQuery = `
 
-    WITH SUBSET AS (SELECT video_id FROM TOP_TRENDING_VIDEOS WHERE video_id <> '${videoid}' LIMIT 12),
-      OTHER AS (SELECT DISTINCT title, video_id, thumbnail_link, category_id
-    FROM VIDEOS  WHERE video_id <> 'ZpZy4H6CEiY' LIMIT 12)
-
     SELECT DISTINCT B.title as video_title, B.video_id, B.thumbnail_link
-    FROM OTHER AS B JOIN SUBSET A ON A.video_id =  B.video_id
-    WHERE B.category_id IN (SELECT category_id
-    	FROM VIDEOS
-    	WHERE video_id = '${videoid}');
-    ; `
+    FROM TOP_TRENDING_VIDEOS AS A JOIN VIDEOS AS B ON A.video_id =  B.video_id
+    WHERE B.category_id IN
+    (SELECT VI.category_id  
+            FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = 
+                VI.video_id
+            WHERE V.video_id = '${videoid}')
+    AND A.video_id <>'${videoid}' 
+    LIMIT 12; `
     
 
 

@@ -44,32 +44,6 @@ const rows = [[
 ];
 const data = [columns, ...rows];
 
-// const options = {
-//   height: 70,
-//   gantt: {
-//     trackHeight: 30,
-//     backgroundColor: '#000000',
-//     criticalPathEnabled: false,
-//             criticalPathStyle: {
-//               stroke: '#e64a19',
-//               strokeWidth: 5
-//             },
-//     // labelStyle: {
-//     //   color: "#cf2b08",
-//     //   fontName: 'Arial',
-//     // fontSize: 20
-//     // },
-//     palette: [
-//       {
-        
-//         "color": "#cf2b08",
-//         "dark": "#ff0000",
-//         "light": "#ffffff"
-//       },
-//     ]
-    
-//   },
-// };
 
 const geoMapData = [
   ["Country", "Popularity"],
@@ -335,38 +309,43 @@ class VideoPage extends React.Component {
     }
    
     render() {
-      const options = {
+      onst options = {
+        textStyle: {
+          color: "#FFFFFF"
+        },
         height: this.state.gantHeight,
+        backgroundColor: {fill: '#000000'},
+  
+        hAxis: {
+          // textStyle:{color: '#fff'},
+          textStyle: '#ffffff',
+          baselineColor: '#FFFFFF'
+       },
         gantt: {
           trackHeight: this.state.numCountries,
-          // Colors only the chart area, with opacity
-        chartArea: {
-          backgroundColor: {
-            fill: '#000000',
-            fillOpacity: 0.1
-          },
-        },
+         
           criticalPathEnabled: false,
                   criticalPathStyle: {
                     stroke: '#e64a19',
-                    strokeWidth: 5
+                    strokeWidth: 5,
                   },
-          // labelStyle: {
-          //   color: "#cf2b08",
-          //   fontName: 'Arial',
-          // fontSize: 20
-          // },
+                 
+                 
+          labelStyle: {
+            fontName: 'Arial',
+          fontSize: 18,
+          color: '#ffffff'
+          },
           palette: [
             {
-              
-              "color": "#cf2b08",
-              "dark": "#ff0000",
-              "light": "#ffffff"
+              "color": "#ffffff",
+              "dark": "#ff0000"
             },
           ]
-          
+         
         },
       };
+ 
       return (
         
         <div>
@@ -414,7 +393,7 @@ class VideoPage extends React.Component {
                  <div id="geochart">
                   
                   <h2 id="trendingCountryLabel">Trending Countries:</h2>
-                  <Chart chartType="GeoChart" width="300px" height="300px" data={this.state.finalCountriesArray} options = {geoOptions} />
+                  <Chart chartType="GeoChart" width="500px" height="500px" data={this.state.finalCountriesArray} options = {geoOptions} />
                   <h5> {} </h5>
                   </div>
                   </div>
