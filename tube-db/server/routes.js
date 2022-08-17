@@ -228,7 +228,7 @@ async function trendingVideos(req, res) {
 
     let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels AS C JOIN ` : `FROM `    
     
-    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
+    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title ` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
 
 
     let forthLeg = `GROUP BY V.video_id
