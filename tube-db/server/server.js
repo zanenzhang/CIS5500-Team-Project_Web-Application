@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Routes //
 
 app.get('/trendingvideos', routes.trendingVideos);
-app.get('/hello', routes.hello);
 app.get('/video', routes.singleVideo);
 app.get('/gantt', routes.countryGantt);
 // Channel Specific Routes //

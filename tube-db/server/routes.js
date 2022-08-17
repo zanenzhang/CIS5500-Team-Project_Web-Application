@@ -23,15 +23,6 @@ connection.connect();
 //            SIMPLE ROUTE EXAMPLE
 // ********************************************
 
-// Route 1 (handler)
-async function hello(req, res) {
-    // a GET request to /hello?name=Steve
-    if (req.query.name) {
-        res.send(`Hello, ${req.query.name}! Welcome to the tubeDB server!`)
-    } else {
-        res.send(`Hello! Welcome to the tubeDB server!`)
-    }
-}
 
 // ********************************************
 //             CHANNEL-SPECIFIC ROUTES
@@ -225,21 +216,21 @@ async function trendingVideos(req, res) {
         WHERE category_title = '${category}'
     ), `
 
-    let videosCTE = `FilteredVideos AS (
+    let videosCTE = `Videos AS (
         SELECT V.video_id, VI.published_at, VI.title, VI.thumbnail_link, VI.category_id, VI.channel_title
         FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
         WHERE V.country = '${country}' `
 
     let firstLeg = `LIMIT ${pagePull}
         OFFSET ${offset}
-    ) SELECT F.video_id, F.title as video_title, F.thumbnail_link, F.category_id `
+    ) SELECT V.video_id, V.title as video_title, V.thumbnail_link, V.category_id `
 
     let secondLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FROM Channels AS C JOIN ` : `FROM `    
     
-    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `FilteredVideos AS F ON C.channel_title=F.channel_title ` : `FilteredVideos AS F  `
+    let thirdLeg = (language != 'Select' || subscribersHigh != 0 || libraryHigh !=0) ? `Videos AS V ON C.channel_title=V.channel_title` : `Videos AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id  `
 
 
-    let forthLeg = `GROUP BY F.video_id
+    let forthLeg = `GROUP BY V.video_id
         Limit ${limit};
     `
 
@@ -470,7 +461,6 @@ async function recommendedVideos(req,res){
 
 
 module.exports = {
-    hello,
     channel,
     find_channels,
     trendingVideos,
