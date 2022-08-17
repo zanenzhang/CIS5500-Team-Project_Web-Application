@@ -308,14 +308,18 @@ async function trendingVideos(req, res) {
 async function singleVideo(req, res){
     videoid = req.query.videoid
     finalQuery = `
+    WITH TVIDEOS AS (SELECT video_id, MAX(view_count) as views, max(trending_date) as trend_stop,
+                        min(trending_date) as trend_start, max(likes) as likes,
+                        max(dislikes) as dislikes, max(comment_count) as comments, GROUP_CONCAT(DISTINCT country) as countries
+                 FROM TOP_TRENDING_VIDEOS WHERE video_id = '${videoid}'),
+    WIDESET AS (SELECT video_id, published_at, title, channel_title, tags, description, thumbnail_link FROM VIDEOS
+                WHERE video_id = '${videoid}')
     SELECT VI.title as video_title, VI.published_at, V.video_id,
-            MAX(V.view_count) AS views, MAX(V.trending_date) AS trend_stop,
-            MIN(V.trending_date) AS trend_start, VI.thumbnail_link, MAX(V.likes) AS likes, 
-            MAX(V.dislikes) AS dislikes, MAX(V.comment_count) AS comments, 
-            GROUP_CONCAT(DISTINCT V.country) AS countries, VI.channel_title,
+            V.views, V.trend_stop, V.trend_start, VI.thumbnail_link, V.likes,
+           V.dislikes, V.comments,
+            V.countries, VI.channel_title,
             VI.description, VI.tags
-    FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
-    WHERE V.video_id = '${videoid}'
+    FROM TVIDEOS AS V JOIN WIDESET AS VI ON V.video_id = VI.video_id
     GROUP BY V.video_id;
     `
     // console.log(finalQuery)
@@ -326,6 +330,7 @@ async function singleVideo(req, res){
             console.log(error)
             res.json({ error: error })
         } else if (results) {
+            console.log(finalQuery)
             res.json({ results: results })
         }
     });
@@ -427,14 +432,16 @@ async function recommendedVideos(req,res){
     //         LIMIT 3;`
 
     finalQuery = `
+
+    WITH SUBSET AS (SELECT video_id FROM TOP_TRENDING_VIDEOS WHERE video_id <> '${videoid}' LIMIT 12),
+      OTHER AS (SELECT DISTINCT title, video_id, thumbnail_link, category_id
+    FROM VIDEOS  WHERE video_id <> 'ZpZy4H6CEiY' LIMIT 12)
+
     SELECT DISTINCT B.title as video_title, B.video_id, B.thumbnail_link
-    FROM TOP_TRENDING_VIDEOS AS A JOIN VIDEOS AS B ON A.video_id = B.video_id
-    WHERE B.category_id IN
-    (SELECT VI.category_id  
-    FROM TOP_TRENDING_VIDEOS AS V JOIN VIDEOS AS VI ON V.video_id = VI.video_id
-    WHERE V.video_id = '${videoid}')
-    AND A.video_id <>'${videoid}'
-    LIMIT 12
+    FROM OTHER AS B JOIN SUBSET A ON A.video_id =  B.video_id
+    WHERE B.category_id IN (SELECT category_id
+    	FROM VIDEOS
+    	WHERE video_id = '${videoid}');
     ; `
     
 
