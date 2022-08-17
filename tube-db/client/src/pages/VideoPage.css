@@ -1,12 +1,11 @@
 .videoInfo {
-    font-size:2vmax;
+    /* font-size:2vmax; */
     justify-content: center;
     background: #000000;
     /* flex-grow: 1; */
-    min-width: 1500px;
-    max-width: 1600px;
-    min-height: 1454.5px; 
-    max-height: 1500px;
+    width: 1100px;
+    height: 500px;
+    /* border: 2px solid green; */
 }
 .likesNum {
     flex-grow: 1;
@@ -24,12 +23,7 @@ div > h5 {
 }
 
 #videoFrame{
-    /* width: auto; */
-    /* max-width: 40%; */
-    border-radius: 20px;
-    margin-left: -490px;
-    margin-right: 300px;
-    margin-top:10px;
+    margin-right:400px;
 }
 
 #page {
@@ -47,14 +41,15 @@ height: 800px;
     background: #000000;
     flex-grow: 1;
     width: 200%; 
-    height: 1000px;
-    /* enable grow, disable shrink */
+    height: 1800px;
     justify-content: center;
+    /* border: 2px solid red; */
   }
+
 .headerBar {
     display: flex;
     height: 240px;
-    width: 1750px;
+    /* width: 1750px; */
     background: #000000;
     color: #000000;
 }
@@ -93,17 +88,21 @@ height: 800px;
 
 
 #geochart {
-    text-align: left;
-    padding-top: 10%;
+    /* border: 2px solid white; */
+    padding:0rem;
+    margin-top: 0.8rem;
+    display: inline-block;
+}
+
+.dataDis{
+    width: 800px;
+
 }
 
 .trending {
-    text-align: left;
-    /* padding-top: 10%; */
-    margin-left: 400px;
-    margin-top: -383px;
-    margin-right: 10%;
-    margin-bottom: 10%;
+    /* border: 2px solid red; */
+    margin-top: 0.8rem;
+    display: inline-block;
 }
 
 .description {
@@ -132,21 +131,33 @@ height: 800px;
     border-radius: 20px;
 }
 
-/* #page {
-    display: flex;
-    height: calc( 100vh - 30px);
-  } */
 
-#countryGantt {
+.videoRootWrapper{
+    /* border: 2px solid red; */
+    background: black;
+    height: 1800px;
+    overflow: hidden;
 }
 
 
 
-/*   .bottom {
+#likeButton{
+    /* border: 5px solid red; */
     display: flex;
-    height: 468px;
-    margin-top:453.5px;
-    margin-bottom: -100px;
-    background: #000000;
-    color: #000000;
-} */
+    justify-content: center;
+}
+
+.videoDescriptor{
+    color:#D6D5A8;
+    text-decoration: none;
+}
+
+.videoDescriptor:hover{
+    color: #F61212;
+    text-decoration: none;
+}
+
+.videoAttr{
+    color:whitesmoke;
+}
+

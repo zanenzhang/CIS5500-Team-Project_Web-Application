@@ -13,12 +13,32 @@ import { useState } from 'react';
 
 import {
   Table,
-  Select
+  Select,
+  Row,
+  Col
 } from 'antd'
+
 import { ControlFilled } from '@ant-design/icons';
 
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
+
+function numFormatter(num) {
+  let absNum = num;
+  
+  if(num < 0){
+      absNum = Math.abs(num);
+  }
+  if(absNum >= 1000 && absNum < 1000000){
+      return (num/1000).toFixed(1) + 'K'; // convert to K where num >= 1,000 but num < 1 mil
+  }else if(absNum >= 1000000 && absNum < 1000000000){
+      return (num/1000000).toFixed(1) + 'M'; // convert to M where num >= 1 mil but num < 1 bil
+  }else if(absNum >= 1000000000){
+      return (num/1000000000).toFixed(1) + 'B'; // convert to B where num >= 1 bil
+  }else if(absNum < 900){
+      return num; // if num < 1000, do nothing
+  }
+}
 
 const columns = [
   { type: "string", label: "Task ID" },
@@ -46,13 +66,13 @@ const data = [columns, ...rows];
 
 
 const geoMapData = [
-  ["Country", "Popularity"],
-  ["Japan", 300],
-  ["United States", 300],
-  ["Brazil", 300],
-  ["Canada", 300],
-  ["France", 300],
-  ["RU", 300]
+  ["Country"],
+  ["Japan"],
+  ["United States"],
+  ["Brazil"],
+  ["Canada"],
+  ["France"],
+  ["RU"]
 ];
 
 const geoOptions = {
@@ -62,10 +82,12 @@ const geoOptions = {
     colors: "#ff0000"
   },
   legend: "none",
-  tooltip: {
-    showTitle: false,
-    textStyle: { fontSize: 14 }
-  }
+  tooltip: 'none',
+  keepAspectRatio: false
+  // {
+  //   showTitle: false,
+  //   textStyle: { fontSize: 14 }
+  // }
 }
 
 const ganttColumns = [
@@ -343,60 +365,76 @@ class VideoPage extends React.Component {
             },
           ]
          
-        },
+        }, 
       };
  
       return (
         
-        <div>
-              <div className="headerBar">
+        <div className='videoRootWrapper'>
+          <div className="headerBar">
             <div className="headerLogo">
               <HeaderLogo />
             </div>
-            <div style={{ width: '70vw', margin: '0 auto', marginTop: '5vh', marginBottom: '5vh' }}>
+            
+            <div className='videoPageTitleWrapper'>
               <h1 id="videoPageTitle">Video Details</h1>
-              </div>
             </div>
+          </div>
   
                 <div id="page">
     
                 <div id="sideBar">
                     <div>
-                    <SideMenu />
+                      <SideMenu />
                     </div>
                 </div>
             
                 <div className="videoInfo">
-                  <div>
-                  <iframe id="videoFrame" width="640" height="360" 
-                      src={this.state.fullLink}>
-                  </iframe>
+                  
+                    <iframe id="videoFrame" width="640" height="360" 
+                        src={this.state.fullLink}>
+                    </iframe>
 
                   <div className="description">
-                  <h2>Title: </h2>
-                  {this.state.videoInfo.map(info => <h5>{info.video_title}</h5>)}
-                  {<h2>Description:</h2>}
-                  {this.state.videoInfo.map(info => <h5>{info.description} </h5> ) }
-                  {/* <h2>Trending Start Date:</h2>
-                  {this.state.videoInfo.map(info => <h5> {info.trend_start.substring(0,10)}</h5>)} */}
-                  
-                  <h2>Views:</h2>
-                  {this.state.videoInfo.map(info => <h5> {info.views}</h5>)}
-                  
+                    <h2 className='videoDescriptor'>Title: </h2>
+                      {this.state.videoInfo.map(info => <h5 className='videoAttr'>{info.video_title}</h5>)}
+                    {<h2 className='videoDescriptor'>Description:</h2>}
+                      {this.state.videoInfo.map(info => <h5 className='videoAttr'>{info.description} </h5> ) }
+                    <h2 className='videoDescriptor'>Views:</h2>
+                      {this.state.videoInfo.map(info => <h5 className='videoAttr'> {numFormatter(info.views)}</h5>)}
                   </div>
 
-                <div className="likesNum">
-                <h2>Likes:</h2>
-                  {this.state.videoInfo.map(info => <h5>{info.likes}</h5>)}
+                  <div className="likesNum">
+                    <h2 className='videoDescriptor'>Likes:</h2>
+                      {this.state.videoInfo.map(info => <h5 className='videoAttr'>{numFormatter(info.likes)}</h5>)}
+                  </div>
+
+
+                  <div id="likeButton">
+                    {this.state.videoInfo.map(info=>(
+                      <LikeButton
+                        thumbLink = {info.thumbnail_link}
+                        videoId = {info.video_id}
+                        videoTitle = {info.video_title}
+                      />
+                    ))}
                   </div>
                   
-                 <div id="geochart">
+
+                  <div id="geochart">
+
+                    <h2 className='videoDescriptor'>Trending Countries:</h2>
+                      <Chart className='dataDis' chartType="GeoChart" width="1000px" height="550px"  data={this.state.finalCountriesArray} options = {geoOptions} />
+                  </div>
+
+
+
+                  <div className="trending">
+                    <h2 className='videoDescriptor'>Trending Time:</h2>
+                      <Chart id="countryGantt" chartType="Gantt" data={this.state.finalTrendingDates} width = "1000px" height = "50%" options={options}/>
+                 </div>
                   
-                  <h2 id="trendingCountryLabel">Trending Countries:</h2>
-                  <Chart chartType="GeoChart" width="500px" height="500px" data={this.state.finalCountriesArray} options = {geoOptions} />
-                  <h5> {} </h5>
-                  </div>
-                  </div>
+                
                   
                   
                   
@@ -405,28 +443,11 @@ class VideoPage extends React.Component {
                   
                   {/* <div className="viewsLikes"> */}
 
-                  <div className="trending">
-                  <h2>Trending Time:</h2>
-                  <h2></h2>
-                    <Chart id="countryGantt" chartType="Gantt" data={this.state.finalTrendingDates} width = "80%" height = "50%" options={options}/>
-                    {/* <h2>Trending Time:</h2>
-                    <Chart chartType="Gantt" data={data} width = "60%" height = "5%" options={options}/>
-                     */}
-                 </div>
 
                   <div className="likes">
                   
                      
-                  <div id="likeButton">
                   
-                  {this.state.videoInfo.map(info=>(
-                    <LikeButton
-                      thumbLink = {info.thumbnail_link}
-                      videoId = {info.video_id}
-                      videoTitle = {info.video_title}
-                    />
-                  ))}
-                  </div>
                   </div>
                   <div className="bottom"></div>
 
