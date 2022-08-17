@@ -16,3 +16,5 @@ The web application could help solve or improve convenience related problems wit
 With regards to functionality, TubeDB will allow users to browse, watch, search, favorite and be informed of the most popular Youtube videos, either for personal entertainment or to help users keep up-to-date on societal trends. The search functionality will be flexible to encompass a wide permutation of parameters across multiple database tables. Users will also be able to peruse the most popular or personally preferred YouTube channels as well as search and view content related to these channels. Users will also be able to save favorite videos for viewing at a later time and be recommended additional video content based on user favorites.
 
 1)YouTube.com Traffic. similarweb. (2022). Retrieved 15 August 2022, from https://www.similarweb.com/website/youtube.com/#overview.
+
+[Final Report Draft - CIS5500.pdf](https://github.com/zanenzhang/CIS5500-Team-Project/files/9365956/Final.Report.Draft.-.CIS5500.pdf)
