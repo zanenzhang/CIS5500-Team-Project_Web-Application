@@ -300,9 +300,9 @@ async function trendingVideos(req, res) {
 async function singleVideo(req, res){
     videoid = req.query.videoid
     finalQuery = `
-    WITH TVIDEOS AS (SELECT video_id, MAX(view_count) as views, max(trending_date) as trend_stop,
-                        min(trending_date) as trend_start, max(likes) as likes,
-                        max(dislikes) as dislikes, max(comment_count) as comments, GROUP_CONCAT(DISTINCT country) as countries
+    WITH TVIDEOS AS (SELECT video_id, MAX(view_count) as views, MAX(trending_date) as trend_stop,
+                        MIN(trending_date) as trend_start, MAX(likes) as likes,
+                        MAX(dislikes) as dislikes, MAX(comment_count) as comments, GROUP_CONCAT(DISTINCT country) as countries
                  FROM TOP_TRENDING_VIDEOS WHERE video_id = '${videoid}'),
     WIDESET AS (SELECT video_id, published_at, title, channel_title, tags, description, thumbnail_link FROM VIDEOS
                 WHERE video_id = '${videoid}')
