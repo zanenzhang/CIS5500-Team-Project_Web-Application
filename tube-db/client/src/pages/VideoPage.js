@@ -401,7 +401,7 @@ class VideoPage extends React.Component {
                     {<h2 className='videoDescriptor'>Description:</h2>}
                       {this.state.videoInfo.map(info => <h5 className='videoAttr'>{info.description} </h5> ) }
                     <h2 className='videoDescriptor'>Views:</h2>
-                      {this.state.videoInfo.map(info => <h5 className='videoAttr'> {numFormatter(info.views)}</h5>)}
+                      {this.state.videoInfo.map(info => <h5 className='videoAttr vidAttrViews'> {numFormatter(info.views)}</h5>)}
                   </div>
 
                   <div className="likesNum">
