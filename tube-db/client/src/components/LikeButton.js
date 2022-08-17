@@ -26,6 +26,7 @@ const LikeButton = ({thumbLink, videoId, videoTitle}) => {
         Axios.post('http://localhost:8080/',
             {user: user,
             videoId: videoId}).then(() => {
+              console.log("successful insert");
             });
         
       }}
