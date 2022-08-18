@@ -27,7 +27,7 @@ app.get('/find_channels', routes.find_channels);
 app.get('/selected_channel_recent_trending',routes.selected_channel_recent_trending);
 app.get('/favorited',routes.favoritedVideos);
 app.get('/recommendation',routes.recommendedVideos);
-app.post('/', routes.insert);
+app.post('/api/insert', routes.insert);
 
 
 

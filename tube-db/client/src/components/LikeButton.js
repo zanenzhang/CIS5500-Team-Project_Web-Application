@@ -23,7 +23,7 @@ const LikeButton = ({thumbLink, videoId, videoTitle}) => {
         var fullLink = window.localStorage.getItem('link');
         window.localStorage.setItem('likedLink', fullLink);
 
-        Axios.post('http://localhost:8080/',
+        Axios.post('http://localhost:8080/api/insert',
             {user: user,
             videoId: videoId}).then(() => {
               console.log("successful insert");
