@@ -3,7 +3,7 @@
 
 **Welcome to TubeDB! This is Team BugBusters' final project submission for CIS5500.**
 
-Report: [Final Report Draft - CIS5500.pdf](https://github.com/zanenzhang/CIS5500-Team-Project/files/9365956/Final.Report.Draft.-.CIS5500.pdf)
+Report: [Final Report - CIS5500.pdf](https://github.com/zanenzhang/CIS5500-Team-Project/files/9367292/Final.Report.-.CIS5500.pdf)
 
 **Abstract:**
 Founded in 2005, YouTube is one of the most visited websites in the world and boasts over 35 billion monthly visits1. Hosting videos from a plethora of different categories and countries, YouTube naturally offers a rich catalog of data from which to build a database application. As YouTube videos possess diverse details and classifiers and are hosted on channels with a separately unique set of details, an opportunity exists to perform complex database queries and deliver valuable insights as well as potentially engaging video content.
