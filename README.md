@@ -3,6 +3,7 @@
 
 **Welcome to TubeDB! This is Team BugBusters' final project submission for CIS5500.**
 
+Video Demo: https://www.loom.com/share/b5180d7e1da34919b8e8a41e199716e1
 Report: [Final Report - CIS5500.pdf](https://github.com/zanenzhang/CIS5500-Team-Project/files/9367292/Final.Report.-.CIS5500.pdf)
 
 **Abstract:**
